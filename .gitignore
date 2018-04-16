@@ -57,34 +57,3 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
-
-.gitignore
-
-.bowerrc
-.env
-.env.example
-.gitattributes
-MODEL.php
-Vagrantfile
-app/
-artisan
-bootstrap/app.php
-bootstrap/autoload.php
-bootstrap/cache/.gitignore
-bower.json
-composer.json
-composer.lock
-config/
-database/factories/
-database/migrations/
-database/seeds/
-gulpfile.js
-increments('id')
-package-lock.json
-package.json
-php
-phpunit.xml
-public/
-server.php
-string('title'
-tests/
