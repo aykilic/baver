@@ -13,6 +13,6 @@ class sablonObj extends Model
 {
 	protected $table='sablon';
 	protected $primaryKey = 'sblid';
-	protected $fillable=['sblturuid','sbladid','id','data-name','data_adi','text','top','left','width','height'];
+	protected $fillable=['sblturuid','sbladid','id','data-name','adi','text','top','left','width','height','stylealign','text','ttop','tleft','twidth','theight'];
 
 }

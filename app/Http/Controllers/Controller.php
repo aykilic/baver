@@ -756,8 +756,9 @@ class Controller extends BaseController
 //			->get();
 
 		$sablon = DB::table('sablonad')
-			->select('sablonad.*','sablon_turu.*')
+			->select('sablonad.*','sablon_turu.*','sablon.*')
 			->join( 'sablon_turu','sablonad.sblturuid', '=', 'sablon_turu.sblturuid')
+			->join( 'sablon','sablonad.sbladid', '=', 'sablon.sbladid')
 		            ->get();
 
 
@@ -800,11 +801,31 @@ class Controller extends BaseController
 	}
 	public function designedit(Request $request,$id)
 	{
+		$sbladsonid = DB::table('sablonad')
+	                 ->orderBy('sbladid', 'desc')
+	                 ->first();
+///
+		$sblid=db::table('sablon')
+		         ->select('sablon.*','sablonad.*')
+		         ->join( 'sablonad','sablonad.sbladid', '=', 'sablon.sbladid')
+		         ->get();
+		if (empty($sbladsonid)){
+			$sonnumara=1;
+		}
+		else{
+			$sonnumara=$sbladsonid->sbladid +1;
+		}
+		$data=null;
+		$firma = firmaObj::first();
 		//$data = sablonObj::find($id);
 		$datam=DB::table('sablon')->where('sbladid',$id)->get();
 		//dd($datam);
 
 		return View::make('sablonlar.design')
+			->with('firma', $firma)
+			->with('sonnumara', $sonnumara)
+			->with('sblid', $sblid)
+			->with('data', $data)
 		           ->with('sablone', $datam);
 //		$sablon = DB::table('sablon')
 //		            ->select('sablon.*', 'sablon_turu.*')
