@@ -74,7 +74,7 @@
     </head>
     <div class="right_col" style="height:1400px;">
         <input type="hidden" id="tasarim" name="tasarim" value="" title="" class="form-control" />
-
+        <input type="hidden" id="tasarimtbl" name="tasarimtbl" value="" title="" class="form-control" />
 
                 <div class="col-md-8" >
 
@@ -88,25 +88,30 @@
                                                 @isset($sablone)
                                                     <div id="veri" data-veri="1" ></div>
                                                     @foreach($sablone as $sablon )
-                                                        <div  class="fat-alan-kutu"   id="{{$sablon->id}}" data-adi="{{$sablon->data_adi}}" style="top:{{$sablon->top}}px; left: {{$sablon->left}}px; width:222px; height:33px;font-family:Arial; font-size:9px;'">{{$sablon->data_adi}}<span></span><i class="fat-alan-kapat  fa fa-close" style="float:right;"></i></div>
+                                                        <div  class="fat-alan-kutu"   id="{{$sablon->id}}" adi="{{$sablon->adi}}" style="top:{{$sablon->top}}px; left: {{$sablon->left}}px; width:{{$sablon->width}}px; height:{{$sablon->height}}px;font-family:Arial; font-size:9px;text-align:{{$sablon->stylealign}};">{{$sablon->adi}}<span></span><i class="fat-alan-kapat  fa fa-close" style="float:right;"></i></div>
 
                                                     @endforeach
                                                     @endisset
-                                                    <div id="tbldongu" style="cursor: move; position: absolute; overflow: hidden; top: 444px; left: 30px; width: 750px; height: 300px; border: 1px solid rgb(0, 0, 0);right: auto; bottom: auto; " >
-{{--// ürün satır yazdırma alanı--}}
-                                                        <div class="column-resize-handle-wrapper" style="width:100%;">
-                                                            <div class="column-resize-handle" data-type="name" style="left: 256px;">
-                                                                <div></div>
-                                                            </div>
-                                                            <div class="column-resize-handle" data-type="quantity" style="left: 347px;">
-                                                                <div></div>
-                                                            </div>
 
-                                                        </div>
+                                               @if   (empty($sablonet))
+
+                                                        <div id="tbldongu" class="fat-alan-stok" style="cursor: move; position: absolute; overflow: hidden; top: 444px; left: 30px; width: 750px; height: 300px; border: 1px solid rgb(0, 0, 0);right: auto; bottom: auto; " >
+
+
+@else
+                                                                @foreach($sablonet as $sablont )
+                                                                <div id="{{$sablont->id}}" class="fat-alan-stok" style="cursor: move; position: absolute; overflow: hidden; top:{{$sablont->ttop}}px; left:{{$sablont->tleft}}px; width:{{$sablont->twidth}}px; height:{{$sablont->theight}}px; border: 1px solid rgb(0, 0, 0);right: auto; bottom: auto; " >
+{{--// ürün satır yazdırma alanı--}}@endforeach
+@endif
+
+
+
+
+
                                                             <table class="table table-bordered">                                                                                                         <thead>
                                                                 <tr>
                                                                     <th data-resizable-column-id="#">First Name</th>
-                                                                    <th data-resizable-column-id="first_name"></th>
+                                                                    <th data-resizable-column-id="first_name" data-noresize></th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -123,7 +128,7 @@
 
 
 
-                                                    </div>
+                                                                </div>
 
                                             </div>
                                        </div>
@@ -165,10 +170,50 @@
                                <div class="">
                                    <label for="Tasarım Adı">Tasarım Adı</label>
                                    <input type="hidden" id="sblsonid" name="sblsonid" sonid="{{$sonnumara}}"/>
-                                   <input class="form-control" id="sblad" name="sblad" >
+                                   <input class="form-control" id="sblad" name="sblad" value="@isset($sablonad){{$sablonad->sblad }}@endisset">
                                    {{csrf_field()}}
 
                                </div>
+                               </br>
+
+
+                                   <div class="form-group">
+
+                                       {{--<label for="tax_no"  name="stoktur">Şablon Türü</label>--}}
+                                       {{--<select data-toggle="dropdown" id="stoktur" class="form-control" name="stoktur" aria-expanded="false"  ><span class="caret"></span>--}}
+                                           {{--<option >Seçiniz</option>--}}
+                                           {{--@foreach($sblturu as $key => $sblturuad)--}}
+                                               {{--<option  value="{{ $key }}">{{ $sblturuad }}</option>--}}
+                                           {{--@endforeach--}}
+                                       {{--</select>--}}
+
+
+
+
+
+                                       <label for="tax_no" name="ldoviz">Tasarım Türü</label>
+
+                                       <select data-toggle="dropdown" id="sblturu" class="form-control" name="sblturu" aria-expanded="false"  ><span class="caret"></span>
+
+
+                                           {{--@foreach($sblturu as $sbltur)--}}
+
+                                               {{--<option value="{{ $sbltur->sblturuid }}" {{ $secsblturu == $sbltur->sblturuid ? 'selected=="selected"' : '' }}>{{ $sbltur->sblturuad }}</option>--}}
+                                           {{--@endforeach--}}
+                                           <option SELECTED >Seçiniz</option>
+
+
+                                       @foreach ($sblturu as $key)
+                                           @if ($key->sblturuid == $secsblturu)
+                                               <option selected value="{{ $key->sblturuid }}">{{ $key->sblturuad }}</option>
+                                           @else
+                                               <option value="{{ $key->sblturuid }}">{{ $key->sblturuad }}</option>
+                                           @endif
+                                       @endforeach
+                                       </select>
+                                   </div>
+
+
                                </br>
 
 
@@ -260,7 +305,7 @@
                                                    </a>
                                                    <div id="collapseTwo1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
                                                        <div class="panel-body">
-                                                           <li id="surukle1" data-adi="Cari Hesap" data-name="cunvan" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
+                                                           <li id="surukle1" adi="Cari Hesap" data-name="cunvan" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
 
                                                                <div class="row">
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
@@ -289,7 +334,7 @@
                                                                </div>
                                                            </li>
 
-                                                           <li id="surukle2" data-adi="Tarih" data-name="tar" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
+                                                           <li id="surukle2" adi="Tarih" data-name="tar" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
 
                                                                <div class="row">
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
@@ -317,7 +362,7 @@
                                                                    </div>
                                                                </div>
                                                            </li>
-                                                           <li id="surukle3" data-adi="Adres" data-name="cadres1" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
+                                                           <li id="surukle3" adi="Adres" data-name="cadres1" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
 
                                                                <div class="row">
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
@@ -345,7 +390,7 @@
                                                                    </div>
                                                                </div>
                                                            </li>
-                                                           <li id="surukle4" data-adi="Vergi Dairesi" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
+                                                           <li id="surukle4" adi="Vergi Dairesi" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
 
                                                                <div class="row">
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
@@ -373,7 +418,7 @@
                                                                    </div>
                                                                </div>
                                                            </li>
-                                                           <li id="surukle5" data-adi="Vergi No" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
+                                                           <li id="surukle5" adi="Vergi No" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
 
                                                                <div class="row">
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
@@ -401,7 +446,7 @@
                                                                    </div>
                                                                </div>
                                                            </li>
-                                                           <li id="surukle6" data-adi="Fis Numarasi" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
+                                                           <li id="surukle6" adi="Fis Numarasi" class="ui-state-info bg-success bg-info ui-draggable ui-draggable-handle" style="font-size: small; height: 40px; min-height: 20px; width: 100%; list-style-type: none; float: left;background: #E6E9ED">
 
                                                                <div class="row">
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
@@ -458,6 +503,7 @@
 
    </div>
 
+    </div>
 
 
 
@@ -484,25 +530,30 @@
 
    <script type="text/javascript">
        $(document).ready(function() {
+
+
+
            $.ajaxSetup({
                headers: {
                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                }
            });
 // resize drag durma belam s..ildi
+           $("#tbldongu,.fat-alan-stok").draggable({
+
+               containment: $('#divContainer')}).resizable({});
            $("table").resizableColumns({
                store: window.store
 
            });
+
            $('.rc-handle').hover(function() {
-               $("#tbldongu").draggable({ disabled: true });
+               $("#tbldongu,.fat-alan-stok").draggable({ disabled: true });
            },function() {
-               $("#tbldongu").draggable({ disabled: false });
+               $("#tbldongu,.fat-alan-stok").draggable({ disabled: false });
            });
 
-               $("#tbldongu").draggable({
 
-                   containment: $('#divContainer')}).resizable({});
 
 // resize drag durma belam s..ildi
 
@@ -532,12 +583,12 @@
                    accept: "#surukle1,#surukle2,#surukle3,#surukle4,#surukle5,#surukle6",
                    drop: function (event, ui) {
                        idd =ui.draggable.attr('id');
-                       iddd =ui.draggable.attr('data-adi');
+                       iddd =ui.draggable.attr('adi');
                        name =  ui.draggable.attr('data-name');
                        leftPosition  = ui.offset.left - $(this).offset().left;
                        topPosition   = ui.offset.top - $(this).offset().top;
 
-                       var div = "<div class='fat-alan-kutu' id='sec_"+idd+"' data-adi='"+iddd+"' data-name='"+name+"' style='top:"+topPosition+"px; left: "+leftPosition+"px; width:222px; height:33px; font-family:Arial; font-size:9px;' ><span>"+iddd+"</span><i class='fat-alan-kapat  fa fa-close ' style='float:right;'></i></div>";
+                       var div = "<div class='fat-alan-kutu' id='sec_"+idd+"' adi='"+iddd+"' data-name='"+name+"' style='top:"+topPosition+"px; left: "+leftPosition+"px; width:222px; height:33px; font-family:Arial; font-size:9px;' ><span>"+iddd+"</span><i class='fat-alan-kapat  fa fa-close ' style='float:right;'></i></div>";
                        $(this).append(div);
                        Sayac++;
                        $('.fat-alan-kutu').draggable({
@@ -599,10 +650,36 @@
                                styling: 'bootstrap3'
                            });
                        }else{
+
+                           var JSonDatatbl = "";
+                           var Saytbl = 0;
+                           var sbladid=$('#sblsonid').attr('sonid');
+                           var ToplamDiv1 = $('#divContainer div#tbldongu').length;
+                           $('#divContainer div#tbldongu').each(function() {
+                               Saytbl++;
+                               if(Saytbl == 1)
+                               {
+                                   JSonDatatbl = "[";
+                               }
+
+                               JSonDatatbl += '{"id":"' + $(this).attr('id') +'","sbladid":"'+ sbladid +'", "ttop":"' + $(this).position().top + '", "tleft":"' + $(this).position().left + '", "twidth":"' + $(this).outerWidth(true) + '", "theight":"' + $(this).outerHeight(true) + '"}';
+
+                               if(Saytbl == ToplamDiv1)
+                               {
+                                   JSonDatatbl += "]";
+                               }
+                               else
+                               {
+                                   JSonDatatbl += ',';
+                               }
+
+                           });
+
+                           $("#tasarimtbl").val(JSonDatatbl);
+
                    var JSonData = "";
                    var ToplamDiv = $('#divContainer div.fat-alan-kutu').length;
                    var SayDiv = 0;
-                   var sbladid=$('#sblsonid').attr('sonid');
                        veri   =$('#divContainer div#veri').attr('data-veri');
 
                        if(veri == "undefined" || veri == null){
@@ -617,7 +694,11 @@
                                    JSonData = "[";
                                }
 
-                               JSonData += '{"id":"' + $(this).attr('id') + '","data-name":"' + $(this).attr('data-name') + '", "data-adi":"' + $(this).attr('data-adi') + '","sbladid":"'+ sbladid +'", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '"}';
+                               //css("font-family", $('#ddlFontFamily').val());
+                             //  $(this).css('float')
+//                               style="float:right;"
+                               var ali = $('#divContainer div.fat-alan-kutu').css("text-align");
+                               JSonData += '{"id":"' + $(this).attr('id') + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '","sbladid":"'+ sbladid +'", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '", "stylealign":"'+ali+'"}';
 
                                if(SayDiv == ToplamDiv)
                                {
@@ -628,11 +709,16 @@
                                    JSonData += ',';
                                }
                            });
-                   $("#tasarim").val(JSonData);
-                        bad= $("#tasarim").attr('value');
-                        sbladi=$("#sblad").val();
-                       console.log(bad);
 
+
+                   $("#tasarim").val(JSonData);
+
+                           //var ali = $('#divContainer div.fat-alan-kutu').css("text-align");
+                        bad= $("#tasarim").attr('value');
+                        tbad=$("#tasarimtbl").attr('value');
+                        sbladi=$("#sblad").val();
+                       console.log(tbad);
+                           console.log(bad);
                        $.ajax({
                            dataType: 'JSON',
                            type: 'POST',
@@ -640,7 +726,10 @@
                            data: {
                                '_token': $('input[name=csrf-token]').val(),
                                'datam': bad,
-                               'sblad':sbladi
+                               'datamt':tbad,
+                               'sblad':sbladi,
+                               'sblturuid': $('#sblturu').find('option:selected').val()
+
                            },
                            success: function(data) {
                                console.log(data);
@@ -674,7 +763,7 @@
                                JSonData = "[";
                            }
 
-                           JSonData += '{"id":"' + $(this).attr('id') + '","data-name":"' + $(this).attr('data-name') + '", "data-adi":"' + $(this).attr('data-adi') + '", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '"}';
+                           JSonData += '{"id":"' + $(this).attr('id') + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '"}';
 
                            if(SayDiv == ToplamDiv)
                            {

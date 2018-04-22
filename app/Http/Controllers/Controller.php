@@ -30,6 +30,7 @@ use App\Models\depoObj;
 use App\Models\fisturuObj;
 use App\Models\stokturObj;
 use App\Models\sablonObj;
+use App\Models\sablon_turuObj;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -754,11 +755,16 @@ class Controller extends BaseController
 //		          ->join( 'sablon','sablon.sbladid', '=', 'sablonad.sbladid')
 //		         ->join( 'sablon_turu','sablon.sblturuid', '=', 'sablon_turu.sblturuid')
 //			->get();
-
 		$sablon = DB::table('sablonad')
 			->select('sablonad.*','sablon_turu.*')
 			->join( 'sablon_turu','sablonad.sblturuid', '=', 'sablon_turu.sblturuid')
-		            ->get();
+			->get();
+//		$sablon = DB::table('sablonad')
+//			->select('sablonad.*','sablon_turu.*','sablon.*')
+//			->join( 'sablon','sablonad.sbladid', '=', 'sablon.sbladid')
+//			->join( 'sablon_turu','sablonad.sblturuid', '=', 'sablon_turu.sblturuid')
+//
+//		            ->get();
 
 
 		//dd($sablon);
@@ -768,6 +774,19 @@ class Controller extends BaseController
 	}
 	public function design()
 	{
+
+		$sbltur = sablon_turuObj::all();
+		$secsbltur = sablon_turuObj::first()->sblturuid;
+
+
+	//	$sbltur= sablon_turuObj::pluck('sblturuad','sblturuid');
+		//$secsbltur = sablon_turuObj::all();
+//		$secsbltur = sablon_turuObj::first()->sblturuid;
+
+
+
+
+
 		//$firma = DB::table('firmalar')->get();
 		$sbladsonid = DB::table('sablonad')
 		           ->orderBy('sbladid', 'desc')
@@ -795,17 +814,51 @@ class Controller extends BaseController
 		           ->with('firma', $firma)
 		           ->with('sonnumara', $sonnumara)
 					->with('sblid', $sblid)
+			->with('sblturu', $sbltur)
+			->with('secsblturu', $secsbltur)
 		           ->with('data', $data);
 
 	}
 	public function designedit(Request $request,$id)
 	{
+		//$sbltur= sablon_turuObj::pluck('sblturuad','sblturuid');
+
+		$sablonadObj = sablonadObj::find($id);
+		$sbltur = sablon_turuObj::all();
+		$secsbltur = db::table('sablonad')->where('sbladid',$id)->value('sblturuid');
+
+		$sbladsonid = DB::table('sablonad')
+	                 ->orderBy('sbladid', 'desc')
+	                 ->first();
+///
+		$sblid=db::table('sablon')
+		         ->select('sablon.*','sablonad.*')
+		         ->join( 'sablonad','sablonad.sbladid', '=', 'sablon.sbladid')
+		         ->get();
+		if (empty($sbladsonid)){
+			$sonnumara=1;
+		}
+		else{
+			$sonnumara=$sbladsonid->sbladid +1;
+		}
+		$data=null;
+		$firma = firmaObj::first();
 		//$data = sablonObj::find($id);
 		$datam=DB::table('sablon')->where('sbladid',$id)->get();
-		//dd($datam);
 
+
+$datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get();
+//dd($datamt);
 		return View::make('sablonlar.design')
-		           ->with('sablone', $datam);
+			->with('firma', $firma)
+			->with('sonnumara', $sonnumara)
+			->with('sblid', $sblid)
+			->with('data', $data)
+			->with('sblturu', $sbltur)
+			->with('secsblturu', $secsbltur)
+			->with('sablonad', $sablonadObj)
+			->with('sablone', $datam)
+			->with('sablonet', $datamt);
 //		$sablon = DB::table('sablon')
 //		            ->select('sablon.*', 'sablon_turu.*')
 //		            ->join( 'sablon_turu','sablon.sblturuid', '=', 'sablon_turu.sblturuid')
@@ -835,17 +888,24 @@ class Controller extends BaseController
 	//	dd($request->all());
 		$sablonadObj =new sablonadObj;
 		$sablonadObj->sblad=$request->sblad;
+		$sablonadObj->sblturuid=$request->sblturuid;
+
 
 
 
 		$sablonadObj->save();
 
 		$aa=json_decode($request->datam, true);
+		$aat=json_decode($request->datamt,true);
+		foreach ($aat as $trackt) {
+
+			sablonObj::create($trackt);
+		}
 
 		foreach ($aa as $track) {
 			sablonObj::create($track);
     }
-		return response()->json($aa);
+		return response()->json($aat);
 			//}
 			//return response()->json( $data );
 
