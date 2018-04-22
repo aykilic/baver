@@ -115,13 +115,20 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                @foreach($sblid as $sbl)
 
+
+                                                                @isset($sblid)
+                                                                @foreach($sblid as $sbl)
                                                                <tr>
                                                                    <td ></td>
                                                                  <td>  <div class="" id="sad" >{{$sbl->sbladid}}</div></td>
                                                                </tr>
                                                                 @endforeach
+                                                                    @endisset
+                                                                <tr>
+                                                                    <td ></td>
+                                                                    <td>  <div class="" id="sad" ></div></td>
+                                                                </tr>
                                                                </tbody>
                                                            </table>
 
