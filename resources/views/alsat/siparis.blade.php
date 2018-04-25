@@ -92,6 +92,7 @@
                                                 <label for="address">Hesap</label>
                                                 <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control " >
                                                 <input type="text" name="fisfad" id="fisfad" value="" class="form-control has-feedback-left typeahead" >
+                                                <img class="Typeahead-spinner" src="../images/wait.gif">
                                                 <span class="fa fa-search form-control-feedback left" ></span>
                                             </div> <!-- /.form-group -->
 
@@ -262,25 +263,33 @@
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: {
                     url: "/",
-                    transform: function(response) {
-                        return $.map(response, function(firma) {
-                            return { value: firma.cunvan,
-                                     id:    firma.fid
-                            };
-                        });
-                    }
-                },
+
+                        transform: function (response) {
+                            return $.map(response, function (firma) {
+                                return {
+                                    value: firma.cunvan,
+                                    id: firma.fid
+                                };
+                            });
+                        }
+                    },
+
                 remote: {
                     wildcard: '%QUERY',
                     url: "find/%QUERY",
-                    transform: function(response) {
-                        return $.map(response, function(firma) {
-                            return { value: firma.cunvan,
+
+                        transform: function (response) {
+                            return $.map(response, function (firma) {
+                                return {
+                                    value: firma.cunvan,
                                     id: firma.fid
-                            };
-                        });
+                                };
+                            });
+                        }
+
                     }
-                }
+
+
             });
 
             $('.typeahead').typeahead({
@@ -296,13 +305,21 @@
                     display: 'value',
                     source: search,
                     templates: {
-                        //header: '<h4 class="dropdown">Restaurants</h4>'
-                    },
+                        empty: [
+                            '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
+                        ],
+                    }
 
             }).on("typeahead:selected", function(obj, datum) {
 
                 $("#fisfid").val(datum.id);
-            });
+            })
+                .on('typeahead:asyncrequest', function() {
+                $('.Typeahead-spinner').show();
+            })
+                .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+                    $('.Typeahead-spinner').hide();
+                });
             //deneme
 //            var substringMatcher = function(strs) {
 //                return function findMatches(q, cb) {
@@ -436,9 +453,9 @@
 
 
 //
-//            $(":input").keyup(function(){
-//    this.value = this.value.toUpperCase();
-//    });
+            $(":input").keyup(function(){
+    this.value = this.value.toUpperCase();
+    });
 
 
 
