@@ -733,16 +733,7 @@ class Controller extends BaseController
 
 
     //****************siparis fisi***************************//
-    public function siparisfisi()
-    {
-        $firma = DB::table('firmalar')->get();
-        $fistur = fisturuObj::pluck('fisturuad','fisturuid');
-//       $sipfistur = sipfisiObj::all();
 
-        return View::make('alsat.siparis')
-           ->with('fistur', $fistur)
-            ->with('firma', $firma);
-    }
 
 
     //****************siparis fisi***************************//

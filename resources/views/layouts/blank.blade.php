@@ -120,7 +120,9 @@
         <script src="{{ asset("js/bootstrap.min.js") }}"></script>
         <!-- FastClick -->
         {{--<script src="{{ asset("js/jquery.dataTables.min.js") }}"></script>--}}
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+        {{--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>--}}
+        <script src="{{ asset("js/jquery.dataTables.min.js") }}"></script>
+
         <script src="{{ asset("js/moment.min.js") }}"></script>
 
         <script src="{{ asset("js/fastclick.js") }}"></script>

@@ -95,7 +95,7 @@ Route::delete('/stokturusil/{depoid}', 'Controller@stokturusil');
 
 //****************sipariş fisi************************//////////////////////
 
-Route::get('/siparisfisi', 'Controller@siparisfisi');
+Route::get('/siparisfisi', 'fisController@siparisfisi');
 Route::post('/siparisfisi/kaydet', 'Controller@sipfiskaydet');
 Route::put('/siparisfisi/edit', 'Controller@sipfisedit');
 
@@ -113,3 +113,7 @@ Route::post('/designkaydet', 'Controller@designkaydet');
 
 Route::get('/deneme', 'Controller@deneme');
 
+
+//************GENEL **************/////////////////7
+Route::get('autocompletefirma',array('as'=>'autocomplete','uses'=>'fisController@autocomplete'));
+Route::get('/find/{id}', 'fisController@find');
