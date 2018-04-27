@@ -73,7 +73,6 @@ p + p {
 
 
 
-.typeahead,
 .tt-query,
 .tt-hint {
     width: 396px;
@@ -143,6 +142,14 @@ p + p {
     font-size: 14px;
 }
 .Typeahead-spinner {
+    position: absolute;
+    top: 32px;
+    right: 20px;
+    display: none;
+    width: 20px;
+    height: 20px;
+}
+.Typeahead-spinners {
     position: absolute;
     top: 32px;
     right: 20px;

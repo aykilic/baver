@@ -67,11 +67,10 @@ class fisController extends Controller{
 		                                          ->get();
 		return response()->json($data);
 	}
-	public function find(Request $request, $id)
+	public function find(Request $request, $query)
 	{
-		//$query = $request->input('a');
-
-		$res = firmaObj::where("cunvan","LIKE","%{$request->input('a')}%")
+		$al=$query;
+		$res = firmaObj::select("cunvan")->where("cunvan","LIKE","%{$al}%")
 		                ->get();
 		//$res   = firmaObj::where('cunvan', 'LIKE', "%$query%")->get();
 		return response()->json($res);

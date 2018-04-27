@@ -19,7 +19,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Sipariş Fişi Detayı </h2>
+                            <h2>Sipariş Fişi </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -86,16 +86,18 @@
                                             </div> <!-- /.row -->
                                         </div> <!-- /.col-md-6 -->
                                         <div class="col-md-4">
-
+                                            <div class="row">
+                                                <div class="col-lg-12">
                                             <div class="form-group">
-
+                                                <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control" >
                                                 <label for="address">Hesap</label>
-                                                <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control " >
+
                                                 <input type="text" name="fisfad" id="fisfad" value="" class="form-control has-feedback-left typeahead" >
                                                 <img class="Typeahead-spinner" src="../images/wait.gif">
                                                 <span class="fa fa-search form-control-feedback left" ></span>
                                             </div> <!-- /.form-group -->
-
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-xs-6 col-md-6">
                                                     <div class="form-group">
@@ -132,9 +134,51 @@
                                     </div>
 
                                     <div class="h-20"></div>
-
                                     <div class="clearfix"></div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="x_panel">
+                                                <div class="x_title">
+                                                    <h2>Satır Detayı </h2>
 
+                                                    <div class="clearfix"></div>
+                                                    <div class="x_content">
+
+
+
+
+
+
+                                                        <br />
+
+
+
+
+                                                        <div class="col-xs-1 col-md-2">
+                                                            <div class="form-group">
+
+                                                            <input type="hidden" name="fisfid[]" id="fisfid" value="" >
+                                                            <input type="text" name="fisfad" id="fisfad" value="" class="form-control has-feedback-left typeaheads" >
+                                                            <img class="Typeahead-spinners" src="../images/wait.gif">
+                                                            <span class="fa fa-search form-control-feedback left" style="margin-top:6px" ></span>
+                                                        </div>
+                                                        </div>
+                                                        <div class="h-20"></div>
+
+                                                        <div class="clearfix"></div>
+
+
+                                                        <div class="text-right">
+
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="text-right">
                                         <input type="hidden" name="add">
@@ -143,6 +187,18 @@
                                     </div>
 
                                 </form>
+
+
+
+
+
+
+
+
+
+
+
+
 
                             </div>
                         </div>
@@ -255,42 +311,68 @@
 
 
 
-            //FirstName Search Engine
+            //FirstName Search Engine    örrrrnek
             var search = new Bloodhound({
-                datumTokenizer: function(datum) {
-                    return Bloodhound.tokenizers.whitespace(datum.value);
-                },
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                prefetch: {
-                    url: "/",
 
-                        transform: function (response) {
-                            return $.map(response, function (firma) {
-                                return {
-                                    value: firma.cunvan,
-                                    id: firma.fid
-                                };
-                            });
-                        }
-                    },
+                datumTokenizer: function (d) {
+                    return Bloodhound.tokenizers.whitespace(d.cunvan);
+                },
+
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                limit:10,
+                //                prefetch: {
+//                    url: "/",
+//
+//                        transform: function (response) {
+//                            return $.map(response, function (firma) {
+//                                return {
+//                                    value: firma.cunvan,
+//                                    id: firma.fid
+//                                };
+//                            });
+//                        }
+//                    },
 
                 remote: {
-                    wildcard: '%QUERY',
-                    url: "find/%QUERY",
+                    wildcard: '%query',
+                    url: 'find/query=%query',
 
-                        transform: function (response) {
-                            return $.map(response, function (firma) {
-                                return {
-                                    value: firma.cunvan,
-                                    id: firma.fid
-                                };
-                            });
-                        }
+//                        transform: function (response) {
+//                            return $.map(response, function (firma) {
+//                                return {
+//                                    cunvan: firma.cunvan,
+//                                    id: firma.fid
+//                                };
+//                            });
+//                        }
+                    filter: function ( response ) {
+console.log(response);
+                        return $.map(response, function (object) {
+                            return {
+                                cunvan: object.cunvan,
+                                firstName: object.fid
 
+                            };
+                        });
                     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+
             });
+            search.initialize();
 ////deneme 1
             $('.typeahead').typeahead({
 
@@ -298,28 +380,58 @@
                     hint: true,
                     highlight: true,
                     minLength: 2,
-                    limit: 10
+                    limit: 100
                 },
                 {
+                    name: 'cunvan',
                     id: 'fid',
-                    display: 'value',
+                    display: 'cunvan',
                     source: search,
                     templates: {
                         empty: [
                             '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
-                        ],
+                        ]
                     }
 
             }).on("typeahead:selected", function(obj, datum) {
 
                 $("#fisfid").val(datum.id);
-            })
-                .on('typeahead:asyncrequest', function() {
-                $('.Typeahead-spinner').show();
-            })
-                .on('typeahead:asynccancel typeahead:asyncreceive', function() {
-                    $('.Typeahead-spinner').hide();
+//            })
+//                .on('typeahead:asyncrequest', function() {
+//                $('.Typeahead-spinner').show();
+//            })
+//                .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+//                    $('.Typeahead-spinner').hide();
                 });
+//            $('.typeaheads').typeahead({
+//
+//
+//                    hint: true,
+//                    highlight: true,
+//                    minLength: 2,
+//                    limit: 10
+//                },
+//                {
+//
+//                    id: 'fid',
+//                    display: 'value',
+//                    source: search.ttAdapter(),
+//                    templates: {
+//                        empty: [
+//                            '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
+//                        ],
+//                    }
+//
+//                }).on("typeaheads:selected", function(obj, datum) {
+//
+//                $("#fisfid").val(datum.id);
+//            })
+//                .on('typeaheads:asyncrequest', function() {
+//                    $('.Typeahead-spinner').show();
+//                })
+//                .on('typeaheads:asynccancel typeahead:asyncreceive', function() {
+//                    $('.Typeahead-spinner').hide();
+//                });
             //deneme
 //            var substringMatcher = function(strs) {
 //                return function findMatches(q, cb) {
