@@ -43,12 +43,21 @@ class fisController extends Controller{
 	public function siparisfisi()
 	{
 		$firma = DB::table('firmalar')->get();
+		$firmam = DB::table('firmalar')->select('cunvan')->get();
+		//$firmaz=$firmam->toArray();
+$firmay=json_encode($firmam);
+		//$firmaz=$firmam;
+		//$firmaz= firmaObj::pluck('cunvan');
+		$firmaz=$firmam->toJson();
+//dd($firmaz);
 		$fistur = fisturuObj::pluck('fisturuad','fisturuid');
 //       $sipfistur = sipfisiObj::all();
 
 		return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
-		           ->with('firma', $firma);
+		           ->with('firma', $firma)
+					->with('firmaz', $firmay);
+
 	}
 
 
@@ -61,16 +70,23 @@ class fisController extends Controller{
 
 
 
-	public function autocomplete(Request $request)
+	public function autocompletee(Request $request)
 	{
 		$data = firmaObj::select ("cunvan as name","fid")->where("cunvan","LIKE","%{$request->input('query')}%")
 		                                          ->get();
 		return response()->json($data);
 	}
-	public function find(Request $request, $query)
+	public function autocomplete(Request $request)
+	{
+		//$data = firmaObj::pluck('cunvan','fid');
+		$data = DB::table('firmalar')->get();
+	//	dd($data);
+		return response()->json($data);
+	}
+	public function find($query)
 	{
 		$al=$query;
-		$res = firmaObj::select("cunvan")->where("cunvan","LIKE","%{$al}%")
+		$res = firmaObj::select("cunvan","fid")->where("cunvan","LIKE","%{$al}%")
 		                ->get();
 		//$res   = firmaObj::where('cunvan', 'LIKE', "%$query%")->get();
 		return response()->json($res);

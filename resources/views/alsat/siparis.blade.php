@@ -92,7 +92,7 @@
                                                 <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control" >
                                                 <label for="address">Hesap</label>
 
-                                                <input type="text" name="fisfad" id="fisfad" value="" class="form-control has-feedback-left typeahead" >
+                                                <input type="text" name="fisfad" id="fisfad" value="" autocomplete="off" class="form-control has-feedback-left typeahead" >
                                                 <img class="Typeahead-spinner" src="../images/wait.gif">
                                                 <span class="fa fa-search form-control-feedback left" ></span>
                                             </div> <!-- /.form-group -->
@@ -158,7 +158,7 @@
                                                             <div class="form-group">
 
                                                             <input type="hidden" name="fisfid[]" id="fisfid" value="" >
-                                                            <input type="text" name="fisfad" id="fisfad" value="" class="form-control has-feedback-left typeaheads" >
+                                                            <input type="text" name="fisfad" id="fisfad" value="" autocomplete="off" class="form-control has-feedback-left typeaheads" >
                                                             <img class="Typeahead-spinners" src="../images/wait.gif">
                                                             <span class="fa fa-search form-control-feedback left" style="margin-top:6px" ></span>
                                                         </div>
@@ -221,7 +221,7 @@
     </footer>
 
 
-
+<input id="denemem" type="hidden" value="">
     <div class="modal fade" tabindex="-1" role="dialog" id="firmam" aria-labelledby="myModalLabel" aria-hidden="true">
 
             <div class="modal-content">
@@ -307,167 +307,134 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            var bloodhound = new Bloodhound({
+//                remote: {
+//                    wildcard: '%query',
+//                    url: 'find/query=%query',
+////
+//                    transform: function (response) {
+//                        return $.map(response, function (firma) {
+//                            return {
+//                                name: firma.cunvan,
+//                                id: firma.fid
+//                            };
 //
-
-
-
-            //FirstName Search Engine    örrrrnek
-            var search = new Bloodhound({
-
-                datumTokenizer: function (d) {
-                    return Bloodhound.tokenizers.whitespace(d.cunvan);
-                },
+//                        });
+//                    }
+//
+//                },
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
-                limit:10,
-                //                prefetch: {
-//                    url: "/",
-//
-//                        transform: function (response) {
-//                            return $.map(response, function (firma) {
-//                                return {
-//                                    value: firma.cunvan,
-//                                    id: firma.fid
-//                                };
-//                            });
-//                        }
-//                    },
-
-                remote: {
-                    wildcard: '%query',
-                    url: 'find/query=%query',
-
-//                        transform: function (response) {
-//                            return $.map(response, function (firma) {
-//                                return {
-//                                    cunvan: firma.cunvan,
-//                                    id: firma.fid
-//                                };
-//                            });
-//                        }
-                    filter: function ( response ) {
-console.log(response);
-                        return $.map(response, function (object) {
+                prefetch: {
+                    url: '/autocomplete',
+                    filter: function (response) {
+                        // assume data is an array of strings e.g. ['one', 'two', 'three']
+                        return $.map(response, function (firma) {
                             return {
-                                cunvan: object.cunvan,
-                                firstName: object.fid
-
+                                name: firma.cunvan,
+                                id: firma.fid
                             };
                         });
                     }
 
 
+                }
 
 
+        });
 
-
-
-
-
-
-
-
-
-
-                    }
-
-            });
-            search.initialize();
-////deneme 1
             $('.typeahead').typeahead({
-
-
+                    limit:5,
                     hint: true,
                     highlight: true,
                     minLength: 2,
-                    limit: 100
+                    rateLimitWait:50
                 },
                 {
                     name: 'cunvan',
                     id: 'fid',
-                    display: 'cunvan',
-                    source: search,
+                    display: 'name',
+                        //Input value to be set when you select a suggestion.
+
+                    source: bloodhound.ttAdapter(),
                     templates: {
                         empty: [
                             '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
                         ]
                     }
 
-            }).on("typeahead:selected", function(obj, datum) {
+            }).on("typeahead:selected", function(obj, data) {
 
-                $("#fisfid").val(datum.id);
-//            })
-//                .on('typeahead:asyncrequest', function() {
-//                $('.Typeahead-spinner').show();
-//            })
-//                .on('typeahead:asynccancel typeahead:asyncreceive', function() {
-//                    $('.Typeahead-spinner').hide();
+              $("#fisfid").val(data.id);
+                console.log(data.id);
+           })
+                .on('typeahead:asyncrequest', function() {
+                $('.Typeahead-spinner').show();
+            })
+                .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+                    $('.Typeahead-spinner').hide();
+
                 });
-//            $('.typeaheads').typeahead({
-//
-//
-//                    hint: true,
-//                    highlight: true,
-//                    minLength: 2,
-//                    limit: 10
-//                },
-//                {
-//
-//                    id: 'fid',
-//                    display: 'value',
-//                    source: search.ttAdapter(),
-//                    templates: {
-//                        empty: [
-//                            '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
-//                        ],
-//                    }
-//
-//                }).on("typeaheads:selected", function(obj, datum) {
-//
-//                $("#fisfid").val(datum.id);
-//            })
-//                .on('typeaheads:asyncrequest', function() {
-//                    $('.Typeahead-spinner').show();
-//                })
-//                .on('typeaheads:asynccancel typeahead:asyncreceive', function() {
-//                    $('.Typeahead-spinner').hide();
-//                });
-            //deneme
-//            var substringMatcher = function(strs) {
-//                return function findMatches(q, cb) {
-//                    var matches, substrRegex;
-//
-//                    // an array that will be populated with substring matches
-//                    matches = [];
-//
-//                    // regex used to determine if a string contains the substring `q`
-//                    substrRegex = new RegExp(q, 'i');
-//
-//                    // iterate through the pool of strings and for any string that
-//                    // contains the substring `q`, add it to the `matches` array
-//                    $.each(strs, function(i, str) {
-//                        if (substrRegex.test(str)) {
-//                            // the typeahead jQuery plugin expects suggestions to a
-//                            // JavaScript object, refer to typeahead docs for more info
-//                            matches.push({ value: str });
-//                        }
-//                    });
-//
-//                    cb(matches);
-//                };
-//            };
-//
-//            var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-//                'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-//                'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-//                'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-//                'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-//                'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-//                'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-//                'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-//                'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+
+//            var jsonData = [
+//                {"cities_id":"1","city":"Attignat","postal_code":"01340"},
+//                {"cities_id":"2","city":"Beaupont","postal_code":"01270"},
+//                {"cities_id":"3","city":"B\u00e9ny","postal_code":"01370"}
 //            ];
-//
+//            $.each(response, function(key, value) {
+//                $.each(value, function(key, value){
+//                    console.log(response);
+//                });
+//            });
+
+
+
+            //deneme
+            {{--var substringMatcher = function(strs) {--}}
+                {{--return function findMatches(q, cb) {--}}
+                    {{--var matches, substrRegex;--}}
+
+                    {{--// an array that will be populated with substring matches--}}
+                    {{--matches = [];--}}
+
+                    {{--// regex used to determine if a string contains the substring `q`--}}
+                    {{--substrRegex = new RegExp(q, 'i');--}}
+
+                    {{--// iterate through the pool of strings and for any string that--}}
+                    {{--// contains the substring `q`, add it to the `matches` array--}}
+                    {{--$.each(strs, function(i, str) {--}}
+                        {{--if (substrRegex.test(str)) {--}}
+                            {{--// the typeahead jQuery plugin expects suggestions to a--}}
+                            {{--// JavaScript object, refer to typeahead docs for more info--}}
+                            {{--matches.push({ value: str });--}}
+                        {{--}--}}
+                    {{--});--}}
+
+                    {{--cb(matches);--}}
+                {{--};--}}
+            {{--};--}}
+            {{--var cunvan=[];--}}
+            {{--var arrr=JSON.stringify($({!!$firmaz!!}));--}}
+            {{--var az  = arrr.cunvan ;--}}
+            {{--ab=JSON.parse(arrr);--}}
+            {{--//console.log(arrr);--}}
+            {{--$.each(JSON.parse(arrr), function(idx, obj) {--}}
+                {{--var seri=obj.cunvan;--}}
+               {{--//serii= arrr.split(',');--}}
+                {{--console.log(seri);--}}
+            {{--});--}}
+
+
+{{--//            $.each(result, function(i, item) {--}}
+{{--//                var f=item.PageName;--}}
+{{--//                console.log([f]);--}}
+{{--//            })--}}
+            {{--//console.log(az);--}}
+            {{--var states = seri;--}}
+           // console.log(arrr);
+
 //            $('#fisfad').typeahead({
 //                    hint: true,
 //                    highlight: true,
@@ -484,6 +451,12 @@ console.log(response);
 
 
             //
+
+
+
+
+
+
 
 //            $("#fisfad").autocomplete({
 //                source : '/autocompletefirma',
