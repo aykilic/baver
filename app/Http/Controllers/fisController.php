@@ -43,20 +43,27 @@ class fisController extends Controller{
 	public function siparisfisi()
 	{
 		$firma = DB::table('firmalar')->get();
+		$stok = DB::table('stok')->get();
 		$firmam = DB::table('firmalar')->select('cunvan')->get();
+		//$stokm = DB::table('stoklar')->select('sad')->get();
 		//$firmaz=$firmam->toArray();
-$firmay=json_encode($firmam);
+//$firmay=json_encode($firmam);
+		//$stoky=json_encode($stokm);
 		//$firmaz=$firmam;
 		//$firmaz= firmaObj::pluck('cunvan');
-		$firmaz=$firmam->toJson();
-//dd($firmaz);
+		//$firmaz=$firmam->toJson();
+//dd($stok);
 		$fistur = fisturuObj::pluck('fisturuad','fisturuid');
+		$dropbirim = birimObj::pluck('bad','bid');
+
 //       $sipfistur = sipfisiObj::all();
 
 		return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
 		           ->with('firma', $firma)
-					->with('firmaz', $firmay);
+		           ->with('stok', $stok)
+		           ->with('birim', $dropbirim);
+
 
 	}
 
@@ -76,12 +83,19 @@ $firmay=json_encode($firmam);
 		                                          ->get();
 		return response()->json($data);
 	}
-	public function autocomplete(Request $request)
+	public function autocompletefirma(Request $request)
 	{
 		//$data = firmaObj::pluck('cunvan','fid');
 		$data = DB::table('firmalar')->get();
 	//	dd($data);
 		return response()->json($data);
+	}
+	public function autocompletestok(Request $request)
+	{
+		//$data = firmaObj::pluck('cunvan','fid');
+		$datam = DB::table('stok')->get();
+		//	dd($data);
+		return response()->json($datam);
 	}
 	public function find($query)
 	{

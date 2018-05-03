@@ -89,9 +89,8 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                             <div class="form-group">
-                                                <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control" >
                                                 <label for="address">Hesap</label>
-
+                                                <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control" >
                                                 <input type="text" name="fisfad" id="fisfad" value="" autocomplete="off" class="form-control has-feedback-left typeahead" >
                                                 <img class="Typeahead-spinner" src="../images/wait.gif">
                                                 <span class="fa fa-search form-control-feedback left" ></span>
@@ -138,31 +137,98 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="x_panel">
-                                                <div class="x_title">
-                                                    <h2>Satır Detayı </h2>
-
-                                                    <div class="clearfix"></div>
-                                                    <div class="x_content">
 
 
 
 
 
 
-                                                        <br />
 
 
 
 
-                                                        <div class="col-xs-1 col-md-2">
-                                                            <div class="form-group">
+                                                        <div class="table-responsive" >
+                                                            <table class="table table-striped"  id="siptable" >
+                                                                <thead style="background-color: #EAEAEA ">
+                                                                <tr>
+                                                                    <th class="duz">
+                                                                        Stok Adı
 
-                                                            <input type="hidden" name="fisfid[]" id="fisfid" value="" >
-                                                            <input type="text" name="fisfad" id="fisfad" value="" autocomplete="off" class="form-control has-feedback-left typeaheads" >
-                                                            <img class="Typeahead-spinners" src="../images/wait.gif">
-                                                            <span class="fa fa-search form-control-feedback left" style="margin-top:6px" ></span>
+                                                                    </th>
+                                                                    <th class="duz">Miktar</th>
+                                                                    <th class="duz">Birim</th>
+                                                                    <th class="duz">Birim Fiyatı</th>
+                                                                    <th class="duz">Tutar</th>
+                                                                    <th class="duz"></th>
+
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr class="sipsatirs">
+                                                                    <td >
+                                                                        <div class="col-lg-12 kutupad">
+                                                                        <div class="form-group kutupad">
+
+                                                                        <input type="hidden" name="fissid[]" id="fissid" value="" >
+                                                                        <input type="text" name="stokad[]" id="stokad"  autocomplete="off" class="form-control has-feedback-left " >
+                                                                        <img class="Typeahead-spinners" src="../images/wait.gif">
+                                                                        <span class="fa fa-search form-control-feedback left ico"   ></span>
+                                                                        </div>
+                                                                        </div>
+                                                                    </td>
+
+
+                                                                    <td>
+                                                                        <div class="col-md-12 kutupad">
+                                                                                <input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" >
+                                                                        </div>
+                                                                    </td>
+
+
+
+
+                                                                    <td>
+                                                                        <div class="col-lg-12 kutupad">
+                                                                            <select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
+                                                                                <option >Seciniz</option>
+                                                                                @foreach($birim as $key => $bad)
+                                                                                    <option  value="{{ $key }}">{{ $bad }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div></td>
+                                                                    <td>
+                                                                        <div class="col-md-12 kutupad">
+                                                                            <input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " >
+                                                                        </div>
+                                                                    </td>
+                                                                    <td><div class="col-md-12 kutupad">
+                                                                            <input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" >
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td><a class="btn btn-default"  href="#" id="satirsil" aria-label="Settings">
+                                                                            <i class="fa fa-times" aria-hidden="true"  ></i>
+                                                                        </a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
-                                                        </div>
+                                                <a class="btn btn-default"  id="satirekle" >
+                                                        Satır Ekle
+                                                    </a>
+
+
+
+
+                                                        {{--<div class="col-xs-1 col-md-2">--}}
+                                                            {{--<div class="form-group">--}}
+
+                                                            {{--<input type="hidden" name="sid[]" id="sid" value="" >--}}
+                                                            {{--<input type="text" name="stokad" id="stokad" value="" autocomplete="off" class="form-control has-feedback-left typeaheads" >--}}
+                                                            {{--<img class="Typeahead-spinners" src="../images/wait.gif">--}}
+                                                            {{--<span class="fa fa-search form-control-feedback left" style="margin-top:6px" ></span>--}}
+                                                        {{--</div>--}}
+                                                        {{--</div>--}}
                                                         <div class="h-20"></div>
 
                                                         <div class="clearfix"></div>
@@ -174,8 +240,6 @@
                                                         </div>
 
 
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -221,7 +285,6 @@
     </footer>
 
 
-<input id="denemem" type="hidden" value="">
     <div class="modal fade" tabindex="-1" role="dialog" id="firmam" aria-labelledby="myModalLabel" aria-hidden="true">
 
             <div class="modal-content">
@@ -250,6 +313,8 @@
 
                     </thead>
                     <tbody>
+                    @foreach($stok as $spost )
+                        @endforeach
                     @foreach($firma as $post )
                         <tr>
                             <td>{{$post->tar}}</td>
@@ -308,41 +373,23 @@
                 }
             });
 
-            var bloodhound = new Bloodhound({
-//                remote: {
-//                    wildcard: '%query',
-//                    url: 'find/query=%query',
-////
-//                    transform: function (response) {
-//                        return $.map(response, function (firma) {
-//                            return {
-//                                name: firma.cunvan,
-//                                id: firma.fid
-//                            };
-//
-//                        });
-//                    }
-//
-//                },
+            var firmabloodhound = new Bloodhound({
+
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: {
-                    url: '/autocomplete',
+                    url: '/autocompletefirma',
                     filter: function (response) {
                         // assume data is an array of strings e.g. ['one', 'two', 'three']
                         return $.map(response, function (firma) {
                             return {
                                 name: firma.cunvan,
-                                id: firma.fid
+                                fid: firma.fid
                             };
                         });
                     }
-
-
                 }
-
-
         });
 //dfgdfgd
             $('.typeahead').typeahead({
@@ -353,12 +400,12 @@
                     rateLimitWait:50
                 },
                 {
-                    name: 'cunvan',
-                    id: 'fid',
+//                    name: 'cunvan',
+//                    id: 'fid',
                     display: 'name',
                         //Input value to be set when you select a suggestion.
 
-                    source: bloodhound.ttAdapter(),
+                    source: firmabloodhound,
                     templates: {
                         empty: [
                             '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
@@ -378,114 +425,58 @@
 
                 });
 
-//            var jsonData = [
-//                {"cities_id":"1","city":"Attignat","postal_code":"01340"},
-//                {"cities_id":"2","city":"Beaupont","postal_code":"01270"},
-//                {"cities_id":"3","city":"B\u00e9ny","postal_code":"01370"}
-//            ];
-//            $.each(response, function(key, value) {
-//                $.each(value, function(key, value){
-//                    console.log(response);
-//                });
-//            });
 
+            var stokbloodhound = new Bloodhound({
 
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 
-            //deneme
-            {{--var substringMatcher = function(strs) {--}}
-                {{--return function findMatches(q, cb) {--}}
-                    {{--var matches, substrRegex;--}}
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: {
+                    url: '/autocompletestok',
+                    filter: function (response) {
+                        console.log(response);
+                        // assume data is an array of strings e.g. ['one', 'two', 'three']
+                        return $.map(response, function (stok) {
+                            return {
+                                name: stok.sad,
+                                id: stok.sid
+                            };
+                        });
+                    }
+                }
+            });
+//dfgdfgd
+            $("input[name*=stokad]").typeahead({
+                    limit:5,
+                    minLength: 2,
+                    rateLimitWait:50
+                },
+                {
+//                    name: 'sname',
+//                    id: 'sid',
+                    display: 'name',
+                    //Input value to be set when you select a suggestion.
 
-                    {{--// an array that will be populated with substring matches--}}
-                    {{--matches = [];--}}
+                    source: stokbloodhound,
+                    templates: {
+                        empty: [
+                            '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
+                        ]
+                    }
 
-                    {{--// regex used to determine if a string contains the substring `q`--}}
-                    {{--substrRegex = new RegExp(q, 'i');--}}
+                }).on("typeahead:selected", function(obj, datam) {
 
-                    {{--// iterate through the pool of strings and for any string that--}}
-                    {{--// contains the substring `q`, add it to the `matches` array--}}
-                    {{--$.each(strs, function(i, str) {--}}
-                        {{--if (substrRegex.test(str)) {--}}
-                            {{--// the typeahead jQuery plugin expects suggestions to a--}}
-                            {{--// JavaScript object, refer to typeahead docs for more info--}}
-                            {{--matches.push({ value: str });--}}
-                        {{--}--}}
-                    {{--});--}}
+                $("#fissid").val(datam.sid);
+                console.log(datam.sid);
+            })
+                .on('typeahead:asyncrequest', function() {
+                    $('.Typeahead-spinner').show();
+                })
+                .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+                    $('.Typeahead-spinner').hide();
 
-                    {{--cb(matches);--}}
-                {{--};--}}
-            {{--};--}}
-            {{--var cunvan=[];--}}
-            {{--var arrr=JSON.stringify($({!!$firmaz!!}));--}}
-            {{--var az  = arrr.cunvan ;--}}
-            {{--ab=JSON.parse(arrr);--}}
-            {{--//console.log(arrr);--}}
-            {{--$.each(JSON.parse(arrr), function(idx, obj) {--}}
-                {{--var seri=obj.cunvan;--}}
-               {{--//serii= arrr.split(',');--}}
-                {{--console.log(seri);--}}
-            {{--});--}}
+                });
 
-
-{{--//            $.each(result, function(i, item) {--}}
-{{--//                var f=item.PageName;--}}
-{{--//                console.log([f]);--}}
-{{--//            })--}}
-            {{--//console.log(az);--}}
-            {{--var states = seri;--}}
-           // console.log(arrr);
-
-//            $('#fisfad').typeahead({
-//                    hint: true,
-//                    highlight: true,
-//                    minLength: 1
-//                },
-//                {
-//                    name: 'states',
-//                    displayKey: 'value',
-//                    source: substringMatcher(states)
-//                });
-
-
-
-
-
-            //
-
-
-
-
-
-
-
-//            $("#fisfad").autocomplete({
-//                source : '/autocompletefirma',
-//                minLenght:1,
-//                autoFocus:true,
-//                select:function(e, ui){
-//                    $('#fisfid').val(ui.item.id);
-//
-//                }
-//            });
-
-            // Auto Complate /////////////
-//            $('input#fisfad').typeahead({
-//                autoFocus:true,
-//                source:  function (query, process) {
-//                    return $.get("/autocompletefirma", { query: query }, function (data) {
-//
-//                        return process(data);
-//
-//                    });
-//                },
-//                afterSelect: function(data) {
-//                    console.log(data);
-//                    $("#fisfid").val(data.fid);
-//
-//                }
-//            });
-
-            // Auto Complate /////////////
 
 
 
@@ -535,15 +526,66 @@
             });
 
 
+//önemliiiii?????**********************************************************************************************************************
+            $(function() {
+                var scntDiv = $('#siptable');
+                var i = $('#siptable tr.sipsatirs').length +1;
+
+            $(document).on('click','#satirekle', function() {
 
 
-//
+            //    alert('opps');
+
+
+
+                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="fissid" value="" ><input type="text" name="stokad" id="stokad"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span><option >Seciniz</option>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                    '</td>';
+
+
+
+
+
+
+
+
+
+                $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv);
+
+
+
+
+
+
+                i++;
+                return false;
+            });
+            $(document).on('click','#satirsil', function() {
+                if( i > 2 ) {
+
+                    $(this).parents('tr').remove();
+                    i--;
+                }
+                return false;
+            });
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+       //önemli*******************************************************************************************************************************
             $(":input").keyup(function(){
     this.value = this.value.toUpperCase();
     });
-
-
-
             $('#tarih').daterangepicker({
                 "singleDatePicker": true,
                 "maxDate": "31-12-2050",
