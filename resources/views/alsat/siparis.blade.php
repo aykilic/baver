@@ -373,7 +373,7 @@
                 }
             });
 
-            var firmabloodhound = new Bloodhound({
+            var bloodhound = new Bloodhound({
 
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 
@@ -385,7 +385,7 @@
                         return $.map(response, function (firma) {
                             return {
                                 name: firma.cunvan,
-                                fid: firma.fid
+                                id: firma.fid
                             };
                         });
                     }
@@ -401,11 +401,11 @@
                 },
                 {
 //                    name: 'cunvan',
-//                    id: 'fid',
+//                   id: 'fid',
                     display: 'name',
                         //Input value to be set when you select a suggestion.
 
-                    source: firmabloodhound,
+                    source: bloodhound,
                     templates: {
                         empty: [
                             '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
@@ -414,8 +414,8 @@
 
             }).on("typeahead:selected", function(obj, data) {
 
-              $("#fisfid").val(data.id);
-                console.log(data.id);
+              $("#fisfid").val(data.fid);
+                console.log(data.fid);
            })
                 .on('typeahead:asyncrequest', function() {
                 $('.Typeahead-spinner').show();
@@ -433,10 +433,10 @@
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: {
                     url: '/autocompletestok',
-                    filter: function (response) {
-                        console.log(response);
+                    filter: function (list) {
+                        console.log(list);
                         // assume data is an array of strings e.g. ['one', 'two', 'three']
-                        return $.map(response, function (stok) {
+                        return $.map(list, function (stok) {
                             return {
                                 name: stok.sad,
                                 id: stok.sid
@@ -452,8 +452,8 @@
                     rateLimitWait:50
                 },
                 {
-//                    name: 'sname',
-//                    id: 'sid',
+                    name: 'sad',
+                    id: 'sid',
                     display: 'name',
                     //Input value to be set when you select a suggestion.
 
@@ -464,10 +464,10 @@
                         ]
                     }
 
-                }).on("typeahead:selected", function(obj, datam) {
+                }).on("typeahead:selected", function(obj, stok) {
 
-                $("#fissid").val(datam.sid);
-                console.log(datam.sid);
+                $("#fissid").val(stok.id);
+                console.log(stok.id);
             })
                 .on('typeahead:asyncrequest', function() {
                     $('.Typeahead-spinner').show();
