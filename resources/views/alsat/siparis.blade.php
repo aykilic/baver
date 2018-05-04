@@ -539,7 +539,7 @@
 
 
 
-                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="fissid" value="" ><input type="text" name="stokad[' + i + ']" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span><option >Seciniz</option>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span><option >Seciniz</option>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                     '</td>';
 
 
@@ -570,7 +570,18 @@
 
                 }).keyup(function(){
                     this.value = this.value.toUpperCase();
-                });
+                }).on("typeahead:selected", function(obj, stok) {
+
+                    $("#"+i).val(stok.id);
+                    console.log(stok.id);
+                })
+                    .on('typeahead:asyncrequest', function() {
+                        $('.Typeahead-spinner').show();
+                    })
+                    .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+                        $('.Typeahead-spinner').hide();
+
+                    });
 
 
 
