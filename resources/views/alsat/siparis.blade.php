@@ -557,6 +557,7 @@
                     },
                     {
                         name: 'sad',
+                        display: 'name',
                         source: stokbloodhound,
                         templates: {
                             empty: [
@@ -567,6 +568,8 @@
 
 
 
+                }).keyup(function(){
+                    this.value = this.value.toUpperCase();
                 });
 
 
