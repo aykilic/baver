@@ -446,7 +446,8 @@
                 }
             });
 //dfgdfgd
-            $("input[name*=stokad]").typeahead({
+           $("input[name^='stokad']").typeahead({
+           // $("#sss").typeahead({
                     limit:5,
                     minLength: 2,
                     rateLimitWait:50
@@ -538,7 +539,7 @@
 
 
 
-                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="fissid" value="" ><input type="text" name="stokad" id="stokad"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span><option >Seciniz</option>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="fissid" value="" ><input type="text" name="stokad[' + i + ']" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span><option >Seciniz</option>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                     '</td>';
 
 
@@ -549,8 +550,24 @@
 
 
 
-                $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv);
+                $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
 
+                        minLength: 2,
+                        limit : 10
+                    },
+                    {
+                        name: 'sad',
+                        source: stokbloodhound,
+                        templates: {
+                            empty: [
+                                '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
+                            ]
+                        }
+
+
+
+
+                });
 
 
 
@@ -569,8 +586,8 @@
             });
 
 
-            });
 
+            });
 
 
 
