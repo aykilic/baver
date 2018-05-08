@@ -126,10 +126,13 @@
         <script src="{{ asset("js/moment.min.js") }}"></script>
 
         <script src="{{ asset("js/fastclick.js") }}"></script>
+        <script src="{{ asset("js/skycons.js") }}"></script>
         <!-- inputmask -->
 
         <!-- NProgress -->
         <script src="{{ asset("js/jquery.inputmask.bundle.js") }}"></script>
+
+
         <script src="{{ asset("js/nprogress.js") }}"></script>
         <script src="{{ asset("js/daterangepicker.js") }}"></script>
 

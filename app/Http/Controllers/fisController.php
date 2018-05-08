@@ -55,6 +55,7 @@ class fisController extends Controller{
 //dd($stok);
 		$fistur = fisturuObj::pluck('fisturuad','fisturuid');
 		$dropbirim = birimObj::pluck('bad','bid');
+		$dropdoviz = dovizObj::pluck('dad','did');
 
 //       $sipfistur = sipfisiObj::all();
 
@@ -62,7 +63,8 @@ class fisController extends Controller{
 		           ->with('fistur', $fistur)
 		           ->with('firma', $firma)
 		           ->with('stok', $stok)
-		           ->with('birim', $dropbirim);
+			->with('doviz', $dropdoviz)
+		->with('birim', $dropbirim);
 
 
 	}

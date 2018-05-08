@@ -69,7 +69,7 @@
                                                     <label for="tax_no"  name="lbanka">Fis Turu</label>
 
                                                     <select data-toggle="dropdown" id="fisturu" class="form-control" name="fisturu" aria-expanded="false"  ><span class="caret"></span>
-                                                        <option >Seciniz</option>
+                                                        {{--<option >Seciniz</option>--}}
                                                         @foreach($fistur as $key => $fisturuad)
                                                             <option  value="{{ $key }}">{{ $fisturuad }}</option>
                                                         @endforeach
@@ -116,14 +116,19 @@
                                             <div class="row">
                                                 <div class="col-xs-6 col-md-6">
                                                     <div class="form-group">
-                                                        <label for="tax_home">Vergi Dairesi</label>
+                                                        <label for="tax_home">Depo</label>
                                                         <input type="text" name="dvad" id="dvad" value="" class="form-control">
                                                     </div> <!-- /.form-group -->
                                                 </div> <!-- /.col-md-4 -->
                                                 <div class="col-xs-6 col-md-6">
                                                     <div class="form-group">
-                                                        <label for="tax_no">Vergi No/T.C. No</label>
-                                                        <input type="text" name="dvdno" id="dvdno" value="" class="form-control " >
+                                                        <label for="tax_no">Döviz</label>
+                                                        <select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
+                                                            {{--<option >Seciniz</option>--}}
+                                                            @foreach($doviz as $key => $dad)
+                                                                <option  value="{{ $key }}">{{ $dad }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div> <!-- /.form-group -->
                                                 </div> <!-- /.col-md-4 -->
                                             </div> <!-- /.row -->
@@ -180,7 +185,7 @@
 
                                                                     <td>
                                                                         <div class="col-md-12 kutupad">
-                                                                                <input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" >
+                                                                                <input type="text" name="miktar[]" id="miktar"                                                                                       autocomplete="off" class="form-control" >
                                                                         </div>
                                                                     </td>
 
@@ -190,19 +195,20 @@
                                                                     <td>
                                                                         <div class="col-lg-12 kutupad">
                                                                             <select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
-                                                                                <option >Seciniz</option>
+                                                                                {{--<option >Seciniz</option>--}}
                                                                                 @foreach($birim as $key => $bad)
                                                                                     <option  value="{{ $key }}">{{ $bad }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div></td>
                                                                     <td>
+                                                                        {{--////77********--}}
                                                                         <div class="col-md-12 kutupad">
-                                                                            <input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " >
+                                                                            <input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right" ><span id="t1" class=" form-control-feedback right ico">TL</span>
                                                                         </div>
                                                                     </td>
                                                                     <td><div class="col-md-12 kutupad">
-                                                                            <input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" >
+                                                                            <input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right" ><span id="t2" class=" form-control-feedback right ico" >TL</span>
                                                                         </div>
                                                                     </td>
 
@@ -251,17 +257,6 @@
                                     </div>
 
                                 </form>
-
-
-
-
-
-
-
-
-
-
-
 
 
                             </div>
@@ -361,7 +356,65 @@
     {{--<script src="{{ asset("js/bootstrap3-typhead.js") }}"></script>--}}
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}}
     <script type="text/javascript">
+
+        function calculate(elementID) {
+
+                    var myBox1 = $('#miktar'+elementID)[0].value;
+                    var myBox2 = $('#bfiyat'+elementID)[0].value;
+
+                    var tutar = myBox1 * myBox2;
+
+                    $('#tutar'+elementID).val(tutar);
+//                    var myBox2 = mainRow.querySelectorAll('[name=bfiyat]')[0].value;
+//                    var total = mainRow.querySelectorAll('[name=tutar]')[0];
+//                    var myResult1 = myBox1 * myBox2;
+//
+
+        }
         $(document).ready(function() {
+
+//            satır hesapla
+
+
+
+
+//        $("#bfiyat,#miktar").on('change keyup',function() {
+//
+//               fiy = $('#bfiyat').val();
+//               mik =$('#miktar').val();
+//
+//                var tutar=fiy*mik;
+//
+//                $('#tutar').val(tutar);
+//            });
+
+
+            $('#birim').on('change', function () {
+               // dtur=$('#birim').find('option:selected').val();
+                dtur=$('#birim').find(":selected").text();
+                $('#t1,#t2').text(dtur);
+
+
+              //  $('#abc span').text('baa baa black sheep');
+
+
+
+//                var value = $(this).val();
+//                $(this).find('option[value="' + value + '"]').attr("selected", "selected");
+            });
+
+            $('#bfiyat,#miktar,#tutar').inputmask({
+                radixPoint: ',',
+                alias: 'decimal',
+                rightAlign: false,
+                suffix: '',
+                autoGroup: true,
+                groupSeparator: '.'
+            });
+
+
+
+
         $('#firma_gir').DataTable({
             processing: true
         });
@@ -394,7 +447,7 @@
 //dfgdfgd
             $('.typeahead').typeahead({
                     limit:5,
-                    hint: true,
+                    hint: false,
                     highlight: true,
                     minLength: 2,
                     rateLimitWait:50
@@ -413,7 +466,6 @@
                     }
 
             }).on("typeahead:selected", function(obj, data) {
-
               $("#fisfid").val(data.fid);
                 console.log(data.fid);
            })
@@ -424,8 +476,6 @@
                     $('.Typeahead-spinner').hide();
 
                 });
-
-
             var stokbloodhound = new Bloodhound({
 
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -466,7 +516,6 @@
                     }
 
                 }).on("typeahead:selected", function(obj, stok) {
-
                 $("#fissid").val(stok.id);
                 console.log(stok.id);
             })
@@ -477,11 +526,6 @@
                     $('.Typeahead-spinner').hide();
 
                 });
-
-
-
-
-
             $('#formkaydet').on('click', '.add', function() {
                 var sad=$('#stokturad').val();
 
@@ -525,30 +569,13 @@
                     });
                 }
             });
-
-
 //önemliiiii?????**********************************************************************************************************************
             $(function() {
                 var scntDiv = $('#siptable');
                 var i = $('#siptable tr.sipsatirs').length +1;
-
             $(document).on('click','#satirekle', function() {
-
-
-            //    alert('opps');
-
-
-
-                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar"  autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span><option >Seciniz</option>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'"  oninput="calculate('+i+')" autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" oninput="calculate('+i+')" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                     '</td>';
-
-
-
-
-
-
-
-
 
                 $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
 
@@ -598,13 +625,30 @@
                 }
                 return false;
             });
-
-
+//                $(document).on("change keyup","#bfiyat"+i,function() {
+//                    console.log(i);
+////                    fiy = $("#bfiyat"+i).val();
+////                    mik =$("#miktar"+i).val();
+////
+////                    var tutar=fiy*mik;
+////
+////                    $("#tutar"+i).val(tutar);
+//                });
 
             });
 
 
-
+//            $("#bfiyat").on('change', calculate);
+//
+//            function calculate() {
+//                var sum = 0;
+//                $('.bfiyat').each(function(i, obj) {
+//                    if ($.isNumeric(this.value)) {
+//                        sum += parseFloat(this.value);
+//                    }
+//                });
+//                $('#tutar').val(sum);
+//            }
 
 
 

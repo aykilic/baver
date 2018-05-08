@@ -157,15 +157,16 @@ p + p {
     width: 20px;
     height: 20px;
 }
-tr > th.duz{ padding-left:17px !important; }
-.kutupad{padding: 0px;}
+tr > th.duz{ padding-left:3px !important; }
+.kutupad{padding: 0px;margin-bottom: 2px;}
 .leftt{padding-left: 15px !important;
 
 }
 .ico{
-    margin-top:6px !important;
-    margin-left:-8px !important}
-
+    margin-top:5px !important;
+    margin-left:-6px !important}
+#siptable tr>td{padding:5px 0 0 2px;}
+#t1{}
     /*span.fa.fa-search.form-control-feedback.left{ padding-left: 1px;*/
 /*}*/
 /* example specific styles */
