@@ -44,7 +44,7 @@
 
                                     <br />
                                     {{ csrf_field() }}
-                                    <div class="row">
+                                    <div class="row kk">
                                         <div class="col-md-2">
 
 
@@ -185,7 +185,7 @@
 
                                                                     <td>
                                                                         <div class="col-md-12 kutupad">
-                                                                                <input type="text" name="miktar[]" id="miktar"                                                                                       autocomplete="off" class="form-control" >
+                                                                                <input type="text" name="miktar[]" id="miktar"                                                                                       autocomplete="off" class="form-control"  >
                                                                         </div>
                                                                     </td>
 
@@ -208,7 +208,7 @@
                                                                         </div>
                                                                     </td>
                                                                     <td><div class="col-md-12 kutupad">
-                                                                            <input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right" ><span id="t2" class=" form-control-feedback right ico" >TL</span>
+                                                                            <input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
                                                                         </div>
                                                                     </td>
 
@@ -357,37 +357,89 @@
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}}
     <script type="text/javascript">
 
+
+
+
+
         function calculate(elementID) {
 
-                    var myBox1 = $('#miktar'+elementID)[0].value;
-                    var myBox2 = $('#bfiyat'+elementID)[0].value;
 
-                    var tutar = myBox1 * myBox2;
 
-                    $('#tutar'+elementID).val(tutar);
+
+                    var myBox1 =$('#miktar'+elementID)[0].value;
+                    var myBox2 =$('#bfiyat'+elementID)[0].value;
+
+                    var tut = myBox1 * myBox2;
+
+
+
+                    $('#tutar'+elementID).val(tut);
 //                    var myBox2 = mainRow.querySelectorAll('[name=bfiyat]')[0].value;
 //                    var total = mainRow.querySelectorAll('[name=tutar]')[0];
 //                    var myResult1 = myBox1 * myBox2;
 //
-
         }
         $(document).ready(function() {
 
-//            satır hesapla
-
-
-
-
-//        $("#bfiyat,#miktar").on('change keyup',function() {
 //
-//               fiy = $('#bfiyat').val();
-//               mik =$('#miktar').val();
-//
-//                var tutar=fiy*mik;
-//
-//                $('#tutar').val(tutar);
+
+
+
+
+        $("#bfiyat,#miktar").on('change keyup',function() {
+
+               fiy = $('#bfiyat').val();
+               mik =$('#miktar').val();
+
+                var tutar=fiy*mik;
+
+                $('#tutar').val(tutar);
+            });
+
+//            $('#bfiyat,#miktar').inputmask({
+//                radixPoint: ',',
+//                alias: 'numeric',
+//                rightAlign: true,
+//                autoGroup: true,
+//                groupSeparator: '.',
+//                numericInput: true
+////                onUnMask: function (maskedValue, unmaskedValue) {
+////                    return (Number(unmaskedValue) / 100).toFixed(5);
+////                }
 //            });
 
+            Inputmask.extendAliases({
+                'myCurrency': {
+                    radixPoint: ',',
+                    alias: 'numeric',
+                    prefix: '',
+                    digits: 5,
+                    autoUnmask: true,
+                    removeMaskOnSubmit: true,
+                    unmaskAsNumber: true,
+                    allowPlus: false,
+                    allowMinus: false,
+                    autoGroup: true,
+                    groupSeparator: "."
+                }
+            });
+            Inputmask.extendAliases({
+                'tutar': {
+                    radixPoint: ',',
+                    alias: 'numeric',
+                    prefix: '',
+                    digits: 2,
+                    autoUnmask: true,
+                    removeMaskOnSubmit: true,
+                    unmaskAsNumber: true,
+                    allowPlus: false,
+                    allowMinus: false,
+                    autoGroup: true,
+                    groupSeparator: "."
+                }
+            });
+            $('#bfiyat,#miktar').inputmask("myCurrency");
+            $('#tutar').inputmask("tutar");
 
             $('#birim').on('change', function () {
                // dtur=$('#birim').find('option:selected').val();
@@ -403,14 +455,7 @@
 //                $(this).find('option[value="' + value + '"]').attr("selected", "selected");
             });
 
-            $('#bfiyat,#miktar,#tutar').inputmask({
-                radixPoint: ',',
-                alias: 'decimal',
-                rightAlign: false,
-                suffix: '',
-                autoGroup: true,
-                groupSeparator: '.'
-            });
+
 
 
 
@@ -454,7 +499,7 @@
                 },
                 {
 //                    name: 'cunvan',
-//                   id: 'fid',
+                  id: 'fid',
                     display: 'name',
                         //Input value to be set when you select a suggestion.
 
@@ -466,8 +511,8 @@
                     }
 
             }).on("typeahead:selected", function(obj, data) {
-              $("#fisfid").val(data.fid);
-                console.log(data.fid);
+              $("#fisfid").val(data.id);
+                console.log(data.id);
            })
                 .on('typeahead:asyncrequest', function() {
                 $('.Typeahead-spinner').show();
@@ -572,11 +617,12 @@
 //önemliiiii?????**********************************************************************************************************************
             $(function() {
                 var scntDiv = $('#siptable');
-                var i = $('#siptable tr.sipsatirs').length +1;
+                var i = $('#siptable tr.sipsatirs').length;
             $(document).on('click','#satirekle', function() {
-                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'"  oninput="calculate('+i+')" autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" oninput="calculate('+i+')" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                {{--var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'radixPoint\': \',\', \'alias\': \'numeric\', \'rightAlign\': \'true\', \'autoGroup\': \'true\', \'groupSeparator\': \'.\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" oninput="calculate('+i+')" data-inputmask="\'radixPoint\': \',\', \'alias\': \'numeric\', \'rightAlign\': \'true\', \'autoGroup\': \'true\', \'groupSeparator\': \'.\'" value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'radixPoint\': \'.\', \'alias\': \'numeric\', \'rightAlign\': \'true\', \'autoGroup\': \'true\', \'groupSeparator\': \',\'" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+--}}
+                    {{--'</td>';--}}
+                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control " ></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="" autocomplete="off" class="form-control" ></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                     '</td>';
-
                 $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
 
                         minLength: 2,
@@ -609,16 +655,19 @@
                         $('.Typeahead-spinner').hide();
 
                     });
-
-
-
-
+                $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
 
                 i++;
+              //Inputmask().mask(document.querySelectorAll("input"));
+                //var bfiyat ='bfiyat'+i;
+               // addMask(i);   [name^="body"]
+
                 return false;
             });
+
+
             $(document).on('click','#satirsil', function() {
-                if( i > 2 ) {
+                if( i > 1 ) {
 
                     $(this).parents('tr').remove();
                     i--;
@@ -634,33 +683,86 @@
 ////
 ////                    $("#tutar"+i).val(tutar);
 //                });
+//                jQuery(":input").inputmask();
 
-            });
 
 
-//            $("#bfiyat").on('change', calculate);
+
+                Inputmask.extendAliases({
+                    'myCurrency': {
+                        radixPoint: ',',
+                        alias: 'numeric',
+                        prefix: '',
+                        digits: 5,
+                        autoUnmask: true,
+                        removeMaskOnSubmit: true,
+                        unmaskAsNumber: true,
+                        allowPlus: false,
+                        allowMinus: false,
+                        autoGroup: true,
+                        groupSeparator: "."
+                    }
+                });
+                Inputmask.extendAliases({
+                    'tutar': {
+                        radixPoint: ',',
+                        alias: 'numeric',
+                        prefix: '',
+                        digits: 2,
+                        autoUnmask: true,
+                        removeMaskOnSubmit: true,
+                        unmaskAsNumber: true,
+                        allowPlus: false,
+                        allowMinus: false,
+                        autoGroup: true,
+                        groupSeparator: "."
+                    }
+                });
+                $('#bfiyat,#miktar').inputmask("myCurrency");
+                $('#tutar').inputmask("tutar");
+
+                $('#birim').on('change', function () {
+                    // dtur=$('#birim').find('option:selected').val();
+                    dtur=$('#birim').find(":selected").text();
+                    $('#t1,#t2').text(dtur);
+
+
+                    //  $('#abc span').text('baa baa black sheep');
+
+
+
+//                var value = $(this).val();
+//                $(this).find('option[value="' + value + '"]').attr("selected", "selected");
+                });
+          });
+
+
+
+
+
+
 //
-//            function calculate() {
-//                var sum = 0;
-//                $('.bfiyat').each(function(i, obj) {
-//                    if ($.isNumeric(this.value)) {
-//                        sum += parseFloat(this.value);
-//                    }
-//                });
-//                $('#tutar').val(sum);
-//            }
 
+            $("#bfiyat,#miktar").on('change keyup',function() {
 
+                fiy = $('#bfiyat').val();
+                mik =$('#miktar').val();
 
+                var tutar=fiy*mik;
 
+                $('#tutar').val(tutar);
+            });
 
 
 
 
        //önemli*******************************************************************************************************************************
-            $(":input").keyup(function(){
+            $(".kk :input").keyup(function(){
     this.value = this.value.toUpperCase();
     });
+            $("#stokad").keyup(function(){
+                this.value = this.value.toUpperCase();
+            });
             $('#tarih').daterangepicker({
                 "singleDatePicker": true,
                 "maxDate": "31-12-2050",
