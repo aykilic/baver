@@ -683,6 +683,7 @@ var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                     $(this).parents('tr').remove();
                     i--;
                 }
+                calculate();
                 return false;
             });
 //                $(document).on("change keyup","#bfiyat"+i,function() {
