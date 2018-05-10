@@ -394,16 +394,16 @@ if(dtur=""){
                     var bf = $('#bfiyat')[0].value;
 
                     var tut = mi * bf;
-
-                    $('#tutar').val(tut);
+var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                    $('#tutar').val(tuta);
                 }
               else  {
                 var myBox = $('#miktar' + elementID)[0].value;
                 var myBoxx = $('#bfiyat' + elementID)[0].value;
 
-                var tuta = myBox * myBoxx;
-
-                $('#tutar' + elementID).val(tuta);
+                var tutaa = myBox * myBoxx;
+                    var tutaaa=Number(tutaa).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                $('#tutar' + elementID).val(tutaaa);
 //
 
                 }
