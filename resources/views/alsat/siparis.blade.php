@@ -520,9 +520,12 @@ var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: {
                     url: '/autocompletefirma',
-                    filter: function (response) {
+                    cache: false,
+                    filter: function (d) {
                         // assume data is an array of strings e.g. ['one', 'two', 'three']
-                        return $.map(response, function (firma) {
+                        return $.map(d, function (firma) {
+                            console.log("Called prepare");
+
                             return {
                                 name: firma.cunvan,
                                 id: firma.fid
@@ -531,6 +534,7 @@ var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                     }
                 }
         });
+            bloodhound.initialize();
 //dfgdfgd
             $('.typeahead').typeahead({
                     limit:5,
@@ -540,12 +544,12 @@ var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                     rateLimitWait:50
                 },
                 {
-//                    name: 'cunvan',
-                  id: 'fid',
+                    name: 'cunvan',
+                    id: 'fid',
                     display: 'name',
                         //Input value to be set when you select a suggestion.
 
-                    source: bloodhound,
+                    source: bloodhound.ttAdapter(),
                     templates: {
                         empty: [
                             '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
@@ -570,10 +574,12 @@ var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: {
                     url: '/autocompletestok',
+                    cache:false,
                     filter: function (list) {
-                        console.log(list);
+//                        console.log(list);
                         // assume data is an array of strings e.g. ['one', 'two', 'three']
                         return $.map(list, function (stok) {
+
                             return {
                                 name: stok.sad,
                                 id: stok.sid
@@ -586,6 +592,7 @@ var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
            $("input[name^='stokad']").typeahead({
            // $("#sss").typeahead({
                     limit:5,
+                   hint: false,
                     minLength: 2,
                     rateLimitWait:50
                 },

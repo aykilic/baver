@@ -115,7 +115,7 @@ Route::get('/deneme', 'Controller@deneme');
 
 
 //************GENEL **************/////////////////7
-Route::get('autocompletefirma',array('as'=>'autocomplete','uses'=>'fisController@autocomplete'));
+//Route::get('autocompletefirma',array('as'=>'autocomplete','uses'=>'fisController@autocomplete'));
 Route::get('/find/query={query}', 'fisController@find');
 Route::get('/autocompletefirma', 'fisController@autocompletefirma');
 Route::get('/autocompletestok', 'fisController@autocompletestok');

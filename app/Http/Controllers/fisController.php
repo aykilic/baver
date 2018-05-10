@@ -47,7 +47,7 @@ class fisController extends Controller{
 		$firmam = DB::table('firmalar')->select('cunvan')->get();
 		//$stokm = DB::table('stoklar')->select('sad')->get();
 		//$firmaz=$firmam->toArray();
-//$firmay=json_encode($firmam);
+$firmay=json_encode($firmam);
 		//$stoky=json_encode($stokm);
 		//$firmaz=$firmam;
 		//$firmaz= firmaObj::pluck('cunvan');
@@ -62,7 +62,9 @@ class fisController extends Controller{
 		return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
 		           ->with('firma', $firma)
-		           ->with('stok', $stok)
+			->with('firmay', $firmay)
+
+			->with('stok', $stok)
 			->with('doviz', $dropdoviz)
 		->with('birim', $dropbirim);
 
