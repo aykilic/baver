@@ -165,6 +165,7 @@
                                                                     <th class="duz">Miktar</th>
                                                                     <th class="duz">Birim</th>
                                                                     <th class="duz">Birim Fiyatı</th>
+                                                                    <th class="duz">Kdv</th>
                                                                     <th class="duz">Tutar</th>
                                                                     <th class="duz"></th>
 
@@ -172,7 +173,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 <tr class="sipsatirs">
-                                                                    <td >
+                                                                    <td class="col-md-4">
                                                                         <div class="col-lg-12 kutupad">
                                                                         <div class="form-group kutupad">
                                                                         <input type="hidden" name="fissid[]" id="fissid" value="">
@@ -184,16 +185,16 @@
                                                                     </td>
 
 
-                                                                    <td>
+                                                                    <td class="col-md-1">
                                                                         <div class="col-md-12 kutupad">
-                                                                                <input type="text" name="miktar[]" id="miktar"                                                                                       autocomplete="off" class="form-control" oninput="calculate()" >
+                                                                                <input type="text" name="miktar[]" id="miktar"                                                                                       autocomplete="off" class="form-control" oninput="calculate()" style="font-family: monospace, monospace;" >
                                                                         </div>
                                                                     </td>
 
 
 
 
-                                                                    <td>
+                                                                    <td class="col-md-1">
                                                                         <div class="col-lg-12 kutupad">
 
                                                                             <select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
@@ -202,16 +203,29 @@
                                                                                     <option  value="{{ $key }}">{{ $bad }}</option>
                                                                                 @endforeach
                                                                             </select>
-                                                                        </div></td>
-                                                                    <td>
-                                                                        {{--////77********--}}
-                                                                        <div class="col-md-12 kutupad">
-                                                                            <input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right" oninput="calculate()" ><span id="t1" class=" form-control-feedback right ico">TL</span>
                                                                         </div>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="col-md-2">
+                                                                        {{--////77********--}}
                                                                         <div class="col-md-12 kutupad">
-                                                                            <input type="text" name="tutar[]" id="tutar" value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
+                                                                            <input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate()" ><span id="t1" class=" form-control-feedback right ico">TL</span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-md-1">
+                                                                        <div class="col-lg-12 kutupad">
+
+                                                                            <select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
+
+                                                                                @foreach($birim as $key => $bad)
+                                                                                    <option  value="{{ $key }}">{{ $bad }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td class="col-md-12">
+                                                                        <div class="col-md-12 kutupad">
+                                                                            <input type="text" name="tutar[]" id="tutar" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
                                                                         </div>
                                                                     </td>
 
@@ -224,7 +238,7 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
-                                                <div class="col-lg-12">
+                                                <div class="col-lg-12" style="padding-left: 0px;">
                                                 <a class="btn btn-default"  id="satirekle" >Satır Ekle</a>
                                                 </div>
 
@@ -234,15 +248,31 @@
 
                                                 <div style="width:100%;height:90px">
 {{--<div class="row" style="float:right">--}}
-    <label class="col-md-1" style="font-size: 14px;margin-left:63.3%;font-family: monospace, monospace">Toplam:</label>
+    <label class="col-md-2" style="font-size: 14px;margin-left:55%;margin-top:7px;font-family: monospace, monospace">Ara Toplam:</label>
   {{--//  <input for="toplam" id="toplam">--}}
                                                     <div class="col-md-3" style="font-size: 14px">
-                                                        <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" ><span id="t2" style="padding-right:42px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:10px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
 {{--</div>--}}
                                                 </div>
-
-
+                                                <div style="width:100%;height:90px">
+                                                    {{--<div class="row" style="float:right">--}}
+                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55%;margin-top:7px;font-family: monospace, monospace">KDV</label>
+                                                    {{--//  <input for="toplam" id="toplam">--}}
+                                                    <div class="col-md-3" style="font-size: 14px">
+                                                        <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:10px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                    </div>
+                                                    {{--</div>--}}
+                                                </div>
+                                                <div style="width:100%;height:90px">
+                                                    {{--<div class="row" style="float:right">--}}
+                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55%;margin-top:7px;font-family: monospace, monospace">Toplam:</label>
+                                                    {{--//  <input for="toplam" id="toplam">--}}
+                                                    <div class="col-md-3" style="font-size: 14px">
+                                                        <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:10px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                    </div>
+                                                    {{--</div>--}}
+                                                </div>
 
                                                         {{--<div class="col-xs-1 col-md-2">--}}
                                                             {{--<div class="form-group">--}}
@@ -632,7 +662,7 @@ var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 var i = $('#siptable tr.sipsatirs').length;
             $(document).on('click','#satirekle', function() {
 
-                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" ></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                     '</td>';
                 $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
 
