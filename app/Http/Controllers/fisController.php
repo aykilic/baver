@@ -56,14 +56,14 @@ $firmay=json_encode($firmam);
 		$fistur = fisturuObj::pluck('fisturuad','fisturuid');
 		$dropbirim = birimObj::pluck('bad','bid');
 		$dropdoviz = dovizObj::pluck('dad','did');
-
+        $dropdepo = depoObj::pluck('depoad','depoid');
 //       $sipfistur = sipfisiObj::all();
 
 		return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
 		           ->with('firma', $firma)
 			->with('firmay', $firmay)
-
+            ->with('depo', $dropdepo)
 			->with('stok', $stok)
 			->with('doviz', $dropdoviz)
 		->with('birim', $dropbirim);
