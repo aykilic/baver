@@ -13,11 +13,11 @@ class Vergi extends Migration
      */
     public function up()
     {
-        Schema::create('vergi', function(Blueprint $t) {
-            $t->increments('vid');
+        Schema::create('vergi', function(Blueprint $table) {
+            $table->increments('vid');
 
             // Some product fields
-            $t->mediumInteger('vor', 5);
+            $table->mediumInteger('vor');
 
             // ... any other fields
         });

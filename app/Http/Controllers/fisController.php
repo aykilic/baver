@@ -35,6 +35,8 @@ use App\Models\stokObj;
 use App\Models\depoObj;
 use App\Models\fisturuObj;
 use App\Models\stokturObj;
+use App\Models\vergiObj;
+
 use App\Models\sipfisObj;
 use App\Models\sablon_turuObj;
 
@@ -54,6 +56,7 @@ $firmay=json_encode($firmam);
 		//$firmaz=$firmam->toJson();
 //dd($stok);
 		$fistur = fisturuObj::pluck('fisturuad','fisturuid');
+        $dropvergi = vergiObj::pluck('vor','vid');
 		$dropbirim = birimObj::pluck('bad','bid');
 		$dropdoviz = dovizObj::pluck('dad','did');
         $dropdepo = depoObj::pluck('depoad','depoid');
@@ -64,6 +67,7 @@ $firmay=json_encode($firmam);
 		           ->with('firma', $firma)
 			->with('firmay', $firmay)
             ->with('depo', $dropdepo)
+            ->with('vergi', $dropvergi)
 			->with('stok', $stok)
 			->with('doviz', $dropdoviz)
 		->with('birim', $dropbirim);

@@ -8,6 +8,8 @@ class DatabaseSeeder extends Seeder
      * Run the database seeds.
      *
      * @return voidk
+     * php artisan make:seeder birimTableSeeder
+
      */
     public function run()
     {
@@ -16,7 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(dovizTableSeeder::class);
         $this->call(birimTableSeeder::class);
         $this->call(durumTableSeeder::class);
-         Model::reguard();
+        $this->call(vergiTableSeeder::class);
+
+        Model::reguard();
     }
 
 }

@@ -224,8 +224,8 @@
 
                                                                     <select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
 
-                                                                        @foreach($birim as $key => $bad)
-                                                                            <option  value="{{ $key }}">{{ $bad }}</option>
+                                                                        @foreach($vergi as $key => $vor)
+                                                                            <option  value="{{ $key }}">{{ $vor }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -265,7 +265,7 @@
                                                 </div>
                                                 <div style="width:100%;height:90px">
                                                     {{--<div class="row" style="float:right">--}}
-                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55%;margin-top:7px;font-family: monospace, monospace">KDV</label>
+                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55%;margin-top:7px;font-family: monospace, monospace">KDV </label>
                                                     {{--//  <input for="toplam" id="toplam">--}}
                                                     <div class="col-md-3" style="font-size: 14px">
                                                         <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:10px;text-align:right" class=" form-control-feedback right ico" >TL</span>
