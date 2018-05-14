@@ -193,15 +193,19 @@
 
                                         </thead>
                                         <tbody>
+                                        @if(!isset($stok))
                                         @foreach($stok as $postt)
                                             <tr class="item{{$postt->sid}}">
                                                 <td><a id="stokturad" data-sttid="{{$postt->stokturid}}" >{{$postt->stokturad}}</a></td>
                                                 <td><a href="javascript:void(0);" id="stokad" data-stid="{{$postt->stokturid}}" data-sid="{{$postt->sid}}" data-sad="{{$postt->sad}}" data-sturad="{{$postt->stokturad}}"  >{{$postt->sad}}</a></td>
                                                 <td><a href="javascript:void(0);" id="editstok" data-stid="{{$postt->stokturid}}" data-sid="{{$postt->sid}}" data-sad="{{$postt->sad}}"><i class="fa fa-edit fa-2x"></i></a></td>
                                                 <td><a href="javascript:void(0);" id="silstok" data-sid="{{$postt->sid}}"><i class="fa fa-trash-o fa-2x" ></i></a></td>
-
                                             </tr>
                                         @endforeach
+@else
+
+    @endif
+
                                         </tbody>
                                     </table>
                                 </div>

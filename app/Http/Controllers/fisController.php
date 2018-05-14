@@ -60,7 +60,7 @@ $firmay=json_encode($firmam);
         $dropvergi = vergiObj::all();
         $selectedvergi = vergiObj::first()->vid;
 		$fistur = fisturuObj::pluck('fisturuad','fisturuid');
-      //  $dropvergi = vergiObj::pluck('vor','vid');
+        $dropvergim = vergiObj::pluck('vor','vid');
 		$dropbirim = birimObj::pluck('bad','bid');
 		$dropdoviz = dovizObj::pluck('dad','did');
         $dropdepo = depoObj::pluck('depoad','depoid');
@@ -72,6 +72,8 @@ $firmay=json_encode($firmam);
 			->with('firmay', $firmay)
             ->with('depo', $dropdepo)
             ->with('vergi', $dropvergi)
+            ->with('vergim', $dropvergim)
+
             ->with('svergi', $selectedvergi)
 			->with('stok', $stok)
 			->with('doviz', $dropdoviz)

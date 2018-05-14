@@ -318,15 +318,17 @@ class Controller extends BaseController
         $stoktur= stokturObj::pluck('stokturad','stokturid');
 
 
+        $stokcheck = stokturObj::all();
+       if (($stokcheck="")) {
 
-        $stok = DB::table('stoktur')
-            ->select('stok.*', 'stoktur.*')
-            ->join( 'stok','stok.stokturid', '=', 'stoktur.stokturid')
-            ->get();
-
-
-//        $stok = stokObj::all();
-
+           $stok = DB::table('stoktur')
+               ->select('stok.*', 'stoktur.*')
+               ->join('stok', 'stok.stokturid', '=', 'stoktur.stokturid')
+               ->get();
+       }
+else {
+    $stok = stokObj::all();
+}
         return View::make('Girisler.stok')
             ->with('stok', $stok)
         ->with('post', $stoktur);

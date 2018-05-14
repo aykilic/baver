@@ -13,5 +13,5 @@ class stokObj extends Model
 {
     protected $table='stok';
     protected $primaryKey = 'sid';
-    protected $fillable=['sad','sturid'];
+    protected $fillable=['sad','stokturid'];
 }

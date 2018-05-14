@@ -175,6 +175,7 @@
                                                             <th class="duz">Birim Fiyatı</th>
                                                             <th class="duz">Kdv</th>
                                                             <th class="duz">Tutar</th>
+
                                                             <th class="duz"></th>
 
                                                         </tr>
@@ -282,7 +283,7 @@
                                                 </div>
                                                 <div style="width:100%;height:90px">
                                                     {{--<div class="row" style="float:right">--}}
-                                                    <label class="col-md-1" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV :</label>
+                                                    <label class="col-md-1" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV  :</label>
                                                     <label class="col-md-1" id="kdvl" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" value="%">% 18</label>
                                                     {{--//  <input for="toplam" id="toplam">--}}
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
@@ -450,6 +451,7 @@
             $('#kdvl').text("%"+" "+kdv);
            // console.log(kdv);
           //  alert(kdv);
+
             calculate();
         });
 
@@ -722,11 +724,8 @@
                 $(document).on('click','#satirekle', function() {
 
                     var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
-                        '<td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="kdv" class="form-control" name="kdv[]"   ><span class="caret"></span>' +
-                        '@foreach($vergi as $akdv)' +
-                        '<option value="{{ $akdv->vid }}" {{ $svergi == $akdv->vid ? 'selected=="selected"' : '' }}>{{ $akdv->vor }}</option>' +
-                        '@endforeach' +
-                        '</select></div></td>'  +
+                        '<td><div class="col-lg-12 kutupad"><input  id="kdv'+i+'" class="form-control" name="kdv[]" disabled>' +
+                          '</div></td>'  +
                         '<td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                         '</td>';
                     $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
@@ -762,13 +761,16 @@
 
                         });
                     $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
+                    $('#kdv'+i).val(kdv);
 
                     i++;
                     //Inputmask().mask(document.querySelectorAll("input"));
                     //var bfiyat ='bfiyat'+i;
                     // addMask(i);   [name^="body"]
 
+
                     return false;
+
                 });
 
 

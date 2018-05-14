@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(birimTableSeeder::class);
         $this->call(durumTableSeeder::class);
         $this->call(vergiTableSeeder::class);
-
+        $this->call(bankaTableSeeder::class);
         Model::reguard();
     }
 
