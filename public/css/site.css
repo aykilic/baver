@@ -164,7 +164,8 @@ tr > th.duz{ padding-left:3px !important; }
 }
 .ico{
     margin-top:5px !important;
-    margin-left:-6px !important}
+    margin-left:6px !important;
+padding-right:35px}
 #siptable tr>td{padding:5px 0 0 2px;}
 #t1{}
     /*span.fa.fa-search.form-control-feedback.left{ padding-left: 1px;*/
