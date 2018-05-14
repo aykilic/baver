@@ -185,7 +185,7 @@
                                                                 <div class="col-lg-12 kutupad">
                                                                     <div class="form-group kutupad">
                                                                         <input type="hidden" name="fissid[]" id="fissid" value="">
-                                                                        <input type="text" name="stokad[]" id="stokad"  autocomplete="off" class="form-control has-feedback-left">
+                                                                        <input type="text" name="stokad[]" id="stokad"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;">
                                                                         <img class="Typeahead-spinners" src="../images/wait.gif">
                                                                         <span class="fa fa-search form-control-feedback left ico"   ></span>
                                                                     </div>
@@ -222,12 +222,29 @@
                                                             <td class="col-md-1">
                                                                 <div class="col-lg-12 kutupad">
 
-                                                                    <select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
+                                                                    <select data-toggle="dropdown" id="kdv" class="form-control" name="kdv[]"   ><span class="caret"></span>
 
-                                                                        @foreach($vergi as $key => $vor)
-                                                                            <option  value="{{ $key }}">{{ $vor }}</option>
+
+                                                                        @foreach($vergi as $akdv)
+                                                                            <option value="{{ $akdv->vid }}" {{ $svergi == $akdv->vid ? 'selected=="selected"' : '' }}>{{ $akdv->vor }}</option>
                                                                         @endforeach
+
+
                                                                     </select>
+
+
+
+
+
+                                                                    {{--<select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]"  aria-expanded="false"  ><span class="caret"></span>--}}
+
+                                                                        {{--@foreach($vergi as $key => $vor)--}}
+                                                                            {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
+
+                                                                            {{----}}
+                                                                            {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
+                                                                        {{--@endforeach--}}
+                                                                    {{--</select>--}}
                                                                 </div>
                                                             </td>
 
@@ -256,7 +273,7 @@
 
                                                 <div style="width:100%;height:90px">
                                                     {{--<div class="row" style="float:right">--}}
-                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Ara Toplam:</label>
+                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Ara Toplam :</label>
                                                     {{--//  <input for="toplam" id="toplam">--}}
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
                                                         <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
@@ -265,19 +282,20 @@
                                                 </div>
                                                 <div style="width:100%;height:90px">
                                                     {{--<div class="row" style="float:right">--}}
-                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV </label>
+                                                    <label class="col-md-1" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV :</label>
+                                                    <label class="col-md-1" id="kdvl" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" value="%">% 18</label>
                                                     {{--//  <input for="toplam" id="toplam">--}}
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
-                                                        <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="toplamkdv" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     {{--</div>--}}
                                                 </div>
                                                 <div style="width:100%;height:90px">
                                                     {{--<div class="row" style="float:right">--}}
-                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Toplam:</label>
+                                                    <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Toplam :</label>
                                                     {{--//  <input for="toplam" id="toplam">--}}
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
-                                                        <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="gtoplam" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     {{--</div>--}}
                                                 </div>
@@ -415,9 +433,7 @@
 
 
 
-
         //   console.log(Number(price3).toLocaleString('tr',{ minimumFractionDigits: 2 }));
-
 
         if(dtur=""){
             dtur="TL";
@@ -426,14 +442,31 @@
             dtur = $('#dbirim').find(":selected").text();
         }
 
+        kdv = $('#kdv').find(":selected").text();
+
+        $('#kdv').on('change', function () {
+            kdv = $('#kdv').find(":selected").text();
+            // kdv=$('#birim').find('option:selected').val();
+            $('#kdvl').text("%"+" "+kdv);
+           // console.log(kdv);
+          //  alert(kdv);
+            calculate();
+        });
+
+
         function calculate(elementID) {
             if ( elementID=="" || elementID==null){
                 var mi = $('#miktar')[0].value;
                 var bf = $('#bfiyat')[0].value;
 
+
+
+
+
                 var tut = mi * bf;
                 var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 $('#tutar').val(tuta);
+
             }
             else  {
                 var myBox = $('#miktar' + elementID)[0].value;
@@ -443,15 +476,27 @@
                 var tutaaa=Number(tutaa).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 $('#tutar' + elementID).val(tutaaa);
 //
-
+               // $('')
             }
             sum=0;
             $("input[name^='tutar']").each(function(){
                 sum += +$(this).val();
+            //    console.log(sum);
             });
-            var tt=Number(sum).toLocaleString('tr',{ minimumFractionDigits: 2 });
+            var sattoplam=Number(sum).toLocaleString('tr',{ minimumFractionDigits: 2 });
 
-            $('#toplamm').val(tt);
+            $('#toplamm').val(sattoplam);
+           // dsattoplam=sattoplam.replace(/\./g,",");
+
+            var kdvsattoplam= sum*kdv/100;
+            var kdvsattoplamm =Number(kdvsattoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
+            $('#toplamkdv').val(kdvsattoplamm);
+
+
+            var geneltoplam=sum*(1+(kdv/100));
+            var geneltoplamm =Number(geneltoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
+            $('#gtoplam').val(geneltoplamm);
+
         }
 
 
@@ -677,7 +722,13 @@
                 var i = $('#siptable tr.sipsatirs').length;
                 $(document).on('click','#satirekle', function() {
 
-                    var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                    var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
+                        '<td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="kdv" class="form-control" name="kdv[]"   ><span class="caret"></span>' +
+                        '@foreach($vergi as $akdv)' +
+                        '<option value="{{ $akdv->vid }}" {{ $svergi == $akdv->vid ? 'selected=="selected"' : '' }}>{{ $akdv->vor }}</option>' +
+                        '@endforeach' +
+                        '</select></div></td>'  +
+                        '<td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                         '</td>';
                     $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
 
