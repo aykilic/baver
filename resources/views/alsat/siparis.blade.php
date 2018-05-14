@@ -462,7 +462,6 @@
 
 
 
-
                 var tut = mi * bf;
                 var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 $('#tutar').val(tuta);
