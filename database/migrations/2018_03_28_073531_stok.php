@@ -15,7 +15,7 @@ class stok extends Migration
         Schema::create('stok', function (Blueprint $table) {
             $table->increments('sid');
             $table->string('sad',50);
-            $table->tinyInteger('stokurid');
+            $table->tinyInteger('stokturid');
             $table->timestamps();
         });
     }
