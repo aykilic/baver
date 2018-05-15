@@ -68,8 +68,8 @@
 
 
                                                     <label for="tax_no"  name="lbanka">Fis Turu</label>
-
-                                                    <select data-toggle="dropdown" id="fisturu" class="form-control" name="fisturu" aria-expanded="false"  ><span class="caret"></span>
+                                                    <input type="hidden" name="fisturu" id="fisturuid" value="1" class="form-control">
+                                                    <select data-toggle="dropdown" id="fisturu" class="form-control"  aria-expanded="false"  ><span class="caret"></span>
                                                         {{--<option >Seciniz</option>--}}
                                                         @foreach($fistur as $key => $fisturuad)
                                                             <option  value="{{ $key }}">{{ $fisturuad }}</option>
@@ -118,8 +118,8 @@
                                                     <div class="col-xs-6 col-md-6">
                                                         <div class="form-group">
                                                             <label for="tax_home">Depo</label>
-                                                            <input type="hidden" name="dvad" id="dvad" value="" class="form-control">
-                                                            <select data-toggle="dropdown" id="depo" class="form-control" name="dbirim[]" aria-expanded="false"  ><span class="caret"></span>
+                                                            <input type="hidden" name="depo" id="depoid" value="1" class="form-control">
+                                                            <select data-toggle="dropdown" id="depo" class="form-control" aria-expanded="false"  ><span class="caret"></span>
                                                                 {{--<option >Seçiniz</option>--}}
                                                                 @foreach($depo as $key => $depoad)
                                                                     <option  value="{{ $key }}">{{ $depoad }}</option>
@@ -861,8 +861,20 @@
 //                $(this).find('option[value="' + value + '"]').attr("selected", "selected");
                 });
             });
+            $('#depo').on('change', function () {
+                // dtur=$('#birim').find('option:selected').val();
 
+                depo=$('#depo').find("option:selected").val();
+                $('#depoid').val(depo);
 
+            });
+            $('#fisturu').on('change', function () {
+                // dtur=$('#birim').find('option:selected').val();
+
+                fisturu=$('#fisturu').find("option:selected").val();
+                $('#fisturuid').val(fisturu);
+
+            });
 
 
 

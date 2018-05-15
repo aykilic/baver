@@ -152,7 +152,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Cari Hesap Listesi </h2>
+                            <h2>Stok Listesi </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -193,7 +193,7 @@
 
                                         </thead>
                                         <tbody>
-                                        @if(!isset($stok))
+
                                         @foreach($stok as $postt)
                                             <tr class="item{{$postt->sid}}">
                                                 <td><a id="stokturad" data-sttid="{{$postt->stokturid}}" >{{$postt->stokturad}}</a></td>
@@ -202,9 +202,7 @@
                                                 <td><a href="javascript:void(0);" id="silstok" data-sid="{{$postt->sid}}"><i class="fa fa-trash-o fa-2x" ></i></a></td>
                                             </tr>
                                         @endforeach
-@else
 
-    @endif
 
                                         </tbody>
                                     </table>
