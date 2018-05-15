@@ -67,10 +67,17 @@ $firmay=json_encode($firmam);
 //       $sipfistur = sipfisiObj::all();
         $olayy = olayObj::pluck('olayad','olayid');
 
+$index=1;
+$hane=6;
+        $new_index = str_pad($index, $hane, "0", STR_PAD_LEFT);
 
-
-
-
+//dd($new_index);
+        $b="001345";
+        $str= $b ;
+        $number = (int)$str;
+//        $number = sprintf('%08d',$number);
+//        dd($number);
+      //  dd($number);
         return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
 		           ->with('firma', $firma)
