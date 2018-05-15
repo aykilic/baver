@@ -769,7 +769,19 @@ else {
 	{
 
 		$sbltur = sablon_turuObj::all();
-		$secsbltur = sablon_turuObj::first()->sblturuid;
+
+		if ($sbltur!==""){
+            $sblid = sablonObj::all();
+            $secsbltur = sablon_turuObj::all();
+        }
+        else{
+            $secsbltur = sablon_turuObj::first()->sblturuid;
+            $sblid=db::table('sablon')
+                ->select('sablon.*','sablonad.*')
+                ->join( 'sablonad','sablonad.sbladid', '=', 'sablon.sbladid')
+                ->get();
+        }
+
 
 
 	//	$sbltur= sablon_turuObj::pluck('sblturuad','sblturuid');
@@ -785,10 +797,7 @@ else {
 		           ->orderBy('sbladid', 'desc')
 		           ->first();
 ///
-		$sblid=db::table('sablon')
-			->select('sablon.*','sablonad.*')
-			->join( 'sablonad','sablonad.sbladid', '=', 'sablon.sbladid')
-			->get();
+
 
 
 	///
