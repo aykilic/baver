@@ -432,7 +432,12 @@
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}}
     <script type="text/javascript">
 
+        $("tr.sipsatirs input").keyup(function(event) {
+            if (event.keyCode === 13) {
 
+                $("#satirekle").click();
+            }
+        });
 
         //   console.log(Number(price3).toLocaleString('tr',{ minimumFractionDigits: 2 }));
 
@@ -451,7 +456,10 @@
             $('#kdvl').text("%"+" "+kdv);
            // console.log(kdv);
           //  alert(kdv);
-
+            $("input[name^='kdv']").each(function(){
+                $("input[name^='kdv']").val(kdv);
+                //    console.log(sum);
+            });
             calculate();
         });
 
@@ -477,6 +485,7 @@
                 var tutaaa=Number(tutaa).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 $('#tutar' + elementID).val(tutaaa);
 //
+
                // $('')
             }
             sum=0;
@@ -721,9 +730,9 @@
             $(function() {
                 var scntDiv = $('#siptable');
                 var i = $('#siptable tr.sipsatirs').length;
-                $(document).on('click','#satirekle', function() {
+                $(document).on('click','#satirekle', function(ibo) {
 
-                    var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
+                    var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
                         '<td><div class="col-lg-12 kutupad"><input  id="kdv'+i+'" class="form-control" name="kdv[]" disabled>' +
                           '</div></td>'  +
                         '<td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
@@ -759,9 +768,15 @@
                         .on('typeahead:asynccancel typeahead:asyncreceive', function() {
                             $('.Typeahead-spinner').hide();
 
-                        });
+                        }).on("tr.sipsatirs input").keyup(function(event) {
+                        if (event.keyCode === 13) {
+
+                            $("#satirekle").click();
+                        }
+                    });
                     $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
                     $('#kdv'+i).val(kdv);
+
 
                     i++;
                     //Inputmask().mask(document.querySelectorAll("input"));
