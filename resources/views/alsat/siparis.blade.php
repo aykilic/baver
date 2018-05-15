@@ -101,8 +101,14 @@
                                                 <div class="row">
                                                     <div class="col-xs-6 col-md-6">
                                                         <div class="form-group">
-                                                            <label for="district">İlçe-Bölge</label>
-                                                            <input type="text" name="dilce" id="dilce" value="" class="form-control">
+                                                            <label for="district">Olay</label>
+                                                            <input type="hidden" name="olayid" id="olayid" value="1" class="form-control">
+                                                            <select data-toggle="dropdown" id="olay" class="form-control"   ><span class="caret"></span>
+                                                                {{--<option >Seçiniz</option>--}}
+                                                                @foreach($olay as $key => $olayad)
+                                                                    <option  value="{{ $key }}">{{ $olayad }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div> <!-- /.form-group -->
                                                     </div> <!-- /.col -->
                                                     <div class="col-xs-6 col-md-6">
@@ -798,53 +804,7 @@
                     calculate();
                     return false;
                 });
-//                $(document).on("change keyup","#bfiyat"+i,function() {
-//                    console.log(i);
-////                    fiy = $("#bfiyat"+i).val();
-////                    mik =$("#miktar"+i).val();
-////
-////                    var tutar=fiy*mik;
-////
-////                    $("#tutar"+i).val(tutar);
-//                });
-//                jQuery(":input").inputmask();
 
-
-
-
-//                Inputmask.extendAliases({
-//                    'myCurrency': {
-//                        radixPoint: ',',
-//                        alias: 'numeric',
-//                        prefix: '',
-//                        digits: 5,
-//                        autoUnmask: true,
-//                        removeMaskOnSubmit: true,
-//                        unmaskAsNumber: true,
-//                        allowPlus: false,
-//                        allowMinus: false,
-//                        autoGroup: true,
-//                        groupSeparator: "."
-//                    }
-//                });
-//                Inputmask.extendAliases({
-//                    'tutar': {
-//                        radixPoint: ',',
-//                        alias: 'numeric',
-//                        prefix: '',
-//                        digits: 2,
-//                        autoUnmask: true,
-//                        removeMaskOnSubmit: true,
-//                        unmaskAsNumber: true,
-//                        allowPlus: false,
-//                        allowMinus: false,
-//                        autoGroup: true,
-//                        groupSeparator: "."
-//                    }
-//                });
-//                $('#bfiyat,#miktar').inputmask("myCurrency");
-                // $('#tutar').inputmask("tutar");
-                //$("label[for='toplam']").inputmask("tutar");
 
                 $('#dbirim').on('change', function () {
                     // dtur=$('#birim').find('option:selected').val();

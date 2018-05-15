@@ -29,7 +29,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\editFirmaObj;
 use App\Models\dovizObj;
-use App\Models\cbankaObj;
+use App\Models\olayObj;
 use App\Models\birimObj;
 use App\Models\stokObj;
 use App\Models\depoObj;
@@ -59,21 +59,27 @@ $firmay=json_encode($firmam);
 
         $dropvergi = vergiObj::all();
         $selectedvergi = vergiObj::first()->vid;
-		$fistur = fisturuObj::pluck('fisturuad','fisturuid');
+        $fistur = fisturuObj::pluck('fisturuad','fisturuid');
         $dropvergim = vergiObj::pluck('vor','vid');
 		$dropbirim = birimObj::pluck('bad','bid');
 		$dropdoviz = dovizObj::pluck('dad','did');
         $dropdepo = depoObj::pluck('depoad','depoid');
 //       $sipfistur = sipfisiObj::all();
 
-		return View::make('alsat.siparis')
+        $olayy = olayObj::pluck('olayad','olayid');
+
+
+
+
+
+        return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
 		           ->with('firma', $firma)
 			->with('firmay', $firmay)
             ->with('depo', $dropdepo)
             ->with('vergi', $dropvergi)
             ->with('vergim', $dropvergim)
-
+            ->with('olay', $olayy)
             ->with('svergi', $selectedvergi)
 			->with('stok', $stok)
 			->with('doviz', $dropdoviz)
