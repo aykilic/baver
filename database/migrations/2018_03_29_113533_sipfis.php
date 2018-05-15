@@ -16,6 +16,7 @@ class sipfis extends Migration
             $table->tinyInteger('depo');
             $table->tinyInteger('doviz');
             $table->tinyInteger('durumid');
+            $table->tinyInteger('olayid');
             $table->string('aciklama',300);
 
 

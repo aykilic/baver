@@ -17,3 +17,17 @@
     margin-top: 5px;
     margin-left:0px;
 }
+/*@media screen and (max-width: 400px){.col-md-6{width:100%;}}*/
+@media (min-width: 350px) and (max-width: 768px){.col-md-8,.col-lg-12,.col-md-4, .col-md-6,.col-lg-6{width:100%;}}
+@media (min-width: 769px) and (max-width: 995px){
+    .col-lg-12{width:100%;float:left;}
+    .col-md-6{width:100%;float:left;}
+    .col-lg-6{width:50%;float:left;}
+}
+@media (min-width: 995px) and (max-width: 1200px){
+    .col-lg-12{width:100%;float:left;}
+    .col-md-6{width:100%;float:left;}
+    .col-lg-6{width:50%;}
+
+
+}

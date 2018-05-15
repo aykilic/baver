@@ -65,7 +65,6 @@ $firmay=json_encode($firmam);
 		$dropdoviz = dovizObj::pluck('dad','did');
         $dropdepo = depoObj::pluck('depoad','depoid');
 //       $sipfistur = sipfisiObj::all();
-
         $olayy = olayObj::pluck('olayad','olayid');
 
 

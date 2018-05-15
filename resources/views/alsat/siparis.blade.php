@@ -45,8 +45,8 @@
                                     <br />
                                     {{ csrf_field() }}
                                     <div class="x_panel">
-                                        <div class="row kk">
-                                            <div class="col-md-2">
+                                        <div class="col-md-6">
+                                            <div class="col-md-4">
 
 
 
@@ -77,16 +77,16 @@
                                                     </select>
 
                                                 </div> <!-- /.form-group -->
-                                                <div class="row">
-                                                    <div class="col-xs-6 col-md-6">
+                                                {{--<div class="row">--}}
+                                                    {{--<div class="col-xs-6 col-md-6">--}}
 
-                                                    </div> <!-- /.col -->
-                                                    <div class="col-xs-6 col-md-6">
-                                                    </div> <!-- /.col -->
+                                                    {{--</div> <!-- /.col -->--}}
+                                                    {{--<div class="col-xs-6 col-md-6">--}}
+                                                    {{--</div> <!-- /.col -->--}}
 
-                                                </div> <!-- /.row -->
+                                                {{--</div> <!-- /.row -->--}}
                                             </div> <!-- /.col-md-6 -->
-                                            <div class="col-md-4">
+                                            <div class="col-md-8">
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
@@ -99,11 +99,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-xs-6 col-md-6">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="district">Olay</label>
                                                             <input type="hidden" name="olayid" id="olayid" value="1" class="form-control">
-                                                            <select data-toggle="dropdown" id="olay" class="form-control"   ><span class="caret"></span>
+                                                            <select data-toggle="dropdown" id="olay" class="form-control"><span class="caret"></span>
                                                                 {{--<option >Seçiniz</option>--}}
                                                                 @foreach($olay as $key => $olayad)
                                                                     <option  value="{{ $key }}">{{ $olayad }}</option>
@@ -111,7 +111,7 @@
                                                             </select>
                                                         </div> <!-- /.form-group -->
                                                     </div> <!-- /.col -->
-                                                    <div class="col-xs-6 col-md-6">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="city">Şehir-İl</label>
                                                             <input type="text" name="dil" id="dil" value="" class="form-control" >
@@ -121,25 +121,23 @@
                                                 </div> <!-- /.row -->
 
                                                 <div class="row">
-                                                    <div class="col-xs-6 col-md-6">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="tax_home">Depo</label>
+                                                            <label for="">Depo</label>
                                                             <input type="hidden" name="depo" id="depoid" value="1" class="form-control">
-                                                            <select data-toggle="dropdown" id="depo" class="form-control" aria-expanded="false"  ><span class="caret"></span>
+                                                            <select data-toggle="dropdown" id="depo" class="form-control"><span class="caret"></span>
                                                                 {{--<option >Seçiniz</option>--}}
                                                                 @foreach($depo as $key => $depoad)
                                                                     <option  value="{{ $key }}">{{ $depoad }}</option>
                                                                 @endforeach
                                                             </select>
-
-
                                                         </div> <!-- /.form-group -->
                                                     </div> <!-- /.col-md-4 -->
-                                                    <div class="col-xs-6 col-md-6">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="tax_no">Döviz</label>
                                                             <input type="hidden" name="did" id="did" value="1" class="form-control" >
-                                                            <select data-toggle="dropdown" id="dbirim" class="form-control" name="dbirim[]" aria-expanded="false"  ><span class="caret"></span>
+                                                            <select data-toggle="dropdown" id="dbirim" class="form-control" name="dbirim[]" aria-expanded="false"><span class="caret"></span>
                                                                 {{--<option >Seçiniz</option>--}}
                                                                 @foreach($doviz as $key => $dad)
                                                                     <option  value="{{ $key }}">{{ $dad }}</option>
@@ -151,7 +149,24 @@
 
                                             </div> <!-- /.col-md-6 -->
 
+
+
+
                                         </div>
+                                        {{--<div class="col-md-6" style="float:left;">--}}
+
+
+
+                                                {{--<div class="form-group">--}}
+                                                    {{--<label for="city">Sevk Adresi</label>--}}
+                                                    {{--<textarea type="text" name="dil" id="dil" value="" class="form-control" style="height: 170px;" ></textarea>--}}
+                                                {{--</div> <!-- /.form-group -->--}}
+
+
+
+
+
+                                        {{--</div>--}}
                                     </div>
                                     <div class="h-20"></div>
                                     <div class="clearfix"></div>
