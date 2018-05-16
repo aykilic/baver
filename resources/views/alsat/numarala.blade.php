@@ -59,7 +59,7 @@
 
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                        <label>Uzunluk (Hane):</label>
+                                        <label>Uzunluk (Basamak):</label>
                                         <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk">
                                     </div>
                                     </div>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Tarih:</label>
+                                            <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="tarih1" id="tarih2">
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
 
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Uzunluk (Hane):</label>
+                                            <label>Uzunluk (Basamak):</label>
                                             <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk">
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Tarih:</label>
+                                            <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="tarih1" id="tarih2">
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
 
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Uzunluk (Hane):</label>
+                                            <label>Uzunluk (Basamak):</label>
                                             <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk">
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Tarih:</label>
+                                            <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="tarih1" id="tarih2">
                                         </div>
                                     </div>
@@ -164,7 +164,7 @@
 
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Uzunluk (Hane):</label>
+                                            <label>Uzunluk (Basamak):</label>
                                             <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk">
                                         </div>
                                     </div>
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Tarih:</label>
+                                            <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="tarih1" id="tarih2">
                                         </div>
                                     </div>
@@ -199,7 +199,7 @@
 
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Uzunluk (Hane):</label>
+                                            <label>Uzunluk (Basamak):</label>
                                             <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk">
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Tarih:</label>
+                                            <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="tarih1" id="tarih2">
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@
 
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Uzunluk (Hane):</label>
+                                            <label>Uzunluk (Basamak):</label>
                                             <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk">
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
-                                            <label>Tarih:</label>
+                                            <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="tarih1" id="tarih2">
                                         </div>
                                     </div>

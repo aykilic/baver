@@ -16,8 +16,8 @@ class Numarala extends Migration
         Schema::create('numarala', function (Blueprint $table) {
         $table->increments('numaralaid');
             $table->tinyInteger('evrakturuid');
-            $table->Integer('sayi');
-            $table->tinyInteger('uzunluk');
+            $table->Integer('sayi')->default(1) ;
+            $table->tinyInteger('uzunluk')->default(5);
             $table->tinyInteger('mod');
             $table->date('tarih1');
             $table->date('tarih2');
