@@ -98,7 +98,10 @@ Route::delete('/stokturusil/{depoid}', 'Controller@stokturusil');
 Route::get('/siparisfisi', 'fisController@siparisfisi');
 Route::post('/siparisfisi/kaydet', 'Controller@sipfiskaydet');
 Route::put('/siparisfisi/edit', 'Controller@sipfisedit');
-
+Route::get('/numarala', 'fisController@numarala');
+Route::get('/numarala', function () {
+    return view('alsat.numarala');
+});
 
 //****************siparis fisi************************//////////////////////
 //****************sablon************************//////////////////////
@@ -119,3 +122,5 @@ Route::get('/deneme', 'Controller@deneme');
 Route::get('/find/query={query}', 'fisController@find');
 Route::get('/autocompletefirma', 'fisController@autocompletefirma');
 Route::get('/autocompletestok', 'fisController@autocompletestok');
+
+

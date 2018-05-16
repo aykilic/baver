@@ -81,7 +81,7 @@
 
         <!-- Custom Theme Style -->
         <link href="{{asset('css/custom.min.css') }}" rel="stylesheet">
-{{--        <link href="{{asset('css/site.css') }}" rel="stylesheet">--}}
+        <link href="{{asset('css/site.css') }}" rel="stylesheet">
 
         @stack('stylesheets')
 

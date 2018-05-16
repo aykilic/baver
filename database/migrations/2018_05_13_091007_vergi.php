@@ -17,7 +17,7 @@ class Vergi extends Migration
             $table->increments('vid');
 
             // Some product fields
-            $table->mediumInteger('vor');
+            $table->tinyInteger('vor');
 
             // ... any other fields
         });

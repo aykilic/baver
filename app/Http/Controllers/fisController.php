@@ -41,6 +41,12 @@ use App\Models\sipfisObj;
 use App\Models\sablon_turuObj;
 
 class fisController extends Controller{
+//    public function numarala()
+//    {
+//
+//
+//
+//    }
 
 	public function siparisfisi()
 	{
