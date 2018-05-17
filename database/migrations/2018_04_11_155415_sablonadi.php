@@ -10,8 +10,8 @@ class sablonadi extends Migration
 	public function up() {
 		Schema::create('sablonad', function (Blueprint $table) {
 			$table->increments('sbladid');
-			$table->string('sblad',25);
-			$table->integer('sblturuid');
+			$table->string('sblad',25)->nullable();
+			$table->integer('sblturuid')->nullable();
 
 
 

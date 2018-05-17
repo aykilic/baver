@@ -10,7 +10,7 @@ class durum extends Migration
     public function up() {
         Schema::create('durum', function (Blueprint $table) {
             $table->increments('durumid');
-            $table->string('durumad',15);
+            $table->string('durumad',15)->nullable();
 
             $table->timestamps();
         });

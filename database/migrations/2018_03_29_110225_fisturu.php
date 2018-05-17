@@ -10,7 +10,7 @@ class fisturu extends Migration
     public function up() {
         Schema::create('fisturu', function (Blueprint $table) {
             $table->increments('fisturuid');
-            $table->string('fisturuad',10);
+            $table->string('fisturuad',10)->nullable();
 
 
             $table->timestamps();

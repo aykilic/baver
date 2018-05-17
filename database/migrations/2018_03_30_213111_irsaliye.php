@@ -10,7 +10,7 @@ class irsaliye extends Migration
     public function up() {
         Schema::create('irsaliye', function (Blueprint $table) {
             $table->increments('irsid');
-            $table->string('irstar',15);
+            $table->string('irstar',15)->nullable();
 
             $table->timestamps();
         });

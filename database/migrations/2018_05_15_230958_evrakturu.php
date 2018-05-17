@@ -15,7 +15,7 @@ class Evrakturu extends Migration
     {
         Schema::create('evrakturu', function (Blueprint $table) {
             $table->increments('evrakturuid');
-            $table->string('evrakturuad', 15);
+            $table->string('evrakturuad', 15)->nullable();
             $table->timestamps();
 
 

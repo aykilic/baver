@@ -15,7 +15,7 @@ class Doviz extends Migration
     {
         Schema::create('doviz', function (Blueprint $table) {
             $table->increments('did');
-            $table->string('dad',50);
+            $table->string('dad',50)->nullable();
             $table->timestamps();
         });
     }

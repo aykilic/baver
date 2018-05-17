@@ -15,12 +15,12 @@ class Numarala extends Migration
     {
         Schema::create('numarala', function (Blueprint $table) {
         $table->increments('numaralaid');
-            $table->tinyInteger('evrakturuid');
-            $table->Integer('sayi')->default(1);
-            $table->tinyInteger('uzunluk')->default(5);
-            $table->tinyInteger('mod');
-            $table->date('tarih1');
-            $table->date('tarih2');
+            $table->tinyInteger('evrakturuid')->nullable();
+            $table->Integer('sayi')->default(1)->nullable();
+            $table->tinyInteger('uzunluk')->default(5)->nullable();
+            $table->tinyInteger('mod')->nullable();
+            $table->date('tarih1')->nullable();
+            $table->date('tarih2')->nullable();
 
             $table->timestamps();
         });

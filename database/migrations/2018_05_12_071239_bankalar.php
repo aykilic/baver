@@ -15,7 +15,7 @@ class Bankalar extends Migration
     {
         Schema::create('bankalar', function (Blueprint $table) {
             $table->increments('baid');
-            $table->string('bankad',50);
+            $table->string('bankad',50)->nullable();
             $table->timestamps();
         });
     }

@@ -15,9 +15,9 @@ class Firmalar extends Migration
     {
         Schema::create('firmalar', function (Blueprint $table) {
             $table->increments('fid');
-            $table->string('cunvan',150);
-            $table->string('cadres1');
-            $table->string('tar',11);
+            $table->string('cunvan',150)->nullable();
+            $table->string('cadres1')->nullable();
+            $table->string('tar',11)->nullable();
             $table->timestamps();
         });
     }

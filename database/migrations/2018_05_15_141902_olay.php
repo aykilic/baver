@@ -15,8 +15,8 @@ class Olay extends Migration
     {
 
             Schema::create('olay', function (Blueprint $table) {
-                $table->increments('olayid');
-                $table->string('olayad', 13);
+                $table->increments('olayid')->nullable();
+                $table->string('olayad', 13)->nullable();
 
                 $table->timestamps();
             });

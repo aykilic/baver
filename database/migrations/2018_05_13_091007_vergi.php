@@ -17,7 +17,7 @@ class Vergi extends Migration
             $table->increments('vid');
 
             // Some product fields
-            $table->tinyInteger('vor');
+            $table->tinyInteger('vor')->nullable();
 
             // ... any other fields
         });
