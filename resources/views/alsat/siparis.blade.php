@@ -12,6 +12,12 @@
         <!-- Bootstrap CSS -->
 
     </head>
+
+    @if($id==1)
+        @php $ftur = "Satış"; @endphp
+    @else
+        @php $ftur = "Alış"; @endphp
+    @endif
     <div class="right_col" role="main">
         <div class="">
             <div clas="row">
@@ -19,7 +25,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Sipariş Fişi </h2>
+                            <h2>{{$ftur}} Sipariş Fişi </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -61,22 +67,21 @@
 
                                                 <div class="form-group">
                                                     <label for="fisno">Fiş No</label>
-                                                    <input type="text" name="sfisno" id="sfisno" value="" class="form-control" >
+                                                    <input type="text" name="sfisno" id="sfisno" value="{{$numara}}" class="form-control" >
                                                 </div> <!-- /.form-group -->
 
-                                                <div class="form-group">
+                                                {{--<div class="form-group">--}}
 
-
-                                                    <label for="tax_no"  name="lbanka">Fis Turu</label>
-                                                    <input type="hidden" name="fisturu" id="fisturuid" value="1" class="form-control">
-                                                    <select data-toggle="dropdown" id="fisturu" class="form-control"  aria-expanded="false"  ><span class="caret"></span>
+                                                    {{--<label for="tax_no" name="lbanka">Fis Turu</label>--}}
+                                                    {{--<input type="hidden" name="fisturu" id="fisturuid" value="1" class="form-control">--}}
+                                                    {{--<select data-toggle="dropdown" id="fisturu" class="form-control"  aria-expanded="false"  ><span class="caret"></span>--}}
                                                         {{--<option >Seciniz</option>--}}
-                                                        @foreach($fistur as $key => $fisturuad)
-                                                            <option  value="{{ $key }}">{{ $fisturuad }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                        {{--@foreach($fistur as $key => $fisturuad)--}}
+                                                            {{--<option  value="{{ $key }}">{{ $fisturuad }}</option>--}}
+                                                        {{--@endforeach--}}
+                                                    {{--</select>--}}
 
-                                                </div> <!-- /.form-group -->
+                                                {{--</div> <!-- /.form-group -->--}}
                                                 {{--<div class="row">--}}
                                                     {{--<div class="col-xs-6 col-md-6">--}}
 
@@ -854,12 +859,12 @@
 
 
             //önemli*******************************************************************************************************************************
-            $(".kk :input").keyup(function(){
+            $(":input").keyup(function(){
                 this.value = this.value.toUpperCase();
             });
-            $("#stokad").keyup(function(){
-                this.value = this.value.toUpperCase();
-            });
+            // $("#stokad").keyup(function(){
+            //     this.value = this.value.toUpperCase();
+            // });
             $('#tarih').daterangepicker({
                 "singleDatePicker": true,
                 "maxDate": "31-12-2050",

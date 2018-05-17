@@ -12,15 +12,15 @@ class numaralaTableSeeder extends Seeder
     public function run()
     {
         DB::table('numarala')->insert([
-            ['evrakturuid' => 1, 'evrakturuad' => "ALIŞ SİPARİŞ FİŞİ"],
-            ['evrakturuid' => 2, 'evrakturuad' => "SATIŞ SİPARİŞ FİŞİ"],
-            ['evrakturuid' => 3, 'evrakturuad' => "ALIŞ İRSALİYESİ"],
-            ['evrakturuid' => 4, 'evrakturuad' => "SATIŞ İRSALİYESİ"],
-            ['evrakturuid' => 5, 'evrakturuad' => "ALIŞ FATURASI"],
-            ['evrakturuid' => 6, 'evrakturuad' => "SATIŞ FATURASI"],
-            ['evrakturuid' => 7, 'evrakturuad' => "ÇEK BORDROSU"],
-            ['evrakturuid' => 8, 'evrakturuad' => "TAHSİLAT MAKBUZU"],
-            ['evrakturuid' => 9, 'evrakturuad' => "BORÇ MAKBUZU"],
+
+            ['numaralaid'=> 2, 'evrakturuid' => 2, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
+            ['numaralaid'=> 3, 'evrakturuid' => 3, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
+            ['numaralaid'=> 4, 'evrakturuid' => 4, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
+            ['numaralaid'=> 5, 'evrakturuid' => 5, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
+            ['numaralaid'=> 6, 'evrakturuid' => 6, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
+            ['numaralaid'=> 7, 'evrakturuid' => 7, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
+            ['numaralaid'=> 8, 'evrakturuid' => 8, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
+            ['numaralaid'=> 9, 'evrakturuid' => 9, 'sayi'=>1 ,'uzunluk'=>7,'mod'=>1],
 
         ]);
     }

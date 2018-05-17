@@ -8,5 +8,5 @@ class numaralaObj extends Model
 {
     protected $table='numarala';
     protected $primaryKey = 'numaralaid';
-    protected $fillable=['evrakturid','uzunluk','sayi','mod','tarih1','tarih2'];
+    protected $fillable=['evrakturuid','uzunluk','sayi','mod','tarih1','tarih2'];
 }

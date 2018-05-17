@@ -39,7 +39,8 @@
                     </li>
                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/siparisfisi">Sipariş Fişi</a></li>
+                            <li><a href="/siparisfisi/1">Satış Sipariş Fişi</a></li>
+                            <li><a href="/siparisfisi/2">Alış Sipariş Fişi</a></li>
                             <li><a href="/sablon">Şablon</a></li>
                             <li><a href="form_validation.html">Form Validation</a></li>
                             <li><a href="form_wizards.html">Form Wizard</a></li>

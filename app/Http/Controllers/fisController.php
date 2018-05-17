@@ -27,7 +27,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\editFirmaObj;
+use App\Models\numaralaObj;
 use App\Models\dovizObj;
 use App\Models\olayObj;
 use App\Models\birimObj;
@@ -48,7 +48,7 @@ class fisController extends Controller{
 //
 //    }
 
-	public function siparisfisi()
+	public function siparisfisi(request $req, $id)
 	{
 		$firma = DB::table('firmalar')->get();
 		$stok = DB::table('stok')->get();
@@ -79,15 +79,85 @@ $hane=6;
 
 //dd($new_index);
         $b="001345";
-        $str= $b ;
-        $number = (int)$str;
+
+        $number = (int)$b;
+     //   dd($number);
 //        $number = sprintf('%08d',$number);
 //        dd($number);
       //  dd($number);
+
+
+        //******fis numaralama ******///////////////////
+        // id 1 satış
+                    $numarala=numaralaObj::all();
+
+
+
+        $sipfisno = sipfisObj::where('fisturu', $id)->first();
+        // eğer sipariş fişi ilk defa oluşturuluyosa
+        if($sipfisno==""){
+            $sonnum=0;
+
+        }else{
+        // eğer sipariş fişi var ise
+
+
+
+            $sonnum=$sipfisno->numara;
+        }
+
+
+
+      //  dd($sonnum);
+        $numarala=numaralaObj::where('evrakturuid', $id)->first();
+        $hane=$numarala->uzunluk;
+
+        //eğer numaralama aktif değilse
+                    if($numarala->mod==0 || $numarala->mod==""){
+                            if ($id=1){
+// satış ise
+
+
+
+                                $sonnumm=$sonnum + 1;
+
+                                $sonnummm=str_pad($sonnumm, $hane, "0", STR_PAD_LEFT);
+
+                                $numara=$sonnummm;
+                            }else{
+//
+ // alış ise
+                                $sonnumm=$sonnum + 1;
+
+                                $sonnummm=str_pad($sonnumm, $hane, "0", STR_PAD_LEFT);
+
+                                $numara=$sonnummm;
+
+                            }
+
+
+                    }
+                    else{
+                        // numarayı yeniden duzenle
+                        $sonnumara=($numarala->sayi)+1;
+                        $new_index = str_pad($sonnumara, $hane, "0", STR_PAD_LEFT);
+//bitti
+                        $numara=$new_index;
+//dd("burdayım");
+
+
+                    }
+
+
+
+//dd($numara);
+
         return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
 		           ->with('firma', $firma)
-			->with('firmay', $firmay)
+            ->with('numara', $numara)
+
+            ->with('firmay', $firmay)
             ->with('depo', $dropdepo)
             ->with('vergi', $dropvergi)
             ->with('vergim', $dropvergim)
@@ -95,10 +165,12 @@ $hane=6;
             ->with('svergi', $selectedvergi)
 			->with('stok', $stok)
 			->with('doviz', $dropdoviz)
-		->with('birim', $dropbirim);
+		->with('birim', $dropbirim)
+        ->with('id', $id);
 
 
-	}
+
+    }
 
 
 
