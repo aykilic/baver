@@ -60,13 +60,13 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                         <label>Uzunluk (Basamak):</label>
-                                        <input type="text" class="form-control" name="asipfisuzunluk" id="asipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate()">
+                                        <input type="text" class="form-control" name="asipfisuzunluk" id="asipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate01()">
                                     </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Sayı:</label>
-                                            <input type="text" class="form-control" name="sayi" id="sayi" data-inputmask="'alias': 'tutar'" oninput="calculate()">
+                                            <input type="text" class="form-control" name="sayi" id="sayi" data-inputmask="'alias': 'tutar'" oninput="calculate01()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
@@ -103,19 +103,25 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="sipfisuzunluk" id="ssipfisuzunluk" data-inputmask="'alias': 'uzunluk'">
+                                            <input type="text" class="form-control" name="ssipfisuzunluk" id="ssipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate02()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Sayı:</label>
-                                            <input type="text" class="form-control" name="sayi" id="sayi" data-inputmask="'alias': 'tutar'">
+                                            <input type="text" class="form-control" name="ssipsayi" id="ssipsayi" data-inputmask="'alias': 'tutar'" oninput="calculate02()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="tarih1" id="tarih1">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Görünüm :</label>
+                                            <input type="text" class="form-control" name="gorunum" id="ssipfisgorunum" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -140,19 +146,19 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk" data-inputmask="'alias': 'uzunluk'">
+                                            <input type="text" class="form-control" name="aisipfisuzunluk" id="aisipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate03()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Sayı:</label>
-                                            <input type="text" class="form-control" name="sayi" id="sayi" data-inputmask="'alias': 'tutar'">
+                                            <input type="text" class="form-control" name="aisayi" id="aisayi" data-inputmask="'alias': 'tutar'" oninput="calculate03()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
-                                            <input type="text" class="form-control" name="tarih1" id="tarih1">
+                                            <input type="text" class="form-control" name="aitarih1" id="aitarih1">
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -177,19 +183,19 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk" data-inputmask="'alias': 'uzunluk'">
+                                            <input type="text" class="form-control" name="sisipfisuzunluk" id="sisipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate04()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Sayı:</label>
-                                            <input type="text" class="form-control" name="sayi" id="sayi" data-inputmask="'alias': 'tutar'">
+                                            <input type="text" class="form-control" name="sisayi" id="sisayi" data-inputmask="'alias': 'tutar'" oninput="calculate04()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
-                                            <input type="text" class="form-control" name="tarih1" id="tarih1">
+                                            <input type="text" class="form-control" name="sitarih1" id="sitarih1">
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -214,19 +220,19 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk" data-inputmask="'alias': 'uzunluk'">
+                                            <input type="text" class="form-control" name="afsipfisuzunluk" id="afsipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate05()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Sayı:</label>
-                                            <input type="text" class="form-control" name="sayi" id="sayi" data-inputmask="'alias': 'tutar'">
+                                            <input type="text" class="form-control" name="afsayi" id="afsayi" data-inputmask="'alias': 'tutar'" oninput="calculate05()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
-                                            <input type="text" class="form-control" name="tarih1" id="tarih1">
+                                            <input type="text" class="form-control" name="aftarih1" id="aftarih1">
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -251,19 +257,19 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="sipfisuzunluk" id="sipfisuzunluk" data-inputmask="'alias': 'uzunluk'">
+                                            <input type="text" class="form-control" name="sfsipfisuzunluk" id="sfsipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate06()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Sayı:</label>
-                                            <input type="text" class="form-control" name="sayi" id="sayi" data-inputmask="'alias': 'tutar'">
+                                            <input type="text" class="form-control" name="sfsayi" id="sfsayi" data-inputmask="'alias': 'tutar'" oninput="calculate06()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
-                                            <input type="text" class="form-control" name="tarih1" id="tarih1">
+                                            <input type="text" class="form-control" name="sftarih1" id="sftarih1">
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -352,7 +358,7 @@
 
 
 
-       function calculate () {
+       function calculate01 () {
        //     alert('sd');
 
 
