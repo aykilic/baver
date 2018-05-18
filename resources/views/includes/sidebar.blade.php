@@ -42,7 +42,7 @@
                             <li><a href="/siparisfisi/1">Satış Sipariş Fişi</a></li>
                             <li><a href="/siparisfisi/2">Alış Sipariş Fişi</a></li>
                             <li><a href="/sablon">Şablon</a></li>
-                            <li><a href="form_validation.html">Form Validation</a></li>
+                            <li><a href="/numarala">Numaralandırma</a></li>
                             <li><a href="form_wizards.html">Form Wizard</a></li>
                             <li><a href="form_upload.html">Form Upload</a></li>
                             <li><a href="form_buttons.html">Form Buttons</a></li>
