@@ -121,7 +121,7 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Görünüm :</label>
-                                            <input type="text" class="form-control" name="gorunum" id="ssipfisgorunum" disabled>
+                                            <input type="text" class="form-control" name="ssgorunum" id="ssipfisgorunum" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -146,7 +146,7 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="aisipfisuzunluk" id="aisipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate03()">
+                                            <input type="text" class="form-control" name="aiuzunluk" id="aiuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate03()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
@@ -159,6 +159,12 @@
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="aitarih1" id="aitarih1">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Görünüm :</label>
+                                            <input type="text" class="form-control" name="aigorunum" id="aigorunum" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -183,7 +189,7 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="sisipfisuzunluk" id="sisipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate04()">
+                                            <input type="text" class="form-control" name="siuzunluk" id="siuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate04()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
@@ -196,6 +202,12 @@
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="sitarih1" id="sitarih1">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Görünüm :</label>
+                                            <input type="text" class="form-control" name="sigorunum" id="sigorunum" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -220,7 +232,7 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="afsipfisuzunluk" id="afsipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate05()">
+                                            <input type="text" class="form-control" name="afuzunluk" id="afuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate05()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
@@ -233,6 +245,12 @@
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="aftarih1" id="aftarih1">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Görünüm :</label>
+                                            <input type="text" class="form-control" name="afgorunum" id="afgorunum" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -257,7 +275,7 @@
                                     <div class="col-xs-2">
                                         <div class="form-group">
                                             <label>Uzunluk (Basamak):</label>
-                                            <input type="text" class="form-control" name="sfsipfisuzunluk" id="sfsipfisuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate06()">
+                                            <input type="text" class="form-control" name="sfuzunluk" id="sfuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate06()">
                                         </div>
                                     </div>
                                     <div class="col-xs-2">
@@ -270,6 +288,12 @@
                                         <div class="form-group">
                                             <label>Başlangıç Tarihi:</label>
                                             <input type="text" class="form-control" name="sftarih1" id="sftarih1">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Görünüm :</label>
+                                            <input type="text" class="form-control" name="sfgorunum" id="sfgorunum" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
@@ -359,17 +383,9 @@
 
 
        function calculate01 () {
-       //     alert('sd');
-
-
-
-
-
-
             var str = $('#sayi').val();
             var pad = $('#asipfisuzunluk').val();
        //      console.log(pad);
-       //
        //1    var ans = pad.substring(0, pad.length - str.length) + str;
        //2    var ans = pad.substring(str.length) + str;
            if((str.length) > pad){
@@ -381,35 +397,96 @@
                });
                $('#sayi').val("");
                return false;
-
-
            }else {
                var ans = Array((pad - str.length) + 1).join('0') + str;
                $('#asipfisgorunum').val(ans);
            }
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // $(":input").keyup(function(){
-        //     this.value = this.value.toUpperCase();
-        // });
+        function calculate02 () {
+            var str = $('#ssipsayi').val();
+            var pad = $('#ssipfisuzunluk').val();
+            if((str.length) > pad){
+                new PNotify({
+                    title: 'Hata!',
+                    text: 'Hatalı Giriş.',
+                    type: 'error',
+                    styling:'bootstrap3'
+                });
+                $('#ssipsayi').val("");
+                return false;
+            }else {
+                var ans = Array((pad - str.length) + 1).join('0') + str;
+                $('#ssipfisgorunum').val(ans);
+            }
+        }
+        function calculate03 () {
+            var str = $('#aisayi').val();
+            var pad = $('#aiuzunluk').val();
+            if((str.length) > pad){
+                new PNotify({
+                    title: 'Hata!',
+                    text: 'Hatalı Giriş.',
+                    type: 'error',
+                    styling:'bootstrap3'
+                });
+                $('#aisayi').val("");
+                return false;
+            }else {
+                var ans = Array((pad - str.length) + 1).join('0') + str;
+                $('#aigorunum').val(ans);
+            }
+        }
+        function calculate04 () {
+            var str = $('#sisayi').val();
+            var pad = $('#siuzunluk').val();
+            if((str.length) > pad){
+                new PNotify({
+                    title: 'Hata!',
+                    text: 'Hatalı Giriş.',
+                    type: 'error',
+                    styling:'bootstrap3'
+                });
+                $('#sisayi').val("");
+                return false;
+            }else {
+                var ans = Array((pad - str.length) + 1).join('0') + str;
+                $('#sigorunum').val(ans);
+            }
+        }
+        function calculate05 () {
+            var str = $('#afsayi').val();
+            var pad = $('#afuzunluk').val();
+            if((str.length) > pad){
+                new PNotify({
+                    title: 'Hata!',
+                    text: 'Hatalı Giriş.',
+                    type: 'error',
+                    styling:'bootstrap3'
+                });
+                $('#afsayi').val("");
+                return false;
+            }else {
+                var ans = Array((pad - str.length) + 1).join('0') + str;
+                $('#afgorunum').val(ans);
+            }
+        }
+        function calculate06 () {
+            var str = $('#sfsayi').val();
+            var pad = $('#sfuzunluk').val();
+            if((str.length) > pad){
+                new PNotify({
+                    title: 'Hata!',
+                    text: 'Hatalı Giriş.',
+                    type: 'error',
+                    styling:'bootstrap3'
+                });
+                $('#sfsayi').val("");
+                return false;
+            }else {
+                var ans = Array((pad - str.length) + 1).join('0') + str;
+                $('#sfgorunum').val(ans);
+            }
+        }
 
     </script>
 
