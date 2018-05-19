@@ -488,8 +488,8 @@
                                    // type: 'notice',
                                     styling:'bootstrap3'
                                 });
-                            },
-                        },
+                            }
+                        }
 
 
                     });

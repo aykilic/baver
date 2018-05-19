@@ -81,8 +81,8 @@
                                             <input type="text" class="form-control" name="gorunum" id="asipfisgorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" style="margin-top: 24px;">
-                                        <a class="btn btn-default"  id="satirekle" >Kaydet</a>
+                                    <div class="col-lg-1 add" style="margin-top: 24px;">
+                                        <a class="btn btn-default"  id="assatirekle" >Kaydet</a>
                                     </div>
 
                                 </div>
@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
-                                        <a class="btn btn-default"  id="satirekle" >Kaydet</a>
+                                        <a class="btn btn-default"  id="sssatirekle" >Kaydet</a>
                                     </div>
 
                                 </div>
@@ -167,8 +167,8 @@
                                             <input type="text" class="form-control" name="aigorunum" id="aigorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" style="margin-top: 24px;">
-                                        <a class="btn btn-default"  id="satirekle" >Kaydet</a>
+                                    <div class="col-lg-1 add" style="margin-top: 24px;">
+                                        <a class="btn btn-default"  id="aisatirekle" >Kaydet</a>
                                     </div>
 
                                 </div>
@@ -211,7 +211,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
-                                        <a class="btn btn-default"  id="satirekle" >Kaydet</a>
+                                        <a class="btn btn-default"  id="sisatirekle" >Kaydet</a>
                                     </div>
 
                                 </div>
@@ -254,7 +254,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
-                                        <a class="btn btn-default"  id="satirekle" >Kaydet</a>
+                                        <a class="btn btn-default"  id="afsatirekle" >Kaydet</a>
                                     </div>
 
                                 </div>
@@ -297,7 +297,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-1" style="margin-top: 24px;">
-                                        <a class="btn btn-default"  id="satirekle" >Kaydet</a>
+                                        <a class="btn btn-default"  id="sfsatirekle" >Kaydet</a>
                                     </div>
 
                                 </div>
@@ -307,7 +307,7 @@
 
                                 </div>
 
-
+                                {{ csrf_field() }}
 
                         </div>
                     </div>
@@ -488,6 +488,125 @@
             }
         }
 
+
+        $('.add').on('click', '#assatirekle', function() {
+           // alert("df");
+            $.ajax({
+
+                type: 'POST',
+                url: "/askaydet",
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'evrakturuid':2 ,
+                    'sayi': $('#sayi').val(),
+                    //  $('#select_id').find('option:selected').val()
+                    //      'dbanka':$('select[name=dbanka]').val(),
+                    // 'did': $('#did').val(),//
+
+                    'uzunluk': $('#asipfisuzunluk').val(),
+                    success: function(data) {
+                        new PNotify({
+                            title: 'Numaralama',
+                            text: 'Başarılı',
+                            type: 'success',
+                            // type: 'notice',
+                            styling:'bootstrap3'
+                        });
+                    }
+                }
+
+
+            });
+
+        });
+        $('.add').on('click', '#sssatirekle', function() {
+            // alert("df");
+            $.ajax({
+
+                type: 'POST',
+                url: "/ssipnokaydet",
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'evrakturuid':1 ,
+                    'sayi': $('#ssipsayi').val(),
+                    //  $('#select_id').find('option:selected').val()
+                    //      'dbanka':$('select[name=dbanka]').val(),
+                    // 'did': $('#did').val(),//
+
+                    'uzunluk': $('#ssipfisuzunluk').val(),
+                    success: function(data) {
+                        new PNotify({
+                            title: 'Numaralama',
+                            text: 'Başarılı',
+                            type: 'success',
+                            // type: 'notice',
+                            styling:'bootstrap3'
+                        });
+                    }
+                }
+
+
+            });
+
+        });
+        $('.add').on('click', '#aisatirekle', function() {
+            // alert("df");
+            $.ajax({
+
+                type: 'POST',
+                url: "/ainokaydet",
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'evrakturuid': 4,
+                    'sayi': $('#aisayi').val(),
+                    //  $('#select_id').find('option:selected').val()
+                    //      'dbanka':$('select[name=dbanka]').val(),
+                    // 'did': $('#did').val(),//
+
+                    'uzunluk': $('#aiuzunluk').val(),
+                    success: function (data) {
+                        new PNotify({
+                            title: 'Numaralama',
+                            text: 'Başarılı',
+                            type: 'success',
+                            // type: 'notice',
+                            styling: 'bootstrap3'
+                        });
+                    }
+                }
+
+
+            });
+        });
+            $('.add').on('click', '#sisatirekle', function() {
+                // alert("df");
+                $.ajax({
+
+                    type: 'POST',
+                    url: "/sinokaydet",
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'evrakturuid': 3,
+                        'sayi': $('#sisayi').val(),
+                        //  $('#select_id').find('option:selected').val()
+                        //      'dbanka':$('select[name=dbanka]').val(),
+                        // 'did': $('#did').val(),//
+
+                        'uzunluk': $('#siuzunluk').val(),
+                        success: function (data) {
+                            new PNotify({
+                                title: 'Numaralama',
+                                text: 'Başarılı',
+                                type: 'success',
+                                // type: 'notice',
+                                styling: 'bootstrap3'
+                            });
+                        }
+                    }
+
+
+                });
+            });
     </script>
 
 @endsection

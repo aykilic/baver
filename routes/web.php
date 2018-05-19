@@ -125,3 +125,11 @@ Route::get('/autocompletefirma', 'fisController@autocompletefirma');
 Route::get('/autocompletestok', 'fisController@autocompletestok');
 
 
+//**********numarala
+Route::POST('/askaydet', 'fisController@askaydet');
+Route::POST('/ssipnokaydet', 'fisController@ssipnokaydet');
+Route::POST('/ainokaydet', 'fisController@ainokaydet');
+Route::POST('/sinokaydet', 'fisController@sinokaydet');
+Route::POST('/afnokaydet', 'fisController@afnokaydet');
+Route::POST('/sfnokaydet', 'fisController@sfnokaydet');
+

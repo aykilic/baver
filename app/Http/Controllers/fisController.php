@@ -72,10 +72,11 @@ $firmay=json_encode($firmam);
         $dropdepo = depoObj::pluck('depoad','depoid');
 //       $sipfistur = sipfisiObj::all();
         $olayy = olayObj::pluck('olayad','olayid');
-
-$index=1;
-$hane=6;
-        $new_index = str_pad($index, $hane, "0", STR_PAD_LEFT);
+        //$fid = DB::table('firmalar')->where('cunvan', $request->cunvan)->value('fid');
+//$uzunluk=DB::table('numarala')->where('evrakturuid', $id)->value('uzunluk');
+//$index=1;
+//$hane=6;
+//        $new_index = str_pad($index, $uzunluk, "0", STR_PAD_LEFT);
 
 //dd($new_index);
         $b="001345";
@@ -104,6 +105,7 @@ $hane=6;
 
 
             $sonnum=$sipfisno->numara;
+
         }
 
 
@@ -114,7 +116,7 @@ $hane=6;
 
         //eğer numaralama aktif değilse
                     if($numarala->mod==0 || $numarala->mod==""){
-                            if ($id=1){
+                            if ($id=2){
 // satış ise
 
 
@@ -211,7 +213,146 @@ $hane=6;
 		return response()->json($res);
 
 	}
+    public function sipfiskaydet(request $request)
+    {
 
 
 
+
+
+
+        }
+
+
+
+
+
+//************************numarala başlangıç
+    public function askaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+           $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
+    public function ssipnokaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+            $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
+    public function ainokaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+            $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
+    public function sinokaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+            $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
+    public function afnokaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+            $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
+    public function sfnokaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+            $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
+//************************numarala bitiş
 }
