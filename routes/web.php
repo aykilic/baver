@@ -95,7 +95,7 @@ Route::delete('/stokturusil/{depoid}', 'Controller@stokturusil');
 
 //****************sipariş fisi************************//////////////////////
 
-Route::get('/siparisfisi/{id}', 'fisController@siparisfisi');
+Route::get('/siparisfisi', 'fisController@sipfiskaydet');
 Route::post('/siparisfisi/kaydet', 'Controller@sipfiskaydet');
 Route::put('/siparisfisi/edit', 'Controller@sipfisedit');
 Route::get('/numarala', 'fisController@numarala');

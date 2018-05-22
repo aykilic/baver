@@ -174,7 +174,12 @@ $firmay=json_encode($firmam);
 
     }
 
+    public function sipfiskaydet(request $req, $id)
+    {
+$fisturu=0;
+        return View::make('alsat.siparis')->with('fisturu', $fisturu);
 
+    }
 
 
 
@@ -213,15 +218,7 @@ $firmay=json_encode($firmam);
 		return response()->json($res);
 
 	}
-    public function sipfiskaydet(request $request)
-    {
 
-
-
-
-
-
-        }
 
 
 

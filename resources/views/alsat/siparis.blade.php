@@ -20,7 +20,7 @@
     @endif
     <div class="right_col" role="main">
         <div class="">
-            <div clas="row">
+            <div class="row">
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
@@ -43,12 +43,13 @@
                             </ul>
                             <div class="clearfix"></div>
                             <div class="x_content">
-                                <form id="formkaydet"  method="post" >
+                                <form  action="{{action('fisController@sipfiskaydet')}}" class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
                                     {{csrf_field()}}
 
 
 
                                     <br />
+
                                     {{ csrf_field() }}
                                     <div class="x_panel">
                                         <div class="col-md-6">
@@ -97,7 +98,7 @@
                                                         <div class="form-group">
                                                             <label for="address">Hesap</label>
                                                             <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control" >
-                                                            <input type="text" name="fisfad" id="fisfad" value="" autocomplete="off" class="form-control has-feedback-left typeahead" >
+                                                            <input type="text" name="fisfad" id="fisfad" value="" autocomplete="off" class="form-control has-feedback-left typeahead buyuk" >
                                                             <img class="Typeahead-spinner" src="../images/wait.gif">
                                                             <span class="fa fa-search form-control-feedback left" ></span>
                                                         </div> <!-- /.form-group -->
@@ -212,7 +213,7 @@
                                                                 <div class="col-lg-12 kutupad">
                                                                     <div class="form-group kutupad">
                                                                         <input type="hidden" name="fissid[]" id="fissid" value="">
-                                                                        <input type="text" name="stokad[]" id="stokad"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;">
+                                                                        <input type="text" name="stokad[]" id="stokad"  autocomplete="off" class="form-control has-feedback-left buyuk" style="padding-left:65px;">
                                                                         <img class="Typeahead-spinners" src="../images/wait.gif">
                                                                         <span class="fa fa-search form-control-feedback left ico"   ></span>
                                                                     </div>
@@ -354,7 +355,7 @@
                                     <div class="text-right">
                                         <input type="hidden" name="add">
                                         <input type="hidden" name="uniquetime" value="1501288025.81">
-                                        <button  class="btn btn-success btn-insert btn-xs-block add"   type="button" ><i class="fa fa-plus-square"></i>Kaydet</button>
+                                        <button  class="btn btn-success btn-insert btn-xs-block add"   type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button>
                                     </div>
 
                                 </form>
@@ -613,7 +614,7 @@
                     filter: function (d) {
                         // assume data is an array of strings e.g. ['one', 'two', 'three']
                         return $.map(d, function (firma) {
-                            console.log("Called prepare");
+                            //console.log("Called prepare");
 
                             return {
                                 name: firma.cunvan,
@@ -859,7 +860,7 @@
 
 
             //önemli*******************************************************************************************************************************
-            $(":input").keyup(function(){
+            $(".buyuk").keyup(function(){
                 this.value = this.value.toUpperCase();
             });
             // $("#stokad").keyup(function(){
