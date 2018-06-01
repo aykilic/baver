@@ -89,7 +89,7 @@ $firmay=json_encode($firmam);
 
 
         //******fis numaralama ******///////////////////
-        // id 1 satış
+        // id 1 satışsss
                     $numarala=numaralaObj::all();
 
 

@@ -149,6 +149,7 @@ p + p {
     width: 20px;
     height: 20px;
 }
+<<<<<<< HEAD
 .Typeahead-spinners {
     position: absolute;
     top: 32px;
@@ -170,6 +171,8 @@ padding-right:35px}
 #t1{}
     /*span.fa.fa-search.form-control-feedback.left{ padding-left: 1px;*/
 /*}*/
+=======
+>>>>>>> fb302c2... Merge branch '22.04'
 /* example specific styles */
 /* ----------------------- */
 

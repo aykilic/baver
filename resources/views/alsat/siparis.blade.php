@@ -177,8 +177,94 @@
                                     <div class="h-20"></div>
                                     <div class="clearfix"></div>
                                     <div class="row">
+<<<<<<< HEAD
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="x_panel">
+=======
+                                        <div class="col-md-2">
+
+
+
+                                            {{--textbox başlangıç--}}
+
+                                            <div class="form-group item">
+                                                <label for="tar">Tarih</label>
+                                                <input type="text" name="tar" id="tarih" class="form-control has-feedback-left" data-inputmask="'mask': '99-99-9999'"  aria-describedby="inputSuccess2Status2">
+                                                <span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>
+                                                <span id="inputSuccess2Status2" class="sr-only">(success)</span>
+                                            </div> <!-- /.form-group -->
+
+                                            <div class="form-group">
+                                                <label for="fisno">Fiş No</label>
+                                                <input type="text" name="sfisno" id="sfisno" value="" class="form-control" >
+                                            </div> <!-- /.form-group -->
+
+                                            <div class="form-group">
+
+
+                                                    <label for="tax_no"  name="lbanka">Fis Turu</label>
+
+                                                    <select data-toggle="dropdown" id="fisturu" class="form-control" name="fisturu" aria-expanded="false"  ><span class="caret"></span>
+                                                        <option >Seciniz</option>
+                                                        @foreach($fistur as $key => $fisturuad)
+                                                            <option  value="{{ $key }}">{{ $fisturuad }}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                            </div> <!-- /.form-group -->
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-6">
+
+                                                </div> <!-- /.col -->
+                                                <div class="col-xs-6 col-md-6">
+                                                </div> <!-- /.col -->
+
+                                            </div> <!-- /.row -->
+                                        </div> <!-- /.col-md-6 -->
+                                        <div class="col-md-4">
+
+                                            <div class="form-group">
+
+                                                <label for="address">Hesap</label>
+                                                <input type="hidden" name="fisfid" id="fisfid" value="" class="form-control " >
+                                                <input type="text" name="fisfad" id="fisfad" value="" class="form-control has-feedback-left typeahead" >
+                                                <img class="Typeahead-spinner" src="../images/wait.gif">
+                                                <span class="fa fa-search form-control-feedback left" ></span>
+                                            </div> <!-- /.form-group -->
+
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="district">İlçe-Bölge</label>
+                                                        <input type="text" name="dilce" id="dilce" value="" class="form-control">
+                                                    </div> <!-- /.form-group -->
+                                                </div> <!-- /.col -->
+                                                <div class="col-xs-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="city">Şehir-İl</label>
+                                                        <input type="text" name="dil" id="dil" value="" class="form-control" >
+                                                    </div> <!-- /.form-group -->
+                                                </div> <!-- /.col -->
+
+                                            </div> <!-- /.row -->
+
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tax_home">Vergi Dairesi</label>
+                                                        <input type="text" name="dvad" id="dvad" value="" class="form-control">
+                                                    </div> <!-- /.form-group -->
+                                                </div> <!-- /.col-md-4 -->
+                                                <div class="col-xs-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tax_no">Vergi No/T.C. No</label>
+                                                        <input type="text" name="dvdno" id="dvdno" value="" class="form-control " >
+                                                    </div> <!-- /.form-group -->
+                                                </div> <!-- /.col-md-4 -->
+                                            </div> <!-- /.row -->
+
+                                        </div> <!-- /.col-md-6 -->
+>>>>>>> fb302c2... Merge branch '22.04'
 
 
 
@@ -609,6 +695,7 @@
 
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 prefetch: {
+<<<<<<< HEAD
                     url: '/autocompletefirma',
                     cache: false,
                     filter: function (d) {
@@ -621,8 +708,36 @@
                                 id: firma.fid
                             };
                         });
+=======
+                    url: "/",
+
+                        transform: function (response) {
+                            return $.map(response, function (firma) {
+                                return {
+                                    value: firma.cunvan,
+                                    id: firma.fid
+                                };
+                            });
+                        }
+                    },
+
+                remote: {
+                    wildcard: '%QUERY',
+                    url: "find/%QUERY",
+
+                        transform: function (response) {
+                            return $.map(response, function (firma) {
+                                return {
+                                    value: firma.cunvan,
+                                    id: firma.fid
+                                };
+                            });
+                        }
+
+>>>>>>> fb302c2... Merge branch '22.04'
                     }
-                }
+
+
             });
             bloodhound.initialize();
 //dfgdfgd
@@ -636,8 +751,75 @@
                 {
                     name: 'cunvan',
                     id: 'fid',
+<<<<<<< HEAD
                     display: 'name',
                     //Input value to be set when you select a suggestion.
+=======
+                    display: 'value',
+                    source: search,
+                    templates: {
+                        empty: [
+                            '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
+                        ],
+                    }
+
+            }).on("typeahead:selected", function(obj, datum) {
+
+                $("#fisfid").val(datum.id);
+            })
+                .on('typeahead:asyncrequest', function() {
+                $('.Typeahead-spinner').show();
+            })
+                .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+                    $('.Typeahead-spinner').hide();
+                });
+            //deneme
+//            var substringMatcher = function(strs) {
+//                return function findMatches(q, cb) {
+//                    var matches, substrRegex;
+//
+//                    // an array that will be populated with substring matches
+//                    matches = [];
+//
+//                    // regex used to determine if a string contains the substring `q`
+//                    substrRegex = new RegExp(q, 'i');
+//
+//                    // iterate through the pool of strings and for any string that
+//                    // contains the substring `q`, add it to the `matches` array
+//                    $.each(strs, function(i, str) {
+//                        if (substrRegex.test(str)) {
+//                            // the typeahead jQuery plugin expects suggestions to a
+//                            // JavaScript object, refer to typeahead docs for more info
+//                            matches.push({ value: str });
+//                        }
+//                    });
+//
+//                    cb(matches);
+//                };
+//            };
+//
+//            var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+//                'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+//                'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+//                'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+//                'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+//                'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+//                'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+//                'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+//                'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+//            ];
+//
+//            $('#fisfad').typeahead({
+//                    hint: true,
+//                    highlight: true,
+//                    minLength: 1
+//                },
+//                {
+//                    name: 'states',
+//                    displayKey: 'value',
+//                    source: substringMatcher(states)
+//                });
+>>>>>>> fb302c2... Merge branch '22.04'
 
                     source: bloodhound.ttAdapter(),
                     templates: {
@@ -782,6 +964,7 @@
 
 
 
+<<<<<<< HEAD
                         }).keyup(function(){
                         this.value = this.value.toUpperCase();
                     }).on("typeahead:selected", function(obj, stok) {
@@ -804,6 +987,12 @@
                     $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
                     $('#kdv'+i).val(kdv);
 
+=======
+//
+            $(":input").keyup(function(){
+    this.value = this.value.toUpperCase();
+    });
+>>>>>>> fb302c2... Merge branch '22.04'
 
                     i++;
                     //Inputmask().mask(document.querySelectorAll("input"));
