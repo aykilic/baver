@@ -89,14 +89,15 @@ $firmay=json_encode($firmam);
 
 
         //******fis numaralama ******///////////////////
-        // id 1 satışsss
+        // id 1 satış
                     $numarala=numaralaObj::all();
 
-
+// asdsddddddddddsssssdsd
+// sdsdsdsdsdsdsd
 
         $sipfisno = sipfisObj::where('fisturu', $id)->first();
-        $sipfisnoadiid=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $id)->first();
-        $sipfisnoadi=$sipfisnoadiid->fisturuad;
+         $sipfisnoadiid=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $id)->first();
+         $sipfisnoadi=$sipfisnoadiid->fisturuad;
 
         // eğer sipariş fişi ilk defa oluşturuluyosa
 
@@ -117,7 +118,7 @@ $firmay=json_encode($firmam);
       //  dd($sonnum);
         $numarala=numaralaObj::where('evrakturuid', $id)->first();
         $hane=$numarala->uzunluk;
-
+// dd($hane);
         //eğer numaralama aktif değilse
                     if($numarala->mod==0 || $numarala->mod==""){
                             if ($id=2){
@@ -157,13 +158,7 @@ $firmay=json_encode($firmam);
 
 
 //dd($numara);
-        if($id=1){
-
-                     $ss=0;
-
-
-        }
-
+        
 
         return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
@@ -179,7 +174,8 @@ $firmay=json_encode($firmam);
 			->with('stok', $stok)
 			->with('doviz', $dropdoviz)
 		->with('birim', $dropbirim)
-        ->with('sipfisnoadi', $sipfisnoadi);
+         ->with('sipfisnoadi', $sipfisnoadi);
+//        ->with('id', $id);
 
 
 
