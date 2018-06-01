@@ -375,7 +375,7 @@
 
 
         <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlibaaaa3333</a>
         </div>
         <div class="clearfix"></div>
     </footer>
