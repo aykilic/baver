@@ -13,11 +13,11 @@
 
     </head>
 
-    @if($id==1)
-        @php $ftur = "Satış"; @endphp
-    @else
-        @php $ftur = "Alış"; @endphp
-    @endif
+    {{--@if($id==1)--}}
+        {{--@php $ftur = 'Satış' ; @endphp--}}
+    {{--@else--}}
+        {{--@php $ftur = 'Alış' ; @endphp--}}
+    {{--@endif--}}
     <div class="right_col" role="main">
         <div class="">
             <div class="row">
@@ -25,7 +25,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{{$ftur}} Sipariş Fişi </h2>
+                            <h2>{{$sipfisnoadi}} Sipariş Fişi </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>

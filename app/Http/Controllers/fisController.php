@@ -95,7 +95,11 @@ $firmay=json_encode($firmam);
 
 
         $sipfisno = sipfisObj::where('fisturu', $id)->first();
+        $sipfisnoadiid=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $id)->first();
+        $sipfisnoadi=$sipfisnoadiid->fisturuad;
+
         // eğer sipariş fişi ilk defa oluşturuluyosa
+
         if($sipfisno==""){
             $sonnum=0;
 
@@ -153,6 +157,13 @@ $firmay=json_encode($firmam);
 
 
 //dd($numara);
+        if($id=1){
+
+                     $ss=0;
+
+
+        }
+
 
         return View::make('alsat.siparis')
 		           ->with('fistur', $fistur)
@@ -168,7 +179,7 @@ $firmay=json_encode($firmam);
 			->with('stok', $stok)
 			->with('doviz', $dropdoviz)
 		->with('birim', $dropbirim)
-        ->with('id', $id);
+        ->with('sipfisnoadi', $sipfisnoadi);
 
 
 
