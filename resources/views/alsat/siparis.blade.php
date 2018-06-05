@@ -188,7 +188,6 @@
 
 
 
-
                                                 <div class="table-responsive" >
                                                     <table class="table table-striped"  id="siptable" >
                                                         <thead style="background-color: #EAEAEA ">
@@ -248,6 +247,7 @@
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-1">
+                                                                {{--kdv zorrrrrrrr--}}
                                                                 <div class="col-lg-12 kutupad">
 
                                                                     <select data-toggle="dropdown" id="kdv" class="form-control" name="kdv[]"   ><span class="caret"></span>
@@ -442,8 +442,7 @@
 
         </div>
     </div>
-
-
+ 
 
 
 @endsection
@@ -465,6 +464,7 @@
                 $("#satirekle").click();
             }
         });
+
 
         //   console.log(Number(price3).toLocaleString('tr',{ minimumFractionDigits: 2 }));
 
@@ -838,7 +838,7 @@
 
 
 
-//                var value = $(this).val();
+             var ssss = $(this).val()
 //                $(this).find('option[value="' + value + '"]').attr("selected", "selected");
                 });
             });

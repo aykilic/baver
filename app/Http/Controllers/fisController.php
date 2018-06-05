@@ -230,7 +230,6 @@ $fisturu=0;
 
 
 
-
 //************************numarala başlangıç
     public function askaydet(request $request)
     {

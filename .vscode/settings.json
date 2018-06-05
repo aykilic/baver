@@ -1,2 +1,12 @@
 {
+    "eslint.validate": [
+                {
+          "language": "html",
+          "autoFix": true
+        },
+        {
+          "language": "javascript",
+          "autoFix": true
+        }
+      ]
 }
