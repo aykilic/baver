@@ -311,8 +311,8 @@
                                                 </div>
                                                 <div style="width:100%;height:90px">
                                                     <!-- {{--<div class="row" style="float:right">--}} -->
-                                                    <label class="col-md-1" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV  :</label>
-                                                    <label class="col-md-1" id="kdvl" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" value="%">% 18</label>
+                                                    <label class="col-md-1"  style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV  :</label>
+                                                    <label class="col-md-1" id="kdvl" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" ></label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
                                                         <input id="toplamkdv" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
@@ -468,7 +468,14 @@
         });
         kdv=$('#kdv').find(":selected").text();
 
-        //   console.log(Number(price3).toLocaleString('tr',{ minimumFractionDigits: 2 }));
+$(function(){
+
+
+
+
+});
+
+
 
         if(dtur=""){
             dtur="TL";
@@ -480,15 +487,28 @@
       //  kdv = $('#kdv').find(":selected").text();
 // kdv değişti
         $('#kdv').on('change', function () {
-            kdv = $('#kdv').find(":selected").text();
+
             // kdv=$('#birim').find('option:selected').val();
            // $('#kdvl').text("%"+" "+kdv);
            // console.log(kdv);
           //  alert(kdv);
-            $("input[name^='kdv']").each(function(){
-                $("input[name^='kdv']").val(kdv);
-                //    console.log(sum);
+
+            //satir sayısı h!!!!!!!
+            var h = $('#siptable tr.sipsatirs').length;
+
+            $("select[name^='kdv']").each(function(){
+                // sum += +$(this).val();
             });
+            if (h===1){
+
+                kdv = $('#kdv').find(":selected").text();
+                $('#kdv1').text("%"+" "+kdv);
+
+            }
+
+
+
+
             calculate();
         });
 
@@ -497,7 +517,6 @@
             if ( elementID=="" || elementID==null){
                 var mi = $('#miktar')[0].value;
                 var bf = $('#bfiyat')[0].value;
-
 
 
 
@@ -517,6 +536,11 @@
 
                // $('')
             }
+
+
+
+
+
             sum=0;
             $("input[name^='tutar']").each(function(){
                 sum += +$(this).val();
@@ -527,14 +551,21 @@
             $('#toplamm').val(sattoplam);
            // dsattoplam=sattoplam.replace(/\./g,",");
 
-            var kdvsattoplam= sum*kdv/100;
-            var kdvsattoplamm =Number(kdvsattoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
-            $('#toplamkdv').val(kdvsattoplamm);
+            //kdv eklenecek
 
 
-            var geneltoplam=sum*(1+(kdv/100));
-            var geneltoplamm =Number(geneltoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
-            $('#gtoplam').val(geneltoplamm);
+
+
+
+
+            // var kdvsattoplam= sum*kdv/100;
+            // var kdvsattoplamm =Number(kdvsattoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
+            // $('#toplamkdv').val(kdvsattoplamm);
+            //
+            //
+            // var geneltoplam=sum*(1+(kdv/100));
+            // var geneltoplamm =Number(geneltoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
+            // $('#gtoplam').val(geneltoplamm);
 
         }
 
@@ -712,6 +743,7 @@
                     $('.Typeahead-spinner').hide();
 
                 });
+            //incele
             $('#formkaydet').on('click', '.add', function() {
                 var sad=$('#stokturad').val();
 
@@ -782,9 +814,6 @@
                                 ]
                             }
 
-
-
-
                         }).keyup(function(){
     this.value = this.value.toUpperCase();
                     }).on("typeahead:selected", function(obj, stok) {
@@ -807,32 +836,8 @@
                     $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
 
 
-                    kdvsat='kdv'+i;
-
-                   // $("#kdvsat option:first").attr('selected',false);
-
-                 // alert ($('#kdv'+i).find(':first').text());
-                  //  $('#estoktur').val($(this).data('stid'));
-
-                  //  $('#kdv'+i).val($('#kdv').find('option:selected').text());
-
-                       // alert($('#kdv').find('option:selected').text());
-
-                   // $('#kdvsat').val('18');
-
-
-
-
-                 //  alert( $("kdvsat option:first").text('0'));
-                 // $('#kdv'+i).val(kdv);
-
-
                     i++;
-                 //   alert($("#kdvsat option:first").text());
 
-                    //Inputmask().mask(document.querySelectorAll("input"));
-                    //var bfiyat ='bfiyat'+i;
-                    // addMask(i);   [name^="body"]
 
 
                     return false;
