@@ -222,7 +222,7 @@
 
                                                             <td class="col-md-1">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="miktar[]" id="miktar"                                                                                       autocomplete="off" class="form-control" oninput="calculate()" style="font-family: monospace, monospace;" >
+                                                                    <input type="text" name="miktar[]" id="miktar0"  autocomplete="off" class="form-control" oninput="calculate(0)" style="font-family: monospace, monospace;" >
                                                                 </div>
                                                             </td>
 
@@ -243,7 +243,7 @@
                                                             <td class="col-md-2">
                                                                
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="bfiyat[]" id="bfiyat" value="" autocomplete="off" class="form-control" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate()" ><span id="t1" class=" form-control-feedback right ico">TL</span>
+                                                                    <input type="text" name="bfiyat[]" id="bfiyat0" value="" autocomplete="off" class="form-control" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate(0)" ><span id="t1" class=" form-control-feedback right ico">TL</span>
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-1">
@@ -279,7 +279,7 @@
 
                                                             <td class="col-md-12">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="tutar[]" id="tutar" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
+                                                                    <input type="text" name="tutar[]" id="tutar0" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
                                                                 </div>
                                                             </td>
 
@@ -488,30 +488,34 @@
         var h = ($('#siptable tr.sipsatirs').length)-1;
 
         function calculate(elementID, satirsayii) {
-            if ( elementID=="" || elementID==null || elementID==0){
                 if(kdv=="" || kdv==null){
                     kdv=18;
                 }else {
                     kdv = $('#kdv' + h).find(":selected").text();
                 }
-                var mi = $('#miktar')[0].value;
-                var bf = $('#bfiyat')[0].value;
-                var tut = mi * bf;
-                var tuta=Number(tut).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                $('#tutar').val(tuta);
-            }
-            else  {
 
 
-                var myBox = $('#miktar' + elementID)[0].value;
-                var myBoxx = $('#bfiyat' + elementID)[0].value;
 
-                var tutaa = myBox * myBoxx;
-                var tutaaa=Number(tutaa).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                $('#tutar' + elementID).val(tutaaa);
-//
+                    // var mi = $('#miktar')[0].value;
+                    // var bf = $('#bfiyat')[0].value;
+                    // var tut = mi * bf;
+                    // var tuta = Number(tut).toLocaleString('tr', {minimumFractionDigits: 2});
+                    // $('#tutar').val(tuta);
+                    //document.getElementById('#miktar' + elementID);
+
+            //ilk element slinirse
+                    if(document.getElementById('miktar' + elementID)){
+
+
+                    var myBox = $('#miktar' + elementID)[0].value;
+                    var myBoxx = $('#bfiyat' + elementID)[0].value;
+                    //  console.log(elementID);
+                    var tutaa = myBox * myBoxx;
+                    var tutaaa = Number(tutaa).toLocaleString('tr', {minimumFractionDigits: 2});
+                    $('#tutar' + elementID).val(tutaaa);
+                    }
                // $('')
-            }
+
            // kdv = satirsayi;
             sum=0;
             $("input[name^='tutar']").each(function(){
@@ -661,8 +665,8 @@
                     groupSeparator: "."
                 }
             });
-            $('#bfiyat,#miktar').inputmask("myCurrency");
-            $('#tutar,#toplamm').inputmask("tutar");
+            $('#bfiyat0,#miktar0').inputmask("myCurrency");
+            $('#tutar0,#toplamm').inputmask("tutar");
 
         $('#firma_gir').DataTable({
             processing: true
@@ -830,6 +834,7 @@
          //   $(function() {
                 var scntDiv = $('#siptable');
                 var i = $('#siptable tr.sipsatirs').length;
+           // var i=1;
                 $(document).on('click','#satirekle', function(ibo) {
                     var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="'+i+'" value="" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
                         '<td class="col-md-1"><div class="col-lg-12 kutupad">'+
@@ -887,9 +892,10 @@
                     if( i > 1 ) {
 
                         $(this).parents('tr').remove();
-                        i--;
+
                     }
-                    calculate();
+
+                    calculate(0);
                     return false;
                 });
 
