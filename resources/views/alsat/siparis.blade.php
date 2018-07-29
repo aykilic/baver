@@ -545,17 +545,24 @@
             eskik=ff;
            // console.log(eskik);
         }
-        function  myFunction (gggg){
+        function  myFunction (gggg,z){
+
             //var h = ($('#siptable tr.sipsatirs').length)-1;
           //  var ilksat=$('#kdv0').find(":selected").text();
               //  if(gggg==0){satsay=1;}else{ satsay =0;}
             satsay =0;
                 var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
 
-
                 var  kdvtoplam1 =1;
-                n=0;
+
+                    n = 0;
+           // console.log(z);
+           //      if(typeof z!=="undefined"){
+           //           eskik=z;
+           //          }
                 esss=0;
+
+
                 $('#siptable tr.sipsatirs').each(function(){
                     kdvv=$('#kdv'+satsay).find(":selected").text();
                     //console.log(kdvv,kdvtext);
@@ -563,7 +570,10 @@
                     if(kdvv==kdvtext)
                          {
                              n++;
+//return false;
                          }
+
+
                       if(kdvv==eskik){
                         esss++;
                          // console.log(eskik);
@@ -571,49 +581,51 @@
                     satsay++;
 
                 });
+
             ess=0;
             // $('#kdvbel div.kadeve').each(function(){
             //     yy=$('#kdv'+eskik).find(":selected").text();
             //    // ess++;
-            //     console.log(yy);
+               // console.log(n);
             // });
-             $('#siptable tr.sipsatirs').each(function(){
+             $('#siptable tr.sipsatirs').each(function() {
+                 if (z == null) {
 
-                if(n<2){
+                 if (n < 2) {
+                   //  n=1;
 
+                     var kDiv = $('#kdvbel');
+                     var kDivsatir =
+                         '<div class="kdv' + kdvtext + '">' +
+                         '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
+                         '<label class="col-md-1 kdv" id="kdv' + kdvtext + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + kdvtext + '</label>' +
+                         '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
+                         '<input id="toplamkdv' + kdvtext + '" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
+                         '</div>' +
+                         '</div>';
 
+                     $(kDivsatir).appendTo(kDiv);
+                     //  $(".kdv"+eskik).remove();
 
-                    var kDiv = $('#kdvbel');
-                            var kDivsatir =
-                                '<div class="kdv'+kdvtext+'">'+
-                                '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
-                                '<label class="col-md-1 kdv" id="kdv' + kdvtext + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + kdvtext + '</label>' +
-                                '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
-                                '<input id="toplamkdv'+kdvtext+'" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
-                                '</div>'+
-                                '</div>';
+                     // console.log(esss);
 
-                            $(kDivsatir).appendTo(kDiv);
-                  //  $(".kdv"+eskik).remove();
-
-                   // console.log(esss);
-
-                        }
+                 }
+             }
                  if(esss==0){
                      //  console.log('tamam');
                      $(".kdv"+eskik).remove();
 
                  }
-                   // console.log(n);
+                  // console.log(eskik);
                     //
                          n++;
              });
 
-           //  console.log(esss);
-
-            // console.log(esss);
-            // console.log(eskik);
-            // console.log(kdvv);
+            //  console.log(esss);
+            //
+            //  console.log(f);
+            //  console.log(eskik);
+            // console.log(n);
 
 
 
@@ -840,7 +852,7 @@
                         '<td class="col-md-1"><div class="col-lg-12 kutupad">'+
                         '<select data-toggle="dropdown" id="kdv'+i+'" class="form-control kkdv" onchange="myFunction('+i+')" onclick="eski($(this).find(\':selected\').text())" name="kdv[]"><span class="caret"></span>@foreach($vergim as $key => $vor)'+
                         '<option value="{{ $key }}">{{ $vor }}</option>@endforeach</select></div></td>'+
-                        '<td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                        '<td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil"  aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
                         '</td>';
                     $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
                             hint: false,
@@ -889,13 +901,23 @@
 
 
                 $(document).on('click','#satirsil', function() {
+                    var sildi;
+                     var r=i;
+                    // i=r;
+                     re=r-1;
                     if( i > 1 ) {
+                        // ac=$("#kdv"+re);
+                         f = $("#kdv"+re).find(":selected").text();
 
                         $(this).parents('tr').remove();
 
+     //   console.log(f);
+                        sildi++;
                     }
 
                     calculate(0);
+                    myFunction (re,f,sildi);
+
                     return false;
                 });
 
