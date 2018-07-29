@@ -462,7 +462,8 @@
     <!-- {{--<script src="{{ asset("js/bootstrap3-typhead.js") }}"></script>--}} -->
     <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}} -->
     <script type="text/javascript">
-
+eskik=18;
+f=18;
         $("tr.sipsatirs input").keyup(function(event) {
             if (event.keyCode === 13) {
 
@@ -550,6 +551,7 @@
             //var h = ($('#siptable tr.sipsatirs').length)-1;
           //  var ilksat=$('#kdv0').find(":selected").text();
               //  if(gggg==0){satsay=1;}else{ satsay =0;}
+            //if(i==null){i=1;}
             satsay =0;
                 var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
 
@@ -561,12 +563,11 @@
            //           eskik=z;
            //          }
                 esss=0;
-
-
                 $('#siptable tr.sipsatirs').each(function(){
+
                     kdvv=$('#kdv'+satsay).find(":selected").text();
                     //console.log(kdvv,kdvtext);
-
+                //   console.log(i);
                     if(kdvv==kdvtext)
                          {
                              n++;
@@ -611,8 +612,9 @@
 
                  }
              }
+                 console.log(esss);
                  if(esss==0){
-                     //  console.log('tamam');
+                      console.log(eskik);
                      $(".kdv"+eskik).remove();
 
                  }
@@ -905,18 +907,16 @@
                      var r=i;
                     // i=r;
                      re=r-1;
-                    if( i > 1 ) {
+                    if( i >1 ) {
                         // ac=$("#kdv"+re);
                          f = $("#kdv"+re).find(":selected").text();
 
                         $(this).parents('tr').remove();
-
-     //   console.log(f);
-                        sildi++;
+                                i--;
                     }
 
                     calculate(0);
-                    myFunction (re,f,sildi);
+                    myFunction (re,f);
 
                     return false;
                 });
