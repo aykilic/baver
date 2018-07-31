@@ -250,7 +250,7 @@
                                                                 {{--kdv zorrrrrrrr--}}
                                                                 <div class="col-lg-12 kutupad">
 
-                                                                    <select data-toggle="dropdown" id="kdv0" class="form-control" onchange="myFunction(0)" onclick="eski($(this).find(':selected').text())"  name="kdv[]"   ><span class="caret"></span>
+                                                                    <select data-toggle="dropdown" id="kdv0" name="kdv[]" class="form-control" onchange="myFunction(0)" onclick="eski($(this).find(':selected').text())"  name="kdv[]"   ><span class="caret"></span>
 
 
                                                                         {{--@foreach($vergi as $akdv)--}}
@@ -564,9 +564,9 @@ f=18;
            //          }
                 esss=0;
                 $('#siptable tr.sipsatirs').each(function(){
-
+                //kdvv=$("select[name^=kdv[]").find(":selected").text();
                     kdvv=$('#kdv'+satsay).find(":selected").text();
-                    //console.log(kdvv,kdvtext);
+                    console.log(kdvv,kdvtext);
                 //   console.log(i);
                     if(kdvv==kdvtext)
                          {
@@ -580,7 +580,7 @@ f=18;
                          // console.log(eskik);
                      }
                     satsay++;
-
+//console.log(ibom);
                 });
 
             ess=0;
@@ -612,9 +612,9 @@ f=18;
 
                  }
              }
-                 console.log(esss);
+                // console.log(esss);
                  if(esss==0){
-                      console.log(eskik);
+                     // console.log(eskik);
                      $(".kdv"+eskik).remove();
 
                  }
