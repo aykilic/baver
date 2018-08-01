@@ -526,25 +526,31 @@ f=18;
 
         function eski(ff){
 
-            eskik=ff;
+            eskii=ff;
            // console.log(eskik);
         }
-        function  myFunction (gggg,z){
+        function  myFunction (gggg,z,t){
 
             //var h = ($('#siptable tr.sipsatirs').length)-1;
           //  var ilksat=$('#kdv0').find(":selected").text();
               //  if(gggg==0){satsay=1;}else{ satsay =0;}
             //if(i==null){i=1;}
+
             if(typeof z!=="undefined"){
-                eskik=z;
+                eskii=z;
             }
             satsay =0;
-                var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
 
+            //18 eklenirse
+             if(t==1){
+                 kdvtext=gggg;
+             }else {
+                var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
+                 }
                 var  kdvtoplam1 =1;
 
                     n = 0;
-           // console.log(z);
+            //console.log(gggg,z);
 
                 esss=0;
                 $('#siptable tr.sipsatirs').each(function(){
@@ -557,16 +563,13 @@ f=18;
                              n++;
 //return false;
                          }
-
-
-                      if(kdvv==eskik){
+                      if(kdvv==eskii){
                         esss++;
                          // console.log(eskik);
                      }
                     satsay++;
 //console.log(ibom);
                 });
-
 
             ess=0;
             // $('#kdvbel div.kadeve').each(function(){
@@ -600,7 +603,7 @@ f=18;
                 // console.log(esss);
                  if(esss==0){
                      // console.log(eskik);
-                     $(".kdv"+eskik).remove();
+                     $(".kdv"+eskii).remove();
 
                  }
                   // console.log(eskik);
@@ -870,8 +873,8 @@ f=18;
 
 
                     i++;
-
-
+                  var  z=null;
+                    myFunction (18, z, 1);
 
                     return false;
 
@@ -893,8 +896,8 @@ f=18;
 z=re;
                         // f = $("#kdv"+re).find(":selected").text();
                         // $('#siptable tr.sipsatirs')
-                        console.log(f);
-                        console.log(re);
+                        // console.log(f);
+                         //console.log(re);
 
                         $(this).parents('tr').remove();
 
