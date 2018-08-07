@@ -262,7 +262,7 @@
 
                                                             <td class="col-md-12">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="tutar[]" id="tutar0" value="0,00" autocomplete="off" class="form-control" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
+                                                                    <input type="text" name="tutar[]" id="tutar0" value="0,00" autocomplete="off" class="form-control tutar" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
                                                                 </div>
                                                             </td>
 
@@ -288,7 +288,7 @@
                                                     <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Ara Toplam :</label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
-                                                        <input id="toplamm" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="toplamm" disabled="disabled" class="form-control " style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     <!-- {{--</div>--}} -->
                                                 </div>
@@ -509,25 +509,66 @@ f=18;
             var sattoplam=Number(sum).toLocaleString('tr',{ minimumFractionDigits: 2 });
 
             $('#toplamm').val(sattoplam);
-            dsattoplam=sattoplam.replace(/\./g,",");
+            var kacsat = $('#siptable tr.sipsatirs').length;
+            oran=0;
+            var kdvtutart;
+            kdvtutare=0;
+            kdvtutari=0;
+            $('#siptable tr.sipsatirs').each(function() {
+
+                var kdvora;
+                var kdvoran;
+                var kdvtutar;
+
+                kdvora = $('#kdv' + oran).find(":selected").text();
+                kdvtutari=0;
+                if(kacsat > 1 && oran > 0){
+                    orann=0;
+                    $('#siptable tr.sipsatirs').each(function() {
+                        kdvoran = $('#kdv' + orann).find(":selected").text();
+
+                    if(kdvoran==kdvora){
+                        kdvtutar  = $('#tutar' + orann).val();
+                        kdvtutari += (kdvtutar * kdvora / 100);
+                       // var kdvtutarii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                        $('#toplamkdv'+kdvora).val(kdvtutari);
+
+                    }
+                        orann++;
+                    });
+
+
+                }else{
+                    // tek satır olduğunda
+                    kdvtutar  = $('#tutar' + oran).val();
+                    kdvtutari = (kdvtutar * kdvora / 100);
+                  //  var kdvtutariii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                    $('#toplamkdv'+kdvora).val(kdvtutari);
+
+
+                }
+
+                oran++;
+            });
+
+           // dsattoplam=sattoplam.replace(/\./g,",");
 
             //kdv eklenecek
 
-             var kdvsattoplam= sum*kdv/100;
-             var kdvsattoplamm =Number(kdvsattoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
-             $('#toplamkdv').val(kdvsattoplamm);
+             // var kdvsattoplam= sum*kdv/100;
+             // var kdvsattoplamm =Number(kdvsattoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
+             // $('#toplamkdv').val(kdvsattoplamm);
 
 
             // var geneltoplam=sum*(1+(kdv/100));
             // var geneltoplamm =Number(geneltoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
             // $('#gtoplam').val(geneltoplamm);
-
         }
 
         function eski(ff){
 
             eskii=ff;
-           // console.log(eskik);
+           // myFunction(eskii);
         }
         function  myFunction (gggg,z,t){
 
@@ -610,6 +651,8 @@ f=18;
                     //
                          n++;
              });
+             //console.log(gggg);
+            calculate(gggg);
 
 
         }
@@ -893,7 +936,7 @@ f=18;
                     if( i > 1 ) {
                         // ac=$("#kdv"+re);
                         re=$(this).closest("tr").find(".kkdv :selected").text();
-z=re;
+                        z=re;
                         // f = $("#kdv"+re).find(":selected").text();
                         // $('#siptable tr.sipsatirs')
                         // console.log(f);
