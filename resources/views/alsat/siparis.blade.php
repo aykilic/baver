@@ -530,8 +530,9 @@ f=18;
                     if(kdvoran==kdvora){
                         kdvtutar  = $('#tutar' + orann).val();
                         kdvtutari += (kdvtutar * kdvora / 100);
-                       // var kdvtutarii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                        $('#toplamkdv'+kdvora).val(kdvtutari);
+                        var kdvtutarii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                        console.log();
+                        $('#toplamkdv'+kdvora).val(kdvtutarii);
 
                     }
                         orann++;
@@ -542,8 +543,8 @@ f=18;
                     // tek satır olduğunda
                     kdvtutar  = $('#tutar' + oran).val();
                     kdvtutari = (kdvtutar * kdvora / 100);
-                  //  var kdvtutariii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                    $('#toplamkdv'+kdvora).val(kdvtutari);
+                    var kdvtutariii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                    $('#toplamkdv'+kdvora).val(kdvtutariii);
 
 
                 }
