@@ -293,13 +293,13 @@
                                                     <!-- {{--</div>--}} -->
                                                 </div>
                                                 <div style="width:100%;height:90px;" id="kdvbel" class="kdvbel">
-                                                    <div class="kdv18">
+                                                    <div class="kdv18 kdvtutt">
                                                     <!-- {{--<div class="row" style="float:right">--}} -->
                                                     <label class="col-md-1"  style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV  :</label>
-                                                    <label class="col-md-1 kdv" id="kdv0" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% 18</label>
+                                                    <label class="col-md-1 kdv" id="kdv0"  style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% 18</label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">
-                                                        <input id="toplamkdv18" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="toplamkdv18"  class="form-control kdvtut" disabled="disabled" name="kdvtut" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     <!-- {{--</div>--}} -->
                                                 </div>
@@ -310,7 +310,7 @@
                                                     <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Toplam :</label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
-                                                        <input id="gtoplam" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="gtoplam"  class="form-control" disabled="disabled" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     <!-- {{--</div>--}} -->
                                                 </div>
@@ -507,7 +507,7 @@ f=18;
             //    console.log(sum);
             });
             var sattoplam=Number(sum).toLocaleString('tr',{ minimumFractionDigits: 2 });
-
+          //var sattoplam=sum.replace(/\./g,",");
             $('#toplamm').val(sattoplam);
             var kacsat = $('#siptable tr.sipsatirs').length;
             oran=0;
@@ -515,7 +515,7 @@ f=18;
             kdvtutare=0;
             kdvtutari=0;
             $('#siptable tr.sipsatirs').each(function() {
-
+                var kdvtutarii;
                 var kdvora;
                 var kdvoran;
                 var kdvtutar;
@@ -530,9 +530,10 @@ f=18;
                     if(kdvoran==kdvora){
                         kdvtutar  = $('#tutar' + orann).val();
                         kdvtutari += (kdvtutar * kdvora / 100);
-                        var kdvtutarii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                        console.log();
+                        kdvtutarii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
                         $('#toplamkdv'+kdvora).val(kdvtutarii);
+
+                       // $('#gtoplam').val(sattoplam);
 
                     }
                         orann++;
@@ -543,14 +544,34 @@ f=18;
                     // tek satır olduğunda
                     kdvtutar  = $('#tutar' + oran).val();
                     kdvtutari = (kdvtutar * kdvora / 100);
-                    var kdvtutariii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                    $('#toplamkdv'+kdvora).val(kdvtutariii);
+                    kdvtutarii=Number(kdvtutari).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                    $('#toplamkdv'+kdvora).val(kdvtutarii);
 
-
+                   // $('#gtoplam').val(kdvtutariii);
                 }
 
                 oran++;
             });
+                kdvtuta=0;
+           var kdvtut;
+            $("input[name^='kdvtut']").each(function() {
+                var ff = $(this).val();
+                ff=ff.replace(/\,/g,".");
+             //
+                kdvtuta += +ff;
+
+               //kdvtut=Number(kdvtuta).toLocaleString('tr',{ minimumFractionDigits: 2 });
+              //  kdvtut=kdvtut.replace(/\./g,",");
+                console.log(ff);
+            });
+
+          var sattoplami=sattoplam.replace(/\,/g,".");
+           var sattoplamii=Number(sattoplami);
+           // sattoplami=Number(sattoplami).toLocaleString('en',{ minimumFractionDigits: 2 });
+           var sattoplamiii= sattoplamii + kdvtuta;
+            sattoplamiiii=Number(sattoplamiii).toLocaleString('tr',{ minimumFractionDigits: 2 });
+            $('#gtoplam').val(sattoplamiiii);
+
 
            // dsattoplam=sattoplam.replace(/\./g,",");
 
@@ -627,11 +648,11 @@ f=18;
 
                      var kDiv = $('#kdvbel');
                      var kDivsatir =
-                         '<div class="kdv' + kdvtext + '">' +
+                         '<div class="kdv' + kdvtext + ' kdvtutt">' +
                          '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
                          '<label class="col-md-1 kdv" id="kdv' + kdvtext + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + kdvtext + '</label>' +
                          '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
-                         '<input id="toplamkdv' + kdvtext + '" disabled="disabled" class="form-control" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
+                         '<input id="toplamkdv' + kdvtext + '" disabled="disabled" class="form-control kdvtut" name="kdvtut" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
                          '</div>' +
                          '</div>';
 
