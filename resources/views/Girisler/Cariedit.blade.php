@@ -539,7 +539,7 @@
                     },
 
                     success: function(data) {
-                        console.log(data);
+                       // console.log(data);
                         $(
                             '.item' + data.cbid).replaceWith("<tr class='item" + data.cbid + "'>" +
                             "<td><a href='javascript:void(0);' id='editbanka' data-cbid='" + data.cbid + "' data-iban='" + data.iban + "' data-baid='" + data.baid + "' data-did='" + data.did + "' data-bsube='" + data.bsube + "' data-bsubek='" + data.bsubek + "' data-hesapno='" + data.hesapno + "' >" + bankad + "</a></td>" +
@@ -578,7 +578,7 @@
                         '_token': $('input[name=_token]').val(),
                     },
                     success: function(data) {
-                        console.log(data);
+                        //console.log(data);
                         $('.item' + data['cbid']).remove();
                         new PNotify({
                             title: '',

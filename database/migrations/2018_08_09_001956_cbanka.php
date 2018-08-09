@@ -18,7 +18,7 @@ class cbanka extends Migration
             $table->integer('fid')->nullable();
             $table->integer('baid')->nullable();
             $table->integer('did')->nullable();
-            $table->string('iban',15)->nullable();
+            $table->string('iban',32)->nullable();
             $table->string('bsube',25)->nullable();
             $table->string('bsubek',11)->nullable();
             $table->string('hesapno',11)->nullable();
