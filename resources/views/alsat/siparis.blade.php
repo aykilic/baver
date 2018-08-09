@@ -562,7 +562,7 @@ f=18;
 
                //kdvtut=Number(kdvtuta).toLocaleString('tr',{ minimumFractionDigits: 2 });
               //  kdvtut=kdvtut.replace(/\./g,",");
-                console.log(ff);
+                //console.log(ff);
             });
 
           var sattoplami=sattoplam.replace(/\,/g,".");
