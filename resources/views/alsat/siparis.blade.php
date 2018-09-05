@@ -25,7 +25,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{{$sipfisnoadi}} Sipariş Fişi </h2>
+                            <h2>{{$sipfisnoadi}} Sipariş Fişi  </h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -43,7 +43,7 @@
                             </ul>
                             <div class="clearfix"></div>
                             <div class="x_content">
-                                <form  action="{{action('fisController@sipfiskaydet')}}" class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
+                                <form id="satirler" action="{{action('fisController@sipfiskaydet')}}" class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
                                     {{csrf_field()}}
 
 
@@ -61,6 +61,9 @@
 
                                             <div class="form-group item">
                                                 <label for="tar">Tarih</label>
+
+                                                <input type="hidden" name="fisturu" id="fisturu" value="{{$fisturu}}" class="form-control" >
+
                                                 <input type="text" name="tar" id="tarih" class="form-control has-feedback-left" data-inputmask="'mask': '99-99-9999'"  aria-describedby="inputSuccess2Status2">
                                                 <span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>
                                                 <span id="inputSuccess2Status2" class="sr-only">(success)</span>
@@ -69,29 +72,8 @@
                                             <div class="form-group">
                                                 <label for="fisno">Fiş No</label>
                                                     <input type="text" name="sfisno" id="sfisno" value="{{$numara}}" class="form-control" >
-                                            </div> <!-- /.form-group -->
-
-                                                <!-- {{--<div class="form-group">--}}
-
-                                                    {{--<label for="tax_no" name="lbanka">Fis Turu</label>--}}
-                                                    {{--<input type="hidden" name="fisturu" id="fisturuid" value="1" class="form-control">--}}
-                                                    {{--<select data-toggle="dropdown" id="fisturu" class="form-control"  aria-expanded="false"  ><span class="caret"></span>--}}
-                                                        {{--<option >Seciniz</option>--}}
-                                                        {{--@foreach($fistur as $key => $fisturuad)--}}
-                                                            {{--<option  value="{{ $key }}">{{ $fisturuad }}</option>--}}
-                                                        {{--@endforeach--}}
-                                                    {{--</select>--}}
-
-                                                {{--</div> <!-- /.form-group--}}
-                                                {{--<div class="row">--}}
-                                                    {{--<div class="col-xs-6 col-md-6">--}}
-
-                                                    {{--</div> <!-- /.col --}}
-                                                    {{--<div class="col-xs-6 col-md-6">--}}
-                                                    {{--</div> <!-- /.col --}}
-
-                                                {{--</div> <!-- /.row --}} -->
-                                        </div> <!-- /.col-md-6 -->
+                                            </div>
+                                        </div>
                                             <div class="col-md-8">
                                                 <div class="row">
                                                     <div class="col-lg-12">
@@ -342,7 +324,7 @@
                                     <div class="text-right">
                                         <input type="hidden" name="add">
                                         <input type="hidden" name="uniquetime" value="1501288025.81">
-                                        <button  class="btn btn-success btn-insert btn-xs-block add"   type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button>
+                                        <button  class="btn btn-success btn-insert btn-xs-block add" onsubmit="return false;"  type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button>
                                     </div>
 
                                 </form>
@@ -445,12 +427,22 @@
     <!-- {{--<script src="{{ asset("js/bootstrap3-typhead.js") }}"></script>--}} -->
     <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}} -->
     <script type="text/javascript">
+
+        //enter tuşu submit iptal
+        document.getElementById("satirler").onkeypress = function(e) {
+            var key = e.charCode || e.keyCode || 0;
+            if (key == 13) {
+                e.preventDefault();
+            }
+        };
+        //enter tuşu submit iptal
 eskik=18;
 f=18;
         $("tr.sipsatirs input").keyup(function(event) {
             if (event.keyCode === 13) {
 
                 $("#satirekle").click();
+           //     $("#bfiyat0").focus();
             }
         });
         kdv=$('#kdv').find(":selected").text();
@@ -934,6 +926,7 @@ f=18;
                             $("#satirekle").click();
                         }
                     });
+                    $("input[name^='stokad']").focus();
                     $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
 
 

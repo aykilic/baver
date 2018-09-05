@@ -14,5 +14,5 @@ class sipfisObj extends Model
 {
     protected $table='sipfis';
     protected $primaryKey = 'sipfisid';
-    protected $fillable=['sipfisfid','sipfistar','fisturu','fisno','fisfid','depo','doviz','aciklama'];
+    protected $fillable=['sipfistar','fisturu','fisfid' ,'fisno','depo','doviz','aciklama','olayid','durumid'];
 }

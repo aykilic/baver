@@ -96,6 +96,7 @@ $firmay=json_encode($firmam);
 // sdsdsdsdsdsdsd
 
         $sipfisno = sipfisObj::where('fisturu', $id)->first();
+       // dd($sipfisno);
          $sipfisnoadiid=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $id)->first();
          $sipfisnoadi=$sipfisnoadiid->fisturuad;
 
@@ -161,30 +162,54 @@ $firmay=json_encode($firmam);
         
 
         return View::make('alsat.siparis')
-		           ->with('fistur', $fistur)
-		           ->with('firma', $firma)
+            ->with('fistur', $fistur)
+            ->with('firma', $firma)
             ->with('numara', $numara)
-
+            ->with('fisturu',$id)
             ->with('firmay', $firmay)
             ->with('depo', $dropdepo)
             ->with('vergi', $dropvergi)
             ->with('vergim', $dropvergim)
             ->with('olay', $olayy)
             ->with('svergi', $selectedvergi)
-			->with('stok', $stok)
-			->with('doviz', $dropdoviz)
-		->with('birim', $dropbirim)
-         ->with('sipfisnoadi', $sipfisnoadi);
+            ->with('stok', $stok)
+            ->with('doviz', $dropdoviz)
+            ->with('birim', $dropbirim)
+            ->with('sipfisnoadi', $sipfisnoadi);
 //        ->with('id', $id);
 
 
 
     }
-
-    public function sipfiskaydet(request $req, $id)
+    public function alissiparisfisi(request $req)
     {
-$fisturu=0;
-        return View::make('alsat.siparis')->with('fisturu', $fisturu);
+        return View::make('alsat.alissiparisfis')
+            ->with('fistur', $fistur);
+
+       // return view('alsat.alissiparisfis');
+       // return Redirect::to('alissiparisfisi');
+    }
+    public function sipfiskaydet(request $request)
+    {
+//$fisturu=0;
+       // return View::make('alsat.siparis')->with('fisturu', $fisturu);
+
+        //$a=$request->fisturu;
+        $sipfisObj= new sipfisObj;
+
+        $sipfisObj->sipfistar=$request->tar;
+        $sipfisObj->fisturu=$request->fisturu;
+        $sipfisObj->fisno=$request->sfisno;
+        $sipfisObj->fisfid=$request->fisfid;
+        $sipfisObj->depo=$request->depo;
+        $sipfisObj->doviz=$request->did;
+        //$sipfisObj->aciklama=$request->tar;
+        //$sipfisObj->durum=$request->olayid;
+        $sipfisObj->durumid=$request->olayid;
+
+
+
+        $sipfisObj->save();
 
     }
 
