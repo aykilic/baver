@@ -81,7 +81,7 @@
                                             <input type="text" class="form-control" name="gorunum" id="asipfisgorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1 add" style="margin-top: 24px;">
+                                    <div class="col-lg-1 asf" style="margin-top: 24px;">
                                         <a class="btn btn-default"  id="assatirekle" >Kaydet</a>
                                     </div>
 
@@ -124,7 +124,7 @@
                                             <input type="text" class="form-control" name="ssgorunum" id="ssipfisgorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" style="margin-top: 24px;">
+                                    <div class="col-lg-1 ssf" style="margin-top: 24px;">
                                         <a class="btn btn-default"  id="sssatirekle" >Kaydet</a>
                                     </div>
 
@@ -167,7 +167,7 @@
                                             <input type="text" class="form-control" name="aigorunum" id="aigorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1 add" style="margin-top: 24px;">
+                                    <div class="col-lg-1 ai" style="margin-top: 24px;">
                                         <a class="btn btn-default"  id="aisatirekle" >Kaydet</a>
                                     </div>
 
@@ -210,7 +210,7 @@
                                             <input type="text" class="form-control" name="sigorunum" id="sigorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" style="margin-top: 24px;">
+                                    <div class="col-lg-1 si" style="margin-top: 24px;">
                                         <a class="btn btn-default"  id="sisatirekle" >Kaydet</a>
                                     </div>
 
@@ -489,7 +489,7 @@
         }
 
 
-        $('.add').on('click', '#assatirekle', function() {
+        $('.asf').on('click', '#assatirekle', function() {
            // alert("df");
             $.ajax({
 
@@ -499,6 +499,7 @@
                     '_token': $('input[name=_token]').val(),
                     'evrakturuid':2 ,
                     'sayi': $('#sayi').val(),
+                    'assayigorunum': $('#asipfisgorunum').val(),
                     //  $('#select_id').find('option:selected').val()
                     //      'dbanka':$('select[name=dbanka]').val(),
                     // 'did': $('#did').val(),//
@@ -519,7 +520,7 @@
             });
 
         });
-        $('.add').on('click', '#sssatirekle', function() {
+        $('.ssf').on('click', '#sssatirekle', function() {
             // alert("df");
             $.ajax({
 
@@ -529,6 +530,7 @@
                     '_token': $('input[name=_token]').val(),
                     'evrakturuid':1 ,
                     'sayi': $('#ssipsayi').val(),
+                    'sssayigorunum': $('#ssipfisgorunum').val(),
                     //  $('#select_id').find('option:selected').val()
                     //      'dbanka':$('select[name=dbanka]').val(),
                     // 'did': $('#did').val(),//
@@ -549,7 +551,7 @@
             });
 
         });
-        $('.add').on('click', '#aisatirekle', function() {
+        $('.ai').on('click', '#aisatirekle', function() {
             // alert("df");
             $.ajax({
 
@@ -578,7 +580,7 @@
 
             });
         });
-            $('.add').on('click', '#sisatirekle', function() {
+            $('.si').on('click', '#sisatirekle', function() {
                 // alert("df");
                 $.ajax({
 

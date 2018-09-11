@@ -176,7 +176,7 @@ tr > th.duz{ padding-left:3px !important; }
 .ico{
     margin-top:5px !important;
     margin-left:6px !important;
-        padding-right:35px;}
+    padding-right:35px;}
 #siptable tr>td{padding:5px 0 0 2px;}
 .box-menu a span.icon-box {
     padding-top: 10px;
@@ -200,13 +200,19 @@ tr > th.duz{ padding-left:3px !important; }
     height: auto;
     margin-bottom: 15px;
 }
-.btn-hareket{
+.hareket{
     min-width: 200px !important;
     height: 100px !important;
     margin-left: 0 !important;
-    padding-top:30px !important;
+    border: red;
 }
-    /*span.fa.fa-search.form-control-feedback.left{ padding-left: 1px;*/
+.cirmizi{
+    color:red;
+
+
+}
+
+/*span.fa.fa-search.form-control-feedback.left{ padding-left: 1px;*/
 /*}*/
 
 /* example specific styles */

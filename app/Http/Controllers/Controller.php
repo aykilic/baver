@@ -100,7 +100,8 @@ class Controller extends BaseController
     public function kaydet(Request $request)
                         {
 
-//                            dataTable
+
+//dd(count($a));
                      $firma = DB::table('firmalar')->get();
                      // Kayıt
                              $firmaObj= new firmaobj;
@@ -115,6 +116,8 @@ class Controller extends BaseController
 //
         //*********************** isimden id bulma
         $fid = DB::table('firmalar')->where('cunvan', $request->cunvan)->value('fid');
+
+
 
 
         $a=$request->dbanka;

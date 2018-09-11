@@ -39,9 +39,9 @@
                     </li>
                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/siparisfisi/1">Satış Sipariş Fişi</a></li>
+                            <li><a href="/siparisfisleri/1">Satış Sipariş Fişi</a></li>
                             {{--alissiparisfisi--}}
-                            <li><a href="/alissiparisfisi">Alış Sipariş Fişi</a></li>
+                            <li><a href="/siparisfisleri/2">Alış Sipariş Fişi</a></li>
                             {{--<li><a href="/siparisfisi/2">Alış Sipariş Fişi</a></li>--}}
                             <li><a href="/sablon">Şablon</a></li>
                             <li><a href="/numarala">Numaralandırma</a></li>

@@ -1,7 +1,7 @@
 $(function() {
 
     function cb(start, end) {
-        $('#hgjdsfsfgjfgh span').html(start.format('MMMM D') + ' - ' + end.format('MMMM D'));
+        $('#teslim').html(start.format('MMMM D') + ' - ' + end.format('MMMM D'));
     }
     cb(moment().subtract(29, 'days'), moment());
 
@@ -21,7 +21,7 @@ $(function() {
         },
         "locale": {
             "format": "DD/MM/YYYY",
-            "separator": " - ",
+            "separator": " / ",
             "applyLabel": "Uygula",
             "cancelLabel": "Vazgeç",
             "fromLabel": "Dan",

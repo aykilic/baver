@@ -36,8 +36,8 @@ use App\Models\depoObj;
 use App\Models\fisturuObj;
 use App\Models\stokturObj;
 use App\Models\vergiObj;
-
 use App\Models\sipfisObj;
+use App\Models\sipfissatirObj;
 use App\Models\sablon_turuObj;
 
 class fisController extends Controller{
@@ -50,6 +50,7 @@ class fisController extends Controller{
 
 	public function siparisfisi(request $req, $id)
 	{
+        //
 		$firma = DB::table('firmalar')->get();
 		$stok = DB::table('stok')->get();
 		$firmam = DB::table('firmalar')->select('cunvan')->get();
@@ -64,6 +65,7 @@ $firmay=json_encode($firmam);
 
 
         $dropvergi = vergiObj::all();
+
         $selectedvergi = vergiObj::first()->vid;
         $fistur = fisturuObj::pluck('fisturuad','fisturuid');
         $dropvergim = vergiObj::pluck('vor','vid');
@@ -95,8 +97,11 @@ $firmay=json_encode($firmam);
 // asdsddddddddddsssssdsd
 // sdsdsdsdsdsdsd
 
-        $sipfisno = sipfisObj::where('fisturu', $id)->first();
-       // dd($sipfisno);
+        $sipfisno = sipfisObj::where('fisturu', $id)->orderBy('numara', 'desc')
+            ->first();
+
+        //dd($sipfisno);
+        //dd($sipfisno->numara);
          $sipfisnoadiid=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $id)->first();
          $sipfisnoadi=$sipfisnoadiid->fisturuad;
 
@@ -116,19 +121,19 @@ $firmay=json_encode($firmam);
 
 
 
-      //  dd($sonnum);
+      // dd($sipfisnoadi);
         $numarala=numaralaObj::where('evrakturuid', $id)->first();
         $hane=$numarala->uzunluk;
 // dd($hane);
         //eğer numaralama aktif değilse
                     if($numarala->mod==0 || $numarala->mod==""){
-                            if ($id=2){
+                            if ($id==2){
 // satış ise
 
 
 
                                 $sonnumm=$sonnum + 1;
-
+//dd($sonnum);
                                 $sonnummm=str_pad($sonnumm, $hane, "0", STR_PAD_LEFT);
 
                                 $numara=$sonnummm;
@@ -151,11 +156,18 @@ $firmay=json_encode($firmam);
                         $new_index = str_pad($sonnumara, $hane, "0", STR_PAD_LEFT);
 //bitti
                         $numara=$new_index;
-//dd("burdayım");
+
 
 
                     }
+       // $sipfislist=sipfisObj::where('fisturu', 2)->get();
 
+//        foreach ($sipfislist as $sipfislistt)
+//
+//           $test[]= array($sipfislistt->numara);
+//            // print $test;
+//
+//        dd($test);
 
 
 //dd($numara);
@@ -181,12 +193,62 @@ $firmay=json_encode($firmam);
 
 
     }
-    public function alissiparisfisi(request $req)
+    public function numara($a)
     {
-        return View::make('alsat.alissiparisfis')
-            ->with('fistur', $fistur);
+        $sipfisno = sipfisObj::where('fisturu', $a)->orderBy('numara', 'desc')
+            ->first();
 
-       // return view('alsat.alissiparisfis');
+        $numarala=numaralaObj::where('evrakturuid', $a)->get();
+        $hane=$numarala->uzunluk;
+
+
+        $sonnumm=$sipfisno->numara;
+//dd($sonnum);
+        $sonnummm=str_pad($sonnumm, $hane, "0", STR_PAD_LEFT);
+
+        //$numara=$sonnummm;
+       // dd($sonnummm);
+        return ($sonnummm);
+
+
+    }
+
+
+    public function siparisfisleri(request $req,$a)
+    {
+
+
+        $sipfislist=DB::table('sipfis')
+            ->select('firmalar.*','sipfis.*')
+            ->join('firmalar','firmalar.fid','=','sipfis.fisfid')
+            ->where('sipfis.fisturu', $a)
+            //->orderBy('sipfis.sipfistar', 'desc')
+            ->get();
+
+        if($a == 2){
+            //return Redirect::to('/alissiparisfisi/2');
+            //return view('alsat.alissiparisfis');
+
+            //return view('alsat.alissiparisfis',compact('a'));
+            // return redirect()->route('/alissiparisfisi');
+            //return view('alsat.alissiparisfis',compact('a'));
+            //return View::make(‘alsat.alissiparisfis’)->nest( ‘foo/baz’, $a);
+            //dd($sipfislist->fisturu);
+            return view::make('alsat.alissiparisfis')
+                ->with('fisturu',$a)
+                ->with('sipfisnoadi',"Alış")
+                ->with('sipfislistt',$sipfislist);
+//            Route::get('/', function () {
+//                return view('alsat.alissiparisfis', ['fisturu' => 'dgf']);
+//            });
+
+        }else{
+            return view::make('alsat.alissiparisfis')
+                ->with('fisturu',$a)
+                ->with('sipfisnoadi',"Satış")
+                ->with('sipfislistt',$sipfislist);
+
+        }
        // return Redirect::to('alissiparisfisi');
     }
     public function sipfiskaydet(request $request)
@@ -194,22 +256,88 @@ $firmay=json_encode($firmam);
 //$fisturu=0;
        // return View::make('alsat.siparis')->with('fisturu', $fisturu);
 
-        //$a=$request->fisturu;
-        $sipfisObj= new sipfisObj;
+        $a=$request->fisturu;
 
+       // $sipfislist=sipfisObj::where('fisturu', $a)->get();
+
+        $sipfislist=DB::table('sipfis')
+            ->select('firmalar.*','sipfis.*')
+            ->join('firmalar','firmalar.fid','=','sipfis.fisfid')
+            ->where('sipfis.fisturu', $a)->get();
+//dd($sipfislist);
+
+//        $cbankafirma = DB::table('bankalar')
+//            ->select('cbanka.*', 'bankalar.*','doviz.*')
+//            ->join( 'cbanka','cbanka.baid', '=', 'bankalar.baid')
+//            ->join('doviz','doviz.did', '=', 'cbanka.did')
+//            ->where('cbanka.fid', $fid )
+//            ->get();
+
+//        foreach ($sipfislist as $sipfislistt)
+//        {
+//           $test= $sipfislistt->numara;
+//           // print $test;
+//        }
+
+//fonksiyon çağırma
+//dd($this->numara($a));
+
+//dd($sipfislist);
+        $satirsay=$request->fissid;
+
+
+
+        $sipfisObj= new sipfisObj;
         $sipfisObj->sipfistar=$request->tar;
         $sipfisObj->fisturu=$request->fisturu;
-        $sipfisObj->fisno=$request->sfisno;
+        $sipfisObj->numara=$request->sfisno;
         $sipfisObj->fisfid=$request->fisfid;
         $sipfisObj->depo=$request->depo;
         $sipfisObj->doviz=$request->did;
-        //$sipfisObj->aciklama=$request->tar;
-        //$sipfisObj->durum=$request->olayid;
-        $sipfisObj->durumid=$request->olayid;
+        $sipfisObj->durumid=$request->durumid;
+
+       $sipfisObj->save();
 
 
 
-        $sipfisObj->save();
+        for ($i = 0; $i < count($satirsay); $i++) {
+            $sipfissatirObj = new sipfissatirObj;
+
+            $sipfissatirObj->numara = $request->sfisno;
+            $sipfissatirObj->fissid = $request->fissid[$i];
+            $sipfissatirObj->miktar = $request->miktar[$i];
+            $sipfissatirObj->birim = $request->birim[$i];
+            $sipfissatirObj->bfiyat = $request->bfiyat[$i];
+            $sipfissatirObj->kdv = $request->kdv[$i];
+            $sipfissatirObj->tutar = $request->tutar[$i];
+            $sipfissatirObj->save();
+        }
+
+
+        if($request->fisturu == 2){
+            //return Redirect::to('/alissiparisfisi/2');
+            //return view('alsat.alissiparisfis');
+
+            //return view('alsat.alissiparisfis',compact('a'));
+           // return redirect()->route('/alissiparisfisi');
+           //return view('alsat.alissiparisfis',compact('a'));
+            //return View::make(‘alsat.alissiparisfis’)->nest( ‘foo/baz’, $a);
+            //dd($sipfislist->fisturu);
+            return view::make('alsat.alissiparisfis')
+                ->with('fisturu',$a)
+                ->with('sipfisnoadi',"Alış")
+                ->with('sipfislistt',$sipfislist);
+//            Route::get('/', function () {
+//                return view('alsat.alissiparisfis', ['fisturu' => 'dgf']);
+//            });
+
+        }else{
+            return view::make('alsat.alissiparisfis')
+                ->with('fisturu',$a)
+                ->with('sipfisnoadi',"Satış")
+                ->with('sipfislistt',$sipfislist);
+
+        }
 
     }
 
@@ -266,6 +394,7 @@ $firmay=json_encode($firmam);
 
             $mod=0;
             $data->sayi = $request->sayi;
+            $data->gorunum = $request->assayigorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();
@@ -287,6 +416,7 @@ $firmay=json_encode($firmam);
 
             $mod=0;
             $data->sayi = $request->sayi;
+            $data->gorunum = $request->sssayigorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();
