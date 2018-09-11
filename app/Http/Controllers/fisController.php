@@ -295,7 +295,8 @@ $firmay=json_encode($firmam);
         $sipfisObj->depo=$request->depo;
         $sipfisObj->doviz=$request->did;
         $sipfisObj->durumid=$request->durumid;
-
+        $sipfisObj->gtoplam=$request->gtoplam;
+        //dd($request->gtoplam);
        $sipfisObj->save();
 
 

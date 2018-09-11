@@ -275,7 +275,7 @@
                                                     <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Ara Toplam :</label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
-                                                        <input id="toplamm" disabled="disabled" class="form-control " style="font-family: monospace, monospace;padding-right:55px" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="toplamm"  class="form-control " style="font-family: monospace, monospace;padding-right:55px" value="0,00" readonly/><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     <!-- {{--</div>--}} -->
                                                 </div>
@@ -286,7 +286,7 @@
                                                     <label class="col-md-1 kdv" id="kdv0"  style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% 18</label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">
-                                                        <input id="toplamkdv18"  class="form-control kdvtut" disabled="disabled" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="toplamkdv18"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly/><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     <!-- {{--</div>--}} -->
                                                 </div>
@@ -297,7 +297,7 @@
                                                     <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Toplam :</label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
-                                                        <input id="gtoplam"  class="form-control" disabled="disabled" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" ><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
+                                                        <input id="gtoplam" name="gtoplam" class="form-control"  style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly/><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
                                                     <!-- {{--</div>--}} -->
                                                 </div>
@@ -546,8 +546,9 @@ f=18;
               var ff;
               sattoplami=0;
             $("input[name^='kdvtut']").each(function() {
-                    ff=$(this).val().replace(/./g,"");
-                    fff=ff.replace(/\,/g,".");
+
+                    ff=$(this).val().replace(/\./g,"");
+                   var fff=ff.replace(/\,/g,".");
                    // ffff=Number(ff);
                 kdvtut += +fff;
                 //kdvtuta=kdvtuta+kdvtut;
