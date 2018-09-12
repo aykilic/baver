@@ -284,9 +284,12 @@ $firmay=json_encode($firmam);
 
 //dd($sipfislist);
         $satirsay=$request->fissid;
-
-
-
+        $para=$request->gtoplam;
+       // number_format($para,2,",",".");
+        $para=str_replace( ".", "", $para );
+        $para=str_replace( ",", ".", $para );
+        //$para=number_format($para,2,",",".");
+        dd($para );
         $sipfisObj= new sipfisObj;
         $sipfisObj->sipfistar=$request->tar;
         $sipfisObj->fisturu=$request->fisturu;
@@ -295,7 +298,12 @@ $firmay=json_encode($firmam);
         $sipfisObj->depo=$request->depo;
         $sipfisObj->doviz=$request->did;
         $sipfisObj->durumid=$request->durumid;
-        $sipfisObj->gtoplam=$request->gtoplam;
+
+//        setlocale(LC_MONETARY, 'tr_TR');
+//        $rtoplam=money_format('%i', $para);
+        //$rtoplam=sprintf('TL %s', number_format($para, 2));
+        //dd($rtoplam);
+        $sipfisObj->gtoplam=$para;
         //dd($request->gtoplam);
        $sipfisObj->save();
 
