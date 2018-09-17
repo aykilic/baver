@@ -8,5 +8,5 @@ class sipfissatirObj extends Model
 {
     protected $table='sipfissatir';
     protected $primaryKey = 'sipfissatirid';
-    protected $fillable=['numara','fissid','miktar' ,'birim','bfiyat','kdv','tutar'];
+    protected $fillable=['numara','fissid','miktar' ,'birim','bfiyat','kdv','tutar','sipfisid'];
 }

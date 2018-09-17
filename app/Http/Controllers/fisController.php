@@ -193,6 +193,63 @@ $firmay=json_encode($firmam);
 
 
     }
+    public function sipfisedit(request $request, $id, $fisturu)
+    {
+
+        $sipfis=DB::table('sipfis')->where('sipfisid', $id)
+            ->leftjoin('firmalar','firmalar.fid','=','sipfis.fisfid')
+            ->first();
+        $sipfissat=DB::table('sipfissatir')->where('sipfisid', $id)
+            ->leftjoin('stok','stok.sid','=','sipfissatir.fissid')
+            ->get();
+
+//dd($sipfissat);
+        $fisturu=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $sipfis->fisturu)->first();
+
+        $olay=DB::table('olay')->get();
+        $depo=DB::table('depo')->get();
+        $doviz=DB::table('doviz')->get();
+        $dropvergi = vergiObj::all();
+
+        $dropbirim = birimObj::pluck('bad','bid');
+        $dropvergim = vergiObj::pluck('vor','vid');
+
+//        $sipfisObj= new sipfisObj;
+//        $sipfisObj->sipfistar=$request->tar;
+//        $sipfisObj->fisturu=$request->fisturu;
+//        $sipfisObj->numara=$request->sfisno;
+//        $sipfisObj->fisfid=$request->fisfid;
+//        $sipfisObj->depo=$request->depo;
+//        $sipfisObj->doviz=$request->did;
+//        $sipfisObj->durumid=$request->durumid;
+
+
+
+
+
+
+        return View::make('alsat.sipfisedit')
+            ->with('sipfis', $sipfis)
+            ->with('sipfissat', $sipfissat)
+            ->with('fisturu',$fisturu->fisturuad)
+            ->with('olay', $olay)
+            ->with('secolay', $sipfis->durumid)
+            ->with('depo', $depo)
+            ->with('secdepo', $sipfis->depo)
+            ->with('doviz', $doviz)
+            ->with('secdoviz', $sipfis->doviz)
+            ->with('birim', $dropbirim)
+            //->with('secbirim', $dropbirim)
+            ->with('vergim', $dropvergim)
+            ->with('numara', $sipfis->numara);
+
+
+
+
+    }
+
+
+
     public function numara($a)
     {
         $sipfisno = sipfisObj::where('fisturu', $a)->orderBy('numara', 'desc')
@@ -219,11 +276,17 @@ $firmay=json_encode($firmam);
 
 
         $sipfislist=DB::table('sipfis')
-            ->select('firmalar.*','sipfis.*')
-            ->join('firmalar','firmalar.fid','=','sipfis.fisfid')
+            ->leftjoin('firmalar','firmalar.fid','=','sipfis.fisfid')
+            ->leftjoin('doviz','doviz.did','=','sipfis.doviz')
             ->where('sipfis.fisturu', $a)
             //->orderBy('sipfis.sipfistar', 'desc')
             ->get();
+
+//        $firma = DB::table('cbanka')
+//            ->leftJoin('firmalar', 'firmalar.fid', '=', 'cbanka.fid')
+//            ->get();
+//
+
 
         if($a == 2){
             //return Redirect::to('/alissiparisfisi/2');
@@ -289,7 +352,7 @@ $firmay=json_encode($firmam);
         $para=str_replace( ".", "", $para );
         $para=str_replace( ",", ".", $para );
         //$para=number_format($para,2,",",".");
-        dd($para );
+        //dd($sipfislist);
         $sipfisObj= new sipfisObj;
         $sipfisObj->sipfistar=$request->tar;
         $sipfisObj->fisturu=$request->fisturu;
@@ -307,12 +370,12 @@ $firmay=json_encode($firmam);
         //dd($request->gtoplam);
        $sipfisObj->save();
 
-
-
+        $sonid=sipfisObj::all()->last()->sipfisid;
+//dd($sonid);
         for ($i = 0; $i < count($satirsay); $i++) {
             $sipfissatirObj = new sipfissatirObj;
-
             $sipfissatirObj->numara = $request->sfisno;
+            $sipfissatirObj->sipfisid = $sonid;
             $sipfissatirObj->fissid = $request->fissid[$i];
             $sipfissatirObj->miktar = $request->miktar[$i];
             $sipfissatirObj->birim = $request->birim[$i];
@@ -332,16 +395,23 @@ $firmay=json_encode($firmam);
            //return view('alsat.alissiparisfis',compact('a'));
             //return View::make(‘alsat.alissiparisfis’)->nest( ‘foo/baz’, $a);
             //dd($sipfislist->fisturu);
-            return view::make('alsat.alissiparisfis')
+            ///*************///////////7
+//            return view::make('alsat.alissiparisfis')
+//                ->with('fisturu',$a)
+//                ->with('sipfisnoadi',"Alış")
+//                ->with('sipfislistt',$sipfislist);
+            ///**/////////////////
+
+            return redirect('/siparisfisleri/2')
                 ->with('fisturu',$a)
-                ->with('sipfisnoadi',"Alış")
-                ->with('sipfislistt',$sipfislist);
+             ->with('sipfisnoadi',"Alış")
+               ->with('sipfislistt',$sipfislist);
 //            Route::get('/', function () {
 //                return view('alsat.alissiparisfis', ['fisturu' => 'dgf']);
 //            });
 
         }else{
-            return view::make('alsat.alissiparisfis')
+            return redirect('/siparisfisleri/1')
                 ->with('fisturu',$a)
                 ->with('sipfisnoadi',"Satış")
                 ->with('sipfislistt',$sipfislist);
@@ -350,7 +420,23 @@ $firmay=json_encode($firmam);
 
     }
 
+    public function siparissil($sipfisid)
+    {
 
+        $post = sipfisObj::findOrFail($sipfisid);
+
+        //$postt=sipfissatirObj::finOrFail($sipfisid);
+        sipfissatirObj::where("sipfisid", $sipfisid)->delete();
+//dd($post);
+        $post->delete();
+      //  $postt->delete();
+//        $dovizObj=new dovizObj;
+//        $dovizObj = dovizObj::find($did);
+//        $dovizObj->delete();
+        //  $data = dovizObj::destroy($did);
+//
+        return response()->json($post);
+    }
 
 
 

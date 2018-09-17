@@ -19,7 +19,12 @@ class sablonii extends Migration
 			$table->integer('left');
 			$table->integer('width');
 			$table->integer('height');
-
+            $table->string('stylealign',15);
+            $table->integer('text');
+            $table->integer('ttop');
+            $table->integer('tleft');
+            $table->integer('twidth');
+            $table->integer('theight');
 
 
 			$table->timestamps();

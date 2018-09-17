@@ -213,7 +213,7 @@
                 <div class="modal-body">
                     Döviz Silinecek Eminmisiniz?
                 </div>
-                <div class="footersild">
+                <div class="modal-footer footersild">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary delete" data-token="{{ csrf_token() }}" id="sil" data-dismiss="modal" >Eminmisiniz?</button>
                 </div>
@@ -256,6 +256,7 @@
             });
             $(document).on('click', '#silbirim', function () {
                 $('#birimsilid').val($(this).data('bid'));
+
                 $('#birimsilpopup').modal();
             });
             $('.footerekle').on('click', '.add', function() {

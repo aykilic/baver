@@ -210,13 +210,13 @@
                                            <option SELECTED >Seçiniz</option>
 
 
-                                       @foreach ($sblturu as $key)
-                                           @if ($key->sblturuid == $secsblturu)
-                                               <option selected value="{{ $key->sblturuid }}">{{ $key->sblturuad }}</option>
-                                           @else
-                                               <option value="{{ $key->sblturuid }}">{{ $key->sblturuad }}</option>
-                                           @endif
-                                       @endforeach
+                                       {{--@foreach ($sblturu as $key)--}}
+                                           {{--@if ($key->sblturuid == $secsblturu)--}}
+                                               {{--<option selected value="{{ $key->sblturuid }}">{{ $key->sblturuad }}</option>--}}
+                                           {{--@else--}}
+                                               {{--<option value="{{ $key->sblturuid }}">{{ $key->sblturuad }}</option>--}}
+                                           {{--@endif--}}
+                                       {{--@endforeach--}}
                                        </select>
                                    </div>
 
@@ -225,7 +225,7 @@
 
 
                                <button type="button" id="fatura_kaydet" class="btn btn-primary dropdown-toggle btn-block " aria-expanded="false"><i class="fa fa-save"> </i> <b>TASARIMI KAYDET</b> </button>
-                                           <!-- start accordion -->
+                           {{csrf_field()}}<!-- start accordion -->
                                            <div class="accordion" id="accordion1" role="tablist" aria-multiselectable="true">
                                                <div class="panel">
                                                    <a class="panel-heading collapsed" role="tab" id="headingOne1" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" aria-expanded="false" aria-controls="collapseOne">
@@ -307,6 +307,7 @@
                                                    </div>
                                                </div>
                                                <div class="panel">
+                                                   {{csrf_field()}}
                                                    <a class="panel-heading collapsed" role="tab" id="headingTwo1" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo">
                                                        <h4 class="panel-title">Eklenecek Alanlar</h4>
                                                    </a>
@@ -320,23 +321,23 @@
                                                                        &nbsp;&nbsp;&nbsp;&nbsp;Cari Hesap Adı&nbsp;</label>
                                                                    </div>
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-<span style="font-size:small" class="text-default pull-right">
-<div class="btn-group btn-group-xs" data-toggle="buttons" style="margin-top:10px;margin-bottom:7px;margin-right:5px">
-<label class="btn btn-default active">
-<input name="sur1" value="left"  type="radio"> <i class="fa fa-align-left" aria-hidden="true"></i>
-</label>
-<label class="btn btn-default">
-<input name="sur1" value="center"  type="radio"> <i class="fa fa-align-center" aria-hidden="true"></i>
-</label>
-<label class="btn btn-default">
-<input name="sur1" value="right"  type="radio"> <i class="fa fa-align-right" aria-hidden="true"></i>
-</label>
-</div>
-</span>
+                                                                <span style="font-size:small" class="text-default pull-right">
+                                                                <div class="btn-group btn-group-xs" data-toggle="buttons" style="margin-top:10px;margin-bottom:7px;margin-right:5px">
+                                                                <label class="btn btn-default active">
+                                                                <input name="sur1" value="left"  type="radio"> <i class="fa fa-align-left" aria-hidden="true"></i>
+                                                                </label>
+                                                                <label class="btn btn-default">
+                                                                <input name="sur1" value="center"  type="radio"> <i class="fa fa-align-center" aria-hidden="true"></i>
+                                                                </label>
+                                                                <label class="btn btn-default">
+                                                                <input name="sur1" value="right"  type="radio"> <i class="fa fa-align-right" aria-hidden="true"></i>
+                                                                </label>
+                                                                </div>
+                                                                </span>
                                                                        <br>
                                                                        <span style="font-size:small; display:none;" class="text-default text-right">
-<i class="fa fa-paragraph" aria-hidden="true"></i>&nbsp;<input type="number" step="0.1" id="t1" !class="num2" onkeyup="ResizeTable()" value="4" style="height:22px; width:50px; font-size:small;">
-</span>
+                                                                    <i class="fa fa-paragraph" aria-hidden="true"></i>&nbsp;<input type="number" step="0.1" id="t1" !class="num2" onkeyup="ResizeTable()" value="4" style="height:22px; width:50px; font-size:small;">
+                                                                    </span>
                                                                    </div>
                                                                </div>
                                                            </li>
@@ -349,23 +350,23 @@
                                                                            &nbsp;&nbsp;&nbsp;&nbsp;Tarih&nbsp;</label>
                                                                    </div>
                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-<span style="font-size:small" class="text-default pull-right">
-<div class="btn-group btn-group-xs" data-toggle="buttons" style="margin-top:10px;margin-bottom:7px;margin-right:5px" >
-<label class="btn btn-default  active">
-<input name="sur2" value="left"  type="radio"> <i class="fa fa-align-left" aria-hidden="true"></i>
-</label>
-<label class="btn btn-default">
-<input name="sur2" value="center"  type="radio"> <i class="fa fa-align-center" aria-hidden="true"></i>
-</label>
-<label class="btn btn-default">
-<input name="sur2" value="right"  type="radio"> <i class="fa fa-align-right" aria-hidden="true"></i>
-</label>
-</div>
-</span>
+                                                            <span style="font-size:small" class="text-default pull-right">
+                                                            <div class="btn-group btn-group-xs" data-toggle="buttons" style="margin-top:10px;margin-bottom:7px;margin-right:5px" >
+                                                            <label class="btn btn-default  active">
+                                                            <input name="sur2" value="left"  type="radio"> <i class="fa fa-align-left" aria-hidden="true"></i>
+                                                            </label>
+                                                            <label class="btn btn-default">
+                                                            <input name="sur2" value="center"  type="radio"> <i class="fa fa-align-center" aria-hidden="true"></i>
+                                                            </label>
+                                                            <label class="btn btn-default">
+                                                            <input name="sur2" value="right"  type="radio"> <i class="fa fa-align-right" aria-hidden="true"></i>
+                                                            </label>
+                                                            </div>
+                                                            </span>
                                                                        <br>
                                                                        <span style="font-size:small; display:none;" class="text-default text-right">
-<i class="fa fa-paragraph" aria-hidden="true"></i>&nbsp;<input type="number" step="0.1" id="t1" !class="num2" onkeyup="ResizeTable()" value="4" style="height:22px; width:50px; font-size:small;">
-</span>
+                                                        <i class="fa fa-paragraph" aria-hidden="true"></i>&nbsp;<input type="number" step="0.1" id="t1" !class="num2" onkeyup="ResizeTable()" value="4" style="height:22px; width:50px; font-size:small;">
+                                                        </span>
                                                                    </div>
                                                                </div>
                                                            </li>
@@ -591,11 +592,11 @@
                    drop: function (event, ui) {
                        idd =ui.draggable.attr('id');
                        iddd =ui.draggable.attr('adi');
-                       name =  ui.draggable.attr('data-name');
+                       names =  ui.draggable.attr('data-name');
                        leftPosition  = ui.offset.left - $(this).offset().left;
                        topPosition   = ui.offset.top - $(this).offset().top;
 
-                       var div = "<div class='fat-alan-kutu' id='sec_"+idd+"' adi='"+iddd+"' data-name='"+name+"' style='top:"+topPosition+"px; left: "+leftPosition+"px; width:222px; height:33px; font-family:Arial; font-size:9px;' ><span>"+iddd+"</span><i class='fat-alan-kapat  fa fa-close ' style='float:right;'></i></div>";
+                       var div = "<div class='fat-alan-kutu' id='sec_"+idd+"' adi='"+iddd+"' data-name='"+names+"' style='top:"+topPosition+"px; left: "+leftPosition+"px; width:222px; height:33px; font-family:Arial; font-size:9px;' ><span>"+iddd+"</span><i class='fat-alan-kapat  fa fa-close ' style='float:right;'></i></div>";
                        $(this).append(div);
                        Sayac++;
                        $('.fat-alan-kutu').draggable({
@@ -724,8 +725,9 @@
                         bad= $("#tasarim").attr('value');
                         tbad=$("#tasarimtbl").attr('value');
                         sbladi=$("#sblad").val();
-                       console.log(tbad);
-                           console.log(bad);
+                       console.log(bad);
+                            console.log(tbad);
+                           // console.log(sbladi);
                        $.ajax({
                            dataType: 'JSON',
                            type: 'POST',
@@ -735,9 +737,11 @@
                                'datam': bad,
                                'datamt':tbad,
                                'sblad':sbladi,
-                               'sblturuid': $('#sblturu').find('option:selected').val()
+                               'sblturuid': 1
+                                   //$('#sblturu').find('option:selected').val()
 
                            },
+
                            success: function(data) {
                                console.log(data);
 
@@ -770,7 +774,7 @@
                                JSonData = "[";
                            }
 
-                           JSonData += '{"id":"' + $(this).attr('id') + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '"}';
+                           JSonData += '{"id":"' + $(this).attr('id') + '","sbladid":"' + {{$id}} + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '"}';
 
                            if(SayDiv == ToplamDiv)
                            {
@@ -786,12 +790,12 @@
 
                        $("#tasarim").val(JSonData);
                        bad= $("#tasarim").attr('value');
-                       console.log(bad);
+                       //console.log(bad);
 
                        $.ajax({
                            dataType: 'JSON',
                            type: 'PUT',
-                           url: '/design/ajedit' ,
+                           url: '/design/ajedit/58' ,
                            data: {
                                '_token': $('input[name=csrf-token]').val(),
                                'datam': bad
@@ -809,7 +813,7 @@
                                });
                            },
                            error: function(data){
-                               console.log(data);
+                               console.log(bad);
 
 
 
@@ -818,37 +822,6 @@
                        return false;
                        }
                });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                    //alaln kapat

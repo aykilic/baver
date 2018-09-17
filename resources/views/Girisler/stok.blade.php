@@ -263,9 +263,9 @@
                 </div>
                 <input type="hidden" id="stoksilid" value="">
                 <div class="modal-body">
-                    Döviz Silinecek Eminmisiniz?
+                    Stok Silinecek Eminmisiniz?
                 </div>
-                <div class="footersild">
+                <div class="modal-footer footersild">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary delete" data-token="{{ csrf_token() }}" id="sil" data-dismiss="modal" >Eminmisiniz?</button>
                 </div>

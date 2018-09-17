@@ -97,7 +97,8 @@ Route::delete('/stokturusil/{depoid}', 'Controller@stokturusil');
 Route::get('/siparisfisleri/{fisturu}', 'fisController@siparisfisleri');
 Route::get('/siparisfisi/{id}', 'fisController@siparisfisi');
 Route::any('/siparisfisi', 'fisController@sipfiskaydet');
-Route::put('/siparisfisi/edit', 'Controller@sipfisedit');
+Route::get('/siparisfisi/edit/{id}/{fisturu}', 'fisController@sipfisedit');
+Route::delete('/siparisfisi/delete/{id}', 'fisController@siparissil');
 Route::get('/numarala', 'fisController@numarala');
 Route::get('/numarala', function () {
     return view('alsat.numarala');
@@ -111,7 +112,7 @@ Route::get('/sablon', 'Controller@sablon');
 Route::get('/design', 'Controller@design');
 Route::get('/design/edit/{id}', 'Controller@designedit');
 Route::put('/design/ajedit/{id}', 'Controller@designajedit');
-Route::post('/designkaydet', 'Controller@designkaydet');
+Route::POST('/designkaydet', 'Controller@designkaydet');
 
 //****************sablon************************//////////////////////
 

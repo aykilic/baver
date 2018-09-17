@@ -181,9 +181,7 @@
                             <div class="clearfix"></div>
                             <div class="x_content" style="margin-top:15px">
 
-                                <script type="text/javascript">
 
-                                </script>
                                     <table class="table table-striped table-bordered" id="stoktablo">
                                         <thead>
                                         <tr class="headings">
@@ -200,15 +198,16 @@
                                         <tbody>
 
                                         @foreach($sipfislistt as $post)
-                                            <tr >
-                                                <td><a href="javascript:void(0);">{{$post->sipfistar}}</a></td>
-                                                <td><a href="javascript:void(0);"  >{{$post->numara}}</a></td>
-                                                <td><a href="javascript:void(0);"  >{{$post->cunvan}}</a></td>
-                                                <td><a href="javascript:void(0);"  ></a></td>
 
+                                            <tr class="item{{$post->sipfisid}}" >
+                                                <td><a href="javascript:void(0);">{{$post->created_at}}</a></td>
+                                                <td><a href="javascript:void(0);"  >{{$post->numara}}</a></td>
+                                                <td><a href="/siparisfisi/edit/{{$post->sipfisid}}/{{$fisturu}}"  >{{$post->cunvan}}</a></td>
+                                                 <td><a href="javascript:void(0);"  > {{number_format($post->gtoplam, 2, ',', '.')}} {{$post->dad}}</a></td>
                                                {{--<td><a href="javascript:void(0);"  ><i class="fa fa-edit fa-2x"></i></a></td>--}}
-                                                <td><a href="javascript:void(0);"  ><i class="fa fa-trash-o fa-2x" ></i></a></td>
+                                                <td><a href="javascript:void(0);" id="silsipfis" data-sipfisid="{{$post->sipfisid}}" ><i class="fa fa-trash-o fa-2x" ></i></a></td>
                                             </tr>
+
                                         @endforeach
 
 
@@ -223,8 +222,29 @@
 
         </div>
     </div>
+    <div class="modal fade" id="sipfissilpopup" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
 
-
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title" id="exampleModalLabel">UYARI!</h3>
+                </div>
+                <input type="hidden" id="sipfissilid" value="">
+                <div class="modal-body">
+                   <h2>Fiş Silinecek Eminmisiniz?</h2>
+                </div>
+                <div class="modal-footer footersil">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary delete" data-token="{{ csrf_token() }}" id="sil" data-dismiss="modal" >Onay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    </script>
     <!-- footer content -->
     <footer>
 
@@ -254,6 +274,35 @@
     <script src="{{ asset("js/daterangepicker.tr.js") }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+
+                $(document).on('click', '#silsipfis', function () {
+                    $('#sipfissilid').val($(this).data('sipfisid'));
+                    sipfisid = $('#sipfissilid').val();
+                    $('#sipfissilpopup').modal();
+                });
+            $('.footersil').on('click', '.delete', function() {
+
+                $.ajax({
+                    dataType: 'JSON',
+                    type: 'delete',
+                    url: '/siparisfisi/delete/' + sipfisid,
+                    data: {
+                        '_token': $('input[name=_token]').val()
+                    },
+                    success: function(data) {
+                        $('.item' + data['sipfisid']).remove();
+                        console.log(data);
+                        new PNotify({
+                            title: '',
+                            text: 'Başarıyla Silindi!',
+                            type: 'success',
+                            // type: 'notice',
+                            styling:'bootstrap3'
+                        });
+                    }
+
+                });
+            });
 
 
                 $('#stoktablo').DataTable({

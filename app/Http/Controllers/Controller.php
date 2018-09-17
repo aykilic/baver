@@ -854,6 +854,7 @@ class Controller extends BaseController
 $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get();
 //dd($datamt);
 		return View::make('sablonlar.design')
+            ->with('id', $id)
 			->with('firma', $firma)
 			->with('sonnumara', $sonnumara)
 			->with('sblid', $sblid)
@@ -873,12 +874,45 @@ $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get()
 	}
 	public function designajedit(Request $request,$id)
 	{
-		//$data = sablonObj::find($id);
-		$datam=DB::table('sablon')->where('sbladid',$id)->get();
+
+        if ($request->ajax()) {
+            //$datt=sablonObj::where('sbladid',$id)->first();
+            $datt = sablonObj::find($id);
+            $aa=json_decode($request->datam, true);
+
+            $datt -> top = $aa -> top;
+
+            $datt->save();
+
+            //DB::table('sablon')->where('sbladid', $id)->update(["detect_photo->door" =>  json_encode((object) ['key' => 'value']) ]);
+
+
+            //$sablonObj = stokturObj::where('sbladid',$id);
+            //
+
+
+
+
+
+
+            //$stokturObj->save();
+
+            return response()->json($datt);
+
+        }
+
+
+
+
+		$dat=DB::table('sablon')->where('sbladid',$id)->get();
 		//dd($datam);
+        $aa=json_decode($request->bad, true);
+        foreach ($aa as $track) {
+            sablonObj::create($track);
+        }
 
 		return View::make('sablonlar.design')
-		           ->with('sablone', $datam);
+		           ->with('sablone', $dat);
 //		$sablon = DB::table('sablon')
 //		            ->select('sablon.*', 'sablon_turu.*')
 //		            ->join( 'sablon_turu','sablon.sblturuid', '=', 'sablon_turu.sblturuid')
@@ -893,10 +927,6 @@ $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get()
 		$sablonadObj =new sablonadObj;
 		$sablonadObj->sblad=$request->sblad;
 		$sablonadObj->sblturuid=$request->sblturuid;
-
-
-
-
 		$sablonadObj->save();
 
 		$aa=json_decode($request->datam, true);
@@ -905,11 +935,10 @@ $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get()
 
 			sablonObj::create($trackt);
 		}
-
 		foreach ($aa as $track) {
 			sablonObj::create($track);
     }
-		return response()->json($aat);
+		return response()->json($sablonadObj);
 			//}
 			//return response()->json( $data );
 
