@@ -670,7 +670,7 @@
                                    JSonDatatbl = "[";
                                }
 
-                               JSonDatatbl += '{"id":"' + $(this).attr('id') +'","sbladid":"'+ sbladid +'", "ttop":"' + $(this).position().top + '", "tleft":"' + $(this).position().left + '", "twidth":"' + $(this).outerWidth(true) + '", "theight":"' + $(this).outerHeight(true) + '"}';
+                               JSonDatatbl += '{"id":"' + $(this).attr('id') +'","sbladid":"'+ sbladid +'", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '"}';
 
                                if(Saytbl == ToplamDiv1)
                                {
@@ -771,31 +771,31 @@
 
                            if(SayDiv == 1)
                            {
-                               JSonData = "[";
+                               JSonDatae = "[";
                            }
 
-                           JSonData += '{"id":"' + $(this).attr('id') + '","sbladid":"' + {{$id}} + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '", "top":"' + $(this).position().top + '", "left":"' + $(this).position().left + '", "width":"' + $(this).outerWidth(true) + '", "height":"' + $(this).outerHeight(true) + '"}';
+                           JSonDatae += '{"id":"' + $(this).attr('id') + '","sbladid":"' + '"id"'  + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '", "ttop":"' + $(this).position().top + '", "tleft":"' + $(this).position().left + '", "twidth":"' + $(this).outerWidth(true) + '", "theight":"' + $(this).outerHeight(true) + '"}';
 
                            if(SayDiv == ToplamDiv)
                            {
-                               JSonData += "]";
+                               JSonDatae += "]";
                            }
                            else
                            {
-                               JSonData += ',';
+                               JSonDatae += ',';
                            }
                        });
 
 
 
-                       $("#tasarim").val(JSonData);
+                       $("#tasarim").val(JSonDatae);
                        bad= $("#tasarim").attr('value');
                        //console.log(bad);
 
                        $.ajax({
                            dataType: 'JSON',
                            type: 'PUT',
-                           url: '/design/ajedit/58' ,
+                           url: '/design/ajedit/' ,
                            data: {
                                '_token': $('input[name=csrf-token]').val(),
                                'datam': bad
@@ -868,8 +868,8 @@
                var pW = parseInt($('#txtPageWidth').val())//parseInt($('#txtPageWidth').val()) + parseInt((parseInt($('#txtPageWidth').val())/9)/pxtomm);
                var pH = parseInt($('#txtPageHeight').val())//parseInt($('#txtPageHeight').val()) +parseInt((parseInt($('#txtPageHeight').val())/9)/pxtomm);
 
-               console.log(pW+'mm')
-               console.log(pH+'mm')
+               //console.log(pW+'mm')
+              // console.log(pH+'mm')
 
                $('#page').css("width", pW + "mm").css("height", pH + "mm").css("border", "gray solid 1px").css("background-color", "#fff");
                $('#divContainer').css("border", "black solid 0px");
@@ -1014,7 +1014,7 @@
                    var pxtomm = px2inch(1)*25.4
 
                    myRuler.api.setScale(pxtomm/10);
-                   console.log("pxtomm / 10 > " + pxtomm/10)
+                   //console.log("pxtomm / 10 > " + pxtomm/10)
 
                }catch(e){console.log(e.stack)}
            }//func
@@ -1042,7 +1042,7 @@
 
 
            });
-
+//update farklı sayfada olmalı
     </script>
 
 

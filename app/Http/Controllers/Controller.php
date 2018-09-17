@@ -880,7 +880,7 @@ $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get()
             $datt = sablonObj::find($id);
             $aa=json_decode($request->datam, true);
 
-            $datt -> top = $aa -> top;
+            $datt -> ttop = $aa -> ttop;
 
             $datt->save();
 
