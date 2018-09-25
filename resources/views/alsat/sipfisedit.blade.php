@@ -431,32 +431,71 @@
         var h = ($('#siptable tr.sipsatirs').length)-1;
 
        //
-        yoran=0;
+      var  yoran=1;
+       var yorann=0;
+
+
         //sayfa yüklendiğinde hesaplama
 
 
          $(window).load(function (){
 
-             idd=$();
-                    var  ymyB = $('#miktar' + yoran)[0].value;
-                     $('#siptable tr.sipsatirs').each(function () {
-        //
-        //             ykdvoran = $('#kdv' + 0).find(":selected").text();
-        //
-                         var  ymyB = $('#miktar' + yoran)[0].value;
-                         var ymyBo = $('#bfiyat'+ yoran)[0].value;
+             summ=0;
+
+             $("input[name^='tutar']").each(function(){
+
+
+                 summ += +$(this).val();
+                 //console.log(sum);
+             });
+             $('#toplamm').val(summ);
+
+                    //var  ymyB = $('#kdv' + yoran).value;
+             $('#siptable tr.sipsatirs').each(function () {
+                 var kdvtek;
+                 var ykdvorann;
+                ykdvorann=$('#kdv' + yorann).find(":selected").text();
+
+                 kdvtek=(summ*ykdvorann/100);
+                 kdvtek=Number(kdvtek).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                 $('#toplamkdv'+(Number(ykdvorann))).val(kdvtek);
+                // console.log(Number(ykdvorann));
+
+                        ggtoplam=(summ*(1.18));
+                 ggtoplam=Number(ggtoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                 $('#gtoplam').val(ggtoplam);
+
+
+                         if( h > 0 ){
+                             $('#siptable tr.sipsatirs').each(function () {
+                                 ykdvoran = $('#kdv' + yoran).find(":selected").text();
+
+
+                                 yoran++;
+                             });
+                         }
+
+
+
+                            //console.log(ykdvorann);
+
+
+                         yorann++;
+        //                  var  ymyB = $('#miktar' + yoran)[0].value;
+        //                  var ymyBo = $('#bfiyat'+ yoran)[0].value;
+        //                  var ytutaa = ymyB * ymyBo;
                  //    console.log($('#siptable tr.sipsatirs #miktar0')[0].value)
         //             // var ymyBB=ymyB.replace(/\./g,"");
         //             // var ymyBBB=ymyBB.replace(/\,/g,".");
         //             //
         //             // var ymyBoo=ymyBo.replace(/\./g,"");
         //             // var ymyBooo=ymyBoo.replace(/\,/g,".");
-        //
-        //
-        //
-                      var ytutaa = ymyBBB * ymyBooo;
+
+
+
+
         //             //
-                     console.log(ymyB,ymyBo);
+                  //   console.log(kdvtek);
         //             //
         //             // var ytutaaa = Number(ytutaa).toLocaleString('tr', {minimumFractionDigits: 2});
         //             //
@@ -464,6 +503,10 @@
         //
         //             //console.log(ymyBox,ymyBoxx,ytutaa,ytutaaa);
         //             //yoran++;
+
+
+
+
                 });
 
             });
