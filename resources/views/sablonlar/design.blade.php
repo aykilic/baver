@@ -774,7 +774,7 @@
                                JSonDatae = "[";
                            }
 
-                           JSonDatae += '{"id":"' + $(this).attr('id') + '","sbladid":"' + '"id"'  + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '", "ttop":"' + $(this).position().top + '", "tleft":"' + $(this).position().left + '", "twidth":"' + $(this).outerWidth(true) + '", "theight":"' + $(this).outerHeight(true) + '"}';
+                           JSonDatae += '{"id":"' + $(this).attr('id') + '","sbladid":"' + {{$id}}  + '","data-name":"' + $(this).attr('data-name') + '", "adi":"' + $(this).attr('adi') + '", "ttop":"' + $(this).position().top + '", "tleft":"' + $(this).position().left + '", "twidth":"' + $(this).outerWidth(true) + '", "theight":"' + $(this).outerHeight(true) + '"}';
 
                            if(SayDiv == ToplamDiv)
                            {
@@ -795,7 +795,7 @@
                        $.ajax({
                            dataType: 'JSON',
                            type: 'PUT',
-                           url: '/design/ajedit/' ,
+                           url: '/design/ajedit/{{$id}}' ,
                            data: {
                                '_token': $('input[name=csrf-token]').val(),
                                'datam': bad

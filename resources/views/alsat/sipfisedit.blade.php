@@ -251,11 +251,10 @@
                                                                 {{--kdv zorrrrrrrr--}}
                                                                 <div class="col-lg-12 kutupad">
                                                                     <select data-toggle="dropdown" id="kdv0" name="kdv[]" class="form-control kkdv" onchange="myFunction(0)" onclick="eski($(this).find(':selected').text())"  name="kdv[]"><span class="caret"></span>
-                                                                        {{--@foreach($vergi as $vergi)--}}
-                                                                        {{--<option value="{{ $vergi->vid }}"--}}
-                                                                        {{--{{ $secvergi == $vergi->vid ? 'selected=="selected"' : '' }}>--}}
-                                                                            {{--{{ $vergi->vor }}</option>--}}
-                                                                        {{--@endforeach--}}
+                                                                        @foreach($vergim as $vergi => $key)
+                                                                        <option value="{{ $vergi }}"{{ $sipfissatt->kdv == $vergi ? 'selected=="selected"' : '' }}>
+                                                                            {{ $key }}</option>
+                                                                        @endforeach
                                                                         {{--@foreach($vergim as $key => $vor)--}}
                                                                             {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
                                                                         {{--@endforeach--}}
@@ -391,6 +390,10 @@
     <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}} -->
     <script type="text/javascript">
         //enter tuşu submit iptal
+
+
+
+
         document.getElementById("satirler").onkeypress = function(e) {
             var key = e.charCode || e.keyCode || 0;
             if (key == 13) {
@@ -425,10 +428,12 @@
 
         var h = ($('#siptable tr.sipsatirs').length)-1;
 
+       // window.onload=calculate(0);
+
         function calculate(elementID, satirsayii) {
             try {
 
-                if(kdv=="" || kdv==null){
+                if(kdv==""|| kdv==null){
                     kdv=18;
                 }else {
                     kdv = $('#kdv' + h).find(":selected").text();
@@ -518,43 +523,23 @@
                     var fff=ff.replace(/\,/g,".");
                     // ffff=Number(ff);
                     kdvtut += +fff;
-                    //kdvtuta=kdvtuta+kdvtut;
-                    //   //fff=Number(ff).toLocaleString('en',{ minimumFractionDigits: 2 });
-                    // var ffff=ff.replace(/\./g,",");
-                    //
-                    //kdvtut +=+ ff;
 
-                    //kdvtut=Number(kdvtuta).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                    //  kdvtut=kdvtut.replace(/\./g,",");
-                    // console.log($(this).val());
                 });
-                //kdvtuta=Number(kdvtut).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                //var sattoplami=sattoplam.replace(/\,/g,".");
-                //var sattoplamii=Number(sattoplami);
-                //sattoplami=Number(sattoplamii).toLocaleString('tr',{ minimumFractionDigits: 2 });
+
 
 
                 sattoplami= Number(sum) + Number(kdvtut);
                 var sattoplamii=Number(sattoplami).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 $('#gtoplam').val(sattoplamii);
 
-                console.log(sum);
-                console.log(kdvtut);
+              //  console.log(sum);
+              //  console.log(kdvtut);
 
                 // dsattoplam=sattoplam.replace(/\./g,",");
             } catch (e) {
                 alert(e.message)
             }
-            //kdv eklenecek
 
-            // var kdvsattoplam= sum*kdv/100;
-            // var kdvsattoplamm =Number(kdvsattoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
-            // $('#toplamkdv').val(kdvsattoplamm);
-
-
-            // var geneltoplam=sum*(1+(kdv/100));
-            // var geneltoplamm =Number(geneltoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
-            // $('#gtoplam').val(geneltoplamm);
         }
 
         function eski(ff){
@@ -564,10 +549,7 @@
         }
         function  myFunction (gggg,z,t){
 
-            //var h = ($('#siptable tr.sipsatirs').length)-1;
-            //  var ilksat=$('#kdv0').find(":selected").text();
-            //  if(gggg==0){satsay=1;}else{ satsay =0;}
-            //if(i==null){i=1;}
+
 
             if(typeof z!=="undefined"){
                 eskii=z;
@@ -605,11 +587,7 @@
             });
 
             ess=0;
-            // $('#kdvbel div.kadeve').each(function(){
-            //     yy=$('#kdv'+eskik).find(":selected").text();
-            //    // ess++;
-            //console.log(z);
-            // });
+
             $('#siptable tr.sipsatirs').each(function() {
                 if (z == null) {
 
