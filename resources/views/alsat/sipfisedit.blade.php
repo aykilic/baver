@@ -292,7 +292,9 @@
                                                 </div>
 
 
-
+                                                <div class="col-lg-12" style="padding-left: 0px;">
+                                                    <a class="btn btn-default"  id="deneme" onclick="deneme();" >deneme</a>
+                                                </div>
 
 
                                                 <div style="width:100%;height:90px">
@@ -428,7 +430,46 @@
 
         var h = ($('#siptable tr.sipsatirs').length)-1;
 
-       // window.onload=calculate(0);
+       //
+        yoran=0;
+        //sayfa yüklendiğinde hesaplama
+
+
+         $(window).load(function (){
+
+             idd=$();
+                    var  ymyB = $('#miktar' + yoran)[0].value;
+                     $('#siptable tr.sipsatirs').each(function () {
+        //
+        //             ykdvoran = $('#kdv' + 0).find(":selected").text();
+        //
+                         var  ymyB = $('#miktar' + yoran)[0].value;
+                         var ymyBo = $('#bfiyat'+ yoran)[0].value;
+                 //    console.log($('#siptable tr.sipsatirs #miktar0')[0].value)
+        //             // var ymyBB=ymyB.replace(/\./g,"");
+        //             // var ymyBBB=ymyBB.replace(/\,/g,".");
+        //             //
+        //             // var ymyBoo=ymyBo.replace(/\./g,"");
+        //             // var ymyBooo=ymyBoo.replace(/\,/g,".");
+        //
+        //
+        //
+                      var ytutaa = ymyBBB * ymyBooo;
+        //             //
+                     console.log(ymyB,ymyBo);
+        //             //
+        //             // var ytutaaa = Number(ytutaa).toLocaleString('tr', {minimumFractionDigits: 2});
+        //             //
+        //             // $('#tutar' + yoran).val(ytutaaa);
+        //
+        //             //console.log(ymyBox,ymyBoxx,ytutaa,ytutaaa);
+        //             //yoran++;
+                });
+
+            });
+
+
+        //sayfa yüklendiğinde hesaplama
 
         function calculate(elementID, satirsayii) {
             try {
@@ -550,18 +591,18 @@
         function  myFunction (gggg,z,t){
 
 
-
+console.log(t);
             if(typeof z!=="undefined"){
                 eskii=z;
             }
             satsay =0;
 
             //18 eklenirse
-            if(t==1){
-                kdvtext=gggg;
-            }else {
-                var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
-            }
+            // if(t==1){
+            //     kdvtext=gggg;
+            // }else {
+            var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
+            // }
             var  kdvtoplam1 =1;
 
             n = 0;

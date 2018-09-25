@@ -872,17 +872,36 @@ $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get()
 //		           ->with('sablon', $sablon);
 
 	}
-	public function designajedit(Request $request,$id)
+	public function designajedit(Request $request,$sbladid)
 	{
-
+//
+//            $data= json_decode($request->datam, true);
+//
+//
+//            foreach($data->listings as $listing){
+//                $title = $listing->title;
+//
+//
+//                Films::updateOrCreate([
+//                    'title' => $title,
+//                    '$times' => $time
+//                ]);
+//            }
+//
         if ($request->ajax()) {
-            //$datt=sablonObj::where('sbladid',$id)->first();
-            $datt = sablonObj::find($id);
+            $sablonObj=sablonObj::where('sbladid',$sbladid)->first();
+           // $sablonObj = sablonObj::find($sbladid);
             $aa=json_decode($request->datam, true);
 
-            $datt -> ttop = $aa -> ttop;
+        foreach ($aa as $rakt) {
 
-            $datt->save();
+            sablonObj::updateOrCreate($rakt);
+        }
+
+
+
+
+
 
             //DB::table('sablon')->where('sbladid', $id)->update(["detect_photo->door" =>  json_encode((object) ['key' => 'value']) ]);
 
@@ -897,22 +916,22 @@ $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get()
 
             //$stokturObj->save();
 
-            return response()->json($datt);
+            return response()->json($sablonObj);
 
         }
 
 
 
 
-		$dat=DB::table('sablon')->where('sbladid',$id)->get();
-		//dd($datam);
-        $aa=json_decode($request->bad, true);
-        foreach ($aa as $track) {
-            sablonObj::create($track);
-        }
+//		$dat=DB::table('sablon')->where('sbladid',$id)->get();
+//		//dd($datam);
+//        $aa=json_decode($request->bad, true);
+//        foreach ($aa as $track) {
+//            sablonObj::create($track);
+//        }
 
-		return View::make('sablonlar.design')
-		           ->with('sablone', $dat);
+		//return View::make('sablonlar.deneme');
+		           //->with('sablone', $dat);
 //		$sablon = DB::table('sablon')
 //		            ->select('sablon.*', 'sablon_turu.*')
 //		            ->join( 'sablon_turu','sablon.sblturuid', '=', 'sablon_turu.sblturuid')
@@ -931,6 +950,11 @@ $datamt=DB::table('sablon')->where('sbladid',$id)->where('id','tbldongu')->get()
 
 		$aa=json_decode($request->datam, true);
 		$aat=json_decode($request->datamt,true);
+
+		// ikili foreach olacak
+
+
+
 		foreach ($aat as $trackt) {
 
 			sablonObj::create($trackt);

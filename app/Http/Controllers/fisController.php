@@ -377,11 +377,18 @@ $firmay=json_encode($firmam);
             $sipfissatirObj->numara = $request->sfisno;
             $sipfissatirObj->sipfisid = $sonid;
             $sipfissatirObj->fissid = $request->fissid[$i];
-            $sipfissatirObj->miktar = $request->miktar[$i];
+
+            $miktarr=str_replace( ",", ".", $request->miktar[$i] );
+            $sipfissatirObj->miktar = $miktarr;
             $sipfissatirObj->birim = $request->birim[$i];
-            $sipfissatirObj->bfiyat = $request->bfiyat[$i];
+            $bfiyatt=str_replace( ",", ".", $request->bfiyat[$i] );
+            $sipfissatirObj->bfiyat = $bfiyatt;
+
+
             $sipfissatirObj->kdv = $request->kdv[$i];
-            $sipfissatirObj->tutar = $request->tutar[$i];
+
+            $tutarr=str_replace( ",", ".", $request->tutar[$i] );
+            $sipfissatirObj->tutar = $tutarr;
             $sipfissatirObj->save();
         }
 

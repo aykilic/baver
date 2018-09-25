@@ -789,49 +789,7 @@ f=18;
 
                 });
             //incele
-            $('#formkaydet').on('click', '.add', function() {
-                var sad=$('#stokturad').val();
 
-
-                if (sad=="" || sad==null) {
-
-
-                    new PNotify({
-                        title: 'Hata!',
-                        text: 'Stok Türünü Girmediniz.',
-                        type: 'error',
-                        styling: 'bootstrap3'
-                    });
-                }
-                else {
-                    $.ajax({
-                        dataType: 'JSON',
-                        type: 'POST',
-                        url: '/stokturukaydet',
-                        data: {
-                            '_token': $('input[name=csrf-token]').val(),
-                            'sad': sad
-                        },
-                        success: function (data) {
-                            console.log(data);
-                            $('#stokturutablo').append("<tr class='item" + data.stokturid + "'>" +
-                                "<td><a href='javascript:void(0);' id='adstokturu' data-stokturid='" + data.stokturid + "' data-stokturad='" + data.stokturad + "'>" + data.stokturad + "</a></td>" +
-                                "<td><a href='javascript:void(0);' id='editstokturu' data-stokturuid='" + data.stokturid + "' data-stokturad='" + data.stokturad + "'><i class='fa fa-edit fa-2x'></i></a></td>" +
-                                "<td><a href='javascript:void(0);' id='silstokturu' data-stokturid='" + data.stokturid + "'><i class='fa fa-trash-o fa-2x'></i></a></td></tr>"
-                            );
-                            new PNotify({
-                                title: 'Popup Title',
-                                text: 'Operation Complated!',
-                                type: 'success',
-                                // type: 'notice',
-                                styling: 'bootstrap3'
-                            });
-
-                            $('#formkaydet').trigger('reset');
-                        }
-                    });
-                }
-            });
 //önemliiiii?????**********************************************************************************************************************
          //   $(function() {
                 var scntDiv = $('#siptable');
