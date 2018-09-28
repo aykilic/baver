@@ -130,6 +130,7 @@
         <!-- inputmask -->
 
         <!-- NProgress -->
+
         <script src="{{ asset("js/jquery.inputmask.bundle.js") }}"></script>
         <script src="{{ asset("js/jquery.inputmask.js") }}"></script>
         <script src="{{ asset("js/jquery.inputmask.extensions.js") }}"></script>
