@@ -215,12 +215,16 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                       @php $i=0; @endphp
                                                         @foreach($sipfissat as $sipfissatt)
+
+
                                                         <tr class="sipsatirs">
+
                                                             <td class="col-md-4">
                                                                 <div class="col-lg-12 kutupad">
                                                                     <div class="form-group kutupad">
-                                                                        <input type="hidden" name="fissid[]" id="fissid0" value="">
+                                                                        <input type="hidden" name="fissid[]" id="fissid{{$i}}" value="">
                                                                         <input type="text" name="stokad[]" id="stokad" value="{{$sipfissatt->sad}}" autocomplete="off" class="form-control has-feedback-left buyuk" style="padding-left:65px;">
                                                                         <img class="Typeahead-spinners" src="../images/wait.gif">
                                                                         <span class="fa fa-search form-control-feedback left ico"   ></span>
@@ -229,7 +233,7 @@
                                                             </td>
                                                             <td class="col-md-1">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="miktar[]" id="miktar0" value="{{$sipfissatt->miktar}}" autocomplete="off" class="form-control" oninput="calculate(0)" style="font-family: monospace, monospace;" >
+                                                                    <input type="text" name="miktar[]" id="miktar{{$i}}" value="{{$sipfissatt->miktar}}" autocomplete="off" class="form-control" oninput="calculate(0)" style="font-family: monospace, monospace;" >
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-1">
@@ -244,7 +248,7 @@
                                                             </td>
                                                             <td class="col-md-2">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="bfiyat[]" id="bfiyat0" value="{{$sipfissatt->bfiyat}}" autocomplete="off" class="form-control" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate(0)" ><span id="t1" class=" form-control-feedback right ico">TL</span>
+                                                                    <input type="text" name="bfiyat[]" id="bfiyat{{$i}}" value="{{$sipfissatt->bfiyat}}" autocomplete="off" class="form-control" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate(0)" ><span id="t1" class=" form-control-feedback right ico">TL</span>
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-1">
@@ -273,7 +277,7 @@
 
                                                             <td class="col-md-12">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="tutar[]" id="tutar0" value="{{$sipfissatt->tutar}}" autocomplete="off" class="form-control tutar" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
+                                                                    <input type="text" name="tutar[]" id="tutar{{$i}}" value="{{$sipfissatt->tutar}}" autocomplete="off" class="form-control tutar" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
                                                                 </div>
                                                             </td>
 
@@ -283,6 +287,7 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
+                                                       @php $i=$i+1; @endphp
                                                         @endforeach
                                                         </tbody>
                                                     </table>
@@ -298,54 +303,43 @@
 
 
                                                 <div style="width:100%;height:90px">
-                                                <!-- {{--<div class="row" style="float:right">--}} -->
+
                                                     <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Ara Toplam :</label>
-                                                <!-- {{--//  <input for="toplam" id="toplam">--}} -->
+
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
                                                         <input id="toplamm"  class="form-control " style="font-family: monospace, monospace;padding-right:55px" value="0,00" readonly/><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
-                                                <!-- {{--</div>--}} -->
+
                                                 </div>
                                                 <div style="width:100%;height:90px;" id="kdvbel" class="kdvbel">
                                                     <div class="kdv18 kdvtutt">
-                                                    <!-- {{--<div class="row" style="float:right">--}} -->
+
                                                         <label class="col-md-1"  style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV  :</label>
-                                                        <label class="col-md-1 kdv" id="kdv0"  style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% 18</label>
-                                                    <!-- {{--//  <input for="toplam" id="toplam">--}} -->
+                                                        <label class="col-md-1 kdv" id="kdv18"  style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% 18</label>
+
                                                         <div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">
                                                             <input id="toplamkdv18"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly/><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                         </div>
-                                                    <!-- {{--</div>--}} -->
+
                                                     </div>
                                                 </div>
 
                                                 <div style="width:100%;height:90px">
-                                                <!-- {{--<div class="row" style="float:right">--}} -->
+
                                                     <label class="col-md-2" style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">Toplam :</label>
-                                                <!-- {{--//  <input for="toplam" id="toplam">--}} -->
+
                                                     <div class="col-md-3" style="font-size: 14px;width:25.5%">
                                                         <input id="gtoplam" name="gtoplam" class="form-control"  style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly/><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
                                                     </div>
-                                                <!-- {{--</div>--}} -->
+
                                                 </div>
 
-                                            <!-- {{--<div class="col-xs-1 col-md-2">--}}
-                                            {{--<div class="form-group">--}}
-
-                                            {{--<input type="hidden" name="sid[]" id="sid" value="" >--}}
-                                            {{--<input type="text" name="stokad" id="stokad" value="" autocomplete="off" class="form-control has-feedback-left typeaheads" >--}}
-                                            {{--<img class="Typeahead-spinners" src="../images/wait.gif">--}}
-                                            {{--<span class="fa fa-search form-control-feedback left" style="margin-top:6px" ></span>--}}
-                                            {{--</div>--}}
-                                            {{--</div>--}} -->
                                                 <div class="h-20"></div>
 
                                                 <div class="clearfix"></div>
 
 
                                                 <div class="text-right">
-
-
                                                 </div>
 
 
@@ -413,103 +407,115 @@
             }
         });
         kdv=$('#kdv').find(":selected").text();
-
+        //console.log(kdv);
 
 
 
 
         if(dtur=""){
             dtur="TL";
-        }
+        }else
         {
             dtur = $('#dbirim').find(":selected").text();
         }
 
         //  kdv = $('#kdv').find(":selected").text();
         // kdv değişti
-
         var h = ($('#siptable tr.sipsatirs').length)-1;
 
-       //
-      var  yoran=1;
-       var yorann=0;
+        //
+        var  yoran=1;
+        var yorann=0;
 
 
         //sayfa yüklendiğinde hesaplama
+       // window.onload(myFunction(0));
+        $(window).load(function (){
 
+            eskii=null;
 
-         $(window).load(function (){
+            myFunction(0,'yeni');
 
-             summ=0;
+        });
 
-             $("input[name^='tutar']").each(function(){
-
-
-                 summ += +$(this).val();
-                 //console.log(sum);
-             });
-             $('#toplamm').val(summ);
-
-                    //var  ymyB = $('#kdv' + yoran).value;
-             $('#siptable tr.sipsatirs').each(function () {
-                 var kdvtek;
-                 var ykdvorann;
-                ykdvorann=$('#kdv' + yorann).find(":selected").text();
-
-                 kdvtek=(summ*ykdvorann/100);
-                 kdvtek=Number(kdvtek).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                 $('#toplamkdv'+(Number(ykdvorann))).val(kdvtek);
-                // console.log(Number(ykdvorann));
-
-                        ggtoplam=(summ*(1.18));
-                 ggtoplam=Number(ggtoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                 $('#gtoplam').val(ggtoplam);
-
-
-                         if( h > 0 ){
-                             $('#siptable tr.sipsatirs').each(function () {
-                                 ykdvoran = $('#kdv' + yoran).find(":selected").text();
-
-
-                                 yoran++;
-                             });
-                         }
-
-
-
-                            //console.log(ykdvorann);
-
-
-                         yorann++;
-        //                  var  ymyB = $('#miktar' + yoran)[0].value;
-        //                  var ymyBo = $('#bfiyat'+ yoran)[0].value;
-        //                  var ytutaa = ymyB * ymyBo;
-                 //    console.log($('#siptable tr.sipsatirs #miktar0')[0].value)
-        //             // var ymyBB=ymyB.replace(/\./g,"");
-        //             // var ymyBBB=ymyBB.replace(/\,/g,".");
-        //             //
-        //             // var ymyBoo=ymyBo.replace(/\./g,"");
-        //             // var ymyBooo=ymyBoo.replace(/\,/g,".");
-
-
-
-
-        //             //
-                  //   console.log(kdvtek);
-        //             //
-        //             // var ytutaaa = Number(ytutaa).toLocaleString('tr', {minimumFractionDigits: 2});
-        //             //
-        //             // $('#tutar' + yoran).val(ytutaaa);
+        //         $(window).load(function (){
         //
-        //             //console.log(ymyBox,ymyBoxx,ytutaa,ytutaaa);
-        //             //yoran++;
-
-
-
-
-                });
-
-            });
+        //             myFunction(0,18,1);
+        //
+        //         });
+        //          $(window).load(function (){
+        //
+        //              summ=0;
+        //
+        //              $("input[name^='tutar']").each(function(){
+        //
+        //
+        //                  summ += +$(this).val();
+        //                  //console.log(sum);
+        //              });
+        //              $('#toplamm').val(summ);
+        //
+        //                     //var  ymyB = $('#kdv' + yoran).value;
+        //              $('#siptable tr.sipsatirs').each(function () {
+        //                  var kdvtek;
+        //                  var ykdvorann;
+        //                 ykdvorann=$('#kdv' + yorann).find(":selected").text();
+        //
+        //                  kdvtek=(summ*ykdvorann/100);
+        //                  kdvtek=Number(kdvtek).toLocaleString('tr',{ minimumFractionDigits: 2 });
+        //                  $('#toplamkdv'+(Number(ykdvorann))).val(kdvtek);
+        //                 // console.log(Number(ykdvorann));
+        //
+        //                         ggtoplam=(summ*(1.18));
+        //                         ggtoplam=Number(ggtoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
+        //                         $('#gtoplam').val(ggtoplam);
+        //
+        //              //    console.log(h);
+        //                          if( h <= 0 ){
+        //                              $('#siptable tr.sipsatirs').each(function () {
+        //                                  ykdvoran = $('#kdv' + yoran).find(":selected").text();
+        //
+        //
+        //                                  yoran++;
+        //                              });
+        //                              console.log("ibo");
+        //                          }
+        //
+        //
+        //
+        //                             console.log("ibom");
+        //
+        //
+        //                          yorann++;
+        //         //                  var  ymyB = $('#miktar' + yoran)[0].value;
+        //         //                  var ymyBo = $('#bfiyat'+ yoran)[0].value;
+        //         //                  var ytutaa = ymyB * ymyBo;
+        //                  //    console.log($('#siptable tr.sipsatirs #miktar0')[0].value)
+        //         //             // var ymyBB=ymyB.replace(/\./g,"");
+        //         //             // var ymyBBB=ymyBB.replace(/\,/g,".");
+        //         //             //
+        //         //             // var ymyBoo=ymyBo.replace(/\./g,"");
+        //         //             // var ymyBooo=ymyBoo.replace(/\,/g,".");
+        //
+        //
+        //
+        //
+        //         //             //
+        //                   //   console.log(kdvtek);
+        //         //             //
+        //         //             // var ytutaaa = Number(ytutaa).toLocaleString('tr', {minimumFractionDigits: 2});
+        //         //             //
+        //         //             // $('#tutar' + yoran).val(ytutaaa);
+        //         //
+        //         //             //console.log(ymyBox,ymyBoxx,ytutaa,ytutaaa);
+        //         //             //yoran++;
+        //
+        //
+        //
+        //
+        //                 });
+        //
+        //             });
 
 
         //sayfa yüklendiğinde hesaplama
@@ -521,9 +527,9 @@
                     kdv=18;
                 }else {
                     kdv = $('#kdv' + h).find(":selected").text();
+                    kdv=Number(kdv);
                 }
-
-
+               // console.log(kdv);
 
                 // var mi = $('#miktar')[0].value;
                 // var bf = $('#bfiyat')[0].value;
@@ -535,7 +541,6 @@
                 //ilk element slinirse
                 if(document.getElementById('miktar' + elementID)){
 
-
                     var myBox = $('#miktar' + elementID)[0].value;
                     var myBoxx = $('#bfiyat' + elementID)[0].value;
                     //  console.log(elementID);
@@ -544,7 +549,6 @@
                     $('#tutar' + elementID).val(tutaaa);
                 }
                 // $('')
-
                 // kdv = satirsayi;
                 sum=0;
                 $("input[name^='tutar']").each(function(){
@@ -566,6 +570,8 @@
                     var kdvtutar;
 
                     kdvora = $('#kdv' + oran).find(":selected").text();
+                    kdvora=Number(kdvora);
+                    //console.log(kdvora);
                     kdvtutari=0;
                     if(kacsat > 1 && oran > 0){
                         orann=0;
@@ -579,11 +585,9 @@
                                 $('#toplamkdv'+kdvora).val(kdvtutarii);
 
                                 // $('#gtoplam').val(sattoplam);
-
                             }
                             orann++;
                         });
-
 
                     }else{
                         // tek satır olduğunda
@@ -610,8 +614,6 @@
 
                 });
 
-
-
                 sattoplami= Number(sum) + Number(kdvtut);
                 var sattoplamii=Number(sattoplami).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 $('#gtoplam').val(sattoplamii);
@@ -623,42 +625,49 @@
             } catch (e) {
                 alert(e.message)
             }
-
         }
 
         function eski(ff){
-
+        ff=Number(ff);
             eskii=ff;
             // myFunction(eskii);
         }
+        function esski(load){
+
+        }
+
         function  myFunction (gggg,z,t){
 
-
-console.log(t);
+            //var h = ($('#siptable tr.sipsatirs').length)-1;
+            //  var ilksat=$('#kdv0').find(":selected").text();
+            //  if(gggg==0){satsay=1;}else{ satsay =0;}
+            //if(i==null){i=1;}
+//console.log(z,t);
             if(typeof z!=="undefined"){
                 eskii=z;
             }
             satsay =0;
 
             //18 eklenirse
-            // if(t==1){
-            //     kdvtext=gggg;
-            // }else {
-            var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
-            // }
+            if(t==1){
+                kdvtext=gggg;
+            }else {
+                var kdvtext = $('#kdv' + gggg).find(":selected").text(); //secilen dd
+            }
             var  kdvtoplam1 =1;
 
             n = 0;
             //console.log(gggg,z);
 
             esss=0;
+            kdvtext=Number(kdvtext);
             $('#siptable tr.sipsatirs').each(function(){
                 //kdvv=$("select[name^=kdv[]").find(":selected").text();
                 kdvv=$('#kdv'+satsay).find(":selected").text();
+                kdvv=Number(kdvv);
                 // console.log(kdvv,kdvtext);
                 //   console.log(i);
-                if(kdvv==kdvtext)
-                {
+                if(kdvv==kdvtext){
                     n++;
 //return false;
                 }
@@ -671,7 +680,11 @@ console.log(t);
             });
 
             ess=0;
-
+            // $('#kdvbel div.kadeve').each(function(){
+            //     yy=$('#kdv'+eskik).find(":selected").text();
+            //    // ess++;
+            //console.log(z);
+            // });
             $('#siptable tr.sipsatirs').each(function() {
                 if (z == null) {
 
@@ -1130,5 +1143,7 @@ console.log(t);
             })
 
         });
+
     </script>
+
 @endsection

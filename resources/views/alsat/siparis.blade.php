@@ -283,7 +283,7 @@
                                                     <div class="kdv18 kdvtutt">
                                                     <!-- {{--<div class="row" style="float:right">--}} -->
                                                     <label class="col-md-1"  style="font-size: 14px;margin-left:55.5%;margin-top:7px;font-family: monospace, monospace">KDV  :</label>
-                                                    <label class="col-md-1 kdv" id="kdv0"  style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% 18</label>
+                                                    <label class="col-md-1 kdv" id="kdv18"  style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% 18</label>
                                                     <!-- {{--//  <input for="toplam" id="toplam">--}} -->
                                                     <div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">
                                                         <input id="toplamkdv18"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly/><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>
@@ -372,8 +372,8 @@
             }
         };
         //enter tuşu submit iptal
-eskik=18;
-f=18;
+        eskik=18;
+        f=18;
         $("tr.sipsatirs input").keyup(function(event) {
             if (event.keyCode === 13) {
 
@@ -389,8 +389,7 @@ f=18;
 
         if(dtur=""){
             dtur="TL";
-        }
-        {
+        }else{
             dtur = $('#dbirim').find(":selected").text();
         }
 
@@ -512,8 +511,8 @@ f=18;
            var sattoplamii=Number(sattoplami).toLocaleString('tr',{ minimumFractionDigits: 2 });
             $('#gtoplam').val(sattoplamii);
 
-                console.log(sum);
-                console.log(kdvtut);
+                //console.log(sum);
+                //console.log(kdvtut);
 
                 // dsattoplam=sattoplam.replace(/\./g,",");
         } catch (e) {
@@ -542,7 +541,7 @@ f=18;
           //  var ilksat=$('#kdv0').find(":selected").text();
               //  if(gggg==0){satsay=1;}else{ satsay =0;}
             //if(i==null){i=1;}
-
+//console.log(z,t);
             if(typeof z!=="undefined"){
                 eskii=z;
             }
@@ -565,8 +564,7 @@ f=18;
                     kdvv=$('#kdv'+satsay).find(":selected").text();
                    // console.log(kdvv,kdvtext);
                 //   console.log(i);
-                    if(kdvv==kdvtext)
-                         {
+                    if(kdvv==kdvtext){
                              n++;
 //return false;
                          }
