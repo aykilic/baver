@@ -198,7 +198,7 @@
                                                             <td class="col-md-4">
                                                                 <div class="col-lg-12 kutupad">
                                                                     <div class="form-group kutupad">
-                                                                        <input type="hidden" name="fissid[]" id="fissid0" value="">
+                                                                        <input type="hidden" name="fissid[]" id="fissid0" class="fissid" value="">
                                                                         <input type="text" name="stokad[]" id="stokad"  autocomplete="off" class="form-control has-feedback-left buyuk" style="padding-left:65px;">
                                                                         <img class="Typeahead-spinners" src="../images/wait.gif">
                                                                         <span class="fa fa-search form-control-feedback left ico"   ></span>
@@ -207,12 +207,12 @@
                                                             </td>
                                                             <td class="col-md-1">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="miktar[]" id="miktar0"  autocomplete="off" class="form-control" oninput="calculate(0)" style="font-family: monospace, monospace;" >
+                                                                    <input type="text" name="miktar[]" id="miktar0"  autocomplete="off" class="form-control miktar" oninput="calculate(0)" style="font-family: monospace, monospace;" >
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-1">
                                                                 <div class="col-lg-12 kutupad">
-                                                                    <select data-toggle="dropdown" id="birim" class="form-control" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
+                                                                    <select data-toggle="dropdown" id="birim" class="form-control birim" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
                                                                         @foreach($birim as $key => $bad)
                                                                             <option  value="{{ $key }}">{{ $bad }}</option>
                                                                         @endforeach
@@ -221,7 +221,7 @@
                                                             </td>
                                                             <td class="col-md-2">
                                                                 <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="bfiyat[]" id="bfiyat0" value="" autocomplete="off" class="form-control" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate(0)" ><span id="t1" class=" form-control-feedback right ico">TL</span>
+                                                                    <input type="text" name="bfiyat[]" id="bfiyat0" value="" autocomplete="off" class="form-control bfiyat" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate(0)" ><span id="t1" class=" form-control-feedback right ico">TL</span>
                                                                 </div>
                                                             </td>
                                                             <td class="col-md-1">
@@ -794,7 +794,7 @@
                 var i = $('#siptable tr.sipsatirs').length;
            // var i=1;
                 $(document).on('click','#satirekle', function(ibo) {
-                    var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" name="fissid[]" id="fissid'+i+'" value="" class="fissid" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control miktar" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control birim" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control bfiyat" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
+                    var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" class="fissid" name="fissid[]" id="fissid'+i+'" value="" class="fissid" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control miktar" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control birim" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control bfiyat" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
                         '<td class="col-md-1"><div class="col-lg-12 kutupad">'+
                         '<select data-toggle="dropdown" id="kdv'+i+'" class="form-control kkdv" onchange="myFunction('+i+')" onclick="eski($(this).find(\':selected\').text())" name="kdv[]"><span class="caret"></span>@foreach($vergim as $key => $vor)'+
                         '<option value="{{ $key }}">{{ $vor }}</option>@endforeach</select></div></td>'+
@@ -873,7 +873,46 @@
 
                                 i--;
 
-                                //yeniden id isimlendir
+                        var fields = $('#siptable tr.sipsatirs .fissid');
+                        var counts = 0;
+                        $.each(fields, function() {
+                            // $('#siptable tr.sipsatirs').each(function() {
+
+                            $(this).attr('id','fissid' + counts);
+
+                            counts++;
+                        });
+
+                        //yeniden id isimlendir
+                        var fields = $('#siptable tr.sipsatirs .miktar');
+                        var counts = 0;
+                        $.each(fields, function() {
+                            // $('#siptable tr.sipsatirs').each(function() {
+
+                            $(this).attr('id','miktar' + counts);
+                            $(this).attr('oninput','calculate('+counts+')' );
+                            counts++;
+                        });
+
+                        var fields = $('#siptable tr.sipsatirs .birim');
+                        var counts = 0;
+                        $.each(fields, function() {
+                            // $('#siptable tr.sipsatirs').each(function() {
+
+                            $(this).attr('id','birim' + counts);
+                            counts++;
+                        });
+
+                        var fields = $('#siptable tr.sipsatirs .bfiyat');
+                        var counts = 0;
+                        $.each(fields, function() {
+                            // $('#siptable tr.sipsatirs').each(function() {
+
+                            $(this).attr('id','bfiyat' + counts);
+                            $(this).attr('oninput','calculate('+counts+')' );
+                            counts++;
+                        });
+
                         var fields = $('#siptable tr.sipsatirs .kkdv');
                         var count = 0;
                         $.each(fields, function() {
@@ -883,11 +922,15 @@
                             $(this).attr('onchange','myFunction('+count+')');
                             count++;
                         });
+
+
+
                         var field = $('#siptable tr.sipsatirs .tutar');
                         var counts = 0;
 
                         $.each(field, function() {
                             // $('#siptable tr.sipsatirs').each(function() {
+                            $(this).attr('id','miktar' + counts);
 
                             $(this).attr('id','tutar' + counts);
                             counts++;
