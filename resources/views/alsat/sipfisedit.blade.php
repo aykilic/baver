@@ -436,84 +436,7 @@
 
         });
 
-        //         $(window).load(function (){
-        //
-        //             myFunction(0,18,1);
-        //
-        //         });
-        //          $(window).load(function (){
-        //
-        //              summ=0;
-        //
-        //              $("input[name^='tutar']").each(function(){
-        //
-        //
-        //                  summ += +$(this).val();
-        //                  //console.log(sum);
-        //              });
-        //              $('#toplamm').val(summ);
-        //
-        //                     //var  ymyB = $('#kdv' + yoran).value;
-        //              $('#siptable tr.sipsatirs').each(function () {
-        //                  var kdvtek;
-        //                  var ykdvorann;
-        //                 ykdvorann=$('#kdv' + yorann).find(":selected").text();
-        //
-        //                  kdvtek=(summ*ykdvorann/100);
-        //                  kdvtek=Number(kdvtek).toLocaleString('tr',{ minimumFractionDigits: 2 });
-        //                  $('#toplamkdv'+(Number(ykdvorann))).val(kdvtek);
-        //                 // console.log(Number(ykdvorann));
-        //
-        //                         ggtoplam=(summ*(1.18));
-        //                         ggtoplam=Number(ggtoplam).toLocaleString('tr',{ minimumFractionDigits: 2 });
-        //                         $('#gtoplam').val(ggtoplam);
-        //
-        //              //    console.log(h);
-        //                          if( h <= 0 ){
-        //                              $('#siptable tr.sipsatirs').each(function () {
-        //                                  ykdvoran = $('#kdv' + yoran).find(":selected").text();
-        //
-        //
-        //                                  yoran++;
-        //                              });
-        //                              console.log("ibo");
-        //                          }
-        //
-        //
-        //
-        //                             console.log("ibom");
-        //
-        //
-        //                          yorann++;
-        //         //                  var  ymyB = $('#miktar' + yoran)[0].value;
-        //         //                  var ymyBo = $('#bfiyat'+ yoran)[0].value;
-        //         //                  var ytutaa = ymyB * ymyBo;
-        //                  //    console.log($('#siptable tr.sipsatirs #miktar0')[0].value)
-        //         //             // var ymyBB=ymyB.replace(/\./g,"");
-        //         //             // var ymyBBB=ymyBB.replace(/\,/g,".");
-        //         //             //
-        //         //             // var ymyBoo=ymyBo.replace(/\./g,"");
-        //         //             // var ymyBooo=ymyBoo.replace(/\,/g,".");
-        //
-        //
-        //
-        //
-        //         //             //
-        //                   //   console.log(kdvtek);
-        //         //             //
-        //         //             // var ytutaaa = Number(ytutaa).toLocaleString('tr', {minimumFractionDigits: 2});
-        //         //             //
-        //         //             // $('#tutar' + yoran).val(ytutaaa);
-        //         //
-        //         //             //console.log(ymyBox,ymyBoxx,ytutaa,ytutaaa);
-        //         //             //yoran++;
-        //
-        //
-        //
-        //
-        //                 });
-        //
-        //             });
+
 
 
         //sayfa yüklendiğinde hesaplama
@@ -707,10 +630,10 @@
             //console.log(z);
             // });
 
-            // if(isNaN(eskii)){
-            //
-            //     n=2;
-            // }
+            if(isNaN(eskii)){
+
+                n=2;
+            }
             //console.log(n,kdvtext);
 
             $('#siptable tr.sipsatirs').each(function() {
