@@ -116,7 +116,6 @@
                                                 <td><a href="javascript:void(0);" id="silbirim" data-bid="{{$postt->bid}}"><i class="fa fa-trash-o fa-2x" ></i></a></td>
 
                                             </tr>
-
                                         @endforeach
                                         </tbody>
                                     </table>

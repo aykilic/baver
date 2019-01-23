@@ -11,7 +11,7 @@ class bankaTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bankalar')->insert([
+        Role::table('bankalar')->insert([
             ['baid' => 1, 'bankad' => "GARANTİ"],
             ['baid' => 2, 'bankad' => "YAPIKREDİ"],
             ['baid' => 3, 'bankad' => "T.FİNANS"],

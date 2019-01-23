@@ -199,8 +199,6 @@
                                                     </table>
 
                                                 </div>
-
-
                                             <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                                                     {{ csrf_field() }}
 

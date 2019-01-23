@@ -48,7 +48,7 @@
                             </ul>
                             <div class="clearfix"></div>
                             <div class="x_content">
-                                <form id="satirler" action="{{action('fisController@sipfiskaydet')}}" class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
+                                <form id="satirler" action="{{action('fisController@sipfiskaydet')}}"  class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
                                     {{csrf_field()}}
 
 
@@ -329,7 +329,9 @@
                                     <div class="text-right">
                                         <input type="hidden" name="add">
                                         <input type="hidden" name="uniquetime" value="1501288025.81">
-                                        <button  class="btn btn-success btn-insert btn-xs-block add" onsubmit="return false;"  type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button>
+                                        <!-- <button  class="btn btn-success btn-insert btn-xs-block add" onsubmit="return false;"  type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button> -->
+                                   <button  class="btn btn-success btn-insert btn-xs-block add" onClick="kaydet(this.form);"  type="button" ><i class="fa fa-plus-square"></i>Kaydet</button>
+                                   
                                     </div>
 
                                 </form>
@@ -346,7 +348,7 @@
     <footer>
 
         <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlibaaaa3333</a>
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorliba3</a>
         </div>
         <div class="clearfix"></div>
     </footer>
@@ -360,7 +362,7 @@
     <link href="{{ asset("css/site.css") }}" rel="stylesheet">
 
     <script src="{{ asset("js/typeahead.js") }}"></script>
-
+    <script src="{{ asset("js/sweetalert.js") }}"></script>
     <!-- {{--<script src="{{ asset("js/bootstrap3-typhead.js") }}"></script>--}} -->
     <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}} -->
     <script type="text/javascript">
@@ -371,6 +373,82 @@
                 e.preventDefault();
             }
         };
+        
+        function kaydet(form) {
+            var fisfid = $('#fisfid').val();
+            if(fisfid == "" || fisfid == null || fisfid== undefined){
+                
+                swal("Hata!", "Hesap Seçmediniz!...", "error");
+                // document.getElementsByClassName("swal-button")[0].style.backgroundColor = '#26B99A';
+
+                        // swal({
+                        // // text: "How was your experience getting help with this issue?",
+                        // title:"Hesap Seçmediniz!",
+                        // buttons: {
+                        //     cancel: "Kapat",
+                        // },
+                        // });
+            }else{
+                    swal({
+                            title: "Eminmisiniz?",
+                            text: "Siparis Fişi Kaydedilecek!...",
+                            // icon: "warning",
+                            
+                            // buttons:{
+                            // cancel: {
+                            //     text: "KAPAT!",
+                            //     value: null,
+                            //     visible: true,
+                            //     className: "",
+                            //     closeModal: true,
+                            // },
+                            // confirm: {
+                            //     text: "TAMAMDIR...",
+                            //     value: true,
+                            //     visible: true,
+                            //     className: "",
+                            //     closeModal: true
+                            // },
+                        // },
+                             buttons: ["HAYIR!", "EVET!"],
+                            // buttons: true,
+                            // confirmButtonColor: "#DD6B55",
+                            // confirmButtonText: "Evet, silinsin!",
+                            // cancelButtonText: "Hayır, vazgeç!",
+
+
+                            // dangerMode: true,
+                    })
+                    .then((kaydetsipfis) => {
+                            if (kaydetsipfis) {
+                                
+                              form.submit();
+                                        
+                            
+                            } else {
+                                return false;
+                            }
+                    });
+                // form.submit();
+
+            }
+
+            // if (confirm("Kaydetmek istediğinize eminmisiniz")) {
+            // form.submit();
+            // }
+
+            
+            }
+        // $('#satirler').submit(function(e) {
+        //     e.preventDefault();
+
+        //     if (confirm('Are you sure you want to submit this form?')) {         
+        //             return true;         
+        //         } else {
+        //             return false;
+        //         }
+  
+        //     });
         //enter tuşu submit iptal
         eskik=18;
         f=18;
@@ -849,7 +927,7 @@
                     return false;
 
                 });
-
+                
 
                 $(document).on('click','#satirsil', function() {
                     // var sildi;

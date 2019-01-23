@@ -29,104 +29,104 @@
                 </ul>
                 <div class="clearfix"></div>
             </div>
-            @foreach ($durum as $hdurum )
-            <div class="x_content">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="temperature"><b>Monday</b>, 07:30 AM
-                            <span>F</span>
-                            <span><b>C</b></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="weather-icon">
-                          <span>
-                                              <canvas height="84" width="84" id="{{$hdurum->hadiseGun1}}"></canvas>
-                                          </span>
+            {{--@foreach ($durum as $hdurum )--}}
+            {{--<div class="x_content">--}}
+                {{--<div class="row">--}}
+                    {{--<div class="col-sm-12">--}}
+                        {{--<div class="temperature"><b>Monday</b>, 07:30 AM--}}
+                            {{--<span>F</span>--}}
+                            {{--<span><b>C</b></span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="row">--}}
+                    {{--<div class="col-sm-4">--}}
+                        {{--<div class="weather-icon">--}}
+                          {{--<span>--}}
+                                              {{--<canvas height="84" width="84" id="{{$hdurum->hadiseGun1}}"></canvas>--}}
+                                          {{--</span>--}}
 
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="weather-text">
-                            <h2>İstanbul
-                                <br><i>Partly Cloudy Day</i>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <div class="weather-text pull-right">
-                        <h3 class="degrees">23</h3>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-sm-8">--}}
+                        {{--<div class="weather-text">--}}
+                            {{--<h2>İstanbul--}}
+                                {{--<br><i>Partly Cloudy Day</i>--}}
+                            {{--</h2>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-sm-12">--}}
+                    {{--<div class="weather-text pull-right">--}}
+                        {{--<h3 class="degrees">23</h3>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="clearfix"></div>--}}
 
 
-                <div class="row weather-days">
-                    <div class="col-sm-2">
-                        <div class="daily-weather">
-                            <h2 class="day">Pzt</h2>
-                            <h3 class="degrees">{{$hdurum->enDusukGun1}}-{{$hdurum->enYuksekGun1}}</h3>
-                            <span>
-                                                  <canvas id="{{$hdurum->hadiseGun1}}" width="32" height="32">
-                                                  </canvas>
+                {{--<div class="row weather-days">--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<div class="daily-weather">--}}
+                            {{--<h2 class="day">Pzt</h2>--}}
+                            {{--<h3 class="degrees">{{$hdurum->enDusukGun1}}-{{$hdurum->enYuksekGun1}}</h3>--}}
+                            {{--<span>--}}
+                                                  {{--<canvas id="{{$hdurum->hadiseGun1}}" width="32" height="32">--}}
+                                                  {{--</canvas>--}}
 
-                                          </span>
-                            <h5>15
-                                <i>km/h</i>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="daily-weather">
-                            <h2 class="day">Sal</h2>
-                            <h3 class="degrees">{{$hdurum->enDusukGun2}}-{{$hdurum->enYuksekGun2}}</h3>
-                            <canvas height="32" width="32" id="{{$hdurum->hadiseGun2}}"></canvas>
-                            <h5>12
-                                <i>km/h</i>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="daily-weather">
-                            <h2 class="day">Çar</h2>
-                            <h3 class="degrees">{{$hdurum->enDusukGun3}}-{{$hdurum->enYuksekGun3}}</h3>
-                            <canvas height="32" width="32" id="snow"></canvas>
-                            <h5>14
-                                <i>km/h</i>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="daily-weather">
-                            <h2 class="day">Per</h2>
-                            <h3 class="degrees">{{$hdurum->enDusukGun4}}-{{$hdurum->enYuksekGun4}}</h3>
-                            <canvas height="32" width="32" id="sleet"></canvas>
-                            <h5>15
-                                <i>km/h</i>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="daily-weather">
-                            <h2 class="day">Cum</h2>
-                            <h3 class="degrees">{{$hdurum->enDusukGun5}}-{{$hdurum->enYuksekGun5}}</h3>
-                            <canvas height="32" width="32" id="wind"></canvas>
-                            <h5>11
-                                <i>km/h</i>
-                            </h5>
-                        </div>
-                    </div>
+                                          {{--</span>--}}
+                            {{--<h5>15--}}
+                                {{--<i>km/h</i>--}}
+                            {{--</h5>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<div class="daily-weather">--}}
+                            {{--<h2 class="day">Sal</h2>--}}
+                            {{--<h3 class="degrees">{{$hdurum->enDusukGun2}}-{{$hdurum->enYuksekGun2}}</h3>--}}
+                            {{--<canvas height="32" width="32" id="{{$hdurum->hadiseGun2}}"></canvas>--}}
+                            {{--<h5>12--}}
+                                {{--<i>km/h</i>--}}
+                            {{--</h5>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<div class="daily-weather">--}}
+                            {{--<h2 class="day">Çar</h2>--}}
+                            {{--<h3 class="degrees">{{$hdurum->enDusukGun3}}-{{$hdurum->enYuksekGun3}}</h3>--}}
+                            {{--<canvas height="32" width="32" id="snow"></canvas>--}}
+                            {{--<h5>14--}}
+                                {{--<i>km/h</i>--}}
+                            {{--</h5>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<div class="daily-weather">--}}
+                            {{--<h2 class="day">Per</h2>--}}
+                            {{--<h3 class="degrees">{{$hdurum->enDusukGun4}}-{{$hdurum->enYuksekGun4}}</h3>--}}
+                            {{--<canvas height="32" width="32" id="sleet"></canvas>--}}
+                            {{--<h5>15--}}
+                                {{--<i>km/h</i>--}}
+                            {{--</h5>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-sm-2">--}}
+                        {{--<div class="daily-weather">--}}
+                            {{--<h2 class="day">Cum</h2>--}}
+                            {{--<h3 class="degrees">{{$hdurum->enDusukGun5}}-{{$hdurum->enYuksekGun5}}</h3>--}}
+                            {{--<canvas height="32" width="32" id="wind"></canvas>--}}
+                            {{--<h5>11--}}
+                                {{--<i>km/h</i>--}}
+                            {{--</h5>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-                @endforeach
+                    {{--<div class="clearfix"></div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+                {{--@endforeach--}}
         </div>
-        <img src="http://www.mgm.gov.tr/sunum/sondurum-show-2.aspx?m=ISTANBUL&rC=111&rZ=fff" style="width:140px; height:100px;" alt="ANKARA" />
-        <img src="http://www.mgm.gov.tr/sunum/tahmin-show-2.aspx?m=ISTANBUL&basla=1&bitir=5&rC=111&rZ=fff" style="width:400px; height:100px;" alt="ANKARA" />
+        {{--<img src="http://www.mgm.gov.tr/sunum/sondurum-show-2.aspx?m=ISTANBUL&rC=111&rZ=fff" style="width:140px; height:100px;" alt="ANKARA" />--}}
+        {{--<img src="http://www.mgm.gov.tr/sunum/tahmin-show-2.aspx?m=ISTANBUL&basla=1&bitir=5&rC=111&rZ=fff" style="width:400px; height:100px;" alt="ANKARA" />--}}
     </div>
     </div>
 

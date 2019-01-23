@@ -224,7 +224,7 @@
                                                             <td class="col-md-4">
                                                                 <div class="col-lg-12 kutupad">
                                                                     <div class="form-group kutupad">
-                                                                        <input type="hidden" name="fissid[]" id="fissid{{$i}}" class="fissid" value="">
+                                                                        <input type="hidden" name="fissid[]" id="fissid{{$i}}" class="fissid" data-fissatid="{{$sipfissatt->sipfisatirid}}" value="">
                                                                         <input type="text" name="stokad[]" id="stokad" value="{{$sipfissatt->sad}}" autocomplete="off" class="form-control has-feedback-left buyuk" style="padding-left:65px;">
                                                                         {{--<img class="Typeahead-spinners" src="../images/wait.gif">--}}
                                                                         <span class="fa fa-search form-control-feedback left ico"   ></span>
@@ -365,7 +365,7 @@
     <footer>
 
         <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlibaaaa3333</a>
+            Baver Kimya Plastik San Tic Ltd Şti
         </div>
         <div class="clearfix"></div>
     </footer>
@@ -394,6 +394,106 @@
                 e.preventDefault();
             }
         };
+
+        // sayfa yüklendiğinde
+        $(window).load(function (){
+
+            //eskii=null;
+            // eski(undefined);
+            myEdit();
+
+        });
+
+        function myEdit(){
+
+            // $(".kdv").remove();
+                var eh = 0;
+                
+                var eekdv=0;
+                esum=0;
+                
+                // $(this).attr('id','fissid' + counts);
+                var ssh = ($('#siptable tr.sipsatirs').length)
+                ekdv=$('#kdv'+eh).find(":selected").text();
+                ekdv=Number(ekdv);
+            $('#siptable tr.sipsatirs').each(function() {
+
+                if(eh == 0){
+              
+                    $(".kdv18").remove();
+                    var ekDiv = $('#kdvbel');
+                                var ekDivsatir =
+                                    '<div class="kdv' + ekdv + ' kdvtutt">' +
+                                    '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
+                                    '<label class="col-md-1 kdv" id="kdv' + ekdv + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + ekdv + '</label>' +
+                                    '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
+                                    '<input id="toplamkdv' + ekdv + '"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
+                                    '</div>' +
+                                    '</div>';
+
+                                $(ekDivsatir).appendTo(ekDiv);
+                                
+                }else{
+                    ekdv=$('#kdv'+eh).find(":selected").text();
+                    ekdv=Number(ekdv);
+                    var eeh=0;
+                     kdves=0;
+                    $('#siptable tr.sipsatirs').each(function()
+                    {
+                        eekdv=$('#kdv'+eeh).find(":selected").text();
+                        eekdv=Number(eekdv);
+                        
+                         if(eh > eeh)
+                            {
+
+                                if(ekdv==eekdv)
+                                    {
+                                        kdves++;
+
+                                    }
+                            }
+                       
+                        eeh++;
+                    });
+                                if(kdves==0)
+                                {
+                                var eekDiv = $('#kdvbel');
+                                var eekDivsatir =
+                                '<div class="kdv' + ekdv + ' kdvtutt">' +
+                                '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
+                                '<label class="col-md-1 kdv" id="kdv' + ekdv + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + ekdv + '</label>' +
+                                '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
+                                '<input id="toplamkdv' + ekdv + '"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
+                                '</div>' +
+                                '</div>';
+
+                                $(eekDivsatir).appendTo(eekDiv);
+                                }
+                    }
+                        eh++;
+                
+                    calculate(0);
+                    
+            });
+
+            // toplam tutar
+            $("input[name^='tutar']").each(function(){
+                    esum += +$(this).val();
+                    // console.log(esum);
+                });
+                var esattoplam=Number(esum).toLocaleString('tr',{ minimumFractionDigits: 2 });
+                $('#toplamm').val(esattoplam);
+
+            
+        }
+        
+
+
+
+
+
+
+
         //enter tuşu submit iptal
         eskik=18;
         f=18;
@@ -428,13 +528,9 @@
 
         //sayfa yüklendiğinde hesaplama
        // window.onload(myFunction(0));
-        $(window).load(function (){
 
-            //eskii=null;
-            eski(undefined);
-            myFunction(0);
-
-        });
+       
+       
 
 
 
@@ -452,13 +548,6 @@
                     kdv=Number(kdv);
                 }
 
-
-                // var mi = $('#miktar')[0].value;
-                // var bf = $('#bfiyat')[0].value;
-                // var tut = mi * bf;
-                // var tuta = Number(tut).toLocaleString('tr', {minimumFractionDigits: 2});
-                // $('#tutar').val(tuta);
-                //document.getElementById('#miktar' + elementID);
 
                 //ilk element slinirse
                 if(document.getElementById('miktar' + elementID)){
@@ -576,17 +665,7 @@
 
 
         function  myFunction (gggg,z,t){
-            //console.log(eskii);
-
-            // $('#siptable tr.sipsatirs').each(function(){
-            //     kdvv=$('#kdv'+satsal).find(":selected").text();
-            //
-            // });
-            //var h = ($('#siptable tr.sipsatirs').length)-1;
-            //  var ilksat=$('#kdv0').find(":selected").text();
-            //  if(gggg==0){satsay=1;}else{ satsay =0;}
-            //if(i==null){i=1;}
-//console.log(z,t);
+            
             if(typeof z!=="undefined" ){
                 eskii=z;
             }
@@ -601,7 +680,6 @@
             var  kdvtoplam1 =1;
 
             n = 0;
-            //console.log(gggg,z);
 
             esss=0;
             kdvtext=Number(kdvtext);
@@ -609,35 +687,30 @@
                 //kdvv=$("select[name^=kdv[]").find(":selected").text();
                 kdvv=$('#kdv'+satsay).find(":selected").text();
                 kdvv=Number(kdvv);
-                // console.log(kdvv,kdvtext);
-                //   console.log(i);
+                
                 if(kdvv==kdvtext){
                     n++;
-//return false;
+
                 }
                 if(kdvv==eskii){
                     esss++;
-                    // console.log(eskik);
+                    
                 }
                 satsay++;
-//console.log(ibom);
+
             });
 
             ess=0;
-            // $('#kdvbel div.kadeve').each(function(){
-            //     yy=$('#kdv'+eskik).find(":selected").text();
-            //    // ess++;
-            //console.log(z);
-            // });
+            
 
             if(isNaN(eskii)){
 
                 n=2;
             }
-            //console.log(n,kdvtext);
+            
 
             $('#siptable tr.sipsatirs').each(function() {
-                if (z == null) {
+                if (z == null || z == "undefined") {
 
                     if (n < 2) {
                         //  n=1;
@@ -677,18 +750,6 @@
         $(document).ready(function() {
 
 
-//        $("#bfiyat,#miktar").on('change keyup',function() {
-//
-//               fiy = $('#bfiyat').val();
-//               mik =$('#miktar').val();
-//
-//                var tutar=fiy*mik;
-//
-//                $('#tutar').val(tutar);
-//            $('#toplamm').text(tutar);
-//            });
-
-
             Inputmask.extendAliases({
                 'myCurrency': {
                     radixPoint: ',',
@@ -721,13 +782,13 @@
             });
             maske =0;
             $('#siptable tr.sipsatirs').each(function() {
-//console.log(maske);
+
                 $('#bfiyat'+maske).inputmask("myCurrency");
                 $('#miktar'+maske).inputmask("myCurrency");
                 $('#tutar'+maske).inputmask("tutar");
 
 
-            // console.log(maske);
+            
              maske++;
             });
             $('#toplamm').inputmask("tutar");
@@ -855,7 +916,7 @@
                 var sad=$('#stokturad').val();
 
 
-                if (sad=="" || sad==null) {
+                if (sad=="" || sad==null || fisfid=="" || fisifid==null) {
 
 
                     new PNotify({
@@ -958,32 +1019,66 @@
 
 
             $(document).on('click','#satirsil', function() {
-                // var sildi;
-                //re=$(this).attr('data-sil');
-                // re=$(this).parents(":selected").text();
-                // re=$(this).closest("tr").find(".kkdv :selected").text();
+                swal({
+                            title: "Eminmisiniz?",
+                            text: "Satır Silinecek!...",
+                            // icon: "warning",
+                            
+                            // buttons:{
+                            // cancel: {
+                            //     text: "KAPAT!",
+                            //     value: null,
+                            //     visible: true,
+                            //     className: "",
+                            //     closeModal: true,
+                            // },
+                            // confirm: {
+                            //     text: "TAMAMDIR...",
+                            //     value: true,
+                            //     visible: true,
+                            //     className: "",
+                            //     closeModal: true
+                            // },
+                        // },
+                             buttons: ["HAYIR!", "EVET!"],
+                            // buttons: true,
+                            // confirmButtonColor: "#DD6B55",
+                            // confirmButtonText: "Evet, silinsin!",
+                            // cancelButtonText: "Hayır, vazgeç!",
 
-                // var r=i;
-                //  i=r;
-                //   re=r-1;
-                if( i > 1 ) {
-                    // ac=$("#kdv"+re);
+
+                            // dangerMode: true,
+                    })
+                    .then((silsipfissat) => {
+                            if (silsipfissat) {
+                                $.ajax({
+
+                                    dataType: 'JSON',
+                                    type: 'POST',
+                                    url: '/sipfissatsil',
+                                    data: {
+                                        '_token': $('input[name=csrf-token]').val(),
+                                        'sipfissatid': mcep,
+                                        'sipfisid':aa,
+                                        
+
+                        },
+                        success: function (data) {
+
+                            // önemli
+                    if( i > 1 ) {
+                    
                     re=$(this).closest("tr").find(".kkdv :selected").text();
                     re=Number(re);
-                   // console.log(re);
+                   
                     z=re;
-                    // f = $("#kdv"+re).find(":selected").text();
-                    // $('#siptable tr.sipsatirs')
-                    // console.log(f);
-                    //console.log(re);
-
+                    
                     $(this).parents('tr').remove();
 
                     i--;
                     var fields = $('#siptable tr.sipsatirs .fissid');
                     var counts = 0;
                     $.each(fields, function() {
-                        // $('#siptable tr.sipsatirs').each(function() {
 
                         $(this).attr('id','fissid' + counts);
 
@@ -1050,6 +1145,29 @@
                 myFunction (re,z);
 
                 return false;
+                                //önemli
+                        },
+                        error:function (data) {
+                            // console.log(data);
+                            new PNotify({
+                                title: 'Uyarı!...',
+                                text: 'İşlem Hatası...',
+                                type: 'error',
+                                // type: 'notice',
+                                styling: 'bootstrap3'
+                            });
+                        }
+
+                                            });
+                              
+                                        
+                            
+                            } else {
+                                return false;
+                            }
+                    });
+                
+               
             });
 
 

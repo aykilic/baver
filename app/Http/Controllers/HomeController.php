@@ -26,11 +26,12 @@ class HomeController extends Controller
     public function index()
     {
 
-    	$hdurum=file_get_contents('http://212.175.180.28/api/tahminler/gunluk?istno=93401');
-	    $hhdurum=json_decode($hdurum);
+//    	$hdurum=file_get_contents('http://212.175.180.28/api/tahminler/gunluk?istno=93401');
+//	    $hhdurum=json_decode($hdurum);
     	//dd($hhdurum);
 	    return View::make('home')
-		    ->with('durum',$hhdurum);
+//		    ->with('durum',$hhdurum)
+            ;
 //return view('home');
 		  //  ->json();
 
