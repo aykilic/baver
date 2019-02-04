@@ -210,6 +210,25 @@ tr > th.duz{ padding-left:3px !important; }
 
 
 }
+.modall {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background:  url('../images/load.svg') 50% 50%  no-repeat;
+}
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modall {
+    display: block;
+}
     /*span.fa.fa-search.form-control-feedback.left{ padding-left: 1px;*/
 /*}*/
 

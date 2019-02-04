@@ -96,9 +96,12 @@ Route::delete('/stokturusil/{depoid}', 'Controller@stokturusil');
 //****************sipariş fisi************************//////////////////////
 Route::get('/siparisfisleri/{fisturu}', 'fisController@siparisfisleri');
 Route::get('/siparisfisi/{id}', 'fisController@siparisfisi');
-Route::any('/siparisfisi', 'fisController@sipfiskaydet');
+Route::any('/siparisfisii', 'fisController@sipfiskaydet');
+Route::any('/siparisfisie', 'fisController@sipfiseditkaydet');
 Route::get('/siparisfisi/edit/{id}/{fisturu}', 'fisController@sipfisedit');
 Route::delete('/siparisfisi/delete/{id}', 'fisController@siparissil');
+Route::delete('/sipfissatsil/{id}', 'fisController@sipsatsil');
+Route::post('/sipfissatekle', 'fisController@sipfissatekle');
 Route::get('/numarala', 'fisController@numarala');
 Route::get('/numarala', function () {
     return view('alsat.numarala');

@@ -10,6 +10,9 @@
         <!-- App scripts -->
 
         <!-- Bootstrap CSS -->
+        <link href="{{ asset('/css/site.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('/css/alertify.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('/css/alertify.default.min.css') }}" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -25,10 +28,10 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            @if($fisturu==1)
-                                <h2 class="sat">{{$fisturu}} Sipariş Fişi Listesi </h2>
+                            @if($fisturuid==1)
+                                <h2 class="sat">{{$sipfisnoadi}} Sipariş Fişi Listesi </h2>
                             @else
-                                <h2 class="al">{{$fisturu}} Sipariş Fişi Listesi </h2>
+                                <h2 class="al">{{$sipfisnoadi}} Sipariş Fişi Listesi </h2>
 
                             @endif
                             <ul class="nav navbar-right panel_toolbox">
@@ -46,9 +49,10 @@
                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
                                 </li>
                             </ul>
+                                <div class="modall"></div>
                             <div class="clearfix"></div>
                             <div class="x_content">
-                                <form id="satirler" action="{{action('fisController@sipfiskaydet')}}" class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
+                                <form id="esatirler" action="{{action('fisController@sipfiseditkaydet')}}" class="form-horizontal form-label-left" name="form1" method="put"  novalidate>
                                     {{csrf_field()}}
 
 
@@ -66,9 +70,9 @@
 
                                                 <div class="form-group item">
                                                     <label for="tar">Tarih</label>
-
+                                                    <input type="hidden" name="fisturuid" id="fisturuid" value="{{$sipfis->fisturu}}" class="form-control" >
                                                     <input type="hidden" name="fisturu" id="fisturu" value="{{$fisturu}}" class="form-control" >
-
+                                                    <input type="hidden" name="sipfisid" id="sipfisid" value="{{$sipfisid}}" class="form-control" >
                                                     <input type="text" name="tar" id="tarih" class="form-control has-feedback-left" value="{{$sipfis->sipfistar}}" data-inputmask="'mask': '99/99/9999'"  aria-describedby="inputSuccess2Status2">
                                                     <span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>
                                                     <span id="inputSuccess2Status2" class="sr-only">(success)</span>
@@ -224,7 +228,8 @@
                                                             <td class="col-md-4">
                                                                 <div class="col-lg-12 kutupad">
                                                                     <div class="form-group kutupad">
-                                                                        <input type="hidden" name="fissid[]" id="fissid{{$i}}" class="fissid" data-fissatid="{{$sipfissatt->sipfisatirid}}" value="">
+                                                                        <input type="hidden" name="sipfissatirid[]" id="sipfissatirid{{$i}}" value="{{$sipfissatt->sipfisatirid}}">
+                                                                        <input type="hidden" name="fissid[]" id="fissid{{$i}}" class="fissid" data-fissatid="{{$sipfissatt->sipfisatirid}}" value="{{$sipfissatt->fissid}}">
                                                                         <input type="text" name="stokad[]" id="stokad" value="{{$sipfissatt->sad}}" autocomplete="off" class="form-control has-feedback-left buyuk" style="padding-left:65px;">
                                                                         {{--<img class="Typeahead-spinners" src="../images/wait.gif">--}}
                                                                         <span class="fa fa-search form-control-feedback left ico"   ></span>
@@ -282,7 +287,7 @@
                                                             </td>
 
                                                             <td>
-                                                                <a class="btn btn-default"  href="#" id="satirsil" aria-label="Settings">
+                                                                <a class="btn btn-default"  href="#" id="satirsil" data-fissatid="{{$sipfissatt->sipfisatirid}}" aria-label="Settings">
                                                                     <i class="fa fa-times" aria-hidden="true"  ></i>
                                                                 </a>
                                                             </td>
@@ -379,16 +384,21 @@
     <link href="{{ asset("css/site.css") }}" rel="stylesheet">
 
     <script src="{{ asset("js/typeahead.js") }}"></script>
-
+    <script src="{{ asset("js/sweetalert.js") }}"></script>
+    <script src="{{ asset("js/alertify.min.js") }}"></script>
     <!-- {{--<script src="{{ asset("js/bootstrap3-typhead.js") }}"></script>--}} -->
     <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}} -->
     <script type="text/javascript">
         //enter tuşu submit iptal
 
+        $body = $("body");
+        $(document).on({
+            ajaxStart: function() { $body.addClass("loading");},
+            ajaxStop: function() { $body.removeClass("loading");}
+        });
 
 
-
-        document.getElementById("satirler").onkeypress = function(e) {
+        document.getElementById("esatirler").onkeypress = function(e) {
             var key = e.charCode || e.keyCode || 0;
             if (key == 13) {
                 e.preventDefault();
@@ -487,12 +497,6 @@
             
         }
         
-
-
-
-
-
-
 
         //enter tuşu submit iptal
         eskik=18;
@@ -901,7 +905,12 @@
                     }
 
                 }).on("typeahead:selected", function(obj, stok) {
-                $("#fissid0").val(stok.id);
+                // $hh=$('#fissid'+i);
+
+                //$('#fissid'+i).val(stok.id);
+                //$("[id='fissid" + i + "']").val(stok.id);
+                $re=$(this).closest("tr.sipsatirs").find(".fissid").val(stok.id);
+                console.log($re);
                // console.log(stok.id);
             })
                 .on('typeahead:asyncrequest', function() {
@@ -960,214 +969,351 @@
             var scntDiv = $('#siptable');
             var i = $('#siptable tr.sipsatirs').length;
             // var i=1;
+
+            // satır ekle
             $(document).on('click','#satirekle', function(ibo) {
-                var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad "><input type="hidden" class="fissid" name="fissid[]" id="fissid'+i+'" value="" class="fissid" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control miktar" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control birim" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control bfiyat" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
-                    '<td class="col-md-1"><div class="col-lg-12 kutupad">'+
-                    '<select data-toggle="dropdown" id="kdv'+i+'" class="form-control kkdv" onchange="myFunction('+i+')" onclick="eski($(this).find(\':selected\').text())" name="kdv[]"><span class="caret"></span>@foreach($vergim as $key => $vor)'+
-                    '<option value="{{ $key }}">{{ $vor }}</option>@endforeach</select></div></td>'+
-                    '<td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control tutar" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil"  aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
-                    '</td>';
-                $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
-                        hint: false,
-                        minLength: 1,
-                        limit : 10
+                $.ajax({
+
+                    dataType: 'JSON',
+                    type: 'post',
+                    url: '/sipfissatekle',
+                    data: {
+                        '_token': $('input[name=csrf-token]').val(),
+                         'numara': $('#sfisno').val(),
+                         'sipfisid':$('#sipfisid').val()
+
+
                     },
-                    {
-                        name: 'sad',
-                        display: 'name',
-                        source: stokbloodhound,
-                        templates: {
-                            empty: [
-                                '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
-                            ]
-                        }
+                    success: function (data) {
+                        //console.log(data);
+                                {{--data-fissatid="{{$sipfissatt->sipfisatirid}}"--}}
+                        var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad "><input type="hidden" class="fissid" name="fissid[]" id="fissid'+i+'"  value=""  class="fissid" ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control miktar" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control birim" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control bfiyat" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
+                            '<td class="col-md-1"><div class="col-lg-12 kutupad">'+
+                            '<select data-toggle="dropdown" id="kdv'+i+'" class="form-control kkdv" onchange="myFunction('+i+')" onclick="eski($(this).find(\':selected\').text())" name="kdv[]"><span class="caret"></span>@foreach($vergim as $key => $vor)'+
+                            '<option value="{{ $key }}">{{ $vor }}</option>@endforeach</select></div></td>'+
+                            '<td><div class="col-md-12 kutupad"><input type="text" name="tutar[]" id="tutar'+i+'" data-inputmask="\'alias\': \'tutar\'" value="0,00" autocomplete="off" class="form-control tutar" style="padding-right:55px;text-align:right;font-family: monospace, monospace;"><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div></td><td><a class="btn btn-default  "  href="#" id="satirsil" data-fissatid="'+data+'" aria-label="Settings"><i class="fa fa-times" aria-hidden="true"></i></a></td>'+
+                            '</td>';
+                        $('<tr  class="sipsatirs">'+selectmenu+'</tr>').appendTo(scntDiv).find('#sss').typeahead({
+                                hint: false,
+                                minLength: 1,
+                                limit : 10
+                            },
+                            {
+                                name: 'sad',
+                                display: 'name',
+                                source: stokbloodhound,
+                                templates: {
+                                    empty: [
+                                        '<div class="list-group search-results-dropdown"><div class="list-group-item">Veri Bulunamadı</div></div>'
+                                    ]
+                                }
 
-                    }).keyup(function(){
-                    this.value = this.value.toUpperCase();
-                }).on("typeahead:selected", function(obj, stok) {
+                            }).keyup(function(){
+                            this.value = this.value.toUpperCase();
+                        }).on("typeahead:selected", function(obj, stok) {
 
-                    // $hh=$('#fissid'+i);
+                            // $hh=$('#fissid'+i);
 
-                    //$('#fissid'+i).val(stok.id);
-                    //$("[id='fissid" + i + "']").val(stok.id);
-                    $re=$(this).closest("tr.sipsatirs").find(".fissid").val(stok.id);
-                   // console.log($re);
-                })
-                    .on('typeahead:asyncrequest', function() {
-                        $('.Typeahead-spinner').show();
-                    })
-                    .on('typeahead:asynccancel typeahead:asyncreceive', function() {
-                        $('.Typeahead-spinner').hide();
+                            //$('#fissid'+i).val(stok.id);
+                            //$("[id='fissid" + i + "']").val(stok.id);
+                            $re=$(this).closest("tr.sipsatirs").find(".fissid").val(stok.id);
+                             console.log($re);
+                        })
+                            .on('typeahead:asyncrequest', function() {
+                                $('.Typeahead-spinner').show();
+                            })
+                            .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+                                $('.Typeahead-spinner').hide();
 
-                    }).on("tr.sipsatirs input").keyup(function(event) {
-                    if (event.keyCode === 13) {
+                            }).on("tr.sipsatirs input").keyup(function(event) {
+                            if (event.keyCode === 13) {
 
-                        $("#satirekle").click();
+                                $("#satirekle").click();
+                            }
+                        });
+                        $("input[name^='stokad']").focus();
+                        $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
+
+
+                        i++;
+                        var  z=null;
+                        myFunction (18, z, 1);
+
+                        return false;
+
+
+
+                    // satır ekle
+                    },
+                    error: function(data){
+                    //console.log(data);
                     }
                 });
-                $("input[name^='stokad']").focus();
-                $("[id='bfiyat" + i + "'],[id='miktar" + i + "'],[id='tutar" + i + "']").inputmask();
-
-
-                i++;
-                var  z=null;
-                myFunction (18, z, 1);
-
-                return false;
-
             });
 
 
-            $(document).on('click','#satirsil', function() {
-                swal({
-                            title: "Eminmisiniz?",
-                            text: "Satır Silinecek!...",
-                            // icon: "warning",
-                            
-                            // buttons:{
-                            // cancel: {
-                            //     text: "KAPAT!",
-                            //     value: null,
-                            //     visible: true,
-                            //     className: "",
-                            //     closeModal: true,
-                            // },
-                            // confirm: {
-                            //     text: "TAMAMDIR...",
-                            //     value: true,
-                            //     visible: true,
-                            //     className: "",
-                            //     closeModal: true
-                            // },
-                        // },
-                             buttons: ["HAYIR!", "EVET!"],
-                            // buttons: true,
-                            // confirmButtonColor: "#DD6B55",
-                            // confirmButtonText: "Evet, silinsin!",
-                            // cancelButtonText: "Hayır, vazgeç!",
+            $(document).on('click','#satirsil', function(e) {
+                e.preventDefault();
+                if(i>1){
 
 
-                            // dangerMode: true,
-                    })
-                    .then((silsipfissat) => {
-                            if (silsipfissat) {
-                                $.ajax({
+                var $trthis=$(this);
+                var $tr = $(this).closest('tr');
+                var $trp = $(this).parents('tr');
+                    var sipsatsilid = $(this).attr('data-fissatid');
+                    //console.log(sipsatsilid,"sdf");
+                alertify.confirm(
+                    '<h1><strong>Uyarı...!!!</strong></h1>',
+                    '<h2>Satır Silinecek !</h2>',
+                    function(){
 
-                                    dataType: 'JSON',
-                                    type: 'POST',
-                                    url: '/sipfissatsil',
-                                    data: {
-                                        '_token': $('input[name=csrf-token]').val(),
-                                        'sipfissatid': mcep,
-                                        'sipfisid':aa,
-                                        
+                                        $.ajax({
 
-                        },
-                        success: function (data) {
+                                            dataType: 'JSON',
+                                            type: 'delete',
+                                            url: '/sipfissatsil/'+ sipsatsilid,
+                                            data: {
+                                                '_token': $('input[name=csrf-token]').val(),
+                                                // 'sipfissatid': mcep,
+                                                // 'sipfisid':aa
 
-                            // önemli
-                    if( i > 1 ) {
-                    
-                    re=$(this).closest("tr").find(".kkdv :selected").text();
-                    re=Number(re);
-                   
-                    z=re;
-                    
-                    $(this).parents('tr').remove();
 
-                    i--;
-                    var fields = $('#siptable tr.sipsatirs .fissid');
-                    var counts = 0;
-                    $.each(fields, function() {
+                                                        },
+                                                success: function (data) {
+                                                    console.log($(this));
 
-                        $(this).attr('id','fissid' + counts);
+                                    // önemli
+                                                if( i > 1 ) {
 
-                        counts++;
-                    });
+                                                re=$tr.find(".kkdv :selected").text();
+                                                re=Number(re);
 
-                    //yeniden id isimlendir
-                    var fields = $('#siptable tr.sipsatirs .miktar');
-                    var counts = 0;
-                    $.each(fields, function() {
-                        // $('#siptable tr.sipsatirs').each(function() {
+                                                z=re;
 
-                        $(this).attr('id','miktar' + counts);
-                        $(this).attr('oninput','calculate('+counts+')' );
-                        counts++;
-                    });
+                                                    $trp.remove();
+                                                    console.log(i);
+                                                    i--;
+                                                    var fields = $('#siptable tr.sipsatirs .fissid');
+                                                    var counts = 0;
+                                                    $.each(fields, function() {
 
-                    var fields = $('#siptable tr.sipsatirs .birim');
-                    var counts = 0;
-                    $.each(fields, function() {
-                        // $('#siptable tr.sipsatirs').each(function() {
+                                                        $trthis.attr('id','fissid' + counts);
 
-                        $(this).attr('id','birim' + counts);
-                        counts++;
-                    });
+                                                        counts++;
+                                                    });
 
-                    var fields = $('#siptable tr.sipsatirs .bfiyat');
-                    var counts = 0;
-                    $.each(fields, function() {
-                        // $('#siptable tr.sipsatirs').each(function() {
+                                                    //yeniden id isimlendir
+                                                    var fields = $('#siptable tr.sipsatirs .miktar');
+                                                    var counts = 0;
+                                                    $.each(fields, function() {
+                                                        // $('#siptable tr.sipsatirs').each(function() {
 
-                        $(this).attr('id','bfiyat' + counts);
-                        $(this).attr('oninput','calculate('+counts+')' );
-                        counts++;
-                    });
+                                                        $trthis.attr('id','miktar' + counts);
+                                                        $trthis.attr('oninput','calculate('+counts+')' );
+                                                        counts++;
+                                                    });
 
-                    var fields = $('#siptable tr.sipsatirs .kkdv');
-                    var count = 0;
-                    $.each(fields, function() {
-                        // $('#siptable tr.sipsatirs').each(function() {
+                                                    var fields = $('#siptable tr.sipsatirs .birim');
+                                                    var counts = 0;
+                                                    $.each(fields, function() {
+                                                        // $('#siptable tr.sipsatirs').each(function() {
 
-                        $(this).attr('id','kdv' + count);
-                        $(this).attr('onchange','myFunction('+count+')');
-                        count++;
-                    });
+                                                        $trthis.attr('id','birim' + counts);
+                                                        counts++;
+                                                    });
+
+                                                    var fields = $('#siptable tr.sipsatirs .bfiyat');
+                                                    var counts = 0;
+                                                    $.each(fields, function() {
+                                                        // $('#siptable tr.sipsatirs').each(function() {
+
+                                                        $trthis.attr('id','bfiyat' + counts);
+                                                        $trthis.attr('oninput','calculate('+counts+')' );
+                                                        counts++;
+                                                    });
+
+                                                    var fields = $('#siptable tr.sipsatirs .kkdv');
+                                                    var count = 0;
+                                                    $.each(fields, function() {
+                                                        // $('#siptable tr.sipsatirs').each(function() {
+
+                                                        $trthis.attr('id','kdv' + count);
+                                                        $trthis.attr('onchange','myFunction('+count+')');
+                                                        count++;
+                                                    });
 
 
 
-                    var field = $('#siptable tr.sipsatirs .tutar');
-                    var counts = 0;
+                                                    var field = $('#siptable tr.sipsatirs .tutar');
+                                                    var counts = 0;
 
-                    $.each(field, function() {
-                        // $('#siptable tr.sipsatirs').each(function() {
-                        $(this).attr('id','miktar' + counts);
+                                                    $.each(field, function() {
+                                                        // $('#siptable tr.sipsatirs').each(function() {
+                                                        $trthis.attr('id','miktar' + counts);
 
-                        $(this).attr('id','tutar' + counts);
-                        counts++;
+                                                        $trthis.attr('id','tutar' + counts);
+                                                        counts++;
 
-                    });
-                    //yeniden id isimlendir
-                }
+                                                    });
+                                                //yeniden id isimlendir
+                                                    }
 
-                calculate(0);
-                myFunction (re,z);
-
-                return false;
-                                //önemli
-                        },
-                        error:function (data) {
-                            // console.log(data);
-                            new PNotify({
-                                title: 'Uyarı!...',
-                                text: 'İşlem Hatası...',
-                                type: 'error',
-                                // type: 'notice',
-                                styling: 'bootstrap3'
-                            });
-                        }
-
-                                            });
-                              
-                                        
-                            
-                            } else {
+                                calculate(0);
+                                myFunction (re,z);
+                                                    alertify.success('İşlem Tamamlandı...');
                                 return false;
-                            }
+                                        //önemli
+                                },
+                                                error:function (data) {
+                                     console.log(data);
+                                    new PNotify({
+                                        title: 'Uyarı!...',
+                                        text: 'İşlem Hatası...',
+                                        type: 'error',
+                                        // type: 'notice',
+                                        styling: 'bootstrap3'
+                                    });
+                                }
+
+                                        });
+
+                         },
+                    function(){ alertify.error('İptal Edildi')});
+                // swal({
+                //             title: "Eminmisiniz?",
+                //             text: "Satır Silinecek!...",
+                //
+                //              buttons: ["HAYIR!", "EVET!"],
+                //
+                //     }).then((silsipfissat) => {
+                //
+                //             if (silsipfissat) {
+                //                 $.ajax({
+                //
+                //                     dataType: 'JSON',
+                //                     type: 'delete',
+                //                     url: '/sipfissatsil/'+ sipsatsilid,
+                //                     data: {
+                //                         '_token': $('input[name=csrf-token]').val(),
+                //                         // 'sipfissatid': mcep,
+                //                         // 'sipfisid':aa
+                //
+                //
+                //                                 },
+                //                         success: function (data) {
+                //                             console.log($(this));
+                //
+                //             // önemli
+                //                         if( i > 1 ) {
+                //
+                //                         re=$tr.find(".kkdv :selected").text();
+                //                         re=Number(re);
+                //
+                //                         z=re;
+                //
+                //                             $trp.remove();
+                //                             console.log(i);
+                //                             i--;
+                //                             var fields = $('#siptable tr.sipsatirs .fissid');
+                //                             var counts = 0;
+                //                             $.each(fields, function() {
+                //
+                //                                 $trthis.attr('id','fissid' + counts);
+                //
+                //                                 counts++;
+                //                             });
+                //
+                //                             //yeniden id isimlendir
+                //                             var fields = $('#siptable tr.sipsatirs .miktar');
+                //                             var counts = 0;
+                //                             $.each(fields, function() {
+                //                                 // $('#siptable tr.sipsatirs').each(function() {
+                //
+                //                                 $trthis.attr('id','miktar' + counts);
+                //                                 $trthis.attr('oninput','calculate('+counts+')' );
+                //                                 counts++;
+                //                             });
+                //
+                //                             var fields = $('#siptable tr.sipsatirs .birim');
+                //                             var counts = 0;
+                //                             $.each(fields, function() {
+                //                                 // $('#siptable tr.sipsatirs').each(function() {
+                //
+                //                                 $trthis.attr('id','birim' + counts);
+                //                                 counts++;
+                //                             });
+                //
+                //                             var fields = $('#siptable tr.sipsatirs .bfiyat');
+                //                             var counts = 0;
+                //                             $.each(fields, function() {
+                //                                 // $('#siptable tr.sipsatirs').each(function() {
+                //
+                //                                 $trthis.attr('id','bfiyat' + counts);
+                //                                 $trthis.attr('oninput','calculate('+counts+')' );
+                //                                 counts++;
+                //                             });
+                //
+                //                             var fields = $('#siptable tr.sipsatirs .kkdv');
+                //                             var count = 0;
+                //                             $.each(fields, function() {
+                //                                 // $('#siptable tr.sipsatirs').each(function() {
+                //
+                //                                 $trthis.attr('id','kdv' + count);
+                //                                 $trthis.attr('onchange','myFunction('+count+')');
+                //                                 count++;
+                //                             });
+                //
+                //
+                //
+                //                             var field = $('#siptable tr.sipsatirs .tutar');
+                //                             var counts = 0;
+                //
+                //                             $.each(field, function() {
+                //                                 // $('#siptable tr.sipsatirs').each(function() {
+                //                                 $trthis.attr('id','miktar' + counts);
+                //
+                //                                 $trthis.attr('id','tutar' + counts);
+                //                                 counts++;
+                //
+                //                             });
+                //                         //yeniden id isimlendir
+                //                             }
+                //
+                //         calculate(0);
+                //         myFunction (re,z);
+                //
+                //         return false;
+                //                 //önemli
+                //         },
+                //                         error:function (data) {
+                //              console.log(data);
+                //             new PNotify({
+                //                 title: 'Uyarı!...',
+                //                 text: 'İşlem Hatası...',
+                //                 type: 'error',
+                //                 // type: 'notice',
+                //                 styling: 'bootstrap3'
+                //             });
+                //         }
+                //
+                //                 });
+                //
+                //
+                //             }else
+                //             {
+                //                 return false;
+                //             }
+                //     })
+                }else{
+
+                    new PNotify({
+                        title: 'Uyarı!...',
+                        text: 'İşlem Hatası...',
+                        type: 'error',
+                        // type: 'notice',
+                        styling: 'bootstrap3'
                     });
-                
-               
+                }
             });
 
 
