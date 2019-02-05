@@ -99,6 +99,7 @@ Route::get('/siparisfisi/{id}', 'fisController@siparisfisi');
 Route::any('/siparisfisii', 'fisController@sipfiskaydet');
 Route::any('/siparisfisie', 'fisController@sipfiseditkaydet');
 Route::get('/siparisfisi/edit/{id}/{fisturu}', 'fisController@sipfisedit');
+Route::put('/siparisfisi/gtoplam', 'fisController@gtoplam');
 Route::delete('/siparisfisi/delete/{id}', 'fisController@siparissil');
 Route::delete('/sipfissatsil/{id}', 'fisController@sipsatsil');
 Route::post('/sipfissatekle', 'fisController@sipfissatekle');

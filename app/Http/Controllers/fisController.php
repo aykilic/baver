@@ -383,16 +383,28 @@ $firmay=json_encode($firmam);
             $sipfissatirObj->sipfisid = $sonid;
             $sipfissatirObj->fissid = $request->fissid[$i];
 
-            $miktarr=str_replace( ",", ".", $request->miktar[$i] );
+//            $miktarr=str_replace( ",", ".", $request->miktar[$i] );
+//            $sipfissatirObj->miktar = $miktarr;
+//            $sipfissatirObj->birim = $request->birim[$i];
+//            $bfiyatt=str_replace( ",", ".", $request->bfiyat[$i] );
+//            $sipfissatirObj->bfiyat = $bfiyatt;
+//
+//
+//            $sipfissatirObj->kdv = $request->kdv[$i];
+//
+//            $tutarr=str_replace( ",", ".", $request->tutar[$i] );
+            $miktarr=str_replace( ".", "", $request->miktar[$i] );
+            $miktarr=str_replace( ",", ".", $miktarr );
             $sipfissatirObj->miktar = $miktarr;
             $sipfissatirObj->birim = $request->birim[$i];
-            $bfiyatt=str_replace( ",", ".", $request->bfiyat[$i] );
+            $bfiyatt=str_replace( ".", "", $request->bfiyat[$i] );
+            $bfiyatt=str_replace( ",", ".", $bfiyatt );
             $sipfissatirObj->bfiyat = $bfiyatt;
 
 
             $sipfissatirObj->kdv = $request->kdv[$i];
-
-            $tutarr=str_replace( ",", ".", $request->tutar[$i] );
+            $tutarr=str_replace( ".", "", $request->tutar[$i] );
+            $tutarr=str_replace( ",", ".", $tutarr );
             $sipfissatirObj->tutar = $tutarr;
             $sipfissatirObj->save();
         }
@@ -495,17 +507,18 @@ $firmay=json_encode($firmam);
         for ($i = 0; $i < count($satirsay); $i++) {
             $sipfissatirObj =sipfissatirObj::find($request->sipfissatirid[$i]);
             $sipfissatirObj->fissid = $request->fissid[$i];
-
-            $miktarr=str_replace( ",", ".", $request->miktar[$i] );
+            $miktarr=str_replace( ".", "", $request->miktar[$i] );
+            $miktarr=str_replace( ",", ".", $miktarr );
             $sipfissatirObj->miktar = $miktarr;
             $sipfissatirObj->birim = $request->birim[$i];
-            $bfiyatt=str_replace( ",", ".", $request->bfiyat[$i] );
+            $bfiyatt=str_replace( ".", "", $request->bfiyat[$i] );
+            $bfiyatt=str_replace( ",", ".", $bfiyatt );
             $sipfissatirObj->bfiyat = $bfiyatt;
 
 
             $sipfissatirObj->kdv = $request->kdv[$i];
-
-            $tutarr=str_replace( ",", ".", $request->tutar[$i] );
+            $tutarr=str_replace( ".", "", $request->tutar[$i] );
+            $tutarr=str_replace( ",", ".", $tutarr );
             $sipfissatirObj->tutar = $tutarr;
             $sipfissatirObj->save();
         }
@@ -563,6 +576,19 @@ $firmay=json_encode($firmam);
 //
         return response()->json($post);
     }
+    public function gtoplam(Request $request)
+    {
+
+
+        $sipfisObj =sipfisObj::find($request->sipfisid);
+
+        $sipfisObj->gtoplam=$request->gtoplam;
+
+        $sipfisObj->save();
+
+        return response()->json($sipfisObj);
+    }
+
 
     public function sipsatsil(Request $request,$id)
     {
@@ -575,13 +601,16 @@ $firmay=json_encode($firmam);
 
 
         $sipsat->delete();
-        $sipfisObj =sipfisObj::find($request->sipfisid);
-
-        $gtoplam =str_replace( ".", "", $request->gtoplam );
-        $gtoplamm =str_replace( ",", ".", $gtoplam );
-        $sipfisObj->gtoplam=$gtoplamm;
-        $sipfisObj->save();
-        return response()->json($sipfisObj);
+//        $q = DB::table('sipfissatir')
+//            ->where('sipfisid', $request->sipfisid)
+//            ->sum('tutar') ;
+//        $sipfisObj =sipfisObj::find($request->sipfisid);
+////
+////        $gtoplam =str_replace( ".", "", $request->gtoplam );
+////        $gtoplamm =str_replace( ",", ".", $gtoplam );
+//        $sipfisObj->gtoplam=$q;
+//        $sipfisObj->save();
+        return response()->json($sipsat);
     }
 
     public function sipfissatekle(Request $request)

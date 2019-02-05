@@ -1062,8 +1062,10 @@
                 var $trp = $(this).parents('tr');
                     var sipsatsilid = $(this).attr('data-fissatid');
                     //console.log(sipsatsilid,"sdf");
-                    var gtoplam=$('#gtoplam').val();
+
                     var sipfisid=$('#sipfisid').val();
+                    // var sattutar=$tr.find(".tutar").val();
+                    //console.log(sattutar);
                 alertify.confirm(
                     '<h1><strong>Uyarı...!!!</strong></h1>',
                     '<h2>Satır Silinecek !</h2>',
@@ -1075,11 +1077,12 @@
                                             url: '/sipfissatsil/'+ sipsatsilid,
                                             data: {
                                                 '_token': $('input[name=csrf-token]').val(),
-                                                'gtoplam':gtoplam,
-                                                'sipfisid':sipfisid
+                                                //'gtoplam':gtoplam,
+                                                'sipfisid':sipfisid,
+
                                                         },
                                                 success: function (data) {
-                                                    console.log(data);
+
 
                                     // önemli
                                                 if( i > 1 ) {
@@ -1159,7 +1162,28 @@
 
                                 calculate(0);
                                 myFunction (re,z);
+                                                    // gtoplam
+                                                    var gtoplam=$('#gtoplam').val();
+                                                    console.log(gtoplam);
+                                                    $.ajax({
+                                                        dataType: 'JSON',
+                                                        type: 'put',
+                                                        url: '/siparisfisi/gtoplam',
+                                                        data: {
+                                                            '_token': $('input[name=csrf-token]').val(),
+                                                            'gtoplam':gtoplam,
+                                                            'sipfisid':sipfisid,
+
+                                                        },
+                                                        // success: function (data) {},
+                                                        // error:function (data) {},
+                                                    });
+
+
+                                                    // gtoplam
                                                     alertify.success('İşlem Tamamlandı...');
+
+
                                 return false;
                                         //önemli
                                 },
