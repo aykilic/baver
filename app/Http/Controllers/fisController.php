@@ -227,7 +227,7 @@ $firmay=json_encode($firmam);
 
 
 
-        
+
 
 
 
@@ -494,8 +494,6 @@ $firmay=json_encode($firmam);
 
         for ($i = 0; $i < count($satirsay); $i++) {
             $sipfissatirObj =sipfissatirObj::find($request->sipfissatirid[$i]);
-
-
             $sipfissatirObj->fissid = $request->fissid[$i];
 
             $miktarr=str_replace( ",", ".", $request->miktar[$i] );
@@ -566,7 +564,7 @@ $firmay=json_encode($firmam);
         return response()->json($post);
     }
 
-    public function sipsatsil($id)
+    public function sipsatsil(Request $request,$id)
     {
 
         $sipsat = sipfissatirObj::find($id);
@@ -574,14 +572,16 @@ $firmay=json_encode($firmam);
         //$postt=sipfissatirObj::finOrFail($sipfisid);
         //sipfissatirObj::where("sipfisatirid", $id)->delete();
 //dd($sipsat);
+
+
         $sipsat->delete();
-        //  $postt->delete();
-//        $dovizObj=new dovizObj;
-//        $dovizObj = dovizObj::find($did);
-//        $dovizObj->delete();
-        //  $data = dovizObj::destroy($did);
-//
-        return response()->json($sipsat);
+        $sipfisObj =sipfisObj::find($request->sipfisid);
+
+        $gtoplam =str_replace( ".", "", $request->gtoplam );
+        $gtoplamm =str_replace( ",", ".", $gtoplam );
+        $sipfisObj->gtoplam=$gtoplamm;
+        $sipfisObj->save();
+        return response()->json($sipfisObj);
     }
 
     public function sipfissatekle(Request $request)
