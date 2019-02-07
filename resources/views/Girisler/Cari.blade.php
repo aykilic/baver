@@ -151,9 +151,9 @@
                                                         <div class="control-group">
                                                             <div class="controls">
                                                                 <div class="col-md-11 xdisplay_inputx form-group has-feedback">
-                                                                    <input type="text" name="tar" id="tarih" class="form-control has-feedback-left" data-inputmask="'mask': '99-99-9999'"  aria-describedby="inputSuccess2Status2">
-                                                                    <span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>
-                                                                    <span id="inputSuccess2Status2" class="sr-only">(success)</span>
+                                                                    <input type="hidden" name="tar" id="tarih" class="form-control has-feedback-left" data-inputmask="'mask': '99-99-9999'"  aria-describedby="inputSuccess2Status2">
+                                                                    {{--<span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>--}}
+                                                                    {{--<span id="inputSuccess2Status2" class="sr-only">(success)</span>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -169,7 +169,7 @@
                                                         <tr class="headings">
                                                             <th >Tarih </th>
                                                             <th >Hesap Adı </th>
-                                                            <th >Adres </th>
+                                                            <th >Bakiye </th>
                                                             {{--<th>Düzenle</th>--}}
                                                             <th>Sil</th>
 
@@ -220,7 +220,7 @@
                                                                                     {{--<option SELECTED >Seçiniz</option>--}}
                                                                                     {{--</select>--}}
                                                             <select data-toggle="dropdown" id="banka" class="form-control" name="dbanka[]" aria-expanded="false"  ><span class="caret"></span>
-                                                                <option >Seciniz</option>
+                                                                <option >Seçiniz</option>
                                                                 @foreach($banka1 as $key => $bankad)
                                                                     <option  value="{{ $key }}">{{ $bankad }}</option>
                                                                 @endforeach

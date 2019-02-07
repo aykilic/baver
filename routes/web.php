@@ -103,6 +103,7 @@ Route::put('/siparisfisi/gtoplam', 'fisController@gtoplam');
 Route::delete('/siparisfisi/delete/{id}', 'fisController@siparissil');
 Route::delete('/sipfissatsil/{id}', 'fisController@sipsatsil');
 Route::post('/sipfissatekle', 'fisController@sipfissatekle');
+Route::any('/siparisfislist', 'fisController@siparisfislist');
 Route::get('/numarala', 'fisController@numarala');
 Route::get('/numarala', function () {
     return view('alsat.numarala');

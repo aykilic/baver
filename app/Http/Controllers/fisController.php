@@ -582,7 +582,12 @@ $firmay=json_encode($firmam);
 
         $sipfisObj =sipfisObj::find($request->sipfisid);
 
-        $sipfisObj->gtoplam=$request->gtoplam;
+        $gtoplam=str_replace( ".", "", $request->gtoplam );
+        $gtoplam=str_replace( ",", ".", $gtoplam );
+
+        $sipfisObj->gtoplam=$gtoplam;
+
+
 
         $sipfisObj->save();
 
@@ -625,7 +630,27 @@ $firmay=json_encode($firmam);
 
         return response()->json($sonsatid);
     }
+    public function siparisfislist(Request $request)
+    {
+        $data = DB::table('sipfis')->where('sipfis.fisturu',$request->fisturu)
+            ->select('sipfis.*','firmalar.*','olay.*','doviz.*')
+            ->leftjoin('firmalar', 'firmalar.fid', '=', 'sipfis.fisfid')
+            ->leftjoin('olay', 'olay.olayid', '=', 'sipfis.olayid')
+            ->leftjoin('doviz', 'doviz.did', '=', 'sipfis.doviz')
+//            ->leftjoin('sipdurum', 'siparis.durumid', '=', 'sipdurum.sipdurumid')
+//            ->leftjoin('musteriler', 'siparis.mid', '=', 'musteriler.mid')
+//            ->orderByRaw('YEAR(tarih) ASC, MONTH(tarih) ASC, DAY(tarih) ASC')
+            ->get();
 
+
+        $json_data = array(
+////            "draw"            => intval(""),
+////            "recordsTotal"    => intval(""),
+////            "recordsFiltered" => intval(""),
+            "data"            => $data
+        );
+        return  response()->json($json_data);
+    }
 
 
 	public function autocompletee(Request $request)

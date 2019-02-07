@@ -26,9 +26,9 @@
                     <div class="x_panel">
                         <div class="x_title">
                             @if($fisturu==1)
-                                <h2 class="sat">{{$sipfisnoadi}} Sipariş Fişi Listesi </h2>
+                                <h2 class="sat">{{$sipfisnoadi}} Sipariş Fişi </h2>
                             @else
-                                <h2 class="al">{{$sipfisnoadi}} Sipariş Fişi Listesi </h2>
+                                <h2 class="al">{{$sipfisnoadi}} Sipariş Fişi </h2>
 
                             @endif
                             <ul class="nav navbar-right panel_toolbox">

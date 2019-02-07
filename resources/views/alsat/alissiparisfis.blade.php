@@ -18,23 +18,7 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-                        <div class="x_title">
-                            <h2></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
+
                             <div class="clearfix"></div>
                             <div class="x_content">
                                 {{--<form id="formkaydet" action="{{ action('Controller@bankakaydet') }}" method="POST" >--}}
@@ -42,7 +26,7 @@
 
 
 
-                                    <br />
+
                                     {{ csrf_field() }}
                                     <div class="row">
                                         {{--<div class="col-md-4">--}}
@@ -60,7 +44,7 @@
                                             </div>
 
                                         @endif
-
+                                                    <input type=hidden id="fisturu" value="{{$fisturu}}">
 
 
 
@@ -149,35 +133,22 @@
 
                             </div>
                         </div>
-                    </div>
+
                 </div>
             </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-                        <div class="x_title">
+
                             @if($fisturu==1)
                             <h2 class="sat">{{$sipfisnoadi}} Sipariş Fişi Listesi </h2>
                                 @else
                                 <h2 class="al">{{$sipfisnoadi}} Sipariş Fişi Listesi </h2>
 
                             @endif
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
+
+
                             <div class="clearfix"></div>
                             <div class="x_content" style="margin-top:15px">
 
@@ -189,33 +160,36 @@
                                             <th class="column-title">Numara </th>
                                             <th>Firma</th>
                                             <th>Fiş Tutarı</th>
-
-                                            <th>Sil</th>
+                                            <th>Durum</th>
+                                            {{--<th>Sil</th>--}}
 
                                         </tr>
 
                                         </thead>
                                         <tbody>
 
-                                        @foreach($sipfislistt as $post)
+                                        {{--@foreach($data as $post)--}}
 
-                                            <tr class="item{{$post->sipfisid}}" >
-                                                <td><a href="javascript:void(0);">{{$post->created_at}}</a></td>
-                                                <td><a href="javascript:void(0);"  >{{$post->numara}}</a></td>
-                                                <td><a href="/siparisfisi/edit/{{$post->sipfisid}}/{{$fisturu}}"  >{{$post->cunvan}}</a></td>
-                                                 <td><a href="javascript:void(0);"  > {{number_format($post->gtoplam, 2, ',', '.')}} {{$post->dad}}</a></td>
+                                            {{--<tr class="item{{$post->sipfisid}}" >--}}
+                                                {{--<td><a href="javascript:void(0);">{{$post->created_at}}</a></td>--}}
+                                                {{--<td><a href="javascript:void(0);"  >{{$post->numara}}</a></td>--}}
+                                                {{--<td></td>--}}
+                                                {{--<td></td>--}}
+                                                {{--<td><a href="/siparisfisi/edit/{{$post->sipfisid}}/{{$fisturu}}"  >{{$post->cunvan}}</a></td>--}}
+                                                 {{--<td><a href="javascript:void(0);"  > {{number_format($post->gtoplam, 2, ',', '.')}} {{$post->dad}}</a></td>--}}
                                                {{--<td><a href="javascript:void(0);"  ><i class="fa fa-edit fa-2x"></i></a></td>--}}
-                                                <td><a href="javascript:void(0);" id="silsipfis" data-sipfisid="{{$post->sipfisid}}" ><i class="fa fa-trash-o fa-2x" ></i></a></td>
-                                            </tr>
+                                                {{--<td></td>--}}
+                                                {{--<td><a href="javascript:void(0);" id="silsipfis" data-sipfisid="{{$post->sipfisid}}" ><i class="fa fa-trash-o fa-2x" ></i></a></td>--}}
+                                            {{--</tr>--}}
 
-                                        @endforeach
+                                        {{--@endforeach--}}
 
 
                                         </tbody>
                                     </table>
                                 </div>
 
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -258,6 +232,7 @@
 @section('content_script')
     <script src="{{ asset("js/icheck.min.js") }}"></script>
     {{--<!-- Datatables -->--}}
+    {{--<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.15/se-1.2.2/datatables.min.js"></script>--}}
     <script src="{{ asset("js/dataTables.bootstrap.min.js") }}"></script>
     <script src="{{ asset("js/dataTables.buttons.min.js") }}"></script>
     {{--<script src="{{ asset("js/buttons.bootstrap.min.js") }}"></script>--}}
@@ -275,6 +250,11 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
                 $(document).on('click', '#silsipfis', function () {
                     $('#sipfissilid').val($(this).data('sipfisid'));
                     sipfisid = $('#sipfissilid').val();
@@ -305,11 +285,127 @@
             });
 
 
-                $('#stoktablo').DataTable({
-                    //"order": [ 0, 'desc' ]
-                    "order": [[ 0, 'desc' ], [ 1, 'desc' ]]
-                });
+                // $('#stoktablo').DataTable({
+                //     //"order": [ 0, 'desc' ]
+                //     "order": [[ 0, 'desc' ], [ 1, 'desc' ]]
+                // });
+            var fisturu = $('#fisturu').val();
+            console.log(fisturu);
+            var table=$('#stoktablo').DataTable({
 
+                "ajax": {
+                    "url": "/siparisfislist",
+                    "type": "post",
+                    "data":{
+                        'fisturu':fisturu
+                    }
+                },
+
+                "columns": [
+
+                    { "data": "created_at"},
+                    { "data": "numara" },
+                    {{--//href="/siparisfisi/edit/{{$post->sipfisid}}/{{$fisturu}}"--}}
+                    { "data": null,
+                        render:function (data) {
+                            return "<a  href='/siparisfisi/edit/"+data.sipfisid+"/"+fisturu+"' >" + data.cunvan + "</a>";
+                        }
+                    },
+                    // {"data":"dad"},
+                     {
+                          "data":null,
+                    // // {
+
+                        render: function (data, type, row) {
+                            var numm = $.fn.dataTable.render.number('.', ',', 2).display(data.gtoplam);
+                            return  numm +' '+data.dad ;
+                        }
+                    },
+                    { "data": "olayid" },
+
+                ],
+
+                "ordering": false,
+                'columnDefs': [
+                    // {
+                    //     'targets': 3,
+                    //
+                    //     "render" : function(data, type, full) {
+                    //         return  data.did;
+                    //     }
+                    // },
+
+
+                    {
+                        'targets': 0
+                        // render:function(data){
+                        //     return moment(data).format('DD-MM-YYYY');
+                        // }
+                    },
+
+
+                    { "targets": 4,"width": "10%",
+
+                        "createdCell": function(td, cellData, rowData, row, col) {
+
+                            switch(cellData) {
+                                case 1:
+                                    // $(td).addClass('label label-info');
+                                    $(td).html("<span class='label label-warning'>AÇIK</span>");
+                                    break;
+                                case 3:
+                                    // $(td).addClass('label label-info');
+                                    $(td).html("<span class='label label-danger'>İPTAL</span>");
+
+                                    break;
+                                case 4:
+                                    $(td).html("<span class='label label-info'>İRSALİYELENDİ</span>");
+                                    break;
+                                case 5:
+                                    $(td).html("<span class='label label-success'>FATURALANDI</span>");
+                                    break;
+
+                            }
+                        }
+                    },
+
+                ],
+                "autoWidth": true,
+                "paging": false,
+//              "bStateSave": true,
+                "language":  {
+                    "sDecimal":        ",",
+                    "sEmptyTable":     "Tabloda herhangi bir veri mevcut değil",
+                    "sInfo":           "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                    "sInfoEmpty":      "Kayıt yok",
+                    "sInfoFiltered":   "(_MAX_ kayıt içerisinden bulunan)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ".",
+                    "sLengthMenu":     "Sayfada _MENU_ kayıt göster",
+                    "sLoadingRecords": "Yükleniyor...",
+                    "sProcessing":     "İşleniyor...",
+                    "sSearch":         "Ara:",
+                    "sZeroRecords":    "Eşleşen kayıt bulunamadı",
+                    "oPaginate": {
+                        "sFirst":    "İlk",
+                        "sLast":     "Son",
+                        "sNext":     "Sonraki",
+                        "sPrevious": "Önceki"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": artan sütun sıralamasını aktifleştir",
+                        "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d kayıt seçildi",
+                            "0": "",
+                            "1": "1 kayıt seçildi"
+                        }
+                    }
+                }
+
+            });
 
             $.ajaxSetup({
                 headers: {
