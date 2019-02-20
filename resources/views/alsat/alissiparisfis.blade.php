@@ -325,7 +325,7 @@
 
                 ],
 
-                "ordering": false,
+                "order": [[ 1, "desc" ]],
                 'columnDefs': [
                     // {
                     //     'targets': 3,
