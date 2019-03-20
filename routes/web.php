@@ -108,9 +108,20 @@ Route::get('/numarala', 'fisController@numarala');
 Route::get('/numarala', function () {
     return view('alsat.numarala');
 });
+//****************irsaliye fisi************************//////////////////////
+Route::get('/irsaliye/{fisturu}', 'irsaliyeController@irsaliyefisleri');
+Route::any('/irsaliyefislist', 'irsaliyeController@irsaliyefislist');
 
+
+//****************irsaliye fisi************************//////////////////////
 
 //****************siparis fisi************************//////////////////////
+
+//****************Aktarma************************//////////////////////
+Route::post('/siiraktar', 'fisController@irsonnumara');
+Route::put('/iraktarnokaydet', 'fisController@iraktarnokaydet');
+//****************Aktarma************************//////////////////////
+
 //****************sablon************************//////////////////////
 
 Route::get('/sablon', 'Controller@sablon');

@@ -561,6 +561,7 @@
                     '_token': $('input[name=_token]').val(),
                     'evrakturuid': 4,
                     'sayi': $('#aisayi').val(),
+                    'aigorunum': $('#aigorunum').val(),
                     //  $('#select_id').find('option:selected').val()
                     //      'dbanka':$('select[name=dbanka]').val(),
                     // 'did': $('#did').val(),//
@@ -590,6 +591,7 @@
                         '_token': $('input[name=_token]').val(),
                         'evrakturuid': 3,
                         'sayi': $('#sisayi').val(),
+                        'sigorunum': $('#sigorunum').val(),
                         //  $('#select_id').find('option:selected').val()
                         //      'dbanka':$('select[name=dbanka]').val(),
                         // 'did': $('#did').val(),//

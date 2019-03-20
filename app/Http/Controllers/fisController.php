@@ -56,7 +56,7 @@ class fisController extends Controller{
 		$firmam = DB::table('firmalar')->select('cunvan')->get();
 		//$stokm = DB::table('stoklar')->select('sad')->get();
 		//$firmaz=$firmam->toArray();
-$firmay=json_encode($firmam);
+            $firmay=json_encode($firmam);
 		//$stoky=json_encode($stokm);
 		//$firmaz=$firmam;
 		//$firmaz= firmaObj::pluck('cunvan');
@@ -97,7 +97,7 @@ $firmay=json_encode($firmam);
 // asdsddddddddddsssssdsd
 // sdsdsdsdsdsdsd
 
-        $sipfisno = sipfisObj::where('fisturu', $id)->orderBy('numara', 'desc')
+        $sipfisno = sipfisObj::where('fisturu', $id)->orderBy('sipfisid', 'desc')
             ->first();
 
         //dd($sipfisno);
@@ -107,17 +107,17 @@ $firmay=json_encode($firmam);
 
         // eğer sipariş fişi ilk defa oluşturuluyosa
 
-        if($sipfisno==""){
-            $sonnum=0;
-
-        }else{
-        // eğer sipariş fişi var ise
-
-
-
-            $sonnum=$sipfisno->numara;
-
-        }
+//        if($sipfisno==""){
+//            $sonnum=0;
+//
+//        }else{
+//        // eğer sipariş fişi var ise
+//
+//
+//
+//            $sonnum=$sipfisno->sonnumara;
+//
+//        }
 
 
 
@@ -126,21 +126,22 @@ $firmay=json_encode($firmam);
         $hane=$numarala->uzunluk;
 // dd($hane);
         //eğer numaralama aktif değilse
-                    if($numarala->mod==0 || $numarala->mod==""){
+//                    if($numarala->mod==0 || $numarala->mod==""){
                             if ($id==2){
 // satış ise
 
 
 
-                                $sonnumm=$sonnum + 1;
+                                $sonnumm=$numarala->sonnumara + 1;
 //dd($sonnum);
                                 $sonnummm=str_pad($sonnumm, $hane, "0", STR_PAD_LEFT);
 
                                 $numara=$sonnummm;
-                            }else{
+                            }
+                            elseif ($id==1){
 //
  // alış ise
-                                $sonnumm=$sonnum + 1;
+                                $sonnumm=$numarala->sonnumara + 1;
 
                                 $sonnummm=str_pad($sonnumm, $hane, "0", STR_PAD_LEFT);
 
@@ -149,17 +150,17 @@ $firmay=json_encode($firmam);
                             }
 
 
-                    }
-                    else{
-                        // numarayı yeniden duzenle
-                        $sonnumara=($numarala->sayi)+1;
-                        $new_index = str_pad($sonnumara, $hane, "0", STR_PAD_LEFT);
-//bitti
-                        $numara=$new_index;
-
-
-
-                    }
+//                    }
+//                    else {
+//                        // numarayı yeniden duzenle
+//                        $sonnumara=($numarala->sayi)+1;
+//                        $new_index = str_pad($sonnumara, $hane, "0", STR_PAD_LEFT);
+////bitti
+//                        $numara=$new_index;
+//
+//
+//
+//                    }
        // $sipfislist=sipfisObj::where('fisturu', 2)->get();
 
 //        foreach ($sipfislist as $sipfislistt)
@@ -208,7 +209,9 @@ $firmay=json_encode($firmam);
         $fisturu=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $sipfis->fisturu)->first();
         $sipfisnoadi=$fisturu->fisturuad;
 
-        $olay=DB::table('olay')->get();
+//        $olay=DB::table('olay')->get();
+
+        $olay= olayObj::pluck('olayad','olayid');
         $depo=DB::table('depo')->get();
         $doviz=DB::table('doviz')->get();
         $dropvergi = vergiObj::all();
@@ -264,7 +267,7 @@ $firmay=json_encode($firmam);
         $hane=$numarala->uzunluk;
 
 
-        $sonnumm=$sipfisno->numara;
+        $sonnumm=$numarala->sonnumara;
 //dd($sonnum);
         $sonnummm=str_pad($sonnumm, $hane, "0", STR_PAD_LEFT);
 
@@ -275,6 +278,65 @@ $firmay=json_encode($firmam);
 
     }
 
+    ///////////////////////////////////////***********************************///////////////////////////////////////////////////
+            Public function irsonnumara(request $req)
+            {
+
+                $modObj=numaralaObj::where('evrakturuid', $req->irturu)->first();
+
+//                if(($mod->mod)==1){
+//eğer numarlama aktif ise
+                    $sonnumara=$modObj->sonnumara+1;
+                    $new_index = str_pad($sonnumara, $modObj->uzunluk, "0", STR_PAD_LEFT);
+//
+                    $numara=$new_index;
+
+
+//                }
+//                else{
+////                    $sipfisno = numaralaObj::where('fisturu', $req->fisturu)->orderBy('irnumara', 'desc')
+////                        ->first();
+//
+////                    $numarala=numaralaObj::where('evrakturuid', $req->fisturu)->value('uzunluk');
+//                    $numaralaObj=numaralaObj::where('evrakturuid', $req->fisturu)->get();
+//                    $hane=$numaralaObj->uzunluk;
+//                    $sayi=$numaralaObj->sonnumara;
+//
+////
+//                    $sonnumm=$numaralaObj->sonnumara;
+////            //dd($sonnum);
+//                    $numara=str_pad($sayi, $hane, "0", STR_PAD_LEFT);
+//
+//                    //$numara=$sonnummm;
+//                    // dd($sonnummm);
+////                return ($sonnummm);
+//
+//                }
+
+
+//                if($numara==null || $numara==""){
+//
+//                    $numara="";
+//                }
+                return response()->json($numara);
+
+            }
+                public function iraktarnokaydet(request $request)
+                {
+                    $sipfisObj = sipfisObj::where('sipfisid', $request->sipfisid)->first();
+
+                    $sipfisObj->irtar=$request->irtarih;
+                    $sipfisObj->irnumara=$request->irnumara;
+                    $sipfisObj->olayid=4;
+                    $sipfisObj->durumid=4;  // gereksiz
+                    $numaralaObj=numaralaObj::where('numaralaid',$request->numaralaid)->first();
+//                    $numaralaObj=numaralaObj::find($request->numaralaid);
+//                    $numaralaObj=DB::table('numarala')->where('numaralaid',$request->numaralaid)->get();
+                    $numaralaObj->sonnumara=$request->irnumara;
+                    $sipfisObj->save();
+                    $numaralaObj->save();
+                    return response()->json($sipfisObj);
+                }
 
     public function siparisfisleri(request $req,$a)
     {
@@ -425,6 +487,11 @@ $firmay=json_encode($firmam);
 //                ->with('sipfisnoadi',"Alış")
 //                ->with('sipfislistt',$sipfislist);
             ///**/////////////////
+            ///
+            $numaralaObj=numaralaObj::find(2);
+//            $numaralaObj=numaralaObj::where('numaralaid',2)->first();
+                $numaralaObj->mod=0;
+            $numaralaObj->save();
 
             return redirect('/siparisfisleri/2')
                 ->with('fisturu',$a)
@@ -435,6 +502,11 @@ $firmay=json_encode($firmam);
 //            });
 
         }else{
+            $numaralaObj=numaralaObj::find(1);
+//            $numaralaObj=numaralaObj::where('numaralaid', 1)->first();
+            $numaralaObj->mod=0;
+            $numaralaObj->save();
+
             return redirect('/siparisfisleri/1')
                 ->with('fisturu',$a)
                 ->with('sipfisnoadi',"Satış")
@@ -696,9 +768,10 @@ $firmay=json_encode($firmam);
 
            $data = numaralaObj::find($request->evrakturuid);
 
-            $mod=0;
+            $mod=1;
             $data->sayi = $request->sayi;
             $data->gorunum = $request->assayigorunum;
+            $data->sonnumara = $request->assayigorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();
@@ -718,9 +791,10 @@ $firmay=json_encode($firmam);
 
             $data = numaralaObj::find($request->evrakturuid);
 
-            $mod=0;
+            $mod=1;
             $data->sayi = $request->sayi;
             $data->gorunum = $request->sssayigorunum;
+            $data->sonnumara = $request->sssayigorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();
@@ -742,6 +816,8 @@ $firmay=json_encode($firmam);
 
             $mod=0;
             $data->sayi = $request->sayi;
+            $data->gorunum = $request->aigorunum;
+            $data->sonnumara = $request->aigorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();
@@ -763,6 +839,8 @@ $firmay=json_encode($firmam);
 
             $mod=0;
             $data->sayi = $request->sayi;
+            $data->gorunum = $request->sigorunum;
+            $data->sonnumara = $request->sigorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();

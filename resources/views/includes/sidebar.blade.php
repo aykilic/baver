@@ -39,9 +39,29 @@
                     </li>
                     <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/siparisfisleri/1">Satış Sipariş Fişi</a></li>
+
                             {{--alissiparisfisi--}}
-                            <li><a href="/siparisfisleri/2">Alış Sipariş Fişi</a></li>
+
+                            <li><a>Alış <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="/siparisfisleri/2">Alış Sipariş Fişi</a>
+                                    </li>
+                                    <li><a href="/irsaliye/2">Alış İrsaliye Fişi</a>
+                                    </li>
+                                </ul>
+
+
+
+                            </li>
+                            <li><a>Satış <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="/siparisfisleri/1">Satış Sipariş Fişi</a>
+                                    </li>
+                                    <li><a href="/irsaliye/1">Satış İrsaliye Fişi</a>
+                                    </li>
+                                </ul>
+
+                            </li>
                             {{--<li><a href="/siparisfisi/2">Alış Sipariş Fişi</a></li>--}}
                             <li><a href="/sablon">Şablon</a></li>
                             <li><a href="/numarala">Numaralandırma</a></li>

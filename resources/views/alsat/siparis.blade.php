@@ -69,7 +69,7 @@
 
                                                 <input type="hidden" name="fisturu" id="fisturu" value="{{$fisturu}}" class="form-control" >
 
-                                                <input type="text" name="tar" id="tarih" class="form-control has-feedback-left" data-inputmask="'mask': '99/99/9999'"  aria-describedby="inputSuccess2Status2">
+                                                <input type="text" name="tar" id="tarih" class="form-control has-feedback-left"   aria-describedby="inputSuccess2Status2">
                                                 <span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>
                                                 <span id="inputSuccess2Status2" class="sr-only">(success)</span>
                                             </div> <!-- /.form-group -->
@@ -363,6 +363,8 @@
 
     <script src="{{ asset("js/typeahead.js") }}"></script>
     <script src="{{ asset("js/sweetalert.js") }}"></script>
+    <script src="{{ asset("js/flatpickr.js") }}"></script>
+
     <!-- {{--<script src="{{ asset("js/bootstrap3-typhead.js") }}"></script>--}} -->
     <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>--}} -->
     <script type="text/javascript">
@@ -1063,61 +1065,74 @@
             // $("#stokad").keyup(function(){
             //     this.value = this.value.toUpperCase();
             // });
-            $('#tarih').daterangepicker({
-                "singleDatePicker": true,
-                "maxDate": "31-12-2050",
-                singleClasses: "tarih",
-                "showDropdowns": true,
-                "showWeekNumbers": true,
-                ranges: {
-                    'Bugün': [moment(), moment()],
-                    'Dün': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Son 7 gün': [moment().subtract(6, 'days'), moment()],
-                    'Son 30 gün': [moment().subtract(29, 'days'), moment()],
-                    'Bu ay': [moment().startOf('month'), moment().endOf('month')],
-                    'Geçen ay': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-
-                "alwaysShowCalendars": true,
-                //                "dateLimit": {
-                //                    "days": 7
-                //                },
-                "locale": {
-                    "direction": "ltr",
-                    "format": "DD-MM-YYYY",
-                    "separator": "/",
-                    "applyLabel": "Uygula",
-                    "cancelLabel": "Kapat",
-                    "fromLabel": "From",
-                    "toLabel": "To",
-                    "customRangeLabel": "Seç",
-                    "daysOfWeek": [
-                        "Pt",
-                        "Sl",
-                        "Çr",
-                        "Pr",
-                        "Cm",
-                        "Ct",
-                        "Pz"
-                    ],
-                    "monthNames": [
-                        "Ocak",
-                        "Şubat",
-                        "Mart",
-                        "Nisan",
-                        "Mayıs",
-                        "Haziran",
-                        "Temmuz",
-                        "Ağustos",
-                        "Eylül",
-                        "Ekim",
-                        "Kasım",
-                        "Aralık"
-                    ],
-                    "firstDay": 0
+            $("#tarih").flatpickr(
+                {
+//              enableTime:true,
+                    altInput: true,
+                    altFormat: "d-m-Y",
+                    dateFormat: "Y-m-d",
+                    weekNumbers: true,
+                     locale:'tr',
+                    allowInput: true,
+                    defaultDate: "today"
                 }
 
-            })
+            );
+            // $('#tarih').daterangepicker({
+            //     "singleDatePicker": true,
+            //     "maxDate": "31-12-2050",
+            //     singleClasses: "tarih",
+            //     "showDropdowns": true,
+            //     "showWeekNumbers": true,
+            //     ranges: {
+            //         'Bugün': [moment(), moment()],
+            //         'Dün': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            //         'Son 7 gün': [moment().subtract(6, 'days'), moment()],
+            //         'Son 30 gün': [moment().subtract(29, 'days'), moment()],
+            //         'Bu ay': [moment().startOf('month'), moment().endOf('month')],
+            //         'Geçen ay': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            //     },
+            //
+            //     "alwaysShowCalendars": true,
+            //     //                "dateLimit": {
+            //     //                    "days": 7
+            //     //                },
+            //     "locale": {
+            //         "direction": "ltr",
+            //         "format": "DD-MM-YYYY",
+            //         "separator": "/",
+            //         "applyLabel": "Uygula",
+            //         "cancelLabel": "Kapat",
+            //         "fromLabel": "From",
+            //         "toLabel": "To",
+            //         "customRangeLabel": "Seç",
+            //         "daysOfWeek": [
+            //             "Pt",
+            //             "Sl",
+            //             "Çr",
+            //             "Pr",
+            //             "Cm",
+            //             "Ct",
+            //             "Pz"
+            //         ],
+            //         "monthNames": [
+            //             "Ocak",
+            //             "Şubat",
+            //             "Mart",
+            //             "Nisan",
+            //             "Mayıs",
+            //             "Haziran",
+            //             "Temmuz",
+            //             "Ağustos",
+            //             "Eylül",
+            //             "Ekim",
+            //             "Kasım",
+            //             "Aralık"
+            //         ],
+            //         "firstDay": 0
+            //     }
+            //
+            // })
 
     });
     </script>
