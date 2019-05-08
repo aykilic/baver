@@ -253,7 +253,7 @@
                                             <input type="text" class="form-control" name="afgorunum" id="afgorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" style="margin-top: 24px;">
+                                    <div class="col-lg-1 af" style="margin-top: 24px;">
                                         <a class="btn btn-default"  id="afsatirekle" >Kaydet</a>
                                     </div>
 
@@ -296,7 +296,7 @@
                                             <input type="text" class="form-control" name="sfgorunum" id="sfgorunum" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" style="margin-top: 24px;">
+                                    <div class="col-lg-1 sf" style="margin-top: 24px;">
                                         <a class="btn btn-default"  id="sfsatirekle" >Kaydet</a>
                                     </div>
 
@@ -611,6 +611,66 @@
 
                 });
             });
+        $('.af').on('click', '#afsatirekle', function() {
+            // alert("df");
+            $.ajax({
+
+                type: 'POST',
+                url: "/afnokaydet",
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'evrakturuid': 6,
+                    'sayi': $('#afsayi').val(),
+                    'afgorunum': $('#afgorunum').val(),
+                    //  $('#select_id').find('option:selected').val()
+                    //      'dbanka':$('select[name=dbanka]').val(),
+                    // 'did': $('#did').val(),//
+
+                    'uzunluk': $('#afuzunluk').val(),
+                    success: function (data) {
+                        new PNotify({
+                            title: 'Numaralama',
+                            text: 'Başarılı',
+                            type: 'success',
+                            // type: 'notice',
+                            styling: 'bootstrap3'
+                        });
+                    }
+                }
+
+
+            });
+        });
+        $('.sf').on('click', '#sfsatirekle', function() {
+            // alert("df");
+            $.ajax({
+
+                type: 'POST',
+                url: "/sfnokaydet",
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'evrakturuid': 5,
+                    'sayi': $('#sisayi').val(),
+                    'sfgorunum': $('#sfgorunum').val(),
+                    //  $('#select_id').find('option:selected').val()
+                    //      'dbanka':$('select[name=dbanka]').val(),
+                    // 'did': $('#did').val(),//
+
+                    'uzunluk': $('#sfuzunluk').val(),
+                    success: function (data) {
+                        new PNotify({
+                            title: 'Numaralama',
+                            text: 'Başarılı',
+                            type: 'success',
+                            // type: 'notice',
+                            styling: 'bootstrap3'
+                        });
+                    }
+                }
+
+
+            });
+        });
     </script>
 
 @endsection

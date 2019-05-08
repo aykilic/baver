@@ -29,30 +29,31 @@
                     <div class="x_panel">
                         <div class="x_title">
                             @if($fisturuid==1)
-                                <h2 class="sat">{{$sipfisnoadi}} Sipariş Fişi </h2>
+                                <h2 class="sat">{{$sipfisnoadi}} İrsaliye </h2>
                             @else
-                                <h2 class="al">{{$sipfisnoadi}} Sipariş Fişi </h2>
+                                <h2 class="al">{{$sipfisnoadi}} İrsaliye </h2>
 
                             @endif
                             {{--<ul class="nav navbar-right panel_toolbox">--}}
-                                {{--<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>--}}
-                                {{--</li>--}}
-                                {{--<li class="dropdown">--}}
-                                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>--}}
-                                    {{--<ul class="dropdown-menu" role="menu">--}}
-                                        {{--<li><a href="#">Settings 1</a>--}}
-                                        {{--</li>--}}
-                                        {{--<li><a href="#">Settings 2</a>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</li>--}}
-                                {{--<li><a class="close-link"><i class="fa fa-close"></i></a>--}}
-                                {{--</li>--}}
+                            {{--<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>--}}
+                            {{--</li>--}}
+                            {{--<li class="dropdown">--}}
+                            {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>--}}
+                            {{--<ul class="dropdown-menu" role="menu">--}}
+                            {{--<li><a href="#">Settings 1</a>--}}
+                            {{--</li>--}}
+                            {{--<li><a href="#">Settings 2</a>--}}
+                            {{--</li>--}}
                             {{--</ul>--}}
-                                <div class="modall"></div>
+                            {{--</li>--}}
+                            {{--<li><a class="close-link"><i class="fa fa-close"></i></a>--}}
+                            {{--</li>--}}
+                            {{--</ul>--}}
+                            <div class="modall"></div>
                             <div class="clearfix"></div>
                             <div class="x_content">
-                                <form id="esatirler" action="{{action('fisController@sipfiseditkaydet')}}" class="form-horizontal form-label-left" name="form1" method="put"  novalidate>
+                                <form id="esatirler" action="{{action('irsaliyeController@irsaliyeditkaydet')}}" class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
+                                    {{--<input type="hidden" name="_method" value="PUT">--}}
                                     {{csrf_field()}}
 
 
@@ -70,7 +71,7 @@
 
                                                 <div class="form-group item">
                                                     <label for="tar">Tarih</label>
-                                                    <input type="hidden" name="fisturuid" id="fisturuid" value="{{$sipfis->fisturu}}" class="form-control" >
+                                                    <input type="hidden" name="fisturuid" id="fisturuid" value="{{$fisturuid}}" class="form-control" >
                                                     <input type="hidden" name="fisturu" id="fisturu" value="{{$fisturu}}" class="form-control" >
                                                     <input type="hidden" name="sipfisid" id="sipfisid" value="{{$sipfisid}}" class="form-control" >
                                                     <input type="text" name="tar" id="tarih" class="form-control has-feedback-left " value="{{$sipfis->sipfistar}}"   aria-describedby="inputSuccess2Status2">
@@ -80,7 +81,7 @@
 
                                                 <div class="form-group">
                                                     <label for="fisno">Fiş No</label>
-                                                    <input type="text" name="sfisno" id="sfisno" value="{{$numara}}" class="form-control" >
+                                                    <input type="text" name="irno" id="irno" value="{{$numara}}" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
@@ -107,13 +108,13 @@
                                                                 {{--@endforeach--}}
                                                                 @foreach($olay as $key =>$olayad  )
                                                                     <option  value="{{ $key }}"
-                                                                        {{ $secolay == $key ? 'selected=="selected"' : ''}}>
+                                                                            {{ $secolay == $key ? 'selected=="selected"' : ''}}>
                                                                         {{$olayad}}
                                                                     </option>
 
                                                                 @endforeach
                                                                 {{--@foreach($olay as $key => $olayad)--}}
-                                                                    {{--<option  value="{{ $key }}">{{ $olayad }}</option>--}}
+                                                                {{--<option  value="{{ $key }}">{{ $olayad }}</option>--}}
                                                                 {{--@endforeach--}}
                                                             </select>
                                                         </div> <!-- /.form-group -->
@@ -135,7 +136,7 @@
                                                             <select data-toggle="dropdown" id="depo" class="form-control"><span class="caret"></span>
                                                             <!-- {{--<option >Seçiniz</option>--}} -->
                                                                 {{--@foreach($depo as $key => $depoad)--}}
-                                                                    {{--<option  value="{{ $key }}">{{ $depoad }}</option>--}}
+                                                                {{--<option  value="{{ $key }}">{{ $depoad }}</option>--}}
                                                                 {{--@endforeach--}}
                                                                 @foreach($depo as $key)
                                                                     <option  value="{{ $key->depoid }}"
@@ -154,7 +155,7 @@
                                                             <select data-toggle="dropdown" id="dbirim" class="form-control" name="dbirim[]" aria-expanded="false"><span class="caret"></span>
                                                             <!-- {{--<option >Seçiniz</option>--}} -->
                                                                 {{--@foreach($doviz as $key => $dad)--}}
-                                                                    {{--<option  value="{{ $key }}">{{ $dad }}</option>--}}
+                                                                {{--<option  value="{{ $key }}">{{ $dad }}</option>--}}
                                                                 {{--@endforeach--}}
                                                                 @foreach($doviz as $key)
                                                                     <option  value="{{ $key->did }}"
@@ -222,80 +223,80 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                       @php $i=0; @endphp
+                                                        @php $i=0; @endphp
                                                         @foreach($sipfissat as $sipfissatt)
 
 
-                                                        <tr class="sipsatirs">
+                                                            <tr class="sipsatirs">
 
-                                                            <td class="col-md-4">
-                                                                <div class="col-lg-12 kutupad">
-                                                                    <div class="form-group kutupad">
-                                                                        <input type="hidden" name="sipfissatirid[]" id="sipfissatirid{{$i}}" class="sipfissatirid" value="{{$sipfissatt->sipfisatirid}}">
-                                                                        <input type="hidden" name="fissid[]" id="fissid{{$i}}" class="fissid" data-fissatid="{{$sipfissatt->sipfisatirid}}" value="{{$sipfissatt->fissid}}">
-                                                                        <input type="text" name="stokad[]" id="stokad" value="{{$sipfissatt->sad}}" autocomplete="off" class="form-control has-feedback-left buyuk" style="padding-left:65px;">
-                                                                        {{--<img class="Typeahead-spinners" src="../images/wait.gif">--}}
-                                                                        <span class="fa fa-search form-control-feedback left ico"   ></span>
+                                                                <td class="col-md-4">
+                                                                    <div class="col-lg-12 kutupad">
+                                                                        <div class="form-group kutupad">
+                                                                            <input type="hidden" name="sipfissatirid[]" id="sipfissatirid{{$i}}" class="sipfissatirid" value="{{$sipfissatt->sipfisatirid}}">
+                                                                            <input type="hidden" name="fissid[]" id="fissid{{$i}}" class="fissid" data-fissatid="{{$sipfissatt->sipfisatirid}}" value="{{$sipfissatt->fissid}}">
+                                                                            <input type="text" name="stokad[]" id="stokad" value="{{$sipfissatt->sad}}" autocomplete="off" class="form-control has-feedback-left buyuk" style="padding-left:65px;">
+                                                                            {{--<img class="Typeahead-spinners" src="../images/wait.gif">--}}
+                                                                            <span class="fa fa-search form-control-feedback left ico"   ></span>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="col-md-1">
-                                                                <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="miktar[]" id="miktar{{$i}}" value="{{$sipfissatt->miktar}}" autocomplete="off"  class="form-control miktar" oninput="calculate({{$i}})" style="font-family: monospace, monospace;text-align: right;" >
-                                                                </div>
-                                                            </td>
-                                                            <td class="col-md-1">
-                                                                <div class="col-lg-12 kutupad">
-                                                                    <select data-toggle="dropdown" id="birim" class="form-control birim" value="" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
-                                                                        @foreach($birim as $birimm => $key )
-                                                                            <option  value="{{ $birimm }}" {{ $sipfissatt->birim == $birimm ? 'selected' :  ''  }}
-                                                                            >{{ $key }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td class="col-md-2">
-                                                                <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="bfiyat[]" id="bfiyat{{$i}}" value="{{$sipfissatt->bfiyat}}" autocomplete="off" class="form-control bfiyat" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate({{$i}})" ><span id="t1" class=" form-control-feedback right ico">TL</span>
-                                                                </div>
-                                                            </td>
-                                                            <td class="col-md-1">
-                                                                {{--kdv zorrrrrrrr--}}
-                                                                <div class="col-lg-12 kutupad">
-                                                                    <select data-toggle="dropdown" id="kdv{{$i}}" name="kdv[]" class="form-control kkdv" onchange="myFunction({{$i}})" onclick="eski($(this).find(':selected').text())"  name="kdv[]"><span class="caret"></span>
-                                                                        @foreach($vergim as $vergi => $key)
-                                                                        <option value="{{ $vergi }}"{{ $sipfissatt->kdv == $vergi ? 'selected=="selected"' : '' }}>
-                                                                            {{ $key }}</option>
-                                                                        @endforeach
-                                                                        {{--@foreach($vergim as $key => $vor)--}}
+                                                                </td>
+                                                                <td class="col-md-1">
+                                                                    <div class="col-md-12 kutupad">
+                                                                        <input type="text" name="miktar[]" id="miktar{{$i}}" value="{{$sipfissatt->miktar}}" autocomplete="off"  class="form-control miktar" oninput="calculate({{$i}})" style="font-family: monospace, monospace;text-align: right;" >
+                                                                    </div>
+                                                                </td>
+                                                                <td class="col-md-1">
+                                                                    <div class="col-lg-12 kutupad">
+                                                                        <select data-toggle="dropdown" id="birim" class="form-control birim" value="" name="birim[]" aria-expanded="false"  ><span class="caret"></span>
+                                                                            @foreach($birim as $birimm => $key )
+                                                                                <option  value="{{ $birimm }}" {{ $sipfissatt->birim == $birimm ? 'selected' :  ''  }}
+                                                                                >{{ $key }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="col-md-2">
+                                                                    <div class="col-md-12 kutupad">
+                                                                        <input type="text" name="bfiyat[]" id="bfiyat{{$i}}" value="{{$sipfissatt->bfiyat}}" autocomplete="off" class="form-control bfiyat" style="padding-right:55.6px;text-align:right;font-family: monospace, monospace;" oninput="calculate({{$i}})" ><span id="t1" class=" form-control-feedback right ico">TL</span>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="col-md-1">
+                                                                    {{--kdv zorrrrrrrr--}}
+                                                                    <div class="col-lg-12 kutupad">
+                                                                        <select data-toggle="dropdown" id="kdv{{$i}}" name="kdv[]" class="form-control kkdv" onchange="myFunction({{$i}})" onclick="eski($(this).find(':selected').text())"  name="kdv[]"><span class="caret"></span>
+                                                                            @foreach($vergim as $vergi => $key)
+                                                                                <option value="{{ $vergi }}"{{ $sipfissatt->kdv == $vergi ? 'selected=="selected"' : '' }}>
+                                                                                    {{ $key }}</option>
+                                                                            @endforeach
+                                                                            {{--@foreach($vergim as $key => $vor)--}}
                                                                             {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
+                                                                            {{--@endforeach--}}
+                                                                        </select>
+                                                                        {{--<select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]"  aria-expanded="false"  ><span class="caret"></span>--}}
+
+                                                                        {{--@foreach($vergi as $key => $vor)--}}
+                                                                        {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
+
+                                                                        {{----}}
+                                                                        {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
                                                                         {{--@endforeach--}}
-                                                                    </select>
-                                                                    {{--<select data-toggle="dropdown" id="kdv" class="form-control" name="birim[]"  aria-expanded="false"  ><span class="caret"></span>--}}
+                                                                        {{--</select>--}}
+                                                                    </div>
+                                                                </td>
 
-                                                                    {{--@foreach($vergi as $key => $vor)--}}
-                                                                    {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
+                                                                <td class="col-md-12">
+                                                                    <div class="col-md-12 kutupad">
+                                                                        <input type="text" name="tutar[]" id="tutar{{$i}}" value="{{$sipfissatt->tutar}}" autocomplete="off" class="form-control tutar" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
+                                                                    </div>
+                                                                </td>
 
-                                                                    {{----}}
-                                                                    {{--<option  value="{{ $key }}">{{ $vor }}</option>--}}
-                                                                    {{--@endforeach--}}
-                                                                    {{--</select>--}}
-                                                                </div>
-                                                            </td>
-
-                                                            <td class="col-md-12">
-                                                                <div class="col-md-12 kutupad">
-                                                                    <input type="text" name="tutar[]" id="tutar{{$i}}" value="{{$sipfissatt->tutar}}" autocomplete="off" class="form-control tutar" style="padding-right:55px;text-align:right;font-family: monospace, monospace"  ><span id="t2" class=" form-control-feedback right ico" >TL</span>
-                                                                </div>
-                                                            </td>
-
-                                                            <td>
-                                                                <a class="btn btn-default"  href="#" id="satirsil" data-fissatid="{{$sipfissatt->sipfisatirid}}" aria-label="Settings">
-                                                                    <i class="fa fa-times" aria-hidden="true"  ></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                       @php $i=$i+1; @endphp
+                                                                <td>
+                                                                    <a class="btn btn-default"  href="#" id="satirsil" data-fissatid="{{$sipfissatt->sipfisatirid}}" aria-label="Settings">
+                                                                        <i class="fa fa-times" aria-hidden="true"  ></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            @php $i=$i+1; @endphp
                                                         @endforeach
                                                         </tbody>
                                                     </table>
@@ -357,7 +358,7 @@
                                     <div class="text-right">
                                         <input type="hidden" name="add">
                                         <input type="hidden" name="uniquetime" value="1501288025.81">
-                                        <button  class="btn btn-success btn-insert btn-xs-block add" onsubmit="return false;"  type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button>
+                                        <button  class="btn btn-success btn-insert btn-xs-block add"   type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button>
                                     </div>
 
                                 </form>
@@ -422,86 +423,86 @@
         function myEdit(){
 
             // $(".kdv").remove();
-                var eh = 0;
-                
-                var eekdv=0;
-                esum=0;
-                
-                // $(this).attr('id','fissid' + counts);
-                var ssh = ($('#siptable tr.sipsatirs').length);
-                ekdv=$('#kdv'+eh).find(":selected").text();
-                ekdv=Number(ekdv);
+            var eh = 0;
+
+            var eekdv=0;
+            esum=0;
+
+            // $(this).attr('id','fissid' + counts);
+            var ssh = ($('#siptable tr.sipsatirs').length);
+            ekdv=$('#kdv'+eh).find(":selected").text();
+            ekdv=Number(ekdv);
             $('#siptable tr.sipsatirs').each(function() {
 
                 if(eh == 0){
-              
+
                     $(".kdv18").remove();
                     var ekDiv = $('#kdvbel');
-                                var ekDivsatir =
-                                    '<div class="kdv' + ekdv + ' kdvtutt">' +
-                                    '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
-                                    '<label class="col-md-1 kdv" id="kdv' + ekdv + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + ekdv + '</label>' +
-                                    '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
-                                    '<input id="toplamkdv' + ekdv + '"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
-                                    '</div>' +
-                                    '</div>';
+                    var ekDivsatir =
+                        '<div class="kdv' + ekdv + ' kdvtutt">' +
+                        '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
+                        '<label class="col-md-1 kdv" id="kdv' + ekdv + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + ekdv + '</label>' +
+                        '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
+                        '<input id="toplamkdv' + ekdv + '"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
+                        '</div>' +
+                        '</div>';
 
-                                $(ekDivsatir).appendTo(ekDiv);
-                                
+                    $(ekDivsatir).appendTo(ekDiv);
+
                 }else{
                     ekdv=$('#kdv'+eh).find(":selected").text();
                     ekdv=Number(ekdv);
                     var eeh=0;
-                     kdves=0;
+                    kdves=0;
                     $('#siptable tr.sipsatirs').each(function()
                     {
                         eekdv=$('#kdv'+eeh).find(":selected").text();
                         eekdv=Number(eekdv);
-                        
-                         if(eh > eeh)
+
+                        if(eh > eeh)
+                        {
+
+                            if(ekdv==eekdv)
                             {
+                                kdves++;
 
-                                if(ekdv==eekdv)
-                                    {
-                                        kdves++;
-
-                                    }
                             }
-                       
+                        }
+
                         eeh++;
                     });
-                                if(kdves==0)
-                                {
-                                var eekDiv = $('#kdvbel');
-                                var eekDivsatir =
-                                '<div class="kdv' + ekdv + ' kdvtutt">' +
-                                '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
-                                '<label class="col-md-1 kdv" id="kdv' + ekdv + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + ekdv + '</label>' +
-                                '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
-                                '<input id="toplamkdv' + ekdv + '"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
-                                '</div>' +
-                                '</div>';
+                    if(kdves==0)
+                    {
+                        var eekDiv = $('#kdvbel');
+                        var eekDivsatir =
+                            '<div class="kdv' + ekdv + ' kdvtutt">' +
+                            '<label class="col-md-1"  style="font-size:14px;margin-left:55.5%;margin-top:7px;font-family:monospace,monospace">KDV  :</label>' +
+                            '<label class="col-md-1 kdv" id="kdv' + ekdv + '" style="font-size: 14px;margin-top:7px;font-family: monospace, monospace" >% ' + ekdv + '</label>' +
+                            '<div class="col-md-3 kadeve" style="font-size: 14px;width:25.5%">' +
+                            '<input id="toplamkdv' + ekdv + '"  class="form-control kdvtut" name="kdvtut[]" style="font-family: monospace, monospace;padding-right:55px; text-align: right;" value="0,00" readonly><span id="t2" style="padding-right:45px;text-align:right" class=" form-control-feedback right ico" >TL</span>' +
+                            '</div>' +
+                            '</div>';
 
-                                $(eekDivsatir).appendTo(eekDiv);
-                                }
+                        $(eekDivsatir).appendTo(eekDiv);
                     }
-                        eh++;
-                
-                    calculate(0);
-                    
+                }
+                eh++;
+
+                calculate(0);
+
             });
 
             // toplam tutar
             $("input[name^='tutar']").each(function(){
-                    esum += +$(this).val();
-                    // console.log(esum);
-                });
-                var esattoplam=Number(esum).toLocaleString('tr',{ minimumFractionDigits: 2 });
-                $('#toplamm').val(esattoplam);
+                esum += +$(this).val();
+                // console.log(esum);
+            });
+            var esattoplam=Number(esum).toLocaleString('tr',{ minimumFractionDigits: 2 });
+            $('#toplamm').val(esattoplam);
 
-            
+
         }
-        
+
 
         //enter tuşu submit iptal
         eskik=18;
@@ -536,10 +537,10 @@
 
 
         //sayfa yüklendiğinde hesaplama
-       // window.onload(myFunction(0));
+        // window.onload(myFunction(0));
 
-       
-       
+
+
 
 
 
@@ -627,7 +628,7 @@
                         kdvtutarii=kdvtutari.toFixed(2);
                         kdvtutarii=Number(kdvtutarii).toLocaleString('tr',{ minimumFractionDigits: 2 });
                         $('#toplamkdv'+kdvora).val(kdvtutarii);
-                           // console.log(kdvtutar);
+                        // console.log(kdvtutar);
                         // $('#gtoplam').val(kdvtutariii);
                     }
 
@@ -638,9 +639,9 @@
                 var ff;
                 sattoplami=0;
                 $("input[name^='kdvtut']").each(function() {
-                   //var degmem=$(this).val();
+                    //var degmem=$(this).val();
                     ff=$(this).val().replace(/\./g,"");
-                   fff=ff.replace(/\,/g,".");
+                    fff=ff.replace(/\,/g,".");
                     fff=Number(fff);
 
 
@@ -655,8 +656,8 @@
                 var sattoplamii=Number(sattoplami).toLocaleString('tr',{ minimumFractionDigits: 2 });
                 $('#gtoplam').val(sattoplamii);
 
-              //  console.log(sum);
-              //  console.log(kdvtut);
+                //  console.log(sum);
+                //  console.log(kdvtut);
 
                 // dsattoplam=sattoplam.replace(/\./g,",");
             } catch (e) {
@@ -666,7 +667,7 @@
 
         function eski(ff){
 
-        ff=Number(ff);
+            ff=Number(ff);
 
             eskii=ff;
             // myFunction(eskii);
@@ -674,7 +675,7 @@
 
 
         function  myFunction (gggg,z,t){
-            
+
             if(typeof z!=="undefined" ){
                 eskii=z;
             }
@@ -696,27 +697,27 @@
                 //kdvv=$("select[name^=kdv[]").find(":selected").text();
                 kdvv=$('#kdv'+satsay).find(":selected").text();
                 kdvv=Number(kdvv);
-                
+
                 if(kdvv==kdvtext){
                     n++;
 
                 }
                 if(kdvv==eskii){
                     esss++;
-                    
+
                 }
                 satsay++;
 
             });
 
             ess=0;
-            
+
 
             if(isNaN(eskii)){
 
                 n=2;
             }
-            
+
 
             $('#siptable tr.sipsatirs').each(function() {
                 if (z == null || z == "undefined") {
@@ -797,8 +798,8 @@
                 $('#tutar'+maske).inputmask("tutar");
 
 
-            
-             maske++;
+
+                maske++;
             });
             $('#toplamm').inputmask("tutar");
 
@@ -858,7 +859,7 @@
 
                 }).on("typeahead:selected", function(obj, data) {
                 $("#fisfid").val(data.id);
-               // console.log(data.id);
+                // console.log(data.id);
             })
                 .on('typeahead:asyncrequest', function() {
                     $('.Typeahead-spinner').show();
@@ -916,7 +917,7 @@
                 //$("[id='fissid" + i + "']").val(stok.id);
                 $re=$(this).closest("tr.sipsatirs").find(".fissid").val(stok.id);
                 console.log($re);
-               // console.log(stok.id);
+                // console.log(stok.id);
             })
                 .on('typeahead:asyncrequest', function() {
                     $('.Typeahead-spinner').show();
@@ -984,8 +985,8 @@
                     url: '/sipfissatekle',
                     data: {
                         '_token': $('input[name=csrf-token]').val(),
-                         'numara': $('#sfisno').val(),
-                         'sipfisid':$('#sipfisid').val()
+                        'numara': $('#irno').val(),
+                        'sipfisid':$('#sipfisid').val()
 
 
                     },
@@ -1022,7 +1023,7 @@
                             //$('#fissid'+i).val(stok.id);
                             //$("[id='fissid" + i + "']").val(stok.id);
                             $re=$(this).closest("tr.sipsatirs").find(".fissid").val(stok.id);
-                             console.log($re);
+                            console.log($re);
                         })
                             .on('typeahead:asyncrequest', function() {
                                 $('.Typeahead-spinner').show();
@@ -1048,10 +1049,10 @@
 
 
 
-                    // satır ekle
+                        // satır ekle
                     },
                     error: function(data){
-                    //console.log(data);
+                        //console.log(data);
                     }
                 });
             });
@@ -1062,138 +1063,138 @@
                 if(i>1){
 
 
-                var $trthis=$(this);
-                var $tr = $(this).closest('tr');
-                var $trp = $(this).parents('tr');
+                    var $trthis=$(this);
+                    var $tr = $(this).closest('tr');
+                    var $trp = $(this).parents('tr');
                     var sipsatsilid = $(this).attr('data-fissatid');
                     //console.log(sipsatsilid,"sdf");
 
                     var sipfisid=$('#sipfisid').val();
                     // var sattutar=$tr.find(".tutar").val();
                     //console.log(sattutar);
-                alertify.confirm(
-                    '<h1><strong>Uyarı...!!!</strong></h1>',
-                    '<h2>Satır Silinecek !</h2>',
-                    function(){
+                    alertify.confirm(
+                        '<h1><strong>Uyarı...!!!</strong></h1>',
+                        '<h2>Satır Silinecek !</h2>',
+                        function(){
 
-                                        $.ajax({
-                                            dataType: 'JSON',
-                                            type: 'delete',
-                                            url: '/sipfissatsil/'+ sipsatsilid,
-                                            data: {
-                                                '_token': $('input[name=csrf-token]').val(),
-                                                //'gtoplam':gtoplam,
-                                                'sipfisid':sipfisid,
+                            $.ajax({
+                                dataType: 'JSON',
+                                type: 'delete',
+                                url: '/sipfissatsil/'+ sipsatsilid,
+                                data: {
+                                    '_token': $('input[name=csrf-token]').val(),
+                                    //'gtoplam':gtoplam,
+                                    'sipfisid':sipfisid,
 
-                                                        },
-                                                success: function (data) {
+                                },
+                                success: function (data) {
 
 
                                     // önemli
-                                                if( i > 1 ) {
+                                    if( i > 1 ) {
 
-                                                re=$tr.find(".kkdv :selected").text();
-                                                re=Number(re);
+                                        re=$tr.find(".kkdv :selected").text();
+                                        re=Number(re);
 
-                                                z=re;
+                                        z=re;
 
-                                                    $trp.remove();
-                                                    console.log(i);
-                                                    i--;
-                                                    var fields = $('#siptable tr.sipsatirs .fissid');
-                                                    var counts = 0;
-                                                    $.each(fields, function() {
+                                        $trp.remove();
+                                        console.log(i);
+                                        i--;
+                                        var fields = $('#siptable tr.sipsatirs .fissid');
+                                        var counts = 0;
+                                        $.each(fields, function() {
 
-                                                        $trthis.attr('id','fissid' + counts);
+                                            $trthis.attr('id','fissid' + counts);
 
-                                                        counts++;
-                                                    });
+                                            counts++;
+                                        });
 
-                                                    //yeniden id isimlendir
-                                                    var fields = $('#siptable tr.sipsatirs .miktar');
-                                                    var counts = 0;
-                                                    $.each(fields, function() {
-                                                        // $('#siptable tr.sipsatirs').each(function() {
+                                        //yeniden id isimlendir
+                                        var fields = $('#siptable tr.sipsatirs .miktar');
+                                        var counts = 0;
+                                        $.each(fields, function() {
+                                            // $('#siptable tr.sipsatirs').each(function() {
 
-                                                        $trthis.attr('id','miktar' + counts);
-                                                        $trthis.attr('oninput','calculate('+counts+')' );
-                                                        counts++;
-                                                    });
+                                            $trthis.attr('id','miktar' + counts);
+                                            $trthis.attr('oninput','calculate('+counts+')' );
+                                            counts++;
+                                        });
 
-                                                    var fields = $('#siptable tr.sipsatirs .birim');
-                                                    var counts = 0;
-                                                    $.each(fields, function() {
-                                                        // $('#siptable tr.sipsatirs').each(function() {
+                                        var fields = $('#siptable tr.sipsatirs .birim');
+                                        var counts = 0;
+                                        $.each(fields, function() {
+                                            // $('#siptable tr.sipsatirs').each(function() {
 
-                                                        $trthis.attr('id','birim' + counts);
-                                                        counts++;
-                                                    });
+                                            $trthis.attr('id','birim' + counts);
+                                            counts++;
+                                        });
 
-                                                    var fields = $('#siptable tr.sipsatirs .bfiyat');
-                                                    var counts = 0;
-                                                    $.each(fields, function() {
-                                                        // $('#siptable tr.sipsatirs').each(function() {
+                                        var fields = $('#siptable tr.sipsatirs .bfiyat');
+                                        var counts = 0;
+                                        $.each(fields, function() {
+                                            // $('#siptable tr.sipsatirs').each(function() {
 
-                                                        $trthis.attr('id','bfiyat' + counts);
-                                                        $trthis.attr('oninput','calculate('+counts+')' );
-                                                        counts++;
-                                                    });
+                                            $trthis.attr('id','bfiyat' + counts);
+                                            $trthis.attr('oninput','calculate('+counts+')' );
+                                            counts++;
+                                        });
 
-                                                    var fields = $('#siptable tr.sipsatirs .kkdv');
-                                                    var count = 0;
-                                                    $.each(fields, function() {
-                                                        // $('#siptable tr.sipsatirs').each(function() {
+                                        var fields = $('#siptable tr.sipsatirs .kkdv');
+                                        var count = 0;
+                                        $.each(fields, function() {
+                                            // $('#siptable tr.sipsatirs').each(function() {
 
-                                                        $trthis.attr('id','kdv' + count);
-                                                        $trthis.attr('onchange','myFunction('+count+')');
-                                                        count++;
-                                                    });
-
-
-
-                                                    var field = $('#siptable tr.sipsatirs .tutar');
-                                                    var counts = 0;
-
-                                                    $.each(field, function() {
-                                                        // $('#siptable tr.sipsatirs').each(function() {
-                                                        $trthis.attr('id','miktar' + counts);
-
-                                                        $trthis.attr('id','tutar' + counts);
-                                                        counts++;
-
-                                                    });
-                                                //yeniden id isimlendir
-                                                    }
-
-                                calculate(0);
-                                myFunction (re,z);
-                                                    // gtoplam
-                                                    var gtoplam=$('#gtoplam').val();
-                                                    console.log(gtoplam);
-                                                    $.ajax({
-                                                        dataType: 'JSON',
-                                                        type: 'put',
-                                                        url: '/siparisfisi/gtoplam',
-                                                        data: {
-                                                            '_token': $('input[name=csrf-token]').val(),
-                                                            'gtoplam':gtoplam,
-                                                            'sipfisid':sipfisid,
-
-                                                        },
-                                                        // success: function (data) {},
-                                                        // error:function (data) {},
-                                                    });
+                                            $trthis.attr('id','kdv' + count);
+                                            $trthis.attr('onchange','myFunction('+count+')');
+                                            count++;
+                                        });
 
 
-                                                    // gtoplam
-                                                    alertify.success('İşlem Tamamlandı...');
+
+                                        var field = $('#siptable tr.sipsatirs .tutar');
+                                        var counts = 0;
+
+                                        $.each(field, function() {
+                                            // $('#siptable tr.sipsatirs').each(function() {
+                                            $trthis.attr('id','miktar' + counts);
+
+                                            $trthis.attr('id','tutar' + counts);
+                                            counts++;
+
+                                        });
+                                        //yeniden id isimlendir
+                                    }
+
+                                    calculate(0);
+                                    myFunction (re,z);
+                                    // gtoplam
+                                    var gtoplam=$('#gtoplam').val();
+                                    console.log(gtoplam);
+                                    $.ajax({
+                                        dataType: 'JSON',
+                                        type: 'put',
+                                        url: '/siparisfisi/gtoplam',
+                                        data: {
+                                            '_token': $('input[name=csrf-token]').val(),
+                                            'gtoplam':gtoplam,
+                                            'sipfisid':sipfisid,
+
+                                        },
+                                        // success: function (data) {},
+                                        // error:function (data) {},
+                                    });
 
 
-                                return false;
-                                        //önemli
+                                    // gtoplam
+                                    alertify.success('İşlem Tamamlandı...');
+
+
+                                    return false;
+                                    //önemli
                                 },
-                                                error:function (data) {
-                                     console.log(data);
+                                error:function (data) {
+                                    console.log(data);
                                     new PNotify({
                                         title: 'Uyarı!...',
                                         text: 'İşlem Hatası...',
@@ -1203,135 +1204,135 @@
                                     });
                                 }
 
-                                        });
+                            });
 
-                         },
-                    function(){ alertify.error('İptal Edildi')});
-                // swal({
-                //             title: "Eminmisiniz?",
-                //             text: "Satır Silinecek!...",
-                //
-                //              buttons: ["HAYIR!", "EVET!"],
-                //
-                //     }).then((silsipfissat) => {
-                //
-                //             if (silsipfissat) {
-                //                 $.ajax({
-                //
-                //                     dataType: 'JSON',
-                //                     type: 'delete',
-                //                     url: '/sipfissatsil/'+ sipsatsilid,
-                //                     data: {
-                //                         '_token': $('input[name=csrf-token]').val(),
-                //                         // 'sipfissatid': mcep,
-                //                         // 'sipfisid':aa
-                //
-                //
-                //                                 },
-                //                         success: function (data) {
-                //                             console.log($(this));
-                //
-                //             // önemli
-                //                         if( i > 1 ) {
-                //
-                //                         re=$tr.find(".kkdv :selected").text();
-                //                         re=Number(re);
-                //
-                //                         z=re;
-                //
-                //                             $trp.remove();
-                //                             console.log(i);
-                //                             i--;
-                //                             var fields = $('#siptable tr.sipsatirs .fissid');
-                //                             var counts = 0;
-                //                             $.each(fields, function() {
-                //
-                //                                 $trthis.attr('id','fissid' + counts);
-                //
-                //                                 counts++;
-                //                             });
-                //
-                //                             //yeniden id isimlendir
-                //                             var fields = $('#siptable tr.sipsatirs .miktar');
-                //                             var counts = 0;
-                //                             $.each(fields, function() {
-                //                                 // $('#siptable tr.sipsatirs').each(function() {
-                //
-                //                                 $trthis.attr('id','miktar' + counts);
-                //                                 $trthis.attr('oninput','calculate('+counts+')' );
-                //                                 counts++;
-                //                             });
-                //
-                //                             var fields = $('#siptable tr.sipsatirs .birim');
-                //                             var counts = 0;
-                //                             $.each(fields, function() {
-                //                                 // $('#siptable tr.sipsatirs').each(function() {
-                //
-                //                                 $trthis.attr('id','birim' + counts);
-                //                                 counts++;
-                //                             });
-                //
-                //                             var fields = $('#siptable tr.sipsatirs .bfiyat');
-                //                             var counts = 0;
-                //                             $.each(fields, function() {
-                //                                 // $('#siptable tr.sipsatirs').each(function() {
-                //
-                //                                 $trthis.attr('id','bfiyat' + counts);
-                //                                 $trthis.attr('oninput','calculate('+counts+')' );
-                //                                 counts++;
-                //                             });
-                //
-                //                             var fields = $('#siptable tr.sipsatirs .kkdv');
-                //                             var count = 0;
-                //                             $.each(fields, function() {
-                //                                 // $('#siptable tr.sipsatirs').each(function() {
-                //
-                //                                 $trthis.attr('id','kdv' + count);
-                //                                 $trthis.attr('onchange','myFunction('+count+')');
-                //                                 count++;
-                //                             });
-                //
-                //
-                //
-                //                             var field = $('#siptable tr.sipsatirs .tutar');
-                //                             var counts = 0;
-                //
-                //                             $.each(field, function() {
-                //                                 // $('#siptable tr.sipsatirs').each(function() {
-                //                                 $trthis.attr('id','miktar' + counts);
-                //
-                //                                 $trthis.attr('id','tutar' + counts);
-                //                                 counts++;
-                //
-                //                             });
-                //                         //yeniden id isimlendir
-                //                             }
-                //
-                //         calculate(0);
-                //         myFunction (re,z);
-                //
-                //         return false;
-                //                 //önemli
-                //         },
-                //                         error:function (data) {
-                //              console.log(data);
-                //             new PNotify({
-                //                 title: 'Uyarı!...',
-                //                 text: 'İşlem Hatası...',
-                //                 type: 'error',
-                //                 // type: 'notice',
-                //                 styling: 'bootstrap3'
-                //             });
-                //         }
-                //
-                //                 });
-                //
-                //
-                //             }else
-                //             {
-                //                 return false;
-                //             }
-                //     })
+                        },
+                        function(){ alertify.error('İptal Edildi')});
+                    // swal({
+                    //             title: "Eminmisiniz?",
+                    //             text: "Satır Silinecek!...",
+                    //
+                    //              buttons: ["HAYIR!", "EVET!"],
+                    //
+                    //     }).then((silsipfissat) => {
+                    //
+                    //             if (silsipfissat) {
+                    //                 $.ajax({
+                    //
+                    //                     dataType: 'JSON',
+                    //                     type: 'delete',
+                    //                     url: '/sipfissatsil/'+ sipsatsilid,
+                    //                     data: {
+                    //                         '_token': $('input[name=csrf-token]').val(),
+                    //                         // 'sipfissatid': mcep,
+                    //                         // 'sipfisid':aa
+                    //
+                    //
+                    //                                 },
+                    //                         success: function (data) {
+                    //                             console.log($(this));
+                    //
+                    //             // önemli
+                    //                         if( i > 1 ) {
+                    //
+                    //                         re=$tr.find(".kkdv :selected").text();
+                    //                         re=Number(re);
+                    //
+                    //                         z=re;
+                    //
+                    //                             $trp.remove();
+                    //                             console.log(i);
+                    //                             i--;
+                    //                             var fields = $('#siptable tr.sipsatirs .fissid');
+                    //                             var counts = 0;
+                    //                             $.each(fields, function() {
+                    //
+                    //                                 $trthis.attr('id','fissid' + counts);
+                    //
+                    //                                 counts++;
+                    //                             });
+                    //
+                    //                             //yeniden id isimlendir
+                    //                             var fields = $('#siptable tr.sipsatirs .miktar');
+                    //                             var counts = 0;
+                    //                             $.each(fields, function() {
+                    //                                 // $('#siptable tr.sipsatirs').each(function() {
+                    //
+                    //                                 $trthis.attr('id','miktar' + counts);
+                    //                                 $trthis.attr('oninput','calculate('+counts+')' );
+                    //                                 counts++;
+                    //                             });
+                    //
+                    //                             var fields = $('#siptable tr.sipsatirs .birim');
+                    //                             var counts = 0;
+                    //                             $.each(fields, function() {
+                    //                                 // $('#siptable tr.sipsatirs').each(function() {
+                    //
+                    //                                 $trthis.attr('id','birim' + counts);
+                    //                                 counts++;
+                    //                             });
+                    //
+                    //                             var fields = $('#siptable tr.sipsatirs .bfiyat');
+                    //                             var counts = 0;
+                    //                             $.each(fields, function() {
+                    //                                 // $('#siptable tr.sipsatirs').each(function() {
+                    //
+                    //                                 $trthis.attr('id','bfiyat' + counts);
+                    //                                 $trthis.attr('oninput','calculate('+counts+')' );
+                    //                                 counts++;
+                    //                             });
+                    //
+                    //                             var fields = $('#siptable tr.sipsatirs .kkdv');
+                    //                             var count = 0;
+                    //                             $.each(fields, function() {
+                    //                                 // $('#siptable tr.sipsatirs').each(function() {
+                    //
+                    //                                 $trthis.attr('id','kdv' + count);
+                    //                                 $trthis.attr('onchange','myFunction('+count+')');
+                    //                                 count++;
+                    //                             });
+                    //
+                    //
+                    //
+                    //                             var field = $('#siptable tr.sipsatirs .tutar');
+                    //                             var counts = 0;
+                    //
+                    //                             $.each(field, function() {
+                    //                                 // $('#siptable tr.sipsatirs').each(function() {
+                    //                                 $trthis.attr('id','miktar' + counts);
+                    //
+                    //                                 $trthis.attr('id','tutar' + counts);
+                    //                                 counts++;
+                    //
+                    //                             });
+                    //                         //yeniden id isimlendir
+                    //                             }
+                    //
+                    //         calculate(0);
+                    //         myFunction (re,z);
+                    //
+                    //         return false;
+                    //                 //önemli
+                    //         },
+                    //                         error:function (data) {
+                    //              console.log(data);
+                    //             new PNotify({
+                    //                 title: 'Uyarı!...',
+                    //                 text: 'İşlem Hatası...',
+                    //                 type: 'error',
+                    //                 // type: 'notice',
+                    //                 styling: 'bootstrap3'
+                    //             });
+                    //         }
+                    //
+                    //                 });
+                    //
+                    //
+                    //             }else
+                    //             {
+                    //                 return false;
+                    //             }
+                    //     })
                 }else{
 
                     new PNotify({

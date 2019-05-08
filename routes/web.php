@@ -108,11 +108,18 @@ Route::get('/numarala', 'fisController@numarala');
 Route::get('/numarala', function () {
     return view('alsat.numarala');
 });
+//****************Fatura fisi************************//////////////////////
+Route::post('/sifataktar', 'irsaliyeController@fatsonnumara');
+//****************Fatura fisi************************//////////////////////
 //****************irsaliye fisi************************//////////////////////
-Route::get('/irsaliye/{fisturu}', 'irsaliyeController@irsaliyefisleri');
+Route::any('/irsaliye/{id?}', 'irsaliyeController@irsaliyefisi');
+Route::get('/irsaliyelist/{fisturu}', 'irsaliyeController@irsaliyefisleri');
 Route::any('/irsaliyefislist', 'irsaliyeController@irsaliyefislist');
-
-
+Route::post('/sipaktarlist', 'irsaliyeController@sipaktarlist');
+Route::post('/sipaktarok', 'irsaliyeController@sipaktarok');
+Route::post('/irsaliyekaydet', 'irsaliyeController@irsaliyekaydet');
+Route::get('/irsaliye/edit/{irno}/{fisturu}', 'irsaliyeController@irsaliyedit');
+Route::POST('/irsaliyeditkaydet', 'irsaliyeController@irsaliyeditkaydet');
 //****************irsaliye fisi************************//////////////////////
 
 //****************siparis fisi************************//////////////////////

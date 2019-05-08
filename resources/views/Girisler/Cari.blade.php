@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="text-right">
                                                     <input type="hidden" name="add">
-                                                    <input type="hidden" name="uniquetime" value="1501288025.81">
+
                                                     <button id="send" type="submit" class="btn btn-success">Kaydet</button>   </div>
 
                                                     <table class="table table-striped table-bordered dt-responsive nowrap" id="firma">

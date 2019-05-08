@@ -46,7 +46,7 @@
                                 <ul class="nav child_menu">
                                     <li class="sub_menu"><a href="/siparisfisleri/2">Alış Sipariş Fişi</a>
                                     </li>
-                                    <li><a href="/irsaliye/2">Alış İrsaliye Fişi</a>
+                                    <li><a href="/irsaliyelist/4">Alış İrsaliye Fişi</a>
                                     </li>
                                 </ul>
 
@@ -57,7 +57,7 @@
                                 <ul class="nav child_menu">
                                     <li class="sub_menu"><a href="/siparisfisleri/1">Satış Sipariş Fişi</a>
                                     </li>
-                                    <li><a href="/irsaliye/1">Satış İrsaliye Fişi</a>
+                                    <li><a href="/irsaliyelist/3">Satış İrsaliye Fişi</a>
                                     </li>
                                 </ul>
 

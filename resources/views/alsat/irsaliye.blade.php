@@ -32,13 +32,13 @@
                             {{--<div class="col-md-4">--}}
                             @if($fisturu==1)
                                 <div class="col-md-2">
-                                    <a href="http://baver.test/irsaliye/1" class="btn btn-app btn-hareket">
+                                    <a href="http://baver.test/irsaliye/3" class="btn btn-app btn-hareket">
                                         <i class="fa fa-plus-square-o"></i> Ekle
                                     </a>
                                 </div>
                             @else
                                 <div class="col-md-2">
-                                    <a href="http://baver.test/irsaliye/2" class="btn btn-app btn-hareket">
+                                    <a href="http://baver.test/irsaliye/4" class="btn btn-app btn-hareket">
                                         <i class="fa fa-plus-square-o"></i> Ekle
                                     </a>
                                 </div>
@@ -46,50 +46,9 @@
                             @endif
                             <input type=hidden id="fisturu" value="{{$fisturu}}">
 
-
-
-
-
-                        <!-- /.c
-
-                                            {{--textbox başlangıç--}}
-
-                            {{--<div class="form-group ">--}}
-                            {{--<label for="tax_no"  name="stoktur">Stok Türü</label>--}}
-                            {{--<select data-toggle="dropdown" id="stoktur" class="form-control" name="stoktur" aria-expanded="false"  ><span class="caret"></span>--}}
-                            {{--<option >Seciniz</option>--}}
-                            {{--@foreach($post as $key => $stokturad)--}}
-                            {{--<option  value="{{ $key }}">{{ $stokturad }}</option>--}}
-                            {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--</div> <!-- /.form-group -->--}}
-
-                            {{--<div class="form-group">--}}
-
-                            {{--<label for="name">Stok Adı </label>--}}
-                            {{--<input type="text" name="sad" id="sad" value="" class="form-control "  autocomplate="off" aria-required="true">--}}
-                            {{--</div> <!-- /.form-group -->--}}
-
-                            {{--<div class="row">--}}
-                            {{--<div class="col-xs-6 col-md-6">--}}
-
-                            {{--</div> <!-- /.form-group -->--}}
-                            {{--</div> <!-- /.col-md-6 -->--}}
-                            {{--<div class="col-xs-6 col-md-6">--}}
-                            {{--<div class="form-group">--}}
-
-                            {{--</div> <!-- /.form-group -->--}}
-                            {{--</div> <!-- /.col-md-6 -->--}}
-                            {{--</div> <!-- /.row -->--}}
-
-                                </div> <!-- /.col-md-6 -->
                             <div class="col-md-4">
 
                                 <div class="form-group">
-
-
-
-
 
 
                                 </div> <!-- /.form-group -->
@@ -217,7 +176,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade"  id="editirnotar" role="dialog">
+    <div class="modal fade"  id="editfatnotar" role="dialog">
         <div class="modal-dialog " role="document">
             <div class="modal-content">
 
@@ -232,7 +191,7 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control"  id="data-id">
                             <label for="address">Tarih</label>
-                            <input type="text" name="tar" id="irtarih" class="form-control has-feedback-left"   aria-describedby="inputSuccess2Status2">
+                            <input type="text" name="tar" id="fattarih" class="form-control has-feedback-left"   aria-describedby="inputSuccess2Status2">
                             <span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>
                             {{--<span id="inputSuccess2Status2" class="sr-only">(success)</span>--}}
                             {{ csrf_field() }}
@@ -242,13 +201,13 @@
                     <div class="col-lg-12">
 
                         <label for="address">Numara</label>
-                        <input class="form-control"  id="irnumara" name=""  >
+                        <input class="form-control"  id="fatnumara" name=""  >
                         {{ csrf_field() }}
                     </div>
                 </div>
                 <div class="modal-footer footeredit" style="margin-top: 130px">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary editirno" data-token="{{ csrf_token() }}" data-dismiss="modal">Düzenle</button>
+                    <button type="button" class="btn btn-primary editfatno" data-token="{{ csrf_token() }}" data-dismiss="modal">Düzenle</button>
                 </div>
 
             </div>
@@ -330,63 +289,63 @@
             //     });
             // });
 
-            // $(document).on('click','#acik', function() {
-            //     var sipfisid = $(this).attr('data-id');
-            //
-            //     // console.log(a);
-            //     // $('#estoktur').val($(this).data('stid'));
-            //     if (fisturu==1){irturu=3} else{irturu=4}
-            //     // console.log(irturu);
-            //     $.ajax({
-            //         dataType: 'JSON',
-            //         type: 'post',
-            //         url: '/siiraktar',
-            //         data: {
-            //             '_token': $('input[name=_token]').val(),
-            //             'fisturu':fisturu,
-            //             'irturu':irturu
-            //             // 'sipfisid':sipfisid
-            //         },
-            //
-            //         success: function(data) {
-            //             $('#editirnotar').modal();
-            //             $('#irnumara').val(data);
-            //             $('#data-id').val(sipfisid);
-            //             console.log(data);
-            //         },
-            //         error:function(data){
-            //             console.log(data);
-            //         }
-            //     });
-            // });
-            // $(document).on('click','.editirno', function() {
-            //
-            //     var irtarih =$('#irtarih').val();
-            //     var irnumara =$('#irnumara').val();
-            //     $.ajax({
-            //         dataType: 'JSON',
-            //         type: 'put',
-            //         url: '/iraktarnokaydet',
-            //         data: {
-            //             '_token': $('input[name=_token]').val(),
-            //             'irtarih':irtarih,
-            //             'irnumara':irnumara,
-            //             'sipfisid':$('#data-id').val(),
-            //             'numaralaid':3
-            //         },
-            //
-            //         success: function(data) {
-            //             // console.log(data);
-            //             $('#stoktablo').DataTable().ajax.reload();
-            //
-            //         },
-            //         error:function(data){
-            //             console.log(data);
-            //         }
-            //     });
-            //
-            //
-            // });
+            $(document).on('click','#acik', function() {
+                var sipfisid = $(this).attr('data-id');
+
+                // console.log(a);
+                // $('#estoktur').val($(this).data('stid'));
+                if (fisturu==1){fatturu=5} else{fatturu=6}
+                // console.log(irturu);
+                $.ajax({
+                    dataType: 'JSON',
+                    type: 'post',
+                    url: '/sifataktar',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'fisturu':fisturu,
+                        'fatturu':fatturu
+                        // 'sipfisid':sipfisid
+                    },
+
+                    success: function(data) {
+                        $('#editfatnotar').modal();
+                        $('#fatnumara').val(data);
+                        $('#data-id').val(sipfisid);
+                        console.log(data);
+                    },
+                    error:function(data){
+                        console.log(data);
+                    }
+                });
+            });
+            $(document).on('click','.editfatno', function() {
+
+                var fattarih =$('#fattarih').val();
+                var fatnumara =$('#fatnumara').val();
+                $.ajax({
+                    dataType: 'JSON',
+                    type: 'put',
+                    url: '/iraktarnokaydet',
+                    data: {
+                        '_token': $('input[name=_token]').val(),
+                        'fattarih':fattarih,
+                        'ifatnumara':fatnumara,
+                        'sipfisid':$('#data-id').val(),
+                        'numaralaid':5
+                    },
+
+                    success: function(data) {
+                        // console.log(data);
+                        $('#stoktablo').DataTable().ajax.reload();
+
+                    },
+                    error:function(data){
+                        console.log(data);
+                    }
+                });
+
+
+            });
 
             // $('#stoktablo').DataTable({
             //     //"order": [ 0, 'desc' ]
@@ -407,11 +366,11 @@
                 "columns": [
 
                     { "data": "sipfistar"},
-                    { "data": "numara" },
+                    { "data": "irnumara" },
                         {{--//href="/siparisfisi/edit/{{$post->sipfisid}}/{{$fisturu}}"--}}
                     { "data": null,
                         render:function (data) {
-                            return "<a  href='/irsaliye/edit/"+data.sipfisid+"/"+fisturu+"' >" + data.cunvan + "</a>";
+                            return "<a  href='/irsaliye/edit/"+data.irnumara+"/"+fisturu+"' >" + data.cunvan + "</a>";
                         }
                     },
                     // {"data":"dad"},
@@ -454,7 +413,7 @@
                             switch(cellData || rowData) {
                                 case 1:
                                     // $(td).addClass('label label-info');
-                                    $(td).html("<button class='label label-warning' data-id='"+rowData.sipfisid+"' id='acik'>AÇIK</button>");
+                                    $(td).html("<span class='label label-warning' data-id='"+rowData.sipfisid+"' >AÇIK</span>");
                                     break;
                                 case 3:
                                     // $(td).addClass('label label-info');
@@ -462,7 +421,7 @@
 
                                     break;
                                 case 4:
-                                    $(td).html("<button class='label label-info'>İRSALİYELENDİ</button>");
+                                    $(td).html("<button class='label label-info' data-id='"+rowData.sipfisid+"' id='acik'>İRSALİYELENDİ</button>");
                                     break;
                                 case 5:
                                     $(td).html("<span class='label label-success'>FATURALANDI</span>");

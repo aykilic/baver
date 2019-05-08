@@ -301,11 +301,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-                $(document).on('click', '#silsipfis', function () {
-                    $('#sipfissilid').val($(this).data('sipfisid'));
-                    sipfisid = $('#sipfissilid').val();
-                    $('#sipfissilpopup').modal();
-                });
+                // $(document).on('click', '#silsipfis', function () {
+                //     $('#sipfissilid').val($(this).data('sipfisid'));
+                //     sipfisid = $('#sipfissilid').val();
+                //     $('#sipfissilpopup').modal();
+                // });
             $('.footersil').on('click', '.delete', function() {
 
                 $.ajax({

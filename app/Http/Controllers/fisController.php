@@ -437,6 +437,9 @@ class fisController extends Controller{
         //dd($request->gtoplam);
        $sipfisObj->save();
 
+
+
+
         $sonid=sipfisObj::all()->last()->sipfisid;
 //dd($sonid);
         for ($i = 0; $i < count($satirsay); $i++) {
@@ -491,6 +494,7 @@ class fisController extends Controller{
             $numaralaObj=numaralaObj::find(2);
 //            $numaralaObj=numaralaObj::where('numaralaid',2)->first();
                 $numaralaObj->mod=0;
+            $numaralaObj->sonnumara=$request->sfisno;
             $numaralaObj->save();
 
             return redirect('/siparisfisleri/2')
@@ -505,6 +509,7 @@ class fisController extends Controller{
             $numaralaObj=numaralaObj::find(1);
 //            $numaralaObj=numaralaObj::where('numaralaid', 1)->first();
             $numaralaObj->mod=0;
+            $numaralaObj->sonnumara=$request->sfisno;
             $numaralaObj->save();
 
             return redirect('/siparisfisleri/1')
@@ -862,6 +867,8 @@ class fisController extends Controller{
 
             $mod=0;
             $data->sayi = $request->sayi;
+            $data->gorunum = $request->afgorunum;
+            $data->sonnumara = $request->afgorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();
@@ -883,6 +890,8 @@ class fisController extends Controller{
 
             $mod=0;
             $data->sayi = $request->sayi;
+            $data->gorunum = $request->sfgorunum;
+            $data->sonnumara = $request->sfgorunum;
             $data->uzunluk = $request->uzunluk;
             $data->mod =$mod;
             $data->save();
