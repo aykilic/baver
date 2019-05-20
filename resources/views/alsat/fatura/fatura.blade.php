@@ -32,13 +32,13 @@
                             {{--<div class="col-md-4">--}}
                             @if($fisturu==1)
                                 <div class="col-md-2">
-                                    <a href="http://baver.test/irsaliye/3" class="btn btn-app btn-hareket">
+                                    <a href="http://baver.test/fatura/5" class="btn btn-app btn-hareket">
                                         <i class="fa fa-plus-square-o"></i> Ekle
                                     </a>
                                 </div>
                             @else
                                 <div class="col-md-2">
-                                    <a href="http://baver.test/irsaliye/4" class="btn btn-app btn-hareket">
+                                    <a href="http://baver.test/fatura/6" class="btn btn-app btn-hareket">
                                         <i class="fa fa-plus-square-o"></i> Ekle
                                     </a>
                                 </div>
@@ -101,9 +101,9 @@
                 <div class="x_panel">
 
                     @if($fisturu==1)
-                        <h2 class="sat">{{$sipfisnoadi}} İrsaliye Listesi </h2>
+                        <h2 class="sat">{{$sipfisnoadi}} Fatura Listesi </h2>
                     @else
-                        <h2 class="al">{{$sipfisnoadi}} İrsaliye Listesi </h2>
+                        <h2 class="al">{{$sipfisnoadi}} Fatura Listesi </h2>
 
                     @endif
 
@@ -260,6 +260,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            if(  fisturu==1){
+                numaralaid=5;
+            }else{
+                numaralaid=6;
+            }
             $(document).on('click', '#silsipfis', function () {
                 $('#sipfissilid').val($(this).data('sipfisid'));
                 sipfisid = $('#sipfissilid').val();
@@ -319,12 +324,7 @@
                 });
             });
             $(document).on('click','.editfatno', function() {
-                console.log(fisturu);
-                if(  $("fisturu").val()==1){
-                    numaralaid=5;
-                }else{
-                    numaralaid=6;
-                }
+
                 var fattarih =$('#fattarih').val();
                 var fatnumara =$('#fatnumara').val();
                 $.ajax({
@@ -357,14 +357,13 @@
             // });
 
             // console.log(fisturu);
-            // if(fisturu==1){fisturu=3}else{fisturu=4};
             var table=$('#stoktablo').DataTable({
 
                 "ajax": {
-                    "url": "/irsaliyefislist",
+                    "url": "/faturafislist",
                     "type": "post",
                     "data":{
-                        'fisturu':fisturu  //hata
+                        'fisturu':fisturu
                     }
                 },
 
@@ -373,13 +372,13 @@
                     { "data": "irtar"},
                     { "data": null,
                         render:function (data) {
-                            return "<a  href='/irsaliye/edit/"+data.irnumara+"/"+fisturu+"' >" + data.irnumara + "</a>";
+                            return "<a  href='/fatura/edit/"+data.fatnumara+"/"+fisturu+"' >" + data.fatnumara + "</a>";
                         }
                     },
                         {{--//href="/siparisfisi/edit/{{$post->sipfisid}}/{{$fisturu}}"--}}
                     { "data": null,
                         render:function (data) {
-                            return "<a  href='/irsaliye/edit/"+data.irnumara+"/"+fisturu+"' >" + data.cunvan + "</a>";
+                            return "<a  href='/fatura/edit/"+data.fatnumara+"/"+fisturu+"' >" + data.cunvan + "</a>";
                         }
                     },
                     // {"data":"dad"},

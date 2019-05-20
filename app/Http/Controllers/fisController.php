@@ -241,7 +241,7 @@ class fisController extends Controller{
             ->with('sipfissat', $sipfissat)
             ->with('fisturu',$fisturu->fisturuad)
             ->with('olay', $olay)
-            ->with('secolay', $sipfis->durumid)
+            ->with('secolay', $sipfis->olayid)
             ->with('depo', $depo)
             ->with('secdepo', $sipfis->depo)
             ->with('doviz', $doviz)
@@ -279,7 +279,7 @@ class fisController extends Controller{
     }
 
     ///////////////////////////////////////***********************************///////////////////////////////////////////////////
-            Public function irsonnumara(request $req)
+    public function irsonnumara(request $req)
             {
 
                 $modObj=numaralaObj::where('evrakturuid', $req->irturu)->first();
@@ -321,14 +321,14 @@ class fisController extends Controller{
                 return response()->json($numara);
 
             }
-                public function iraktarnokaydet(request $request)
+    public function iraktarnokaydet(request $request)
                 {
                     $sipfisObj = sipfisObj::where('sipfisid', $request->sipfisid)->first();
 
                     $sipfisObj->irtar=$request->irtarih;
                     $sipfisObj->irnumara=$request->irnumara;
                     $sipfisObj->olayid=4;
-                    $sipfisObj->durumid=4;  // gereksiz
+//                    $sipfisObj->durumid=4;  // gereksiz
                     $numaralaObj=numaralaObj::where('numaralaid',$request->numaralaid)->first();
 //                    $numaralaObj=numaralaObj::find($request->numaralaid);
 //                    $numaralaObj=DB::table('numarala')->where('numaralaid',$request->numaralaid)->get();
@@ -427,8 +427,8 @@ class fisController extends Controller{
         $sipfisObj->fisfid=$request->fisfid;
         $sipfisObj->depo=$request->depo;
         $sipfisObj->doviz=$request->did;
-        $sipfisObj->durumid=$request->durumid;
-
+//        $sipfisObj->durumid=$request->durumid;
+        $sipfisObj->olayid=1;
 //        setlocale(LC_MONETARY, 'tr_TR');
 //        $rtoplam=money_format('%i', $para);
         //$rtoplam=sprintf('TL %s', number_format($para, 2));
@@ -444,7 +444,7 @@ class fisController extends Controller{
 //dd($sonid);
         for ($i = 0; $i < count($satirsay); $i++) {
             $sipfissatirObj = new sipfissatirObj;
-            $sipfissatirObj->numara = $request->sfisno;
+//            $sipfissatirObj->numara = $request->sfisno;
             $sipfissatirObj->sipfisid = $sonid;
             $sipfissatirObj->fissid = $request->fissid[$i];
 
@@ -551,7 +551,7 @@ class fisController extends Controller{
 //fonksiyon çağırma
 //dd($this->numara($a));
 
-//dd($sipfislist);
+//dd($request->fisturuid);
         $satirsay=$request->fissid;
         $para=$request->gtoplam;
         // number_format($para,2,",",".");
@@ -568,7 +568,7 @@ class fisController extends Controller{
         $sipfisObj->depo=$request->depo;
         $sipfisObj->doviz=$request->did;
         $sipfisObj->durumid=$request->durumid;
-
+        $sipfisObj->olayid=1;
 //        setlocale(LC_MONETARY, 'tr_TR');
 //        $rtoplam=money_format('%i', $para);
         //$rtoplam=sprintf('TL %s', number_format($para, 2));
@@ -602,7 +602,7 @@ class fisController extends Controller{
 
         //sdfjlsdjflsdfdslfjsdlkfjdslksdhfodsıfdsovnbdsofusfpsiıfspbfs
 
-        if($request->fisturu == 2){
+        if($request->fisturuid == 2){
             //return Redirect::to('/alissiparisfisi/2');
             //return view('alsat.alissiparisfis');
 
@@ -700,7 +700,7 @@ class fisController extends Controller{
 
 
         $sipfissatirObj = new sipfissatirObj;
-        $sipfissatirObj->numara=$request->numara;
+//        $sipfissatirObj->numara=$request->numara;
         $sipfissatirObj->sipfisid=$request->sipfisid;
         $sipfissatirObj->save();
         $sonsatid = sipfissatirObj::orderBy('sipfisatirid', 'desc')->value('sipfisatirid');
@@ -903,5 +903,56 @@ class fisController extends Controller{
 
 
     }
+    public function tfnokaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+            $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->gorunum = $request->tfgorunum;
+            $data->sonnumara = $request->tfgorunum;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
+    public function ofnokaydet(request $request)
+    {
+
+        if ($request->ajax()) {
+
+
+            $data = numaralaObj::find($request->evrakturuid);
+
+            $mod=0;
+            $data->sayi = $request->sayi;
+            $data->gorunum = $request->ofgorunum;
+            $data->sonnumara = $request->ofgorunum;
+            $data->uzunluk = $request->uzunluk;
+            $data->mod =$mod;
+            $data->save();
+
+            return response()->json($data);
+
+        }
+
+
+
+    }
 //************************numarala bitiş
+    public static function den(request $request){
+
+	    return $a=1;
+
+}
 }

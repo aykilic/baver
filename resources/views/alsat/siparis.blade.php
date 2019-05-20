@@ -95,8 +95,8 @@
                                                     <div class="col-lg-6">
                                                     <div class="form-group">
                                                             <label for="district">Durum</label>
-                                                            <input type="hidden" name="durumid" id="durumid" value="1" class="form-control">
-                                                            <select data-toggle="dropdown" id="durum" class="form-control"><span class="caret"></span>
+                                                            <input type="hidden" name="olayid" id="olayid" value="1" class="form-control">
+                                                            <select data-toggle="dropdown" id="olay" class="form-control"><span class="caret"></span>
                                                                 <!-- {{--<option >Seçiniz</option>--}} -->
                                                                 @foreach($olay as $key => $olayad)
                                                                     <option  value="{{ $key }}">{{ $olayad }}</option>

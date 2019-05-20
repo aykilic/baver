@@ -135,7 +135,7 @@
                                         <div class="form-group">
                                             <br/>
                                             {{--<label>&nbsp;</label>--}}
-                                            <label>Alış İrsaliye</label>
+                                            <label>Alış İrsaliyesi</label>
 
 
                                         </div>
@@ -178,7 +178,7 @@
                                         <div class="form-group">
                                             <br/>
                                             {{--<label>&nbsp;</label>--}}
-                                            <label>Satış irsaliye</label>
+                                            <label>Satış irsaliyesi</label>
 
 
                                         </div>
@@ -221,7 +221,7 @@
                                         <div class="form-group">
                                             <br/>
                                             {{--<label>&nbsp;</label>--}}
-                                            <label>Alış Fatura</label>
+                                            <label>Alış Faturası</label>
 
 
                                         </div>
@@ -264,7 +264,7 @@
                                         <div class="form-group">
                                             <br/>
                                             {{--<label>&nbsp;</label>--}}
-                                            <label>Satış Fatura</label>
+                                            <label>Satış Faturası</label>
 
 
                                         </div>
@@ -301,8 +301,92 @@
                                     </div>
 
                                 </div>
+                                <div class="x_panel">
+                                    <div class="col-xs-1">
+
+                                        <div class="form-group">
+                                            <br/>
+                                            {{--<label>&nbsp;</label>--}}
+                                            <label>Tahsilat Fişi</label>
 
 
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Uzunluk (Basamak):</label>
+                                            <input type="text" class="form-control" name="tfuzunluk" id="tfuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate07()">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Sayı:</label>
+                                            <input type="text" class="form-control" name="tfsayi" id="tfsayi" data-inputmask="'alias': 'tutar'" oninput="calculate07()">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Başlangıç Tarihi:</label>
+                                            <input type="text" class="form-control" name="tftarih1" id="tftarih1">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Görünüm :</label>
+                                            <input type="text" class="form-control" name="tfgorunum" id="tfgorunum" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 tf" style="margin-top: 24px;">
+                                        <a class="btn btn-default"  id="tfsatirekle" >Kaydet</a>
+                                    </div>
+
+                                </div>
+                                <div class="x_panel">
+                                    <div class="col-xs-1">
+
+                                        <div class="form-group">
+                                            <br/>
+                                            {{--<label>&nbsp;</label>--}}
+                                            <label>Ödeme Fişi</label>
+
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Uzunluk (Basamak):</label>
+                                            <input type="text" class="form-control" name="ofuzunluk" id="ofuzunluk" data-inputmask="'alias': 'uzunluk'" oninput="calculate08()">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Sayı:</label>
+                                            <input type="text" class="form-control" name="ofsayi" id="ofsayi" data-inputmask="'alias': 'tutar'" oninput="calculate08()">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Başlangıç Tarihi:</label>
+                                            <input type="text" class="form-control" name="oftarih1" id="oftarih1">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Görünüm :</label>
+                                            <input type="text" class="form-control" name="ofgorunum" id="ofgorunum" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 of" style="margin-top: 24px;">
+                                        <a class="btn btn-default"  id="ofsatirekle" >Kaydet</a>
+                                    </div>
+
+                                </div>
 
 
                                 </div>
@@ -487,8 +571,40 @@
                 $('#sfgorunum').val(ans);
             }
         }
-
-
+        function calculate07 () {
+            var str = $('#tfsayi').val();
+            var pad = $('#tfuzunluk').val();
+            if((str.length) > pad){
+                new PNotify({
+                    title: 'Hata!',
+                    text: 'Hatalı Giriş.',
+                    type: 'error',
+                    styling:'bootstrap3'
+                });
+                $('#tfsayi').val("");
+                return false;
+            }else {
+                var ans = Array((pad - str.length) + 1).join('0') + str;
+                $('#tfgorunum').val(ans);
+            }
+        }
+        function calculate08 () {
+            var str = $('#ofsayi').val();
+            var pad = $('#ofuzunluk').val();
+            if((str.length) > pad){
+                new PNotify({
+                    title: 'Hata!',
+                    text: 'Hatalı Giriş.',
+                    type: 'error',
+                    styling:'bootstrap3'
+                });
+                $('#ofsayi').val("");
+                return false;
+            }else {
+                var ans = Array((pad - str.length) + 1).join('0') + str;
+                $('#ofgorunum').val(ans);
+            }
+        }
         $('.asf').on('click', '#assatirekle', function() {
            // alert("df");
             $.ajax({
@@ -650,13 +766,73 @@
                 data: {
                     '_token': $('input[name=_token]').val(),
                     'evrakturuid': 5,
-                    'sayi': $('#sisayi').val(),
+                    'sayi': $('#sfsayi').val(),
                     'sfgorunum': $('#sfgorunum').val(),
                     //  $('#select_id').find('option:selected').val()
                     //      'dbanka':$('select[name=dbanka]').val(),
                     // 'did': $('#did').val(),//
 
                     'uzunluk': $('#sfuzunluk').val(),
+                    success: function (data) {
+                        new PNotify({
+                            title: 'Numaralama',
+                            text: 'Başarılı',
+                            type: 'success',
+                            // type: 'notice',
+                            styling: 'bootstrap3'
+                        });
+                    }
+                }
+
+
+            });
+        });
+        $('.tf').on('click', '#tfsatirekle', function() {
+            // alert("df");
+            $.ajax({
+
+                type: 'POST',
+                url: "/tfnokaydet",
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'evrakturuid': 7,
+                    'sayi': $('#tfsayi').val(),
+                    'tfgorunum': $('#tfgorunum').val(),
+                    //  $('#select_id').find('option:selected').val()
+                    //      'dbanka':$('select[name=dbanka]').val(),
+                    // 'did': $('#did').val(),//
+
+                    'uzunluk': $('#tfuzunluk').val(),
+                    success: function (data) {
+                        new PNotify({
+                            title: 'Numaralama',
+                            text: 'Başarılı',
+                            type: 'success',
+                            // type: 'notice',
+                            styling: 'bootstrap3'
+                        });
+                    }
+                }
+
+
+            });
+        });
+        $('.of').on('click', '#ofsatirekle', function() {
+            // alert("df");
+            $.ajax({
+
+                type: 'POST',
+                url: "/ofnokaydet",
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'evrakturuid': 8,
+                    'sayi': $('#tfsayi').val(),
+                    'ofgorunum': $('#ofgorunum').val(),
+                    //  $('#select_id').find('option:selected').val()
+                    //      'dbanka':$('select[name=dbanka]').val(),
+                    // 'did': $('#did').val(),//
+
+                    'uzunluk': $('#ofuzunluk').val(),
                     success: function (data) {
                         new PNotify({
                             title: 'Numaralama',

@@ -28,9 +28,9 @@
                     <div class="x_panel">
                         <div class="x_title">
                             @if($fisturu==1)
-                                <h2 class="sat">{{$sipfisnoadi}} İrsaliye Fişi </h2>
+                                <h2 class="sat">{{$sipfisnoadi}} Faturası </h2>
                             @else
-                                <h2 class="al">{{$sipfisnoadi}} İrsaliye Fişi </h2>
+                                <h2 class="al">{{$sipfisnoadi}} Faturası </h2>
 
                             @endif
                             <ul class="nav navbar-right panel_toolbox">
@@ -50,7 +50,7 @@
                             </ul>
                             <div class="clearfix"></div>
                             <div class="x_content">
-                                <form id="satirler" action="{{action('irsaliyeController@irsaliyekaydet')}}"  class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
+                                <form id="satirler" action="{{action('faturaController@faturakaydet')}}"  class="form-horizontal form-label-left" name="form1" method="POST"  novalidate>
                                     {{csrf_field()}}
 
 
@@ -80,7 +80,7 @@
 
                                                 <div class="form-group">
                                                     <label for="fisno">Fiş No</label>
-                                                    <input type="text" name="irno" id="irno" value="{{$numara}}" class="form-control" >
+                                                    <input type="text" name="fatno" id="irno" value="{{$numara}}" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
@@ -335,7 +335,7 @@
 
                                     <div class="text-right">
                                         <input type="hidden" name="add">
-                                        <button class="btn btn-success" type="button" id="sipaktar" style="visibility: visible"><i class="fa fa-download"></i> Sipariş Aktar</button>
+                                        <button class="btn btn-success" type="button" id="sipaktar" style="visibility: visible"><i class="fa fa-download"></i> İrsaliye Aktar</button>
                                         {{--<i class="fa fa-download"></i> Sipariş Aktar--}}
                                         {{--<input type="hidden" name="uniquetime" value="1501288025.81">--}}
                                         <!-- <button  class="btn btn-success btn-insert btn-xs-block add" onsubmit="return false;"  type="submit" ><i class="fa fa-plus-square"></i>Kaydet</button> -->
@@ -369,7 +369,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span >×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Sipariş Aktarma</h4>
+                    <h4 class="modal-title" id="myModalLabel">İrsaliye Aktarma</h4>
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
@@ -488,6 +488,7 @@
                     'fisturu': fisturu,
                     'fid':fid,
                     'olayid':$('#olayid').val()
+
                 },
                 success: function (response) {
                     // $("#sipaktartablo").dataTable().fnDestroy();
@@ -508,8 +509,8 @@
                                 },
                                 //"visible": false,
                             },
-                            { data: "sipfistar"},
-                            { data: "numara" },
+                            { data: "irtar"},
+                            { data: "irnumara" },
                             { data: "olayad" },
                             //
                         ],
@@ -615,7 +616,7 @@
             }else{
                 swal({
                     title: "Eminmisiniz?",
-                    text: "İrsaliye Fişi Kaydedilecek!...",
+                    text: "Fatura Kaydedilecek!...",
                     // icon: "warning",
 
                     // buttons:{
@@ -971,7 +972,9 @@
             $('#bfiyat0,#miktar0').inputmask("myCurrency");
             $('#tutar0,#toplamm').inputmask("tutar");
 
-
+            $('#firma_gir').DataTable({
+                processing: true
+            });
         });
 
 
@@ -1104,6 +1107,7 @@
             var i = $('#siptable tr.sipsatirs').length;
             // var i=1;
             $(document).on('click','#satirekle', function(ibo) {
+
                 var selectmenu ='<td ><div class="col-lg-12 kutupad"><div class="form-group kutupad"><input type="hidden" class="fissid" name="fissid[]" id="fissid'+i+'" value=""  ><input type="text" name="stokad[]" id="sss"  autocomplete="off" class="form-control has-feedback-left" style="padding-left:65px;"><img class="Typeahead-spinners" src="../images/wait.gif"><span class="fa fa-search form-control-feedback left ico"></span></div></div><td><div class="col-md-12 kutupad"><input type="text" name="miktar[]" id="miktar'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')" autocomplete="off" class="form-control miktar" style="font-family: monospace, monospace;"></div></td><td><div class="col-lg-12 kutupad"><select data-toggle="dropdown" id="birim" class="form-control birim" name="birim[]" aria-expanded="false" ><span class="caret"></span>@foreach($birim as $key => $bad)<option  value="{{ $key }}">{{ $bad }}</option>@endforeach</select></div></td><td><div class="col-md-12 kutupad"><input type="text" name="bfiyat[]" id="bfiyat'+i+'" data-inputmask="\'alias\': \'myCurrency\'" oninput="calculate('+i+')"  value="" autocomplete="off" class="form-control bfiyat" style="padding-right:55px;text-align:right;font-family: monospace, monospace;" ><span id="t1" class=" form-control-feedback right ico">'+dtur+'</span></div>' +
                     '<td class="col-md-1"><div class="col-lg-12 kutupad">'+
                     '<select data-toggle="dropdown" id="kdv'+i+'" class="form-control kkdv" onchange="myFunction('+i+')" onclick="eski($(this).find(\':selected\').text())" name="kdv[]"><span class="caret"></span>@foreach($vergim as $key => $vor)'+
@@ -1352,7 +1356,7 @@
 
                     },
                     success:function (response) {
-                        console.log(response);
+                        // console.log(response);
 
                         var $trpi = $('tbody');
                         $trpi.remove();

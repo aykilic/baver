@@ -361,6 +361,12 @@
             });
             $(document).on('click','.editirno', function() {
 
+              if(  $("fisturu").val()==1){
+                  numaralaid=3;
+              }else{
+                  numaralaid=4;
+              }
+
                 var irtarih =$('#irtarih').val();
                 var irnumara =$('#irnumara').val();
                 $.ajax({
@@ -372,7 +378,7 @@
                         'irtarih':irtarih,
                         'irnumara':irnumara,
                         'sipfisid':$('#data-id').val(),
-                        'numaralaid':3
+                        'numaralaid':numaralaid
                     },
 
                     success: function(data) {
@@ -407,7 +413,11 @@
                 "columns": [
 
                     { "data": "sipfistar"},
-                    { "data": "numara" },
+                    { "data": null,
+                        render:function (data) {
+                            return "<a  href='/siparisfisi/edit/"+data.sipfisid+"/"+fisturu+"' >" + data.numara + "</a>";
+                        }
+                    },
                     {{--//href="/siparisfisi/edit/{{$post->sipfisid}}/{{$fisturu}}"--}}
                     { "data": null,
                         render:function (data) {
@@ -438,7 +448,10 @@
                     //     }
                     // },
 
-
+                    {
+                        'targets': 3,
+                        'className':'dt-body-right'
+                    },
                     {
                         'targets': 0,
                         render:function(data){

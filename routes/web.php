@@ -110,6 +110,12 @@ Route::get('/numarala', function () {
 });
 //****************Fatura fisi************************//////////////////////
 Route::post('/sifataktar', 'irsaliyeController@fatsonnumara');
+Route::any('/fatura/{id?}', 'faturaController@faturafisi');
+Route::any('/faturalist/{fisturu}', 'faturaController@faturafisleri');
+Route::any('/faturafislist', 'faturaController@faturafislist');
+Route::post('/faturakaydet', 'faturaController@faturakaydet');
+Route::get('/fatura/edit/{fatno}/{fisturu}', 'faturaController@faturaedit');
+Route::any('/faturaeditkaydet', 'faturaController@faturaeditkaydet');
 //****************Fatura fisi************************//////////////////////
 //****************irsaliye fisi************************//////////////////////
 Route::any('/irsaliye/{id?}', 'irsaliyeController@irsaliyefisi');
@@ -119,14 +125,24 @@ Route::post('/sipaktarlist', 'irsaliyeController@sipaktarlist');
 Route::post('/sipaktarok', 'irsaliyeController@sipaktarok');
 Route::post('/irsaliyekaydet', 'irsaliyeController@irsaliyekaydet');
 Route::get('/irsaliye/edit/{irno}/{fisturu}', 'irsaliyeController@irsaliyedit');
-Route::POST('/irsaliyeditkaydet', 'irsaliyeController@irsaliyeditkaydet');
+Route::any('/irsaliyeditkaydet', 'irsaliyeController@irsaliyeditkaydet');
 //****************irsaliye fisi************************//////////////////////
 
-//****************siparis fisi************************//////////////////////
+//****************makbuz************************//////////////////////
 
+Route::any('/makbuz/{makturu}', 'makbuzController@makbuzlar');
+Route::post('/makbuzfislist', 'makbuzController@makbuzfislist');
+Route::any('/makbuzfisi/edit/{makturu}/{id}', 'makbuzController@makbuzfisi');
+Route::post('/makbanka', 'makbuzController@makbanka');
+Route::post('/makbankahesap', 'makbuzController@makbankahesap');
+Route::any('/makkaydet', 'makbuzController@makkaydet');
+Route::any('/makbuziptal', 'makbuzController@makbuziptal');
+//****************makbuz************************//////////////////////
 //****************Aktarma************************//////////////////////
 Route::post('/siiraktar', 'fisController@irsonnumara');
 Route::put('/iraktarnokaydet', 'fisController@iraktarnokaydet');
+Route::put('/fataktarnokaydet', 'irsaliyeController@fataktarnokaydet');
+
 //****************Aktarma************************//////////////////////
 
 //****************sablon************************//////////////////////
@@ -156,4 +172,7 @@ Route::POST('/ainokaydet', 'fisController@ainokaydet');
 Route::POST('/sinokaydet', 'fisController@sinokaydet');
 Route::POST('/afnokaydet', 'fisController@afnokaydet');
 Route::POST('/sfnokaydet', 'fisController@sfnokaydet');
+Route::POST('/tfnokaydet', 'fisController@tfnokaydet');
+Route::POST('/ofnokaydet', 'fisController@ofnokaydet');
+Route::POST('/ajaxsonnumara/{id}', 'irsaliyeController@ajaxsonnumara');
 

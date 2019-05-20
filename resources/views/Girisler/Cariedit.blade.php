@@ -78,7 +78,10 @@
 
                                             <div class="form-group">
                                                 <input type="hidden" id="firmaid" value="{{$sdf->fid}}">
-                                                <input type="hidden" id="bankaid" value="{{$sdfa->baid}}">
+                                                @isset($sdfa->baid)
+                                                    <input type="hidden" id="bankaid" value="{{$sdfa->baid}}">
+                                                @endisset
+
 
                                                 <label for="name">Hesap Adı </label>
                                                 <input type="text" name="cunvan" id="cunvan" value="{{$sdf->cunvan}}" class="form-control "  >

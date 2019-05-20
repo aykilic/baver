@@ -74,6 +74,7 @@
                                                     <input type="hidden" name="fisturuid" id="fisturuid" value="{{$fisturuid}}" class="form-control" >
                                                     <input type="hidden" name="fisturu" id="fisturu" value="{{$fisturu}}" class="form-control" >
                                                     <input type="hidden" name="sipfisid" id="sipfisid" value="{{$sipfisid}}" class="form-control" >
+                                                    <input type="hidden" name="irnold" id="irnold" value="{{$numara}}" class="form-control" >
                                                     <input type="text" name="tar" id="tarih" class="form-control has-feedback-left " value="{{$sipfis->sipfistar}}"   aria-describedby="inputSuccess2Status2">
                                                     <span class="fa fa-calendar-o form-control-feedback left"  aria-hidden="true"></span>
                                                     <span id="inputSuccess2Status2" class="sr-only">(success)</span>
@@ -100,8 +101,8 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="district">Durum</label>
-                                                            <input type="hidden" name="durumid" id="durumid" value="{{$secolay}}" class="form-control">
-                                                            <select data-toggle="dropdown" id="durum" class="form-control " disabled><span class="caret" ></span>
+                                                            <input type="hidden" name="olayid" id="olayid" value="{{$secolay}}" class="form-control">
+                                                            <select data-toggle="dropdown" id="olay" class="form-control " disabled><span class="caret" ></span>
                                                             <!-- {{--<option >Seçiniz</option>--}} -->
                                                                 {{--@foreach($banka as $abanka)--}}
                                                                 {{--<option  value="{{ $abanka->baid }}" {{ $secb == $abanka->baid ? 'selected=="selected"' : '' }}>{{ $abanka->bankad }}</option>--}}
@@ -152,7 +153,7 @@
                                                         <div class="form-group">
                                                             <label for="tax_no">Döviz</label>
                                                             <input type="hidden" name="did" id="did" value="{{$secdoviz}}" class="form-control" >
-                                                            <select data-toggle="dropdown" id="dbirim" class="form-control" name="dbirim[]" aria-expanded="false"><span class="caret"></span>
+                                                            <select data-toggle="dropdown" id="dbirim" class="form-control" name="dbirim[]" aria-expanded="false" disabled><span class="caret"></span>
                                                             <!-- {{--<option >Seçiniz</option>--}} -->
                                                                 {{--@foreach($doviz as $key => $dad)--}}
                                                                 {{--<option  value="{{ $key }}">{{ $dad }}</option>--}}
@@ -803,9 +804,9 @@
             });
             $('#toplamm').inputmask("tutar");
 
-            $('#firma_gir').DataTable({
-                processing: true
-            });
+            // $('#firma_gir').DataTable({
+            //     processing: true
+            // });
         });
         $(document).ready(function() {
             $.ajaxSetup({
@@ -985,7 +986,7 @@
                     url: '/sipfissatekle',
                     data: {
                         '_token': $('input[name=csrf-token]').val(),
-                        'numara': $('#irno').val(),
+                        'numara': $('#sfisno').val(),
                         'sipfisid':$('#sipfisid').val()
 
 

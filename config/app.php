@@ -163,6 +163,7 @@ return [
 		Watson\BootstrapForm\BootstrapFormServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         'Baum\Providers\BaumServiceProvider',
+        'BenSampo\Enum\EnumServiceProvider'
     ],
 
     /*

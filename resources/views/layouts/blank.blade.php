@@ -146,7 +146,7 @@
         <script src="{{ asset("js/pnotify.buttons.js") }}"></script>
 
         {{--<script src="{{ asset("js/pnotify.nonblock.js") }}"></script>--}}
-
+        <script src="{{ asset("js/typeahead.js") }}"></script>
         <script src="{{ asset("js/custom.min.js") }}"></script>
 
         {{--/-------başla-///////////////////////--}}

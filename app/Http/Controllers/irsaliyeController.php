@@ -7,6 +7,7 @@
  */
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\fisController;
 use App\Models\bankaObj;
 use App\Models\sablonadObj;
 use App\Models\User;
@@ -47,12 +48,7 @@ class irsaliyeController
     {
         if($id==null){$idd=$req->fisturu;}
         //
-        if($req->input('button2'))   {
-            return "dfgcvhbj";
-    }
-
-
-//        if(input::get('button2')) {
+        //        if(input::get('button2')) {
 //            if(input::get('button2')){
 //
 //            return View::make('alsat.veri')
@@ -96,7 +92,7 @@ class irsaliyeController
 
         //******fis numaralama ******///////////////////
         // id 1 satış
-        $numarala=numaralaObj::all();
+//        $numarala=numaralaObj::all();
 
         if($id==3){
             $idd=1;
@@ -105,8 +101,8 @@ class irsaliyeController
         }elseif($idd==1){$id=3;}elseif($idd==2){$id=4;}
 
 
-        $sipfisno = sipfisObj::where('fisturu', $id)->orderBy('sipfisid', 'desc')
-            ->first();
+//        $sipfisno = sipfisObj::where('fisturu', $id)->orderBy('sipfisid', 'desc')
+//            ->first();
 
 
 
@@ -144,7 +140,7 @@ class irsaliyeController
 
         }
 
-
+        $olayid=1;
 //
 
 
@@ -158,7 +154,7 @@ class irsaliyeController
 //            ->with('vergi', $dropvergi)
             ->with('vergim', $dropvergim)
             ->with('olay', $olayy)
-//            ->with('olayid', $olayid)
+            ->with('olayid', $olayid)
             ->with('svergi', $selectedvergi)
             ->with('stok', $stok)
             ->with('doviz', $dropdoviz)
@@ -255,34 +251,84 @@ class irsaliyeController
     {
 
         $numarala=numaralaObj::where('evrakturuid', $evrakturu)->first();
-        $sayi=($numarala->sonnumara)+1;
-        $hane=$numarala->uzunluk;
+//dd($numarala);
+//        if($numarala == null || $numarala == "" || $numarala == undefined){
+//        dd($numarala->sonnumara);
+        if(!isset($numarala) || $numarala==null || !$numarala|| !($numarala->sonnumara)){
+
+            $sayi=1;
+            $hane=5;
+
+        }else{
+
+            $sayi=($numarala->sonnumara)+1;
+            $hane=$numarala->uzunluk;
+        }
+
+//dd($numarala->sonnumara);
+
         $sonnum=str_pad($sayi, $hane, "0", STR_PAD_LEFT);
         return ($sonnum);
 
 
     }
-    public function sipaktarlist(Request $request)
+    public function ajaxsonnumara($evrakturu)
     {
+
+        $numarala=numaralaObj::where('evrakturuid', $evrakturu)->first();
+//dd($numarala);
+//        if($numarala == null || $numarala == "" || $numarala == undefined){
+//        dd($numarala->sonnumara);
+        if(!isset($numarala) || $numarala==null || !$numarala|| !($numarala->sonnumara)){
+
+            $sayi=1;
+            $hane=5;
+
+        }else{
+
+            $sayi=($numarala->sonnumara)+1;
+            $hane=$numarala->uzunluk;
+        }
+
+//dd($numarala->sonnumara);
+
+        $sonnum=str_pad($sayi, $hane, "0", STR_PAD_LEFT);
+
+        return response()->json($sonnum);
+
+    }
+    public function sipaktarlist(Request $request)   //sipariş ve irsaliye
+    {
+
+//        $data = DB::table('sipfis')                       //aynı id den birden fazla olursa
+//        ->select('sipfis.sipfisid')
+//            ->whereIn('sipfis.irnumara',
+//                function ($query) {
+//                    $query->from('sipfis')->select('sipfis.irnumara');
+////                        ->where('sipfis.irnumara', '=','sipfis.irnumara');
+////                })->pluck('sipfisid')->toarray();
+//
+//                })->groupby('irnumara')->get();
+        if($request->olayid==1){
+            $tar='sipfis.sipfistar';
+            $numara='sipfis.numara';
+        }elseif($request->olayid==4){
+            $tar='sipfis.irtar';
+            $numara='sipfis.irnumara';
+        }
+
+
         $data = DB::table('sipfis')
-            ->select('sipfis.*','firmalar.*','olay.*')
+        ->select(($tar),($numara),('olay.olayad'),DB::raw("GROUP_CONCAT(sipfisid) AS sipfisid"))
             ->where('sipfis.fisturu',$request->fisturu)
             ->where('sipfis.fisfid', $request->fid)
-            ->where('sipfis.olayid', 1)
-
+            ->where('sipfis.olayid', $request->olayid)
             ->leftjoin('firmalar', 'firmalar.fid', '=', 'sipfis.fisfid')
             ->leftjoin('olay', 'olay.olayid', '=', 'sipfis.olayid')
-//            ->leftjoin('doviz', 'doviz.did', '=', 'sipfis.doviz')
-//            ->leftjoin('sipdurum', 'siparis.durumid', '=', 'sipdurum.sipdurumid')
-//            ->leftjoin('musteriler', 'siparis.mid', '=', 'musteriler.mid')
-//            ->orderByRaw('YEAR(tarih) ASC, MONTH(tarih) ASC, DAY(tarih) ASC')
-            ->get();
-
+            ->groupBy($numara)
+        ->get()->toarray();
 
         $json_dat = array(
-////            "draw"            => intval(""),
-////            "recordsTotal"    => intval(""),
-////            "recordsFiltered" => intval(""),
             "data"            => $data
         );
         return  response()->json($json_dat);
@@ -299,7 +345,7 @@ class irsaliyeController
 //////        dd($request);
 //////        return View::make('alsat.veri')
 //////            ->with('fisturu',$req->fistur);
-$ibo=1;
+
         $sipidarray=explode(",",$req->sipaktarray); //numaraları dizi haline getirdik
         $sipfisnoadiid=DB::table('sipfissatir')
             ->select('sipfissatir.*','stok.sad','vergi.vor','birim.bad')
@@ -313,24 +359,8 @@ $ibo=1;
 
 
         return response()->json($sipfisnoadiid);
-//////        return view ('alsat.irsaliyefis', compact('data'))->render() ;
-////
-//        return View::make('alsat.irsaliyefis')
-//            ->with('doviz', $dropdoviz)
-//            ->with('birim', $dropbirim)
-//            ->with('vergim', $dropvergim)
-//            ->with('depo', $dropdepo)
-//            ->with('olay', $olayy)
-//            ->with('firma', $requ->fisfid)
-//            ->with('firmad', $firmad)
-//            ->with('numara', $requ->sfisnumara)
-//            ->with('fisturu',$requ->fisturum)
-//            ->with('sipfisnoadi', $sipfisnoadi)
-////            ->render()
-//                ;
 
-
-    }
+    }     //sipariş ve irsaliye
     public function irsaliyekaydet(request $request)
     {
 //$fisturu=0;
@@ -402,6 +432,7 @@ $ibo=1;
                     $sipfisObj->irtar=$request->tar;
                     $sipfisObj->irnumara=$request->irno;
                     $sipfisObj->olayid=4;
+                    $sipfisObj->gtoplam=$para;
                     $sipfisObj->save();
 
                 }
@@ -452,7 +483,7 @@ $ibo=1;
 //         $sipnobul=sipfisObj::where('irnumara', $irnumara)->select('sipfisid')->get();
         $sipnobuls = DB::table('sipfis')->where('irnumara', $irnumara)->select('sipfisid')->get();
 
-        if($fisturum==3){$fisturu=1;}else{$fisturu=2;}
+//        if($fisturum==3){$fisturu=1;}else{$fisturu=2;}
 
         $sipfis=DB::table('sipfis')->where('irnumara', $irnumara)
 //            ->select('sipfis.sipfisid')
@@ -467,7 +498,7 @@ $ibo=1;
                         ->where('sipfis.irnumara', $irnumara);
                         })->get();
 
-        $fisturu=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $fisturu)->first();
+        $fisturu=DB::table('fisturu')->select('fisturuad')->where('fisturuid', $fisturum)->first();
         $sipfisnoadi=$fisturu->fisturuad;
 
 
@@ -501,63 +532,69 @@ $ibo=1;
     }
     public function irsaliyeditkaydet(request $request)
     {
-        $sipfisObj = DB::table('sipfis')->select('sipfisid')->where('irnumara', $request->irno)->get();
-        $irnumara = $request->irno;
+//        $sipfisObjj = DB::table('sipfis')->select('sipfisid')->where('irnumara', $request->irno)->get();
+        $irnumara = $request->irnold;
+        $satirsay=$request->fissid;
+
 //        dd($irnumara);
-        $sipfisids = [];
-        foreach($sipfisObj as $sipfisObjs)
-        {
-//            array_push($sipfisids, $sipfisObjs->sipfisid); //dizi içindeki idleri sıralama
-////            $fisturu = DB::table('sipfis')->where('irnumara', $sipfisObjs->sipfisid)->first();
-//            dd($request->irno);
-
-//            $sipfisObj=sipfisObj::find($sipfisObjs->sipfisid);
-            $sipfisObj = DB::table('sipfis')->where('sipfisid', $sipfisObjs->sipfisid)->get();
-            $sipfisObj->irnumara=$irnumara;
-            $sipfisObj->irtar=$request->tar;
-            $sipfisObj->save();
-    }
-//
-//        $sipfisids = DB::table('sipfis')                       //aynı id den birden fazla olursa
-//                ->select('sipfis.sipfisid')
-//                ->whereIn('sipfis.sipfisid',
-//                    function ($query) use ($irnumara) {
-//                        $query->from('sipfis')->select('sipfis.sipfisid')
-//                            ->where('sipfis.irnumara', $irnumara);
-//                    })->pluck('sipfisid')->toarray();
-
-//        foreach($sipfisids as $sipfisid)
+//        $sipfisids = [];
+//        foreach($sipfisObjj as $sipfisObjs)
 //        {
-////            dd($sipfisid);
-//            $sipfisObj=sipfisObj::find($sipfisid);
-//            $sipfisObj->irnumara=$request->irno;
+////            array_push($sipfisids, $sipfisObjs->sipfisid); //dizi içindeki idleri sıralama
+//////            $fisturu = DB::table('sipfis')->where('irnumara', $sipfisObjs->sipfisid)->first();
+////            dd($request->irno);
+//
+//            $sipfisObj=sipfisObj::find($sipfisObjs->sipfisid);
+////            $sipfisObj = DB::table('sipfis')->where('sipfis.sipfisid', $sipfisObjs->sipfisid)->get();
+//            $sipfisObj->irnumara=$irnumara;
 //            $sipfisObj->irtar=$request->tar;
 //            $sipfisObj->save();
-////            dd($sipfisid);
+//    }
+//
+        $sipfisids = DB::table('sipfis')                       //aynı id den birden fazla olursa
+                ->select('sipfis.sipfisid')
+                ->whereIn('sipfis.sipfisid',
+                    function ($query) use ($irnumara) {
+                        $query->from('sipfis')->select('sipfis.sipfisid')
+                            ->where('sipfis.irnumara', $irnumara);
+                    })->pluck('sipfisid')->toarray();
+
+        foreach($sipfisids as $sipfisid)
+        {
+//            dd($sipfisid);
+            $sipfisObj=sipfisObj::find($sipfisid);
+            $sipfisObj->fisfid=$request->fisfid;
+            $sipfisObj->irnumara=$request->irno;
+            $sipfisObj->irtar=$request->tar;
+            $sipfisObj->depo=$request->depo;
+//            $sipfisObj->doviz=$request->did;
+//            $sipfisObj->gtoplam=$para;
+            $sipfisObj->save();
+
 ////            array_push($competition_all, $sipfisid); //dizi içindeki idleri sıralama
-//       }
+       }
 //        dd($sipfisids);
 //
 //        $sipfisObj->save();
 //        $satirsay=$request->fissid;
 //
-//        for ($i = 0; $i < count($satirsay); $i++) {
-//            $sipfissatirObj = sipfissatirObj::find($request->sipfissatirid[$i]);
-//            $sipfissatirObj->fissid = $request->fissid[$i];
-//            $miktarr = str_replace(".", "", $request->miktar[$i]);
-//            $miktarr = str_replace(",", ".", $miktarr);
-//            $sipfissatirObj->miktar = $miktarr;
-//            $sipfissatirObj->birim = $request->birim[$i];
-//            $bfiyatt = str_replace(".", "", $request->bfiyat[$i]);
-//            $bfiyatt = str_replace(",", ".", $bfiyatt);
-//            $sipfissatirObj->bfiyat = $bfiyatt;
-//            $sipfissatirObj->kdv = $request->kdv[$i];
-//            $tutarr = str_replace(".", "", $request->tutar[$i]);
-//            $tutarr = str_replace(",", ".", $tutarr);
-//            $sipfissatirObj->tutar = $tutarr;
-//            $sipfissatirObj->save();
-//
-//        }
+        for ($i = 0; $i < count($satirsay); $i++) {
+            $sipfissatirObj = sipfissatirObj::find($request->sipfissatirid[$i]);
+            $sipfissatirObj->fissid = $request->fissid[$i];
+            $miktarr = str_replace(".", "", $request->miktar[$i]);
+            $miktarr = str_replace(",", ".", $miktarr);
+            $sipfissatirObj->miktar = $miktarr;
+            $sipfissatirObj->birim = $request->birim[$i];
+            $bfiyatt = str_replace(".", "", $request->bfiyat[$i]);
+            $bfiyatt = str_replace(",", ".", $bfiyatt);
+            $sipfissatirObj->bfiyat = $bfiyatt;
+            $sipfissatirObj->kdv = $request->kdv[$i];
+            $tutarr = str_replace(".", "", $request->tutar[$i]);
+            $tutarr = str_replace(",", ".", $tutarr);
+            $sipfissatirObj->tutar = $tutarr;
+            $sipfissatirObj->save();
+
+        }
         if($request->fisturu == 2){
 
 
@@ -574,4 +611,21 @@ $ibo=1;
 
         }
     }
+    public function fataktarnokaydet(request $request)
+    {
+        $sipfisObj = sipfisObj::where('sipfisid', $request->sipfisid)->first();
+
+        $sipfisObj->irtar=$request->fattarih;
+        $sipfisObj->irnumara=$request->ifatnumara;
+        $sipfisObj->olayid=4;
+//                    $sipfisObj->durumid=4;  // gereksiz
+        $numaralaObj=numaralaObj::where('numaralaid',$request->numaralaid)->first();
+//                    $numaralaObj=numaralaObj::find($request->numaralaid);
+//                    $numaralaObj=DB::table('numarala')->where('numaralaid',$request->numaralaid)->get();
+        $numaralaObj->sonnumara=$request->irnumara;
+        $sipfisObj->save();
+        $numaralaObj->save();
+        return response()->json($sipfisObj);
+    }
+
 }

@@ -276,4 +276,46 @@ div.dataTables_wrapper span.select-item {
         display: block;
     }
 }
+td.dt-body-right{
 
+    text-align: right;
+    font-weight: bolder
+}
+td.dt-body-center{
+
+    text-align: center;
+
+}
+.has-feedback label~.form-control-feedback {
+     top: 0px;
+}
+.form-control-feedback.left {
+    border-right: 1px solid #ccc;
+    left: 9px;
+}
+.text-center{
+    text-align: center;
+}
+.radio {
+    padding-top: 0px !important ;
+}
+.frightlabel{
+    float:right;
+}
+.ll{
+    cursor: pointer;
+}
+/*.mfmt{*/
+
+    /*margin-top:8px;*/
+/*}*/
+.bankadrop select {
+
+    margin-bottom: 25px;
+    padding: 5px;
+    line-height: 25px;
+}
+.pad{
+
+    padding:17px;
+}

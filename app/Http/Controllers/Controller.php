@@ -210,12 +210,7 @@ class Controller extends BaseController
         $firma = DB::table('cbanka')
             ->leftJoin('firmalar', 'firmalar.fid', '=', 'cbanka.fid')
             ->get();
-//          $firma=firmaObj::find('fid', $fid);
-//        $firma = firmaObj::select('*')->where('fid', $fid)->get();
-//       $firma = firmaObj::("Select * from firmalar where fid=$fid")->get();
-        //  $firma = firmaObj::select('fid')->where('fid'>$fid);
-//        return view::make('Girisler.Cariedit')
-//            ->with('editfirma',editFirmaObj::find($fid));
+
         $editfirma = firmaObj::where('fid', $fid)->first();
         $editcbanka = cbankaObj::where('fid', $fid)->first();
 
