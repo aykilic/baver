@@ -279,28 +279,28 @@
                                                         <div class="clearfix"></div>
 <div>
 
-    <table class="table table-striped table-bordered dt-responsive nowrap" id="cbhesap">
-        <thead>
-        <tr class="headings">
-            <th >Tarih </th>
-            <th >Hesap Adı </th>
-            <th >Adres </th>
-            <th>Sil</th>
-        </tr>
+    {{--<table class="table table-striped table-bordered dt-responsive nowrap" id="cbhesap">--}}
+        {{--<thead>--}}
+        {{--<tr class="headings">--}}
+            {{--<th >Tarih </th>--}}
+            {{--<th >Hesap Adı </th>--}}
+            {{--<th >Adres </th>--}}
+            {{--<th>Sil</th>--}}
+        {{--</tr>--}}
 
-        </thead>
-        <tbody>
-        @foreach($firma as $post )
-            <tr>
-                <td></td>
-                <td ><a href=""> </a></td>
-                <td></td>
-                <td><a href=""  aria-label="Delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+        {{--</thead>--}}
+        {{--<tbody>--}}
+        {{--@foreach($firma as $post )--}}
+            {{--<tr>--}}
+                {{--<td></td>--}}
+                {{--<td ><a href=""> </a></td>--}}
+                {{--<td></td>--}}
+                {{--<td><a href=""  aria-label="Delete"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>--}}
                 {{--<a href="{!! route('/cari, $id')!!}" class="btn btn-danger">Delete</a>--}}
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+            {{--</tr>--}}
+        {{--@endforeach--}}
+        {{--</tbody>--}}
+    {{--</table>--}}
 
 
 </div>

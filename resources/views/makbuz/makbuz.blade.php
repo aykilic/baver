@@ -32,7 +32,7 @@
                                 {{--</div>--}}
                             {{--@else--}}
                                 <div class="col-md-2">
-                                    <a href="#" class="btn btn-app btn-hareket">
+                                    <a href="javascript:" class="btn btn-app btn-hareket">
                                         <i class="fa fa-plus-square-o"></i> Ekle
                                     </a>
                                 </div>
@@ -103,7 +103,7 @@
                     <div class="x_content" style="margin-top:15px">
 
 
-                        <table class="table table-striped table-bordered" id="makbuztablo">
+                        <table class="table table-striped table-bordered jambo_table" id="makbuztablo">
                             <thead>
 
                             <tr class="headings">
@@ -176,6 +176,8 @@
                                         <div class="form-group has-feedback">
                                             <label for="address">Hesap</label>
                                             <input type="hidden" name="fisfid" id="fisfid"   value="" class="form-control" >
+                                            <input type="hidden" name="makbuzid" id="makbuzid"   value="" class="form-control" >
+
                                             <input type="text" name="fisfad" id="fisfad"   value="" autocomplete="off" class="form-control has-feedback-left typeahead buyuk">
                                             <img class="Typeahead-spinner" src="../images/wait.gif">
                                             <span class="fa fa-search form-control-feedback left" ></span>
@@ -271,7 +273,7 @@
                                             <td class="col-md-2">
                                                 {{--kdv zorrrrrrrr--}}
                                                 <div class="col-lg-12 kutupad">
-                                                    <select data-toggle="dropdown" id="doviz" name="doviz" class="form-control" ><span class="caret"></span>
+                                                    <select data-toggle="dropdown" id="doviz" name="doviz"  class="form-control" ><span class="caret"></span>
 
                                                         @foreach($doviz as $key => $dad)
                                                             <option  value="{{ $key }}">{{ $dad }}</option>
@@ -353,15 +355,17 @@
                 "columns": [
                     {   "data": null,
                             render:function (data) {
-                            return "<a  href='/makbuz/edit/"+data.makbuznumara+"/"+makbuzturu+"' >" + data.makbuznumara + "</a>";
-                        }
+
+                                return "<a id='editn' href='javascript:' data-makbuzid='" + data.makbuzid +"' data-fisfid='" + data.makbuzfid +"' data-fisfad='" + data.cunvan +"' data-maktarih='" + data.makbuztar +"' data-makbuznumara='" + data.makbuznumara +"' data-doviz='" + data.makbuzdid +"' data-tutar='" + data.makbuztutar +"' data-odemeturu='" + data.odemeturu +"' data-bankad='" + data.baid +"' data-hesapd='" + data.cbid +"'>" + data.makbuznumara + "</a>";
+
+                            }
                     },
                     {   "data": "makbuztar"},
 
 
                     {   "data": null,
                         render:function (data) {
-                            return "<a  href='/makbuz/edit/"+data.makbuznumara+"/"+makbuzturu+"' >" + data.cunvan + "</a>";
+                            return "<a id='editc' href='javascript:' data-makbuzid='" + data.makbuzid +"' data-fisfid='" + data.makbuzfid +"' data-fisfad='" + data.cunvan +"' data-maktarih='" + data.makbuztar +"' data-makbuznumara='" + data.makbuznumara +"' data-doviz='" + data.makbuzdid +"' data-tutar='" + data.makbuztutar +"' data-odemeturu='" + data.odemeturu +"' data-bankad='" + data.baid +"' data-hesapd='" + data.cbid +"'>" + data.cunvan + "</a>";
                         }
                     },
                     {   "data": "odemeturu"},
@@ -394,7 +398,7 @@
                     },
                 ],
 
-                "order": [[ 0, "desc" ],[ 1, "desc" ]],
+                "order": [[ 1, "desc" ],[ 0, "desc" ]],
                 'columnDefs': [
 
 
@@ -510,39 +514,107 @@
                 this.value = this.value.toUpperCase();
             });
         });
-        $(document).on('click','.btn-hareket', function() {
+        $(document).on('click','.btn-hareket,#editc,#editn', function() {
+            $('#fisfid,#fisfad,#tutar').val("");
             if($('#makbuzturu').val()== 2){
                 var fisturu=7;
             }else if($('#makbuzturu').val()==1){
                 var fisturu=8;
             }
-            $('#makpopup').modal();
-             $('#fisfid,#fisfad,#tutar').val("");
-            $('#doviz').val("1");
             setTimeout(function () {
                 $("#havale").iCheck('uncheck');
                 $("#nakit").iCheck('check');
 
             }, 1);
 
-            $.ajax({
-                dataType: 'JSON',
-                type: 'POST',
-                url:"/ajaxsonnumara/"+fisturu,
-                // url:'@Url.Action("sonnumara", "irsaliyeController" ,new { id = "'+ fisturu +'"})',
-                // url:'@Url.Action("sonnumara", "irsaliyeController" ,new { id = "'+ fisturu +'"})',
+            $('#makpopup').modal();
+// console.log($(this).data('fisfid'));
+            if (!$(this).data('fisfid')){
+                // console.log("dfdf");
+                // setTimeout(function () {
+                    $("#havale").iCheck('uncheck');
+                    $("#nakit").iCheck('check');
 
-                // url: '@Url.Action("sonnumara", "irsaliyeController", null, Request.Url.Scheme, null)',
+                // });
+                $('#doviz').val("1");
+                $.ajax({
+                    dataType: 'JSON',
+                    type: 'POST',
+                    url:"/ajaxsonnumara/"+fisturu,
+                    data: {
+                        '_token': $('input[name=csrf-token]').val(),
 
-                data: {
-                    '_token': $('input[name=csrf-token]').val(),
+                    },
+                    success: function (datam) {
+                        // console.log(datam);
+                        $('#makbuzno').val(datam);
+                    }
+                });
+            }else{
+                var bankad=$(this).data('bankad');
+                var hesapd=$(this).data('hesapd');
+                $('#makbuzid').val($(this).data('makbuzid'));
+                $('#fisfid').val($(this).data('fisfid'));
+                $('#fisfad').val($(this).data('fisfad'));
+                $('#maktarih').val($(this).data('maktarih'));
+                $('#makbuzno').val($(this).data('makbuznumara'));
+                $('#odemeturu').val($(this).data('odemeturu'));
+                // $('#banka').val($(this).data('banka'));
+                // $('#hesap').val($(this).data('hesap'));
+                $('#doviz').val($(this).data('doviz'));
+                $('#tutar').val($(this).data('tutar'));
 
-                },
-                success: function (datam) {
-// console.log(datam);
-                    $('#makbuzno').val(datam);
-                }
-        });
+                 if($(this).data('odemeturu')==1){
+                     $("#nakit").iCheck('check');
+                     // $("#nakit").prop('checked', true);
+
+                    }else{
+                     // $("#nakit").attr('checked', false);
+                     // $("#havale").attr('checked', true);
+                     $("#nakit").iCheck('uncheck');
+                    }
+                            if($(this).data('odemeturu')==1){
+                                $("#nakit").iCheck('check');
+                                $("#havale").iCheck('uncheck');
+                            }else{
+                                 setTimeout(function () {
+                                    $("#havale").iCheck('check');
+                                    $("#nakit").iCheck('uncheck');
+                                     // $('#banka').find("option:selected").val($(this).data('banka'));
+
+
+                                 }, 1);
+                                setTimeout(function () {
+
+                                    // $('#banka').find("option:selected").val($(this).data('banka'));
+                                    $('#banka').val(bankad);
+                                    var evt = document.createEvent("HTMLEvents");
+                                    evt.initEvent("change", false, true);
+                                    document.getElementById("banka").dispatchEvent(evt);
+
+                                }, 1000);
+                                setTimeout(function () {
+                                    $('#hesap').val(hesapd);
+                                    // $('#banka').find("option:selected").val($(this).data('banka'));
+
+
+                                }, 1500);
+                                // $('#banka').find("option:selected").val(
+                                //     $(this).data('banka'));
+
+                    // setTimeout(function () {
+
+                         // $('#banka').val($(this).data('banka'));
+
+                    // }, 2);
+                    // setTimeout(function () {
+                    //     $('#hesap').val($(this).data('hesap'));
+                    // }, 3);
+
+
+                            }
+            }
+
         });
         $(document).ready(function() {
 
@@ -621,13 +693,14 @@
             // });
             $('#banka').on('change', function () {
 // console.log($('#banka').find("option:selected").val());
+                var fisfidd=$('#fisfid').val();
                 $.ajax({
                     dataType: 'JSON',
                     type: 'POST',
                     url: '/makbankahesap',
                     data: {
                         '_token': $('input[name=csrf-token]').val(),
-                        'fisfid': 1,
+                        'fisfid': fisfidd,
                         'bankaid': $('#banka').find("option:selected").val()
                     },
                     success: function (datam) {
@@ -642,10 +715,8 @@
                             // a.push(value);
                         });
                     }
-
                 });
             });
-
 
             Inputmask.extendAliases({
                 'myCurrency': {
@@ -733,20 +804,16 @@
                 // $('#did').val(x);
                 //  $('#abc span').text('baa baa black sheep');
 
-
                 var ssss = $(this).val()
 
 //                $(this).find('option[value="' + value + '"]').attr("selected", "selected");
             });
 
-
             $(document).on('click','.makbuzkaydet', function() {
                 // $('#makbuz').trigger('reset');
                 fisfid = $('#fisfid').val();
                  tuta=$('#makbuzform').find("#tutar").val();
-                //
-                //
-                console.log(tuta);
+
                 if (fisfid == "" || fisfid == null || fisfid == undefined) {
                     swal("Hata!", "Cari Hesap Seçmediniz!...", "error");
                     return false;
@@ -786,6 +853,7 @@
                         url: '/makkaydet',
                         data: {
                             '_token': $('input[name=csrf-token]').val(),
+                            'makbuzid':$('#makbuzid').val(),
                             'fisfid': $('#fisfid').val(),
                             'maktar': $('#maktarih').val(),
                             'makbuzno': $('#makbuzno').val(),
@@ -798,11 +866,14 @@
                             // $('#fisfid').val()
                         },
                         success: function (data) {
-                             console.log(data);
+                             // console.log(data);
                             $('#makbuztablo').DataTable().ajax.reload();
                             $("#makpopup").modal("hide");
+                        },
+                        error:function(error){
+                            swal("Hata!", "Numara Kullanılmış Olabilir!...", "error");
+                            return false;
                         }
-
                     });
                 }
         });
@@ -811,7 +882,7 @@
 
                 swal({
                     title: "Eminmisiniz?",
-                    text:  "Makbuz İptal Edilecek!..."+makbuzid,
+                    text:  "Makbuz İptal Edilecek!...",
 
                     buttons: ["HAYIR!", "EVET!"],
 
